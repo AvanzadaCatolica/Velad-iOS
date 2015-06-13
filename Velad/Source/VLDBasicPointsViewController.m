@@ -16,14 +16,13 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
+@property (nonatomic) UIBarButtonItem *backButtonItem;
 
 - (void)setupNavigationItem;
 - (void)setupDataSource;
 - (void)setupTableView;
 - (void)setupLayout;
-- (void)onTapEditButton:(id)sender;
-- (void)updateRightBarButtonItems;
-- (void)onTapDoneButton:(id)sender;
+- (void)updateLeftBarButtonItem;
 - (void)onTapAddButton:(id)sender;
 
 @end
@@ -51,14 +50,17 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    [self updateLeftBarButtonItem];
+}
+
 #pragma mark - Setup methods
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Puntos Básicos";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Editar"
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(onTapEditButton:)];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)setupDataSource {
@@ -81,36 +83,19 @@
 
 #pragma mark - Private methods
 
-- (void)onTapEditButton:(id)sender {
-    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
-    [self updateRightBarButtonItems];
-}
-
-- (void)updateRightBarButtonItems {
-    NSMutableArray *rightBarButtonItems = [NSMutableArray array];
-    if (self.tableView.isEditing) {
-        UIBarButtonItem *doneBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Done"]
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(onTapDoneButton:)];
-        [rightBarButtonItems addObject:doneBarButtonItem];
-        UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Add"]
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                            action:@selector(onTapAddButton:)];
-        [rightBarButtonItems addObject:addBarButtonItem];
+- (void)updateLeftBarButtonItem {
+    if (self.editing) {
+        self.backButtonItem = self.navigationItem.leftBarButtonItem;
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Agregar"
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(onTapAddButton:)]
+                                         animated:YES];
     } else {
-        [rightBarButtonItems addObject:[[UIBarButtonItem alloc] initWithTitle:@"Editar"
-                                                                        style:UIBarButtonItemStyleBordered
-                                                                       target:self
-                                                                       action:@selector(onTapEditButton:)]];
+        [self.navigationItem setLeftBarButtonItem:self.backButtonItem
+                                         animated:YES];
+        self.backButtonItem = nil;
     }
-    [self.navigationItem setRightBarButtonItems:rightBarButtonItems animated:YES];
-}
-
-- (void)onTapDoneButton:(id)sender {
-    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
-    [self updateRightBarButtonItems];
 }
 
 - (void)onTapAddButton:(id)sender {
