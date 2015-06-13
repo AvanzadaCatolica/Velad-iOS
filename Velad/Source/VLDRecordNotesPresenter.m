@@ -90,7 +90,7 @@
         [realm addObject:record];
     }
     [realm commitWriteTransaction];
-    if ([self.delegate respondsToSelector:@selector(recordNotesPresenterDelegateDidFinishRecording:)]) {
+    if ([self.delegate respondsToSelector:@selector(recordNotesPresenterDidFinishRecording:)]) {
         [self.delegate recordNotesPresenterDidFinishRecording:self];
     }
 }

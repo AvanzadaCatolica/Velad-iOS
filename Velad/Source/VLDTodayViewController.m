@@ -24,6 +24,10 @@
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
 - (void)setupDataSource;
+- (void)setupLayout;
+- (void)setupTableView;
+- (void)setupDatePickerView;
+- (void)setupGestureRecognizer;
 
 @end
 

@@ -15,6 +15,7 @@
 @property (nonatomic) NSDateFormatter *dateFormatter;
 
 - (void)setupSelectedDate;
+- (void)setupDateFormatter;
 - (void)setupSubviews;
 
 @end

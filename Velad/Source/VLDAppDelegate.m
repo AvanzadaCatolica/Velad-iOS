@@ -14,6 +14,8 @@
 
 @implementation VLDAppDelegate
 
+#pragma mark - Life cycle
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return YES;
 }
