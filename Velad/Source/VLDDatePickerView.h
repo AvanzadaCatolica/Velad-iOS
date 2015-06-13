@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VLDDatePickerViewDelegate;
+
 @interface VLDDatePickerView : UIView
 
 @property (nonatomic) NSDate *selectedDate;
+@property (nonatomic, weak) id<VLDDatePickerViewDelegate> delegate;
+
+@end
+
+@protocol VLDDatePickerViewDelegate <NSObject>
+
+- (void)datePickerViewDidChangeSelection:(VLDDatePickerView *)datePickerView;
 
 @end

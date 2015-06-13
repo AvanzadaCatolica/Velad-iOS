@@ -16,7 +16,7 @@
 #import "NSString+VLDAdditions.h"
 #import "VLDRecordNotesPresenter.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
@@ -38,6 +38,7 @@ static CGFloat const kDatePickerHeight = 44;
     [self setupDataSource];
     [self setupLayout];
     [self setupTableView];
+    [self setupDatePickerView];
     [self setupGestureRecognizer];
 }
 
@@ -73,6 +74,11 @@ static CGFloat const kDatePickerHeight = 44;
 - (void)setupTableView {
     [self.tableView registerClass:[VLDDailyRecordTableViewCell class]
            forCellReuseIdentifier:NSStringFromClass([VLDDailyRecordTableViewCell class])];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)setupDatePickerView {
+    self.datePickerView.delegate = self;
 }
 
 - (void)setupGestureRecognizer {
@@ -193,6 +199,13 @@ static CGFloat const kDatePickerHeight = 44;
 - (void)dailyRecordTableViewCellDidPressInfoButton:(VLDDailyRecordTableViewCell *)cell {
     self.recordNotesPresenter.record = cell.model.record;
     [self.recordNotesPresenter present];
+}
+
+#pragma mark - VLDDatePickerViewDelegate
+
+- (void)datePickerViewDidChangeSelection:(VLDDatePickerView *)datePickerView {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
