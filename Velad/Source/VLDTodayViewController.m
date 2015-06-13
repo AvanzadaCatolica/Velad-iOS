@@ -28,6 +28,7 @@
 - (void)setupTableView;
 - (void)setupDatePickerView;
 - (void)setupGestureRecognizer;
+- (void)setupNavigationItem;
 
 @end
 
@@ -44,6 +45,7 @@ static CGFloat const kDatePickerHeight = 44;
     [self setupTableView];
     [self setupDatePickerView];
     [self setupGestureRecognizer];
+    [self setupNavigationItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +92,14 @@ static CGFloat const kDatePickerHeight = 44;
     [self.tableView addGestureRecognizer:gestureRecognizer];
 }
 
+- (void)setupNavigationItem {
+    UIImage *listImage = [[UIImage imageNamed:@"List"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:listImage
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(onTapListButton:)];
+}
+
 #pragma mark - Private methods
 
 - (VLDRecordNotesPresenter *)recordNotesPresenter {
@@ -126,6 +136,10 @@ static CGFloat const kDatePickerHeight = 44;
                                     animated:YES
                               scrollPosition:UITableViewScrollPositionMiddle];
     }
+}
+
+- (void)onTapListButton:(id)sender {
+    
 }
 
 #pragma mark - UITableViewDataSource
