@@ -23,6 +23,8 @@
 		3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A941B2CBBB00055E742 /* VLDDiaryViewController.m */; };
 		3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A971B2CBBC40055E742 /* VLDReportsViewController.m */; };
 		3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */; };
+		3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */; };
+		3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,10 @@
 		3F331A971B2CBBC40055E742 /* VLDReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsViewController.m; path = Source/VLDReportsViewController.m; sourceTree = "<group>"; };
 		3F331A991B2CBBD60055E742 /* VLDConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDConfigurationViewController.h; path = Source/VLDConfigurationViewController.h; sourceTree = "<group>"; };
 		3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDConfigurationViewController.m; path = Source/VLDConfigurationViewController.m; sourceTree = "<group>"; };
+		3F331A9C1B2CC3530055E742 /* UIColor+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+VLDAdditions.h"; path = "Source/UIColor+VLDAdditions.h"; sourceTree = "<group>"; };
+		3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+VLDAdditions.m"; path = "Source/UIColor+VLDAdditions.m"; sourceTree = "<group>"; };
+		3F331A9F1B2CC8EB0055E742 /* VLDBasicPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointsViewController.h; path = Source/VLDBasicPointsViewController.h; sourceTree = "<group>"; };
+		3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointsViewController.m; path = Source/VLDBasicPointsViewController.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -183,6 +189,8 @@
 				3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */,
 				3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */,
 				3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */,
+				3F331A9F1B2CC8EB0055E742 /* VLDBasicPointsViewController.h */,
+				3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -201,6 +209,8 @@
 			children = (
 				3F331A861B2C925E0055E742 /* NSString+VLDAdditions.h */,
 				3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */,
+				3F331A9C1B2CC3530055E742 /* UIColor+VLDAdditions.h */,
+				3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -365,6 +375,8 @@
 				3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */,
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
+				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
+				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

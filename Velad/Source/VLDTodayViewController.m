@@ -15,6 +15,7 @@
 #import <Masonry/Masonry.h>
 #import "NSString+VLDAdditions.h"
 #import "VLDRecordNotesPresenter.h"
+#import "VLDBasicPointsViewController.h"
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
 
@@ -153,7 +154,8 @@ static CGFloat const kDatePickerHeight = 44;
 }
 
 - (void)onTapListButton:(id)sender {
-    
+    VLDBasicPointsViewController *viewController = [[VLDBasicPointsViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

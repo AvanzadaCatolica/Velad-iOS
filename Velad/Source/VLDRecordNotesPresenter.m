@@ -45,11 +45,11 @@
         [alertController addAction:cancelAction];
         __weak UIAlertController *weakAlertController = alertController;
         UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Agregar"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction *action) {
-                                                                 UITextField *textField = weakAlertController.textFields[0];
-                                                                 [self handleNotes:textField.text];
-                                                             }];
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              UITextField *textField = weakAlertController.textFields[0];
+                                                              [self handleNotes:textField.text];
+                                                          }];
         [alertController addAction:addAction];
         UIViewController *viewController = [self.dataSource viewControllerForRecordNotesPresenter:self];
         [viewController presentViewController:alertController
