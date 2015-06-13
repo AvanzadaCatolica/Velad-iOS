@@ -18,9 +18,9 @@
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
-@property (nonatomic, weak) IBOutlet VLDDatePickerView *datePickerView;
+@property (nonatomic, weak) VLDDatePickerView *datePickerView;
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
 - (void)setupDataSource;
@@ -37,6 +37,17 @@ static CGFloat const kDatePickerHeight = 44;
 @implementation VLDTodayViewController
 
 #pragma mark - Life cycle
+
+- (void)loadView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    VLDDatePickerView *datePickerView = [[VLDDatePickerView alloc] initWithFrame:CGRectZero];
+    [view addSubview:datePickerView];
+    self.datePickerView = datePickerView;
+    self.view = view;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,6 +92,8 @@ static CGFloat const kDatePickerHeight = 44;
     [self.tableView registerClass:[VLDDailyRecordTableViewCell class]
            forCellReuseIdentifier:NSStringFromClass([VLDDailyRecordTableViewCell class])];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)setupDatePickerView {
@@ -98,6 +111,7 @@ static CGFloat const kDatePickerHeight = 44;
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(onTapListButton:)];
+    self.navigationItem.title = @"Hoy";
 }
 
 #pragma mark - Private methods

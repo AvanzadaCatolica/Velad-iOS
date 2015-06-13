@@ -1,5 +1,5 @@
 //
-//  VLDAppDelegate.h
+//  VLDConfigurationViewController.h
 //  Velad
 //
 //  Created by Renzo Crisóstomo on 13/06/15.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VLDAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (nonatomic, strong) UIWindow *window;
+@interface VLDConfigurationViewController : UIViewController
 
 @end
-

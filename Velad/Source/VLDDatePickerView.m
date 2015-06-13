@@ -14,6 +14,7 @@
 @property (nonatomic, weak) UILabel *selectedDateLabel;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 
+- (void)setupView;
 - (void)setupSelectedDate;
 - (void)setupDateFormatter;
 - (void)setupSubviews;
@@ -27,9 +28,10 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 
 #pragma mark - Public methods
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
+        [self setupView];
         [self setupSelectedDate];
         [self setupDateFormatter];
         [self setupSubviews];
@@ -39,6 +41,10 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 }
 
 #pragma mark - Setup methods
+
+- (void)setupView {
+    self.backgroundColor = [UIColor whiteColor];
+}
 
 - (void)setupSelectedDate {
     NSDateComponents *components = [[NSCalendar currentCalendar]

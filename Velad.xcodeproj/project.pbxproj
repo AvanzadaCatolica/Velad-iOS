@@ -11,7 +11,6 @@
 		3F331A621B2C67E70055E742 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A5D1B2C67E70055E742 /* main.m */; };
 		3F331A681B2C68410055E742 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A651B2C68410055E742 /* Images.xcassets */; };
 		3F331A691B2C68410055E742 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A661B2C68410055E742 /* LaunchScreen.xib */; };
-		3F331A6A1B2C68410055E742 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A671B2C68410055E742 /* Main.storyboard */; };
 		3F331A701B2C6AC60055E742 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A6D1B2C6A350055E742 /* Localizable.strings */; };
 		3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A741B2C75FF0055E742 /* VLDBasicPoint.m */; };
 		3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A781B2C7C4C0055E742 /* VLDTodayViewController.m */; };
@@ -20,6 +19,10 @@
 		3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A831B2C84D00055E742 /* VLDDatePickerView.m */; };
 		3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */; };
 		3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */; };
+		3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A911B2CBB8F0055E742 /* VLDWeekViewController.m */; };
+		3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A941B2CBBB00055E742 /* VLDDiaryViewController.m */; };
+		3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A971B2CBBC40055E742 /* VLDReportsViewController.m */; };
+		3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +36,6 @@
 		3F331A5D1B2C67E70055E742 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Support/main.m; sourceTree = "<group>"; };
 		3F331A651B2C68410055E742 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Assets/Images.xcassets; sourceTree = "<group>"; };
 		3F331A661B2C68410055E742 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = Assets/LaunchScreen.xib; sourceTree = "<group>"; };
-		3F331A671B2C68410055E742 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Assets/Main.storyboard; sourceTree = "<group>"; };
 		3F331A6E1B2C6A350055E742 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Assets/es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3F331A731B2C75FF0055E742 /* VLDBasicPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPoint.h; path = Source/VLDBasicPoint.h; sourceTree = "<group>"; };
 		3F331A741B2C75FF0055E742 /* VLDBasicPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPoint.m; path = Source/VLDBasicPoint.m; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 		3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+VLDAdditions.m"; path = "Source/NSString+VLDAdditions.m"; sourceTree = "<group>"; };
 		3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDRecordNotesPresenter.h; path = Source/VLDRecordNotesPresenter.h; sourceTree = "<group>"; };
 		3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDRecordNotesPresenter.m; path = Source/VLDRecordNotesPresenter.m; sourceTree = "<group>"; };
+		3F331A901B2CBB8F0055E742 /* VLDWeekViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekViewController.h; path = Source/VLDWeekViewController.h; sourceTree = "<group>"; };
+		3F331A911B2CBB8F0055E742 /* VLDWeekViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekViewController.m; path = Source/VLDWeekViewController.m; sourceTree = "<group>"; };
+		3F331A931B2CBBB00055E742 /* VLDDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDDiaryViewController.h; path = Source/VLDDiaryViewController.h; sourceTree = "<group>"; };
+		3F331A941B2CBBB00055E742 /* VLDDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDiaryViewController.m; path = Source/VLDDiaryViewController.m; sourceTree = "<group>"; };
+		3F331A961B2CBBC40055E742 /* VLDReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsViewController.h; path = Source/VLDReportsViewController.h; sourceTree = "<group>"; };
+		3F331A971B2CBBC40055E742 /* VLDReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsViewController.m; path = Source/VLDReportsViewController.m; sourceTree = "<group>"; };
+		3F331A991B2CBBD60055E742 /* VLDConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDConfigurationViewController.h; path = Source/VLDConfigurationViewController.h; sourceTree = "<group>"; };
+		3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDConfigurationViewController.m; path = Source/VLDConfigurationViewController.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -135,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				3F331A661B2C68410055E742 /* LaunchScreen.xib */,
-				3F331A671B2C68410055E742 /* Main.storyboard */,
 				3F331A651B2C68410055E742 /* Images.xcassets */,
 				3F331A6D1B2C6A350055E742 /* Localizable.strings */,
 			);
@@ -146,6 +155,10 @@
 			isa = PBXGroup;
 			children = (
 				3F331A7A1B2C7D630055E742 /* Today */,
+				3F331A8C1B2CBAE50055E742 /* Week */,
+				3F331A8D1B2CBB060055E742 /* Diary */,
+				3F331A8E1B2CBB6B0055E742 /* Reports */,
+				3F331A8F1B2CBB730055E742 /* Configuration */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -190,6 +203,42 @@
 				3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		3F331A8C1B2CBAE50055E742 /* Week */ = {
+			isa = PBXGroup;
+			children = (
+				3F331A901B2CBB8F0055E742 /* VLDWeekViewController.h */,
+				3F331A911B2CBB8F0055E742 /* VLDWeekViewController.m */,
+			);
+			name = Week;
+			sourceTree = "<group>";
+		};
+		3F331A8D1B2CBB060055E742 /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				3F331A931B2CBBB00055E742 /* VLDDiaryViewController.h */,
+				3F331A941B2CBBB00055E742 /* VLDDiaryViewController.m */,
+			);
+			name = Diary;
+			sourceTree = "<group>";
+		};
+		3F331A8E1B2CBB6B0055E742 /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				3F331A961B2CBBC40055E742 /* VLDReportsViewController.h */,
+				3F331A971B2CBBC40055E742 /* VLDReportsViewController.m */,
+			);
+			name = Reports;
+			sourceTree = "<group>";
+		};
+		3F331A8F1B2CBB730055E742 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3F331A991B2CBBD60055E742 /* VLDConfigurationViewController.h */,
+				3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		92E6478D0E4B852836397AB9 /* Frameworks */ = {
@@ -261,7 +310,6 @@
 				3F331A701B2C6AC60055E742 /* Localizable.strings in Resources */,
 				3F331A691B2C68410055E742 /* LaunchScreen.xib in Resources */,
 				3F331A681B2C68410055E742 /* Images.xcassets in Resources */,
-				3F331A6A1B2C68410055E742 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,11 +355,15 @@
 			files = (
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
+				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
+				3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */,
 				3F331A621B2C67E70055E742 /* main.m in Sources */,
+				3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */,
 				3F331A591B2C67DC0055E742 /* VLDAppDelegate.m in Sources */,
 				3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */,
+				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 			);
