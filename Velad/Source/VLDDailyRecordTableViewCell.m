@@ -15,13 +15,25 @@
 
 @end
 
+@interface VLDDailyRecordTableViewCell ()
+
+- (void)onTapInfoButton:(id)sender;
+
+@end
+
 @implementation VLDDailyRecordTableViewCell
 
+#pragma mark - Life cycle
+
 - (void)prepareForReuse {
+    self.model = nil;
+    self.delegate = nil;
     self.textLabel.text = @"";
     self.accessoryType = UITableViewCellAccessoryNone;
     self.accessoryView = nil;
 }
+
+#pragma mark - Public methods
 
 - (void)setModel:(VLDDailyRecord *)model {
     _model = model;
@@ -31,8 +43,17 @@
             self.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+            [infoButton addTarget:self action:@selector(onTapInfoButton:) forControlEvents:UIControlEventTouchUpInside];
             self.accessoryView = infoButton;
         }
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)onTapInfoButton:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(dailyRecordTableViewCellDidPressInfoButton:)]) {
+        [self.delegate dailyRecordTableViewCellDidPressInfoButton:self];
     }
 }
 

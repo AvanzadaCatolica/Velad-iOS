@@ -16,7 +16,7 @@
 #import "NSString+VLDAdditions.h"
 #import "VLDRecordNotesPresenter.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
@@ -127,6 +127,7 @@ static CGFloat const kDatePickerHeight = 44;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VLDDailyRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDDailyRecordTableViewCell class])];
     cell.model = [self dailyRecordAtIndexPath:indexPath];
+    cell.delegate = self;
     
     return cell;
 }
@@ -185,6 +186,13 @@ static CGFloat const kDatePickerHeight = 44;
     if (selectedIndexPath) {
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
+}
+
+#pragma mark - VLDDailyRecordTableViewCellDelegate
+
+- (void)dailyRecordTableViewCellDidPressInfoButton:(VLDDailyRecordTableViewCell *)cell {
+    self.recordNotesPresenter.record = cell.model.record;
+    [self.recordNotesPresenter present];
 }
 
 @end
