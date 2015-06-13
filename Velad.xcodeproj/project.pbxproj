@@ -13,9 +13,12 @@
 		3F331A691B2C68410055E742 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A661B2C68410055E742 /* LaunchScreen.xib */; };
 		3F331A6A1B2C68410055E742 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A671B2C68410055E742 /* Main.storyboard */; };
 		3F331A701B2C6AC60055E742 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A6D1B2C6A350055E742 /* Localizable.strings */; };
+		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		242A4A03FF34540136584E3D /* Pods-Velad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Velad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad.debug.xcconfig"; sourceTree = "<group>"; };
+		327509EF0CA8E04A6C1F47D7 /* Pods-Velad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Velad.release.xcconfig"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad.release.xcconfig"; sourceTree = "<group>"; };
 		3F331A2A1B2C67020055E742 /* Velad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F331A571B2C67DC0055E742 /* VLDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDAppDelegate.h; path = Source/VLDAppDelegate.h; sourceTree = "<group>"; };
 		3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDAppDelegate.m; path = Source/VLDAppDelegate.m; sourceTree = "<group>"; };
@@ -25,6 +28,7 @@
 		3F331A661B2C68410055E742 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = Assets/LaunchScreen.xib; sourceTree = "<group>"; };
 		3F331A671B2C68410055E742 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Assets/Main.storyboard; sourceTree = "<group>"; };
 		3F331A6E1B2C6A350055E742 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Assets/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,17 +36,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2582683999AF857AC08226F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				242A4A03FF34540136584E3D /* Pods-Velad.debug.xcconfig */,
+				327509EF0CA8E04A6C1F47D7 /* Pods-Velad.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3F331A211B2C67020055E742 = {
 			isa = PBXGroup;
 			children = (
 				3F331A2C1B2C67020055E742 /* Velad */,
 				3F331A2B1B2C67020055E742 /* Products */,
+				2582683999AF857AC08226F6 /* Pods */,
+				92E6478D0E4B852836397AB9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +117,14 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		92E6478D0E4B852836397AB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46AB8B98CC65AB363A395FCC /* libPods-Velad.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -108,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F331A4D1B2C67020055E742 /* Build configuration list for PBXNativeTarget "Velad" */;
 			buildPhases = (
+				C74643D23313835C586E9AF9 /* Check Pods Manifest.lock */,
 				3F331A261B2C67020055E742 /* Sources */,
 				3F331A271B2C67020055E742 /* Frameworks */,
 				3F331A281B2C67020055E742 /* Resources */,
+				83B15731141853CD7CB36066 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -165,6 +191,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		83B15731141853CD7CB36066 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Velad/Pods-Velad-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C74643D23313835C586E9AF9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F331A261B2C67020055E742 /* Sources */ = {
@@ -272,6 +331,7 @@
 		};
 		3F331A4E1B2C67020055E742 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 242A4A03FF34540136584E3D /* Pods-Velad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -284,6 +344,7 @@
 		};
 		3F331A4F1B2C67020055E742 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 327509EF0CA8E04A6C1F47D7 /* Pods-Velad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -313,6 +374,7 @@
 				3F331A4F1B2C67020055E742 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
