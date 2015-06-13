@@ -13,12 +13,15 @@
 #import "VLDDailyRecordTableViewCell.h"
 #import "VLDDatePickerView.h"
 #import <Masonry/Masonry.h>
+#import "NSString+VLDAdditions.h"
+#import "VLDRecordNotesPresenter.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) RLMResults *basicPoints;
+@property (nonatomic) RLMResults *basicPoints;
 @property (nonatomic, weak) IBOutlet VLDDatePickerView *datePickerView;
+@property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
 - (void)setupDataSource;
 
@@ -35,6 +38,7 @@ static CGFloat const kDatePickerHeight = 44;
     [self setupDataSource];
     [self setupLayout];
     [self setupTableView];
+    [self setupGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,7 +75,20 @@ static CGFloat const kDatePickerHeight = 44;
            forCellReuseIdentifier:NSStringFromClass([VLDDailyRecordTableViewCell class])];
 }
 
+- (void)setupGestureRecognizer {
+    UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
 #pragma mark - Private methods
+
+- (VLDRecordNotesPresenter *)recordNotesPresenter {
+    if (_recordNotesPresenter == nil) {
+        _recordNotesPresenter = [[VLDRecordNotesPresenter alloc] initWithDataSource:self];
+        _recordNotesPresenter.delegate = self;
+    }
+    return _recordNotesPresenter;
+}
 
 - (VLDDailyRecord *)dailyRecordAtIndexPath:(NSIndexPath *)indexPath {
     VLDDailyRecord *dailyRecord = [[VLDDailyRecord alloc] init];
@@ -80,9 +97,25 @@ static CGFloat const kDatePickerHeight = 44;
     dailyRecord.basicPoint = basicPoint;
     
     RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
-    dailyRecord.record = records.count > 0 ? records[0] : nil;
+    dailyRecord.record = [records firstObject];
     
     return dailyRecord;
+}
+
+- (void)onLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+        VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+        RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
+        VLDRecord *record = [records firstObject];
+        
+        self.recordNotesPresenter.record = record;
+        [self.recordNotesPresenter present];
+        [self.tableView selectRowAtIndexPath:indexPath
+                                    animated:YES
+                              scrollPosition:UITableViewScrollPositionMiddle];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -99,5 +132,59 @@ static CGFloat const kDatePickerHeight = 44;
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+    RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
+    VLDRecord *record = [records firstObject];
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    if (record) {
+        [realm deleteObject:record];
+    } else {
+        record = [[VLDRecord alloc] init];
+        record.date = self.datePickerView.selectedDate;
+        record.basicPoint = basicPoint;
+        record.notes = @"";
+        [realm addObject:record];
+    }
+    
+    [realm commitWriteTransaction];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - VLDRecordNotesPresenterDataSource
+
+- (VLDBasicPoint *)basicPointForRecordNotesPresenter:(VLDRecordNotesPresenter *)presenter {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    return self.basicPoints[selectedIndexPath.row];
+}
+
+- (NSDate *)dateForRecordNotesPresenter:(VLDRecordNotesPresenter *)presenter {
+    return self.datePickerView.selectedDate;
+}
+
+- (UIViewController *)viewControllerForRecordNotesPresenter:(VLDRecordNotesPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - VLDRecordNotesPresenterDelegate
+
+- (void)recordNotesPresenterDidFinishRecording:(VLDRecordNotesPresenter *)presenter {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    if (selectedIndexPath) {
+        [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+        [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)recordNotesPresenterDidCancelRecording:(VLDRecordNotesPresenter *)presenter {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    if (selectedIndexPath) {
+        [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+    }
+}
 
 @end

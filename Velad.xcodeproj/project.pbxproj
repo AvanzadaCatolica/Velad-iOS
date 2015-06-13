@@ -18,6 +18,8 @@
 		3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A7C1B2C7EE10055E742 /* VLDRecord.m */; };
 		3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */; };
 		3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A831B2C84D00055E742 /* VLDDatePickerView.m */; };
+		3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */; };
+		3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,10 @@
 		3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDailyRecordTableViewCell.m; path = Source/VLDDailyRecordTableViewCell.m; sourceTree = "<group>"; };
 		3F331A821B2C84D00055E742 /* VLDDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDDatePickerView.h; path = Source/VLDDatePickerView.h; sourceTree = "<group>"; };
 		3F331A831B2C84D00055E742 /* VLDDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDatePickerView.m; path = Source/VLDDatePickerView.m; sourceTree = "<group>"; };
+		3F331A861B2C925E0055E742 /* NSString+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+VLDAdditions.h"; path = "Source/NSString+VLDAdditions.h"; sourceTree = "<group>"; };
+		3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+VLDAdditions.m"; path = "Source/NSString+VLDAdditions.m"; sourceTree = "<group>"; };
+		3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDRecordNotesPresenter.h; path = Source/VLDRecordNotesPresenter.h; sourceTree = "<group>"; };
+		3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDRecordNotesPresenter.m; path = Source/VLDRecordNotesPresenter.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				3F331A561B2C67CE0055E742 /* Application */,
+				3F331A851B2C91CF0055E742 /* Extensions */,
 				3F331A711B2C74890055E742 /* Modules */,
 				3F331A721B2C74A70055E742 /* Models */,
 				3F331A811B2C848F0055E742 /* Views */,
@@ -161,6 +168,8 @@
 				3F331A781B2C7C4C0055E742 /* VLDTodayViewController.m */,
 				3F331A7E1B2C81030055E742 /* VLDDailyRecordTableViewCell.h */,
 				3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */,
+				3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */,
+				3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -172,6 +181,15 @@
 				3F331A831B2C84D00055E742 /* VLDDatePickerView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		3F331A851B2C91CF0055E742 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F331A861B2C925E0055E742 /* NSString+VLDAdditions.h */,
+				3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		92E6478D0E4B852836397AB9 /* Frameworks */ = {
@@ -289,11 +307,13 @@
 			files = (
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
+				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
 				3F331A621B2C67E70055E742 /* main.m in Sources */,
 				3F331A591B2C67DC0055E742 /* VLDAppDelegate.m in Sources */,
 				3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
+				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

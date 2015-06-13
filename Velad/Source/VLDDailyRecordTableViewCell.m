@@ -9,6 +9,7 @@
 #import "VLDDailyRecordTableViewCell.h"
 #import "VLDBasicPoint.h"
 #import "VLDRecord.h"
+#import "NSString+VLDAdditions.h"
 
 @implementation VLDDailyRecord
 
@@ -26,11 +27,11 @@
     _model = model;
     self.textLabel.text = model.basicPoint.name;
     if (model.record) {
-        if (model.record.notes) {
+        if ([model.record.notes vld_isEmpty]) {
+            self.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
             UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
             self.accessoryView = infoButton;
-        } else {
-            self.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
 }

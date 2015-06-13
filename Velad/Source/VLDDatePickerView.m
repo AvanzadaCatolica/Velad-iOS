@@ -17,7 +17,6 @@
                                         components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                                         fromDate:[NSDate date]];
         _selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
-        self.backgroundColor = [UIColor redColor];
     }
     
     return self;
