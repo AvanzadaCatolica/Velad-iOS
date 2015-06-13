@@ -1,12 +1,15 @@
 PODS:
+  - Masonry (0.6.1)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
 
 DEPENDENCIES:
+  - Masonry
   - Realm
 
 SPEC CHECKSUMS:
+  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
 
 COCOAPODS: 0.37.2
