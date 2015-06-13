@@ -17,7 +17,7 @@
 #import "VLDRecordNotesPresenter.h"
 #import "VLDBasicPointsViewController.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDBasicPointsViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
@@ -155,6 +155,7 @@ static CGFloat const kDatePickerHeight = 44;
 
 - (void)onTapListButton:(id)sender {
     VLDBasicPointsViewController *viewController = [[VLDBasicPointsViewController alloc] init];
+    viewController.delegate = self;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -240,6 +241,12 @@ static CGFloat const kDatePickerHeight = 44;
 - (void)datePickerViewDidChangeSelection:(VLDDatePickerView *)datePickerView {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - VLDBasicPointsViewControllerDelegate
+
+- (void)basicPointsViewControllerDidChangeProperties:(VLDBasicPointsViewController *)viewController {
+    [self.tableView reloadData];
 }
 
 @end

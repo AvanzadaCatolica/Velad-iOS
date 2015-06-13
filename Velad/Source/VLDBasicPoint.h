@@ -16,6 +16,7 @@
 @property NSString *name;
 @property NSInteger order;
 @property (getter=isEnabled) BOOL enabled;
+@property NSString *descriptionText;
 
 + (RLMResults *)basicPoints;
 

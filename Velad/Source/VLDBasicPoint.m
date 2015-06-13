@@ -46,30 +46,35 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     
     basicPoint = [[VLDBasicPoint alloc] init];
     basicPoint.name = @"Oración";
+    basicPoint.descriptionText = @"";
     basicPoint.order = 0;
     basicPoint.enabled = YES;
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
     basicPoint.name = @"Abnegación";
+    basicPoint.descriptionText = @"";
     basicPoint.order = 1;
     basicPoint.enabled = YES;
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
     basicPoint.name = @"Eucaristía";
+    basicPoint.descriptionText = @"";
     basicPoint.order = 2;
     basicPoint.enabled = YES;
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
     basicPoint.name = @"Rosario";
+    basicPoint.descriptionText = @"";
     basicPoint.order = 3;
     basicPoint.enabled = YES;
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
     basicPoint.name = @"Lectura";
+    basicPoint.descriptionText = @"";
     basicPoint.order = 4;
     basicPoint.enabled = YES;
     [realm addObject:basicPoint];
