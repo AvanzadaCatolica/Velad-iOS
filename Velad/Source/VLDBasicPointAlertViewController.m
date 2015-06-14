@@ -70,6 +70,7 @@
 - (void)setupNavigationItem;
 - (void)onTapSaveButton:(id)sender;
 - (void)onTapCancelButton:(id)sender;
+- (void)requestPermission;
 
 @end
 
@@ -93,6 +94,7 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationItem];
+    [self requestPermission];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,6 +102,14 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
 }
 
 #pragma mark - Private methods
+
+- (void)requestPermission {
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+}
 
 - (VLDFormErrorPresenter *)formErrorPresenter {
     if (_formErrorPresenter == nil) {
@@ -161,6 +171,15 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     if (error) {
         [self.formErrorPresenter presentError:error];
         return;
+    }
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        UIUserNotificationSettings *grantedSettings = [application currentUserNotificationSettings];
+        if (grantedSettings.types == UIUserNotificationTypeNone) {
+            [self.formErrorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
+                                                                      code:INT_MAX
+                                                                  userInfo:@{@"NSLocalizedDescription" : @"Las notificaciones están deshabilitadas"}]];
+        }
     }
     [self.notificationScheduler scheduleNotificationForBasicPoint:self.basicPoint
                                                              time:self.form.formValues[kRowDescriptorTime]

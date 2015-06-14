@@ -35,7 +35,9 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
                                      days:(NSArray *)days {
     for (NSString *day in days) {
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.alertTitle = @"Velad te recuerda";
+        if ([localNotification respondsToSelector:@selector(alertTitle)]) {
+            localNotification.alertTitle = @"Velad te recuerda";
+        }
         localNotification.alertBody = [NSString stringWithFormat:@"Alerta sobre el punto básico: %@", basicPoint.name];
         localNotification.userInfo = @{VLDBasicPointUUIDUserInfoKey: basicPoint.UUID};
         [self scheduleNotification:localNotification
