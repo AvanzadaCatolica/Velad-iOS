@@ -14,6 +14,14 @@
 
 #pragma mark - Life cycle
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)prepareForReuse {
     self.model = nil;
     self.textLabel.text = @"";
@@ -25,8 +33,8 @@
 - (void)setModel:(VLDBasicPoint *)model {
     _model = model;
     self.textLabel.text = model.name;
-    if (![model.description vld_isEmpty]) {
-        self.detailTextLabel.text = model.description;
+    if (![model.descriptionText vld_isEmpty]) {
+        self.detailTextLabel.text = model.descriptionText;
     }
     self.accessoryType = model.enabled ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }

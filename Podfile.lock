@@ -4,15 +4,28 @@ PODS:
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
   - Reveal-iOS-SDK (1.5.1)
+  - XLForm (3.0.0)
 
 DEPENDENCIES:
   - Masonry
   - Realm
   - Reveal-iOS-SDK
+  - XLForm (from `git@github.com:xmartlabs/XLForm.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  XLForm:
+    :branch: master
+    :git: git@github.com:xmartlabs/XLForm.git
+
+CHECKOUT OPTIONS:
+  XLForm:
+    :commit: 73a2d5275467c0aa04c4399896fc16a2c7189130
+    :git: git@github.com:xmartlabs/XLForm.git
 
 SPEC CHECKSUMS:
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
+  XLForm: 10fc7eb9e2d5df21a515fa3a794f4e26319abd0e
 
 COCOAPODS: 0.37.2
