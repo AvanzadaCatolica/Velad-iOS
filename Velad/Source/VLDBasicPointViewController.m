@@ -11,6 +11,7 @@
 #import "NSString+VLDAdditions.h"
 #import <Realm/Realm.h>
 #import "VLDFormErrorPresenter.h"
+#import "VLDBasicPointAlertViewController.h"
 
 @interface VLDBasicPointViewController () <VLDFormErrorPresenterDataSource>
 
@@ -27,12 +28,14 @@
 
 static NSString * const kRowDescriptorName = @"VLDRowDescriptorName";
 static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescription";
+static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 @implementation VLDBasicPointViewController
 
 - (instancetype)initWithBasicPoint:(VLDBasicPoint *)basicPoint {
     self = [super init];
     if (self) {
+        _basicPoint = basicPoint;
         [self setupFormDescriptor];
         [self setupBasicPoint:basicPoint];
     }
@@ -82,12 +85,20 @@ static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescriptio
     [rowDescriptor.cellConfigAtConfigure setObject:@(NSTextAlignmentRight)
                                             forKey:@"textField.textAlignment"];
     [sectionDescriptor addFormRow:rowDescriptor];
+    if (self.basicPoint) {
+        rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorAlert
+                                                              rowType:XLFormRowDescriptorTypeButton
+                                                                title:@"Alertas"];
+        rowDescriptor.action.formSelector = @selector(onTapAlertButton:);
+        [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
+        [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+        [sectionDescriptor addFormRow:rowDescriptor];
+    }
     
     self.form = formDescriptor;
 }
 
 - (void)setupBasicPoint:(VLDBasicPoint *)basicPoint {
-    _basicPoint = basicPoint;
     XLFormRowDescriptor *nameFormRowDescriptor = [self.form formRowWithTag:kRowDescriptorName];
     nameFormRowDescriptor.value = basicPoint.name;
     if (![basicPoint.descriptionText vld_isEmpty]) {
@@ -147,6 +158,12 @@ static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescriptio
 - (void)onTapCancelButton:(id)sender {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+- (void)onTapAlertButton:(id)sender {
+    VLDBasicPointAlertViewController *viewController = [[VLDBasicPointAlertViewController alloc] initWithBasicPoint:self.basicPoint];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - VLDFormErrorPresenterDataSource

@@ -28,6 +28,7 @@
 		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
 		3FD02C101B2D719C00B82507 /* VLDFormErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDFormErrorPresenter.m */; };
+		3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
 		3FD02C0E1B2D719C00B82507 /* VLDFormErrorPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDFormErrorPresenter.h; path = Source/VLDFormErrorPresenter.h; sourceTree = "<group>"; };
 		3FD02C0F1B2D719C00B82507 /* VLDFormErrorPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDFormErrorPresenter.m; path = Source/VLDFormErrorPresenter.m; sourceTree = "<group>"; };
+		3FD02C111B2D7C0A00B82507 /* VLDBasicPointAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointAlertViewController.h; path = Source/VLDBasicPointAlertViewController.h; sourceTree = "<group>"; };
+		3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointAlertViewController.m; path = Source/VLDBasicPointAlertViewController.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +209,8 @@
 				3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */,
 				3FD02C0E1B2D719C00B82507 /* VLDFormErrorPresenter.h */,
 				3FD02C0F1B2D719C00B82507 /* VLDFormErrorPresenter.m */,
+				3FD02C111B2D7C0A00B82507 /* VLDBasicPointAlertViewController.h */,
+				3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
 				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
+				3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
