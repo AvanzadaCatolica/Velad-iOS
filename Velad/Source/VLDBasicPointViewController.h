@@ -24,5 +24,6 @@
 
 - (void)basicPointViewController:(VLDBasicPointViewController *)viewController
       didFinishEditingBasicPoint:(VLDBasicPoint *)basicPoint;
+- (void)basicPointViewControllerDidCancelEditing:(VLDBasicPointViewController *)viewController;
 
 @end

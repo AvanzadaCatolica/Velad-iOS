@@ -204,4 +204,11 @@
     }
 }
 
+- (void)basicPointViewControllerDidCancelEditing:(VLDBasicPointViewController *)viewController {
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
 @end

@@ -159,6 +159,9 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 - (void)onTapCancelButton:(id)sender {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+    if ([self.delegate respondsToSelector:@selector(basicPointViewControllerDidCancelEditing:)]) {
+        [self.delegate basicPointViewControllerDidCancelEditing:self];
+    }
 }
 
 - (void)onTapAlertButton:(id)sender {
