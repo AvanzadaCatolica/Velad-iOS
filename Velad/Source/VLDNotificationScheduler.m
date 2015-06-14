@@ -20,6 +20,7 @@
                          day:(NSString *)day
                         time:(NSDate *)time;
 - (NSInteger)weekdayForDay:(NSString *)day;
+- (BOOL)isToday:(NSString *)day;
 
 @end
 
@@ -74,14 +75,29 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
 }
 
 - (NSInteger)weekdayForDay:(NSString *)day {
-    return [_weekDaySymbols indexOfObject:[day lowercaseString]] + 1;
+    return [self.weekDaySymbols indexOfObject:[day lowercaseString]] + 1;
+}
+
+- (BOOL)isToday:(NSString *)day {
+    NSDate *today = [NSDate date];
+    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:today];
+    return todayComponents.weekday == [self weekdayForDay:day];
 }
 
 - (void)scheduleNotification:(UILocalNotification *)notification
                          day:(NSString *)day
                         time:(NSDate *)time {
     NSDate *today = [NSDate date];
-    NSDate *targetDate = [today dateByAddingTimeInterval:kWeekTimeInterval];
+    NSDate *targetDate;
+    if ([self isToday:day]) {
+        if ([today compare:time] == NSOrderedAscending) {
+            targetDate = today;
+        } else {
+            targetDate = [today dateByAddingTimeInterval:kWeekTimeInterval];
+        }
+    } else {
+        targetDate = [today dateByAddingTimeInterval:kWeekTimeInterval];
+    }
     NSDateComponents *timeComponents = [[NSCalendar currentCalendar] components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:time];
     NSDateComponents *targetComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:targetDate];
     [targetComponents setWeekday:[self weekdayForDay:day]];
