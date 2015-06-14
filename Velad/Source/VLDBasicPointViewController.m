@@ -106,6 +106,15 @@ static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescriptio
                                                                                           action:@selector(onTapCancelButton:)];
 }
 
+- (void)bind:(VLDBasicPoint *)basicPoint {
+    basicPoint.name = self.form.formValues[kRowDescriptorName];
+    if (self.form.formValues[@"VLDRowDescriptorDescription"] != [NSNull null]) {
+        basicPoint.descriptionText = self.form.formValues[kRowDescriptorDescription];
+    } else {
+        basicPoint.descriptionText = @"";
+    }
+}
+
 - (void)onTapDoneButton:(id)sender {
     NSError *error = [[self formValidationErrors] firstObject];
     if (error) {
@@ -114,13 +123,20 @@ static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescriptio
     }
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
-    self.basicPoint.name = self.form.formValues[kRowDescriptorName];
-    if (self.form.formValues[@"VLDRowDescriptorDescription"] != [NSNull null]) {
-        self.basicPoint.descriptionText = self.form.formValues[kRowDescriptorDescription];
-    } else {
-        self.basicPoint.descriptionText = @"";
+    
+    if (self.basicPoint) {
+        [self bind:self.basicPoint];
     }
+    else {
+        VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
+        basicPoint.enabled = YES;
+        basicPoint.order = [VLDBasicPoint allObjects].count;
+        [self bind:basicPoint];
+        [realm addObject:basicPoint];
+    }
+    
     [realm commitWriteTransaction];
+    
     if ([self.delegate respondsToSelector:@selector(basicPointViewController:didFinishEditingBasicPoint:)]) {
         [self.delegate basicPointViewController:self didFinishEditingBasicPoint:self.basicPoint];
     }

@@ -101,7 +101,12 @@
 }
 
 - (void)onTapAddButton:(id)sender {
-    
+    VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:nil];
+    viewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -189,7 +194,11 @@
 - (void)basicPointViewController:(VLDBasicPointViewController *)viewController
       didFinishEditingBasicPoint:(VLDBasicPoint *)basicPoint {
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [self.tableView reloadData];
+    }
     if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
         [self.delegate basicPointsViewControllerDidChangeProperties:self];
     }
