@@ -14,8 +14,10 @@
 #import "VLDWeekTableViewCell.h"
 #import "VLDWeekViewModel.h"
 #import "VLDRecord.h"
+#import "UIView+VLDAdditions.h"
+#import <MessageUI/MessageUI.h>
 
-@interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate>
+@interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) NSArray *viewModels;
@@ -26,10 +28,11 @@
 - (void)setupLayout;
 - (void)setupTableView;
 - (void)setupDateIntervalPickerView;
+- (void)onTapMailButton:(id)sender;
 
 @end
 
-static CGFloat const kDatePickerHeight = 44;
+static CGFloat const kDatePickerHeight = 88;
 
 @implementation VLDWeekViewController
 
@@ -71,6 +74,11 @@ static CGFloat const kDatePickerHeight = 44;
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Semana";
+    UIImage *mailImage = [[UIImage imageNamed:@"Mail"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:mailImage
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(onTapMailButton:)];
 }
 
 - (void)setupDataSource {
@@ -114,7 +122,32 @@ static CGFloat const kDatePickerHeight = 44;
     self.dateIntervalPickerView.delegate = self;
 }
 
+#pragma mark - Private methods
+
+- (void)onTapMailButton:(id)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
+        [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
+        composeViewController.mailComposeDelegate = self;
+        [composeViewController setSubject:@"Reporte semanal"];
+        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view snapshotImage])
+                                        mimeType:@"image/png"
+                                        fileName:@"Reporte.png"];
+        [self presentViewController:composeViewController
+                           animated:YES
+                         completion:^{
+                             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                         }];
+    } else {
+        
+    }
+}
+
 #pragma mark - UITableViewDataSource
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Puntos Básicos";
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.viewModels.count;
@@ -137,6 +170,12 @@ static CGFloat const kDatePickerHeight = 44;
 - (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
     [self setupDataSource];
     [self.tableView reloadData];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

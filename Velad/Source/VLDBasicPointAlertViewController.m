@@ -34,7 +34,7 @@
         if (array.count == 1) {
             return [[array firstObject] capitalizedString];
         } else {
-            return [NSString stringWithFormat:@"%d días", array.count];
+            return [NSString stringWithFormat:@"%ld días", (long)array.count];
         }
     }
     if ([value isKindOfClass:[NSString class]]) {

@@ -33,7 +33,7 @@
 
 @end
 
-static CGFloat const kDatePickerHeight = 44;
+static CGFloat const kDatePickerHeight = 88;
 
 @implementation VLDTodayViewController
 
@@ -160,6 +160,10 @@ static CGFloat const kDatePickerHeight = 44;
 }
 
 #pragma mark - UITableViewDataSource
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Puntos Básicos";
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.basicPoints.count;
