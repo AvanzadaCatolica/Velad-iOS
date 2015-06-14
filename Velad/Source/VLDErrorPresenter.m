@@ -1,22 +1,22 @@
 //
-//  VLDFormErrorPresenter.m
+//  VLDErrorPresenter.m
 //  Velad
 //
 //  Created by Renzo Crisóstomo on 14/06/15.
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDFormErrorPresenter.h"
+#import "VLDErrorPresenter.h"
 
-@interface VLDFormErrorPresenter ()
+@interface VLDErrorPresenter ()
 
 @end
 
-@implementation VLDFormErrorPresenter
+@implementation VLDErrorPresenter
 
 #pragma mark - Life cycle
 
-- (instancetype)initWithDataSource:(id<VLDFormErrorPresenterDataSource>)dataSource {
+- (instancetype)initWithDataSource:(id<VLDErrorPresenterDataSource>)dataSource {
     self = [super init];
     if (self) {
         _dataSource = dataSource;
@@ -35,7 +35,7 @@
                                                                 style:UIAlertActionStyleDefault
                                                               handler:nil];
         [alertController addAction:dismissAction];
-        UIViewController *viewController = [self.dataSource viewControllerForFormErrorPresenter:self];
+        UIViewController *viewController = [self.dataSource viewControllerForErrorPresenter:self];
         [viewController presentViewController:alertController
                                      animated:YES
                                    completion:nil];

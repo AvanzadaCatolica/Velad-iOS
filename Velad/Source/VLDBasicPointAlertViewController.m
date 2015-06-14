@@ -8,7 +8,7 @@
 
 #import "VLDBasicPointAlertViewController.h"
 #import "VLDBasicPoint.h"
-#import "VLDFormErrorPresenter.h"
+#import "VLDErrorPresenter.h"
 #import "VLDNotificationScheduler.h"
 #import "VLDAlert.h"
 
@@ -60,10 +60,10 @@
 
 @end
 
-@interface VLDBasicPointAlertViewController () <VLDFormErrorPresenterDataSource>
+@interface VLDBasicPointAlertViewController () <VLDErrorPresenterDataSource>
 
 @property (nonatomic) VLDBasicPoint *basicPoint;
-@property (nonatomic) VLDFormErrorPresenter *formErrorPresenter;
+@property (nonatomic) VLDErrorPresenter *errorPresenter;
 @property (nonatomic) VLDNotificationScheduler *notificationScheduler;
 
 - (void)setupFormDescriptor;
@@ -111,11 +111,11 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     }
 }
 
-- (VLDFormErrorPresenter *)formErrorPresenter {
-    if (_formErrorPresenter == nil) {
-        _formErrorPresenter = [[VLDFormErrorPresenter alloc] initWithDataSource:self];
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
     }
-    return _formErrorPresenter;
+    return _errorPresenter;
 }
 
 - (VLDNotificationScheduler *)notificationScheduler {
@@ -169,16 +169,16 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
 - (void)onTapSaveButton:(id)sender {
     NSError *error = [[self formValidationErrors] firstObject];
     if (error) {
-        [self.formErrorPresenter presentError:error];
+        [self.errorPresenter presentError:error];
         return;
     }
     UIApplication *application = [UIApplication sharedApplication];
     if ([application respondsToSelector:@selector(currentUserNotificationSettings)]) {
         UIUserNotificationSettings *grantedSettings = [application currentUserNotificationSettings];
         if (grantedSettings.types == UIUserNotificationTypeNone) {
-            [self.formErrorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
-                                                                      code:INT_MAX
-                                                                  userInfo:@{@"NSLocalizedDescription" : @"Las notificaciones están deshabilitadas"}]];
+            [self.errorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
+                                                                  code:INT_MAX
+                                                              userInfo:@{@"NSLocalizedDescription" : @"Las notificaciones están deshabilitadas"}]];
         }
     }
     [self.notificationScheduler scheduleNotificationForBasicPoint:self.basicPoint
@@ -191,9 +191,9 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - VLDFormErrorPresenterDataSource
+#pragma mark - VLDErrorPresenterDataSource
 
-- (UIViewController *)viewControllerForFormErrorPresenter:(VLDFormErrorPresenter *)presenter {
+- (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
     return self;
 }
 

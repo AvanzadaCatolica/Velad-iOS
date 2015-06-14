@@ -10,13 +10,13 @@
 #import "VLDBasicPoint.h"
 #import "NSString+VLDAdditions.h"
 #import <Realm/Realm.h>
-#import "VLDFormErrorPresenter.h"
+#import "VLDErrorPresenter.h"
 #import "VLDBasicPointAlertViewController.h"
 
-@interface VLDBasicPointViewController () <VLDFormErrorPresenterDataSource>
+@interface VLDBasicPointViewController () <VLDErrorPresenterDataSource>
 
 @property (nonatomic, readonly) VLDBasicPoint *basicPoint;
-@property (nonatomic) VLDFormErrorPresenter *formErrorPresenter;
+@property (nonatomic) VLDErrorPresenter *errorPresenter;
 
 - (void)setupFormDescriptor;
 - (void)setupBasicPoint:(VLDBasicPoint *)basicPoint;
@@ -54,11 +54,11 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 #pragma mark - Private methods
 
-- (VLDFormErrorPresenter *)formErrorPresenter {
-    if (_formErrorPresenter == nil) {
-        _formErrorPresenter = [[VLDFormErrorPresenter alloc] initWithDataSource:self];
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
     }
-    return _formErrorPresenter;
+    return _errorPresenter;
 }
 
 - (void)setupFormDescriptor {
@@ -129,7 +129,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 - (void)onTapDoneButton:(id)sender {
     NSError *error = [[self formValidationErrors] firstObject];
     if (error) {
-        [self.formErrorPresenter presentError:error];
+        [self.errorPresenter presentError:error];
         return;
     }
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -170,9 +170,9 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
-#pragma mark - VLDFormErrorPresenterDataSource
+#pragma mark - VLDErrorPresenterDataSource
 
-- (UIViewController *)viewControllerForFormErrorPresenter:(VLDFormErrorPresenter *)presenter {
+- (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
     return self;
 }
 
