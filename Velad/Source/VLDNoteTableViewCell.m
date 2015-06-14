@@ -1,15 +1,15 @@
 //
-//  VLDWeekTableViewCell.m
+//  VLDNoteTableViewCell.m
 //  Velad
 //
 //  Created by Renzo Crisóstomo on 14/06/15.
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDWeekTableViewCell.h"
-#import "VLDWeekViewModel.h"
+#import "VLDNoteTableViewCell.h"
+#import "VLDNote.h"
 
-@implementation VLDWeekTableViewCell
+@implementation VLDNoteTableViewCell
 
 #pragma mark - Life cycle
 
@@ -22,17 +22,17 @@
 }
 
 - (void)prepareForReuse {
-    self.viewModel = nil;
+    self.model = nil;
     self.textLabel.text = @"";
     self.detailTextLabel.text = @"";
 }
 
 #pragma mark - Public methods
 
-- (void)setViewModel:(VLDWeekViewModel *)viewModel {
-    _viewModel = viewModel;
-    self.textLabel.text = viewModel.basicPoint.name;
-    self.detailTextLabel.text = [NSString stringWithFormat:@"%ld/7", (long)viewModel.weekCount];
+- (void)setModel:(VLDNote *)model {
+    _model = model;
+    self.textLabel.text = model.text;
+    self.detailTextLabel.text = [VLDNote symbolForState:model.state];
 }
 
 @end

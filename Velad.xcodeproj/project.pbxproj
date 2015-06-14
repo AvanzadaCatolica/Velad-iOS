@@ -37,6 +37,9 @@
 		3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C211B2DAE1E00B82507 /* VLDWeekTableViewCell.m */; };
 		3FD02C251B2DB20D00B82507 /* VLDWeekViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C241B2DB20D00B82507 /* VLDWeekViewModel.m */; };
 		3FD02C281B2DB97800B82507 /* UIView+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C271B2DB97800B82507 /* UIView+VLDAdditions.m */; };
+		3FF4D7241B2DF1C3008538DA /* VLDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7231B2DF1C3008538DA /* VLDNote.m */; };
+		3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */; };
+		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +104,12 @@
 		3FD02C241B2DB20D00B82507 /* VLDWeekViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekViewModel.m; path = Source/VLDWeekViewModel.m; sourceTree = "<group>"; };
 		3FD02C261B2DB97800B82507 /* UIView+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+VLDAdditions.h"; path = "Source/UIView+VLDAdditions.h"; sourceTree = "<group>"; };
 		3FD02C271B2DB97800B82507 /* UIView+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+VLDAdditions.m"; path = "Source/UIView+VLDAdditions.m"; sourceTree = "<group>"; };
+		3FF4D7221B2DF1C3008538DA /* VLDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNote.h; path = Source/VLDNote.h; sourceTree = "<group>"; };
+		3FF4D7231B2DF1C3008538DA /* VLDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNote.m; path = Source/VLDNote.m; sourceTree = "<group>"; };
+		3FF4D7251B2DF3B2008538DA /* VLDNoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteTableViewCell.h; path = Source/VLDNoteTableViewCell.h; sourceTree = "<group>"; };
+		3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNoteTableViewCell.m; path = Source/VLDNoteTableViewCell.m; sourceTree = "<group>"; };
+		3FF4D7281B2DF599008538DA /* VLDNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteViewController.h; path = Source/VLDNoteViewController.h; sourceTree = "<group>"; };
+		3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNoteViewController.m; path = Source/VLDNoteViewController.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -217,6 +226,8 @@
 				3FD02C181B2D8FE000B82507 /* VLDAlert.m */,
 				3FD02C1A1B2D940400B82507 /* VLDWeekday.h */,
 				3FD02C1B1B2D940400B82507 /* VLDWeekday.m */,
+				3FF4D7221B2DF1C3008538DA /* VLDNote.h */,
+				3FF4D7231B2DF1C3008538DA /* VLDNote.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -288,6 +299,10 @@
 			children = (
 				3F331A931B2CBBB00055E742 /* VLDDiaryViewController.h */,
 				3F331A941B2CBBB00055E742 /* VLDDiaryViewController.m */,
+				3FF4D7251B2DF3B2008538DA /* VLDNoteTableViewCell.h */,
+				3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */,
+				3FF4D7281B2DF599008538DA /* VLDNoteViewController.h */,
+				3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */,
 			);
 			name = Diary;
 			sourceTree = "<group>";
@@ -435,6 +450,7 @@
 				3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */,
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
+				3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */,
 				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
@@ -455,7 +471,9 @@
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
 				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,
 				3FD02C251B2DB20D00B82507 /* VLDWeekViewModel.m in Sources */,
+				3FF4D7241B2DF1C3008538DA /* VLDNote.m in Sources */,
 				3FD02C1F1B2DAB6400B82507 /* VLDDateIntervalPickerView.m in Sources */,
+				3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 				3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */,
 			);

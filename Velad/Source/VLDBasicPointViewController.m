@@ -21,7 +21,7 @@
 - (void)setupFormDescriptor;
 - (void)setupBasicPoint:(VLDBasicPoint *)basicPoint;
 - (void)setupNavigationItem;
-- (void)onTapDoneButton:(id)sender;
+- (void)onTapSaveButton:(id)sender;
 - (void)onTapCancelButton:(id)sender;
 
 @end
@@ -31,6 +31,8 @@ static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescriptio
 static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 @implementation VLDBasicPointViewController
+
+#pragma mark - Life cycle
 
 - (instancetype)initWithBasicPoint:(VLDBasicPoint *)basicPoint {
     self = [super init];
@@ -109,9 +111,9 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Punto Básico";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                            target:self
-                                                                                           action:@selector(onTapDoneButton:)];
+                                                                                           action:@selector(onTapSaveButton:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(onTapCancelButton:)];
@@ -126,7 +128,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     }
 }
 
-- (void)onTapDoneButton:(id)sender {
+- (void)onTapSaveButton:(id)sender {
     NSError *error = [[self formValidationErrors] firstObject];
     if (error) {
         [self.errorPresenter presentError:error];
