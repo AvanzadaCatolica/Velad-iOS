@@ -140,6 +140,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     }
     else {
         VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
+        basicPoint.UUID = [[NSUUID UUID] UUIDString];
         basicPoint.enabled = YES;
         basicPoint.order = [VLDBasicPoint allObjects].count;
         [self bind:basicPoint];

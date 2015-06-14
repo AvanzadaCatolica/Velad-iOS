@@ -9,6 +9,8 @@
 #import "VLDBasicPointAlertViewController.h"
 #import "VLDBasicPoint.h"
 #import "VLDFormErrorPresenter.h"
+#import "VLDNotificationScheduler.h"
+#import "VLDAlert.h"
 
 @interface VLDWeekdayArrayValueTrasformer : NSValueTransformer
 @end
@@ -62,7 +64,9 @@
 
 @property (nonatomic) VLDBasicPoint *basicPoint;
 @property (nonatomic) VLDFormErrorPresenter *formErrorPresenter;
+@property (nonatomic) VLDNotificationScheduler *notificationScheduler;
 
+- (void)setupFormDescriptor;
 - (void)setupNavigationItem;
 - (void)onTapSaveButton:(id)sender;
 - (void)onTapCancelButton:(id)sender;
@@ -104,6 +108,13 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     return _formErrorPresenter;
 }
 
+- (VLDNotificationScheduler *)notificationScheduler {
+    if (_notificationScheduler == nil) {
+        _notificationScheduler = [[VLDNotificationScheduler alloc] init];
+    }
+    return _notificationScheduler;
+}
+
 - (void)setupFormDescriptor {
     XLFormDescriptor *formDescriptor;
     XLFormSectionDescriptor *sectionDescriptor;
@@ -117,7 +128,7 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorTime
                                                           rowType:XLFormRowDescriptorTypeTimeInline
                                                             title:@"Hora"];
-    rowDescriptor.value = [NSDate date];
+    rowDescriptor.value = self.basicPoint.alert ? self.basicPoint.alert.time : [NSDate date];
     [sectionDescriptor addFormRow:rowDescriptor];
     
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorInterval
@@ -127,6 +138,8 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
     rowDescriptor.selectorOptions = [dateFormatter weekdaySymbols];
     rowDescriptor.valueTransformer = [VLDWeekdayArrayValueTrasformer class];
+    rowDescriptor.selectorTitle = @"Días";
+    rowDescriptor.value = self.basicPoint.alert ? [self.basicPoint.alert weekDaySymbols] : @[];
     [rowDescriptor addValidator:[[VLDWeekdayArrayValidator alloc] init]];
     [sectionDescriptor addFormRow:rowDescriptor];
     
@@ -149,6 +162,10 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
         [self.formErrorPresenter presentError:error];
         return;
     }
+    [self.notificationScheduler scheduleNotificationForBasicPoint:self.basicPoint
+                                                             time:self.form.formValues[kRowDescriptorTime]
+                                                             days:self.form.formValues[kRowDescriptorInterval]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)onTapCancelButton:(id)sender {

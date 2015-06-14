@@ -45,6 +45,7 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm beginWriteTransaction];
     
     basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
     basicPoint.name = @"Oración";
     basicPoint.descriptionText = @"";
     basicPoint.order = 0;
@@ -52,6 +53,7 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
     basicPoint.name = @"Abnegación";
     basicPoint.descriptionText = @"";
     basicPoint.order = 1;
@@ -59,6 +61,7 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
     basicPoint.name = @"Eucaristía";
     basicPoint.descriptionText = @"";
     basicPoint.order = 2;
@@ -66,6 +69,7 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
     basicPoint.name = @"Rosario";
     basicPoint.descriptionText = @"";
     basicPoint.order = 3;
@@ -73,6 +77,7 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm addObject:basicPoint];
     
     basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
     basicPoint.name = @"Lectura";
     basicPoint.descriptionText = @"";
     basicPoint.order = 4;

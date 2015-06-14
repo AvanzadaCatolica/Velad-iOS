@@ -10,13 +10,16 @@
 #import <Realm/RLMObject.h>
 
 @class RLMResults;
+@class VLDAlert;
 
 @interface VLDBasicPoint : RLMObject
 
+@property NSString *UUID;
 @property NSString *name;
 @property NSInteger order;
 @property (getter=isEnabled) BOOL enabled;
 @property NSString *descriptionText;
+@property VLDAlert *alert;
 
 + (RLMResults *)basicPoints;
 
