@@ -97,10 +97,9 @@
 - (void)updateLeftBarButtonItem {
     if (self.editing) {
         self.backButtonItem = self.navigationItem.leftBarButtonItem;
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Agregar"
-                                                                                   style:UIBarButtonItemStyleBordered
-                                                                                  target:self
-                                                                                  action:@selector(onTapAddButton:)]
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                                target:self
+                                                                                                action:@selector(onTapAddButton:)]
                                          animated:YES];
     } else {
         [self.navigationItem setLeftBarButtonItem:self.backButtonItem

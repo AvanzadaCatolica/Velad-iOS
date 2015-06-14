@@ -70,6 +70,12 @@ static CGFloat const kDatePickerHeight = 88;
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    [self updateLeftBarButtonItem];
+}
+
 #pragma mark - Setup methods
 
 - (void)setupDataSource {
@@ -91,9 +97,7 @@ static CGFloat const kDatePickerHeight = 88;
                forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmentedControl;
     self.segmentedControl = segmentedControl;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                           target:self
-                                                                                           action:@selector(onTapAddButton:)];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)setupLayout {
@@ -126,19 +130,28 @@ static CGFloat const kDatePickerHeight = 88;
 #pragma mark - Private methods
 
 - (void)onValueChangedSegmentedControl:(id)sender {
-    UISegmentedControl *segmentedControl = sender;
-    VLDDiaryMode mode = segmentedControl.selectedSegmentIndex;
-    if (mode == VLDDiaryModeConfessable) {
-        [self.navigationItem
-         setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                            target:self
-                                                                            action:@selector(onTapActionButton:)]
-         animated:YES];
-    } else {
-        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    }
+    [self updateLeftBarButtonItem];
     [self setupDataSource];
     [self.tableView reloadData];
+}
+
+- (void)updateLeftBarButtonItem {
+    if (self.editing) {
+        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                                target:self
+                                                                                                action:@selector(onTapAddButton:)]];
+    } else {
+        VLDDiaryMode mode = self.segmentedControl.selectedSegmentIndex;
+        if (mode == VLDDiaryModeConfessable) {
+            [self.navigationItem
+             setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                target:self
+                                                                                action:@selector(onTapActionButton:)]
+             animated:YES];
+        } else {
+            [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        }
+    }
 }
 
 - (void)onTapAddButton:(id)sender {
@@ -162,6 +175,21 @@ static CGFloat const kDatePickerHeight = 88;
     VLDNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDNoteTableViewCell class])];
     cell.model = self.notes[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        VLDNote *note = self.notes[indexPath.row];
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        
+        [realm deleteObject:note];
+        
+        [realm commitWriteTransaction];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }
 }
 
 #pragma mark - UITableViewDelegate
