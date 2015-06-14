@@ -31,10 +31,10 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
                                                                                  message:error.userInfo[@"NSLocalizedDescription"]
                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Aceptar"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-        [alertController addAction:cancelAction];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Aceptar"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:nil];
+        [alertController addAction:dismissAction];
         UIViewController *viewController = [self.dataSource viewControllerForFormErrorPresenter:self];
         [viewController presentViewController:alertController
                                      animated:YES

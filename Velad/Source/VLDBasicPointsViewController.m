@@ -12,12 +12,14 @@
 #import "VLDBasicPointCellTableViewCell.h"
 #import "VLDBasicPoint.h"
 #import "VLDBasicPointViewController.h"
+#import "VLDNotificationScheduler.h"
 
 @interface VLDBasicPointsViewController () <UITableViewDataSource, UITableViewDelegate, VLDBasicPointViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) RLMResults *basicPoints;
 @property (nonatomic) UIBarButtonItem *backButtonItem;
+@property (nonatomic) VLDNotificationScheduler *notificationScheduler;
 
 - (void)setupNavigationItem;
 - (void)setupDataSource;
@@ -85,6 +87,13 @@
 
 #pragma mark - Private methods
 
+- (VLDNotificationScheduler *)notificationScheduler {
+    if (_notificationScheduler == nil) {
+        _notificationScheduler = [[VLDNotificationScheduler alloc] init];
+    }
+    return _notificationScheduler;
+}
+
 - (void)updateLeftBarButtonItem {
     if (self.editing) {
         self.backButtonItem = self.navigationItem.leftBarButtonItem;
@@ -129,6 +138,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+        [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
         
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];

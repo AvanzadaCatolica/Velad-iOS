@@ -34,6 +34,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
 - (void)scheduleNotificationForBasicPoint:(VLDBasicPoint *)basicPoint
                                      time:(NSDate *)time
                                      days:(NSArray *)days {
+    [self unscheduleNotificationsForBasicPoint:basicPoint];
     for (NSString *day in days) {
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         if ([localNotification respondsToSelector:@selector(alertTitle)]) {
@@ -41,6 +42,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
         }
         localNotification.alertBody = [NSString stringWithFormat:@"Alerta sobre el punto básico: %@", basicPoint.name];
         localNotification.userInfo = @{VLDBasicPointUUIDUserInfoKey: basicPoint.UUID};
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
         [self scheduleNotification:localNotification
                                day:day
                               time:time];
@@ -61,6 +63,16 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
     basicPoint.alert = alert;
     
     [realm commitWriteTransaction];
+}
+
+- (void)unscheduleNotificationsForBasicPoint:(VLDBasicPoint *)basicPoint {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSArray *localNotifications = [application scheduledLocalNotifications];
+    for (UILocalNotification *localNotification in localNotifications) {
+        if ([localNotification.userInfo[VLDBasicPointUUIDUserInfoKey] isEqualToString:basicPoint.UUID]) {
+            [application cancelLocalNotification:localNotification];
+        }
+    }
 }
 
 #pragma mark - Private methods
@@ -106,7 +118,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
     [targetComponents setSecond:0];
     NSDate *fireDate = [[NSCalendar currentCalendar] dateFromComponents:targetComponents];
     notification.fireDate = fireDate;
-    notification.repeatInterval = kWeekTimeInterval;
+    notification.repeatInterval = NSWeekCalendarUnit;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 

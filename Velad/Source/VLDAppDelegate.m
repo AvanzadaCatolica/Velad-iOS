@@ -32,7 +32,32 @@
     [self setupNavigation];
     [self setupAppearance];
     [self.window makeKeyAndVisible];
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]) {
+        [self application:[UIApplication sharedApplication] didReceiveLocalNotification:launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]];
+    }
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    if ([UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[notification respondsToSelector:@selector(alertTitle)] ? notification.alertTitle : @"Alerta"
+                                                                                 message:notification.alertBody
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Aceptar"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+        [alertController addAction:dismissAction];
+        [self.window.rootViewController presentViewController:alertController
+                                                     animated:YES
+                                                   completion:nil];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[notification respondsToSelector:@selector(alertTitle)] ? notification.alertTitle : @"Alerta"
+                                                            message:notification.alertBody
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"Aceptar", nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - Private methods

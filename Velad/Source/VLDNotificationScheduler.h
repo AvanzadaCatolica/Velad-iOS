@@ -17,5 +17,6 @@ extern NSString * const VLDBasicPointUUIDUserInfoKey;
 - (void)scheduleNotificationForBasicPoint:(VLDBasicPoint *)basicPoint
                                      time:(NSDate *)time
                                      days:(NSArray *)days;
+- (void)unscheduleNotificationsForBasicPoint:(VLDBasicPoint *)basicPoint;
 
 @end
