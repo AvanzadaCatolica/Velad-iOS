@@ -12,6 +12,8 @@
 
 @interface VLDRecordNotesPresenter () <UIAlertViewDelegate>
 
+@property (nonatomic, weak, readonly) id<VLDRecordNotesPresenterDataSource> dataSource;
+
 - (void)handleNotes:(NSString *)notes;
 
 @end

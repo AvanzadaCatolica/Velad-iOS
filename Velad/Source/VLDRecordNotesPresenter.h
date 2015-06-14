@@ -17,7 +17,6 @@
 @interface VLDRecordNotesPresenter : NSObject
 
 @property (nonatomic) VLDRecord *record;
-@property (nonatomic, weak) id<VLDRecordNotesPresenterDataSource> dataSource;
 @property (nonatomic, weak) id<VLDRecordNotesPresenterDelegate> delegate;
 
 - (instancetype)initWithDataSource:(id<VLDRecordNotesPresenterDataSource>)dataSource NS_DESIGNATED_INITIALIZER;

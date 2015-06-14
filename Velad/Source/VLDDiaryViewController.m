@@ -13,18 +13,20 @@
 #import <Realm/Realm.h>
 #import "VLDNote.h"
 #import "VLDNoteViewController.h"
+#import "VLDUpdateNotesPresenter.h"
 
 typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     VLDDiaryModeAll,
     VLDDiaryModeConfessable,
 };
 
-@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate>
+@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
 @property (nonatomic) RLMResults *notes;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
+@property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
@@ -129,9 +131,17 @@ static CGFloat const kDatePickerHeight = 88;
 
 #pragma mark - Private methods
 
+- (VLDUpdateNotesPresenter *)updateNotesPresenter {
+    if (_updateNotesPresenter == nil) {
+        _updateNotesPresenter = [[VLDUpdateNotesPresenter alloc] initWithDataSource:self];
+        _updateNotesPresenter.delegate = self;
+    }
+    return _updateNotesPresenter;
+}
+
 - (void)onValueChangedSegmentedControl:(id)sender {
-    [self updateLeftBarButtonItem];
     [self setupDataSource];
+    [self updateLeftBarButtonItem];
     [self.tableView reloadData];
 }
 
@@ -142,7 +152,7 @@ static CGFloat const kDatePickerHeight = 88;
                                                                                                 action:@selector(onTapAddButton:)]];
     } else {
         VLDDiaryMode mode = self.segmentedControl.selectedSegmentIndex;
-        if (mode == VLDDiaryModeConfessable) {
+        if (mode == VLDDiaryModeConfessable && self.notes.count >= 1) {
             [self.navigationItem
              setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                 target:self
@@ -162,7 +172,7 @@ static CGFloat const kDatePickerHeight = 88;
 }
 
 - (void)onTapActionButton:(id)sender {
-    
+    [self.updateNotesPresenter present];
 }
 
 #pragma mark - UITableViewDataSource
@@ -189,6 +199,7 @@ static CGFloat const kDatePickerHeight = 88;
         [realm commitWriteTransaction];
         
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [self updateLeftBarButtonItem];
     }
 }
 
@@ -220,6 +231,23 @@ static CGFloat const kDatePickerHeight = 88;
     if (indexPath) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+#pragma mark - VLDUpdateNotesPresenterDataSource
+
+- (RLMResults *)notesForUpdateNotesPresenter:(VLDUpdateNotesPresenter *)presenter {
+    return self.notes;
+}
+
+- (UIViewController *)viewControllerForUpdatesNotesPresenter:(VLDUpdateNotesPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - VLDUpdateNotesPresenterDelegate
+
+- (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
+    [self updateLeftBarButtonItem];
+    [self.tableView reloadData];
 }
 
 @end
