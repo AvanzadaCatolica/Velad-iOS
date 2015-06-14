@@ -8,6 +8,7 @@
 
 #import "VLDDateIntervalPickerView.h"
 #import <Masonry/Masonry.h>
+#import "VLDArrowButton.h"
 
 @interface VLDDateIntervalPickerView ()
 
@@ -66,9 +67,7 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 }
 
 - (void)setupSubviews {
-    UIButton *leftArrowButton = [[UIButton alloc] init];
-    [leftArrowButton setImage:[[UIImage imageNamed:@"LeftArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                     forState:UIControlStateNormal];
+    VLDArrowButton *leftArrowButton = [VLDArrowButton buttonWithDirection:VLDArrowButtonDirectionLeft];
     [self addSubview:leftArrowButton];
     [leftArrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(leftArrowButton.superview).with.offset(kButtonsHorizontalPadding);
@@ -78,9 +77,7 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                         action:@selector(onTapLeftArrow:)
               forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *rightArrowButton = [[UIButton alloc] init];
-    [rightArrowButton setImage:[[UIImage imageNamed:@"RightArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                      forState:UIControlStateNormal];
+    VLDArrowButton *rightArrowButton = [VLDArrowButton buttonWithDirection:VLDArrowButtonDirectionRight];
     [self addSubview:rightArrowButton];
     [rightArrowButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(rightArrowButton.superview).with.offset(-kButtonsHorizontalPadding);

@@ -27,6 +27,7 @@
 		3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */; };
 		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
+		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
 		3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */; };
 		3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */; };
 		3FD02C161B2D878F00B82507 /* VLDNotificationScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C151B2D878F00B82507 /* VLDNotificationScheduler.m */; };
@@ -80,6 +81,8 @@
 		3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointCellTableViewCell.m; path = Source/VLDBasicPointCellTableViewCell.m; sourceTree = "<group>"; };
 		3F331AA81B2CEAB10055E742 /* VLDBasicPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointViewController.h; path = Source/VLDBasicPointViewController.h; sourceTree = "<group>"; };
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
+		3FCBDABA1B2DC20700AE04C0 /* VLDArrowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDArrowButton.h; path = Source/VLDArrowButton.h; sourceTree = "<group>"; };
+		3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDArrowButton.m; path = Source/VLDArrowButton.m; sourceTree = "<group>"; };
 		3FD02C0E1B2D719C00B82507 /* VLDErrorPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDErrorPresenter.h; path = Source/VLDErrorPresenter.h; sourceTree = "<group>"; };
 		3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDErrorPresenter.m; path = Source/VLDErrorPresenter.m; sourceTree = "<group>"; };
 		3FD02C111B2D7C0A00B82507 /* VLDBasicPointAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointAlertViewController.h; path = Source/VLDBasicPointAlertViewController.h; sourceTree = "<group>"; };
@@ -261,6 +264,8 @@
 				3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */,
 				3FD02C261B2DB97800B82507 /* UIView+VLDAdditions.h */,
 				3FD02C271B2DB97800B82507 /* UIView+VLDAdditions.m */,
+				3FCBDABA1B2DC20700AE04C0 /* VLDArrowButton.h */,
+				3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
+				3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */,
 				3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */,
 				3F331A621B2C67E70055E742 /* main.m in Sources */,
 				3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */,
