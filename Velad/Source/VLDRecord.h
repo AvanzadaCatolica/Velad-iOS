@@ -18,5 +18,8 @@
 
 + (RLMResults *)recordForBasicPoint:(VLDBasicPoint *)basicPoint
                              onDate:(NSDate *)date;
++ (RLMResults *)recordsForBasicPoint:(VLDBasicPoint *)basicPoint
+                    betweenStartDate:(NSDate *)startDate
+                             endDate:(NSDate *)endDate;
 
 @end

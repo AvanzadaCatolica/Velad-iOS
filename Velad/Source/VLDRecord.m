@@ -19,4 +19,11 @@
     return results;
 }
 
++ (RLMResults *)recordsForBasicPoint:(VLDBasicPoint *)basicPoint
+                    betweenStartDate:(NSDate *)startDate
+                             endDate:(NSDate *)endDate {
+    RLMResults *results = [VLDRecord objectsWhere:@"basicPoint == %@ AND date BETWEEN {%@, %@}", basicPoint, startDate, endDate];
+    return results;
+}
+
 @end

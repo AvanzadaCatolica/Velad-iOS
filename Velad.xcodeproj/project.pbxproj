@@ -32,6 +32,9 @@
 		3FD02C161B2D878F00B82507 /* VLDNotificationScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C151B2D878F00B82507 /* VLDNotificationScheduler.m */; };
 		3FD02C191B2D8FE000B82507 /* VLDAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C181B2D8FE000B82507 /* VLDAlert.m */; };
 		3FD02C1C1B2D940400B82507 /* VLDWeekday.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C1B1B2D940400B82507 /* VLDWeekday.m */; };
+		3FD02C1F1B2DAB6400B82507 /* VLDDateIntervalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C1E1B2DAB6400B82507 /* VLDDateIntervalPickerView.m */; };
+		3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C211B2DAE1E00B82507 /* VLDWeekTableViewCell.m */; };
+		3FD02C251B2DB20D00B82507 /* VLDWeekViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C241B2DB20D00B82507 /* VLDWeekViewModel.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +89,12 @@
 		3FD02C181B2D8FE000B82507 /* VLDAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDAlert.m; path = Source/VLDAlert.m; sourceTree = "<group>"; };
 		3FD02C1A1B2D940400B82507 /* VLDWeekday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekday.h; path = Source/VLDWeekday.h; sourceTree = "<group>"; };
 		3FD02C1B1B2D940400B82507 /* VLDWeekday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekday.m; path = Source/VLDWeekday.m; sourceTree = "<group>"; };
+		3FD02C1D1B2DAB6400B82507 /* VLDDateIntervalPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDDateIntervalPickerView.h; path = Source/VLDDateIntervalPickerView.h; sourceTree = "<group>"; };
+		3FD02C1E1B2DAB6400B82507 /* VLDDateIntervalPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDateIntervalPickerView.m; path = Source/VLDDateIntervalPickerView.m; sourceTree = "<group>"; };
+		3FD02C201B2DAE1E00B82507 /* VLDWeekTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekTableViewCell.h; path = Source/VLDWeekTableViewCell.h; sourceTree = "<group>"; };
+		3FD02C211B2DAE1E00B82507 /* VLDWeekTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekTableViewCell.m; path = Source/VLDWeekTableViewCell.m; sourceTree = "<group>"; };
+		3FD02C231B2DB20D00B82507 /* VLDWeekViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekViewModel.h; path = Source/VLDWeekViewModel.h; sourceTree = "<group>"; };
+		3FD02C241B2DB20D00B82507 /* VLDWeekViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekViewModel.m; path = Source/VLDWeekViewModel.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -235,6 +244,8 @@
 			children = (
 				3F331A821B2C84D00055E742 /* VLDDatePickerView.h */,
 				3F331A831B2C84D00055E742 /* VLDDatePickerView.m */,
+				3FD02C1D1B2DAB6400B82507 /* VLDDateIntervalPickerView.h */,
+				3FD02C1E1B2DAB6400B82507 /* VLDDateIntervalPickerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -255,6 +266,10 @@
 			children = (
 				3F331A901B2CBB8F0055E742 /* VLDWeekViewController.h */,
 				3F331A911B2CBB8F0055E742 /* VLDWeekViewController.m */,
+				3FD02C201B2DAE1E00B82507 /* VLDWeekTableViewCell.h */,
+				3FD02C211B2DAE1E00B82507 /* VLDWeekTableViewCell.m */,
+				3FD02C231B2DB20D00B82507 /* VLDWeekViewModel.h */,
+				3FD02C241B2DB20D00B82507 /* VLDWeekViewModel.m */,
 			);
 			name = Week;
 			sourceTree = "<group>";
@@ -412,12 +427,15 @@
 				3F331A591B2C67DC0055E742 /* VLDAppDelegate.m in Sources */,
 				3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */,
 				3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */,
+				3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */,
 				3FD02C101B2D719C00B82507 /* VLDFormErrorPresenter.m in Sources */,
 				3FD02C1C1B2D940400B82507 /* VLDWeekday.m in Sources */,
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
 				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,
+				3FD02C251B2DB20D00B82507 /* VLDWeekViewModel.m in Sources */,
+				3FD02C1F1B2DAB6400B82507 /* VLDDateIntervalPickerView.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 				3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */,
 			);

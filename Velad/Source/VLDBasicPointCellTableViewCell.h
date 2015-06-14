@@ -12,6 +12,6 @@
 
 @interface VLDBasicPointCellTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) VLDBasicPoint *model;
+@property (nonatomic) VLDBasicPoint *model;
 
 @end

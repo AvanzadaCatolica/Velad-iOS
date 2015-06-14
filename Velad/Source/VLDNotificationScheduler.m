@@ -14,7 +14,7 @@
 
 @interface VLDNotificationScheduler ()
 
-@property (nonatomic, strong) NSArray *weekDaySymbols;
+@property (nonatomic) NSArray *weekDaySymbols;
 
 - (void)scheduleNotification:(UILocalNotification *)notification
                          day:(NSString *)day
