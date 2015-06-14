@@ -16,12 +16,14 @@
 #import "VLDRecord.h"
 #import "UIView+VLDAdditions.h"
 #import <MessageUI/MessageUI.h>
+#import "VLDErrorPresenter.h"
 
-@interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, MFMailComposeViewControllerDelegate>
+@interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, MFMailComposeViewControllerDelegate, VLDErrorPresenterDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) NSArray *viewModels;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
+@property (nonatomic) VLDErrorPresenter *errorPresenter;
 
 - (void)setupNavigationItem;
 - (void)setupDataSource;
@@ -124,6 +126,13 @@ static CGFloat const kDatePickerHeight = 88;
 
 #pragma mark - Private methods
 
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
+    }
+    return _errorPresenter;
+}
+
 - (void)onTapMailButton:(id)sender {
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
@@ -139,7 +148,9 @@ static CGFloat const kDatePickerHeight = 88;
                              [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
                          }];
     } else {
-        
+        [self.errorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
+                                                              code:INT_MAX
+                                                          userInfo:@{@"NSLocalizedDescription" : @"No se ha encontrado una cuenta de correo configurada"}]];
     }
 }
 
@@ -176,6 +187,12 @@ static CGFloat const kDatePickerHeight = 88;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - VLDErrorPresenterDataSource
+
+- (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
+    return self;
 }
 
 @end
