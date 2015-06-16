@@ -49,15 +49,14 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 }
 
 - (void)setupSelectedDate {
-    NSDateComponents *components = [[NSCalendar currentCalendar]
-                                    components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit
-                                    fromDate:[NSDate date]];
-    components.weekday = 1;
-    components.hour = 0;
-    components.minute = 0;
-    components.second = 0;
-    _selectedStartDate = [[NSCalendar currentCalendar] dateFromComponents:components];
-    _selectedEndDate = [_selectedStartDate dateByAddingTimeInterval:kWeekTimeInterval - 1];
+    NSDate *weekStart;
+    NSTimeInterval timeInterval;
+    [[NSCalendar currentCalendar] rangeOfUnit:NSWeekCalendarUnit
+                                    startDate:&weekStart
+                                     interval:&timeInterval
+                                      forDate:[NSDate date]];
+    _selectedStartDate = weekStart;
+    _selectedEndDate = [weekStart dateByAddingTimeInterval:timeInterval - 1];
 }
 
 - (void)setupDateFormatter {

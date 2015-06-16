@@ -78,7 +78,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
 #pragma mark - Private methods
 
 - (NSArray *)weekDaySymbols {
-    if (_weekDaySymbols) {
+    if (_weekDaySymbols == nil) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
         _weekDaySymbols = [dateFormatter weekdaySymbols];
