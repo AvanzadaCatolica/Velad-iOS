@@ -11,6 +11,8 @@
 #import "VLDErrorPresenter.h"
 #import "VLDNotificationScheduler.h"
 #import "VLDAlert.h"
+#import "UIColor+VLDAdditions.h"
+#import "VLDDeleteAlertPresenter.h"
 
 @interface VLDWeekdayArrayValueTrasformer : NSValueTransformer
 @end
@@ -60,11 +62,12 @@
 
 @end
 
-@interface VLDBasicPointAlertViewController () <VLDErrorPresenterDataSource>
+@interface VLDBasicPointAlertViewController () <VLDErrorPresenterDataSource, VLDDeleteAlertPresenterDataSource, VLDDeleteAlertPresenterDelegate>
 
 @property (nonatomic) VLDBasicPoint *basicPoint;
 @property (nonatomic) VLDErrorPresenter *errorPresenter;
 @property (nonatomic) VLDNotificationScheduler *notificationScheduler;
+@property (nonatomic) VLDDeleteAlertPresenter *deleteAlertPresenter;
 
 - (void)setupFormDescriptor;
 - (void)setupNavigationItem;
@@ -76,6 +79,7 @@
 
 static NSString * const kRowDescriptorTime = @"VLDRowDescriptorTime";
 static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
+static NSString * const kRowDescriptorDelete = @"VLDRowDescriptorDelete";
 
 @implementation VLDBasicPointAlertViewController
 
@@ -97,33 +101,7 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     [self requestPermission];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark - Private methods
-
-- (void)requestPermission {
-    UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-}
-
-- (VLDErrorPresenter *)errorPresenter {
-    if (_errorPresenter == nil) {
-        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
-    }
-    return _errorPresenter;
-}
-
-- (VLDNotificationScheduler *)notificationScheduler {
-    if (_notificationScheduler == nil) {
-        _notificationScheduler = [[VLDNotificationScheduler alloc] init];
-    }
-    return _notificationScheduler;
-}
+#pragma mark - Setup methods
 
 - (void)setupFormDescriptor {
     XLFormDescriptor *formDescriptor;
@@ -153,6 +131,18 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     [rowDescriptor addValidator:[[VLDWeekdayArrayValidator alloc] init]];
     [sectionDescriptor addFormRow:rowDescriptor];
     
+    if (self.basicPoint.alert) {
+        sectionDescriptor = [XLFormSectionDescriptor formSection];
+        [formDescriptor addFormSection:sectionDescriptor];
+        
+        rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorDelete
+                                                              rowType:XLFormRowDescriptorTypeButton
+                                                                title:@"Eliminar alertas"];
+        rowDescriptor.action.formSelector = @selector(onTapDeleteButton:);
+        [rowDescriptor.cellConfig setObject:[UIColor vld_mainColor] forKey:@"textLabel.textColor"];
+        [sectionDescriptor addFormRow:rowDescriptor];
+    }
+    
     self.form = formDescriptor;
 }
 
@@ -164,6 +154,38 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(onTapCancelButton:)];
+}
+
+#pragma mark - Private methods
+
+- (void)requestPermission {
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+}
+
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
+    }
+    return _errorPresenter;
+}
+
+- (VLDNotificationScheduler *)notificationScheduler {
+    if (_notificationScheduler == nil) {
+        _notificationScheduler = [[VLDNotificationScheduler alloc] init];
+    }
+    return _notificationScheduler;
+}
+
+- (VLDDeleteAlertPresenter *)deleteAlertPresenter {
+    if (_deleteAlertPresenter == nil) {
+        _deleteAlertPresenter = [[VLDDeleteAlertPresenter alloc] initWithDataSource:self];
+        _deleteAlertPresenter.delegate = self;
+    }
+    return _deleteAlertPresenter;
 }
 
 - (void)onTapSaveButton:(id)sender {
@@ -191,10 +213,36 @@ static NSString * const kRowDescriptorInterval = @"VLDRowDescriptorInterval";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)onTapDeleteButton:(id)sender {
+    [self.deleteAlertPresenter present];
+}
+
 #pragma mark - VLDErrorPresenterDataSource
 
 - (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
     return self;
+}
+
+#pragma mark - VLDDeleteAlertPresenterDataSource
+
+- (UIViewController *)viewControllerForDeleteAlarmPresenter:(VLDDeleteAlertPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - VLDDeleteAlertPresenterDelegate
+
+- (void)deleteAlarmPresenterDidSelectDelete:(VLDDeleteAlertPresenter *)presenter {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    [realm deleteObject:self.basicPoint.alert];
+    
+    [realm commitWriteTransaction];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)deleteAlarmPresenterDidCancelDelete:(VLDDeleteAlertPresenter *)presenter {
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
 @end

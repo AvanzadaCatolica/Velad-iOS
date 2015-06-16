@@ -51,7 +51,9 @@
 
 - (void)present {
     if ([UIAlertController class]) {
-        UIAlertController *alertController = [[UIAlertController alloc] init];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Cambiar a confesadas todas las notas?"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancelar"
                                                                style:UIAlertActionStyleCancel
                                                              handler:nil];
