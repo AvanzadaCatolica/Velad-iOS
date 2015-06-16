@@ -73,6 +73,7 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
     rowDescriptor.selectorOptions = [VLDNote stateSymbols];
     rowDescriptor.selectorTitle = @"Tipo";
     rowDescriptor.value = self.note ? [VLDNote symbolForState:self.note.state] : [VLDNote stateSymbols][0];
+    rowDescriptor.required = YES;
     [sectionDescriptor addFormRow:rowDescriptor];
     
     self.form = formDescriptor;

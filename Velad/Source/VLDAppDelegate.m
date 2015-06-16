@@ -16,9 +16,11 @@
 #import <Realm/Realm.h>
 #import "VLDProfile.h"
 #import "VLDProfileViewController.h"
+#import "VLDSecurity.h"
 
 @interface VLDAppDelegate () <VLDProfileViewControllerDelegate>
 
+- (void)setupSecurity;
 - (void)setupAppearance;
 - (void)setupNavigation;
 - (UITabBarController *)mainTabBarController;
@@ -33,6 +35,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor vld_mainColor];
+    [self setupSecurity];
     [self setupAppearance];
     [self setupNavigation];
     [self.window makeKeyAndVisible];
@@ -65,6 +68,21 @@
 }
 
 #pragma mark - Setup methods
+
+- (void)setupSecurity {
+    VLDSecurity *security = [[VLDSecurity allObjects] firstObject];
+    if (!security) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        
+        VLDSecurity *security = [[VLDSecurity alloc] init];
+        security.enabled = NO;
+        security.state = VLDSecurityStateOnColdStart;
+        [realm addObject:security];
+        
+        [realm commitWriteTransaction];
+    }
+}
 
 - (void)setupAppearance {
     [[UITabBar appearance] setTintColor:[UIColor vld_mainColor]];

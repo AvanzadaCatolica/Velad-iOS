@@ -40,6 +40,10 @@
 		3FE4C8091B301BDF0061420E /* VLDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8081B301BDF0061420E /* VLDProfileViewController.m */; };
 		3FE4C80C1B301DED0061420E /* VLDProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C80B1B301DED0061420E /* VLDProfile.m */; };
 		3FE4C80F1B30534C0061420E /* VLDDeleteAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C80E1B30534C0061420E /* VLDDeleteAlertPresenter.m */; };
+		3FE4C8121B305A3D0061420E /* VLDSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8111B305A3D0061420E /* VLDSecurityViewController.m */; };
+		3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8141B305B0E0061420E /* VLDSecurity.m */; };
+		3FE4C8181B3060B60061420E /* VLDSetActiveSecurityPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */; };
+		3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */; };
 		3FF4D7241B2DF1C3008538DA /* VLDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7231B2DF1C3008538DA /* VLDNote.m */; };
 		3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */; };
 		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
@@ -114,6 +118,14 @@
 		3FE4C80B1B301DED0061420E /* VLDProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDProfile.m; path = Source/VLDProfile.m; sourceTree = "<group>"; };
 		3FE4C80D1B30534C0061420E /* VLDDeleteAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDDeleteAlertPresenter.h; path = Source/VLDDeleteAlertPresenter.h; sourceTree = "<group>"; };
 		3FE4C80E1B30534C0061420E /* VLDDeleteAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDeleteAlertPresenter.m; path = Source/VLDDeleteAlertPresenter.m; sourceTree = "<group>"; };
+		3FE4C8101B305A3D0061420E /* VLDSecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSecurityViewController.h; path = Source/VLDSecurityViewController.h; sourceTree = "<group>"; };
+		3FE4C8111B305A3D0061420E /* VLDSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSecurityViewController.m; path = Source/VLDSecurityViewController.m; sourceTree = "<group>"; };
+		3FE4C8131B305B0E0061420E /* VLDSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSecurity.h; path = Source/VLDSecurity.h; sourceTree = "<group>"; };
+		3FE4C8141B305B0E0061420E /* VLDSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSecurity.m; path = Source/VLDSecurity.m; sourceTree = "<group>"; };
+		3FE4C8161B3060B60061420E /* VLDSetActiveSecurityPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSetActiveSecurityPresenter.h; path = Source/VLDSetActiveSecurityPresenter.h; sourceTree = "<group>"; };
+		3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSetActiveSecurityPresenter.m; path = Source/VLDSetActiveSecurityPresenter.m; sourceTree = "<group>"; };
+		3FE4C8191B3064D10061420E /* VLDSecurityPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSecurityPasscodeViewController.h; path = Source/VLDSecurityPasscodeViewController.h; sourceTree = "<group>"; };
+		3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSecurityPasscodeViewController.m; path = Source/VLDSecurityPasscodeViewController.m; sourceTree = "<group>"; };
 		3FF4D7221B2DF1C3008538DA /* VLDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNote.h; path = Source/VLDNote.h; sourceTree = "<group>"; };
 		3FF4D7231B2DF1C3008538DA /* VLDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNote.m; path = Source/VLDNote.m; sourceTree = "<group>"; };
 		3FF4D7251B2DF3B2008538DA /* VLDNoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteTableViewCell.h; path = Source/VLDNoteTableViewCell.h; sourceTree = "<group>"; };
@@ -242,6 +254,8 @@
 				3FF4D7231B2DF1C3008538DA /* VLDNote.m */,
 				3FE4C80A1B301DED0061420E /* VLDProfile.h */,
 				3FE4C80B1B301DED0061420E /* VLDProfile.m */,
+				3FE4C8131B305B0E0061420E /* VLDSecurity.h */,
+				3FE4C8141B305B0E0061420E /* VLDSecurity.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -341,6 +355,12 @@
 				3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */,
 				3FE4C8071B301BDF0061420E /* VLDProfileViewController.h */,
 				3FE4C8081B301BDF0061420E /* VLDProfileViewController.m */,
+				3FE4C8101B305A3D0061420E /* VLDSecurityViewController.h */,
+				3FE4C8111B305A3D0061420E /* VLDSecurityViewController.m */,
+				3FE4C8161B3060B60061420E /* VLDSetActiveSecurityPresenter.h */,
+				3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */,
+				3FE4C8191B3064D10061420E /* VLDSecurityPasscodeViewController.h */,
+				3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -471,6 +491,7 @@
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3FF4D72D1B2E096E008538DA /* VLDUpdateNotesPresenter.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
+				3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */,
 				3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */,
 				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
@@ -479,6 +500,7 @@
 				3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */,
 				3FE4C8091B301BDF0061420E /* VLDProfileViewController.m in Sources */,
 				3F331A621B2C67E70055E742 /* main.m in Sources */,
+				3FE4C8181B3060B60061420E /* VLDSetActiveSecurityPresenter.m in Sources */,
 				3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */,
 				3FE4C80F1B30534C0061420E /* VLDDeleteAlertPresenter.m in Sources */,
 				3FD02C161B2D878F00B82507 /* VLDNotificationScheduler.m in Sources */,
@@ -492,6 +514,8 @@
 				3FD02C1C1B2D940400B82507 /* VLDWeekday.m in Sources */,
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
+				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,
+				3FE4C8121B305A3D0061420E /* VLDSecurityViewController.m in Sources */,
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
 				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,
 				3FD02C251B2DB20D00B82507 /* VLDWeekViewModel.m in Sources */,

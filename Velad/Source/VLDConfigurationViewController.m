@@ -10,6 +10,7 @@
 #import "VLDProfileViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "VLDErrorPresenter.h"
+#import "VLDSecurityViewController.h"
 
 @interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
 
@@ -101,7 +102,8 @@ static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
 }
 
 - (void)onTapSecurityButton:(id)button {
-    
+    VLDSecurityViewController *viewController = [[VLDSecurityViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)onTapOpinionButton:(id)button {

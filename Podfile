@@ -5,5 +5,6 @@ target 'Velad' do
   pod 'Masonry'
   pod 'XLForm', git: 'git@github.com:xmartlabs/XLForm.git', branch: 'master'
   pod 'Reveal-iOS-SDK', configurations: ['Debug']
+  pod 'SSKeychain'
 end
 
