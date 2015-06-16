@@ -7,6 +7,7 @@
 //
 
 #import "VLDConfigurationViewController.h"
+#import "VLDProfileViewController.h"
 
 @interface VLDConfigurationViewController ()
 
@@ -83,7 +84,9 @@ static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
 #pragma mark - Private methods
 
 - (void)onTapProfileButton:(id)button {
-    
+    VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)onTapSecurityButton:(id)button {

@@ -17,6 +17,7 @@
 #import "UIView+VLDAdditions.h"
 #import <MessageUI/MessageUI.h>
 #import "VLDErrorPresenter.h"
+#import "VLDProfile.h"
 
 @interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, MFMailComposeViewControllerDelegate, VLDErrorPresenterDataSource>
 
@@ -138,7 +139,12 @@ static CGFloat const kDatePickerHeight = 88;
         MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
         [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
         composeViewController.mailComposeDelegate = self;
+        
+        VLDProfile *profile = [[VLDProfile allObjects] firstObject];
+        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@", profile.name, profile.circle, profile.group];
+        
         [composeViewController setSubject:@"Reporte semanal"];
+        [composeViewController setMessageBody:messageBody isHTML:NO];
         [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view snapshotImage])
                                         mimeType:@"image/png"
                                         fileName:@"Reporte.png"];
