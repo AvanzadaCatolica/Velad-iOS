@@ -82,6 +82,8 @@ static NSString * const kRowDescriptorSetActive = @"VLDRowDescriptorSetActive";
         rowDescriptor.selectorTitle = @"Solicitar contraseña";
         rowDescriptor.value = self.security.isEnabled ? [VLDSecurity symbolForState:self.security.state] : @"";
         [sectionDescriptor addFormRow:rowDescriptor];
+        
+        sectionDescriptor.footerTitle = @"Al iniciar: Se le solicitará la contraseña al abrir la aplicación por primera vez, solo se volverá a solicitar si la aplicación es terminada de la multitarea.\n\nAl abrir: Se le solicitará la contraseña cada vez que abra la aplicación. Puede ser un poco molesto pero es el modo más seguro.";
 
     }
     
@@ -130,6 +132,7 @@ static NSString * const kRowDescriptorSetActive = @"VLDRowDescriptorSetActive";
     [realm beginWriteTransaction];
     
     self.security.enabled = !self.security.enabled;
+    self.security.state = VLDSecurityStateOnColdStart;
     
     [realm commitWriteTransaction];
 }

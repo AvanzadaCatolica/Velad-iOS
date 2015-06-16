@@ -23,6 +23,9 @@
 - (void)textFieldDidChangeEditing:(id)sender;
 - (void)nextStep;
 - (void)onTapCancelButton:(id)sender;
+- (BOOL)isRootViewController;
+- (void)clear;
+- (void)onTapPasscodeLabel:(id)sender;
 
 @end
 
@@ -59,10 +62,14 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.textField becomeFirstResponder];
     [self setupNavigationItem];
     [self setupLayout];
     [self setupView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -73,10 +80,12 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Seguridad";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                             target:self
-                                             action:@selector(onTapCancelButton:)];
+    if (!self.isRootViewController) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                 target:self
+                                                 action:@selector(onTapCancelButton:)];
+    }
 }
 
 - (void)setupLayout {
@@ -98,6 +107,7 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
 
 - (void)setupView {
     self.textField.keyboardType = UIKeyboardTypeNumberPad;
+    self.textField.hidden = YES;
     [self.textField addTarget:self
                        action:@selector(textFieldDidChangeEditing:)
              forControlEvents:UIControlEventEditingChanged];
@@ -108,6 +118,8 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
     self.passcodeLabel.text = @"- - - -";
     self.passcodeLabel.font = [UIFont systemFontOfSize:48];
     self.passcodeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.passcodeLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(onTapPasscodeLabel:)]];
 }
 
 #pragma mark - Private methods
@@ -138,14 +150,16 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
             });
         } else {
             if ([self.textField.text isEqualToString:self.lastRecord]) {
-                [SSKeychain setPassword:self.lastRecord
-                             forService:VLDKeychainService
-                                account:VLDKeychainAccount];
-                if ([self.delegate respondsToSelector:@selector(securityPasscodeViewControllerDidFinish:)]) {
-                    [self.delegate securityPasscodeViewControllerDidFinish:self];
-                }
-                [self.textField resignFirstResponder];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SSKeychain setPassword:self.lastRecord
+                                 forService:VLDKeychainService
+                                    account:VLDKeychainAccount];
+                    if ([self.delegate respondsToSelector:@selector(securityPasscodeViewControllerDidFinish:)]) {
+                        [self.delegate securityPasscodeViewControllerDidFinish:self];
+                    }
+                    [self.textField resignFirstResponder];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                });
             } else {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     self.lastRecord = nil;
@@ -159,11 +173,17 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
         NSString *password = [SSKeychain passwordForService:VLDKeychainService
                                                     account:VLDKeychainAccount];
         if ([self.textField.text isEqualToString:password]) {
-            if ([self.delegate respondsToSelector:@selector(securityPasscodeViewControllerDidFinish:)]) {
-                [self.delegate securityPasscodeViewControllerDidFinish:self];
-            }
-            [self.textField resignFirstResponder];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ([self.delegate respondsToSelector:@selector(securityPasscodeViewControllerDidFinish:)]) {
+                    [self.delegate securityPasscodeViewControllerDidFinish:self];
+                }
+                [self.textField resignFirstResponder];
+                if (self.isRootViewController) {
+                    [self clear];
+                } else {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+            });
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 self.textField.text = @"";
@@ -177,6 +197,26 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
 - (void)onTapCancelButton:(id)sender {
     [self.textField resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)isRootViewController {
+    UIViewController *rootViewController = (UINavigationController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+    if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController;
+        return navigationController.topViewController == self;
+    }
+    return rootViewController == self;
+}
+
+- (void)clear {
+    self.textField.text = @"";
+    [self textFieldDidChangeEditing:self.textField];
+}
+
+- (void)onTapPasscodeLabel:(id)sender {
+    if (!self.textField.isFirstResponder) {
+        [self.textField becomeFirstResponder];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

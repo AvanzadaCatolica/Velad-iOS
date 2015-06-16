@@ -17,8 +17,11 @@
 #import "VLDProfile.h"
 #import "VLDProfileViewController.h"
 #import "VLDSecurity.h"
+#import "VLDSecurityPasscodeViewController.h"
 
-@interface VLDAppDelegate () <VLDProfileViewControllerDelegate>
+@interface VLDAppDelegate () <VLDProfileViewControllerDelegate, VLDSecurityPasscodeViewControllerDelegate>
+
+@property (nonatomic) VLDSecurity *security;
 
 - (void)setupSecurity;
 - (void)setupAppearance;
@@ -45,33 +48,33 @@
     return YES;
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[notification respondsToSelector:@selector(alertTitle)] ? notification.alertTitle : @"Alerta"
-                                                                                 message:notification.alertBody
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Aceptar"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-        [alertController addAction:dismissAction];
-        [self.window.rootViewController presentViewController:alertController
-                                                     animated:YES
-                                                   completion:nil];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[notification respondsToSelector:@selector(alertTitle)] ? notification.alertTitle : @"Alerta"
-                                                            message:notification.alertBody
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"Aceptar", nil];
-        [alertView show];
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    if (self.security.isEnabled && self.security.state == VLDSecurityStateOnOpen) {
+        if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
+            if ([navigationController.topViewController isKindOfClass:[VLDSecurityPasscodeViewController class]]) {
+                [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                VLDSecurityPasscodeViewController *viewController = [[VLDSecurityPasscodeViewController alloc] initWithMode:VLDSecurityPasscodeViewControllerModeRequest];
+                viewController.delegate = self;
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+                [self.window.rootViewController presentViewController:navigationController
+                                                             animated:YES
+                                                           completion:nil];
+            }
+        }
     }
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    //TODO: Make this work with the security model.
 }
 
 #pragma mark - Setup methods
 
 - (void)setupSecurity {
-    VLDSecurity *security = [[VLDSecurity allObjects] firstObject];
-    if (!security) {
+    self.security = [[VLDSecurity allObjects] firstObject];
+    if (!self.security) {
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
         
@@ -81,6 +84,8 @@
         [realm addObject:security];
         
         [realm commitWriteTransaction];
+        
+        self.security = security;
     }
 }
 
@@ -98,7 +103,14 @@
 - (void)setupNavigation {
     VLDProfile *profile = [[VLDProfile allObjects] firstObject];
     if (profile) {
-        self.window.rootViewController = [self mainTabBarController];
+        if (self.security.isEnabled) {
+            VLDSecurityPasscodeViewController *viewController = [[VLDSecurityPasscodeViewController alloc] initWithMode:VLDSecurityPasscodeViewControllerModeRequest];
+            viewController.delegate = self;
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            self.window.rootViewController = navigationController;
+        } else {
+            self.window.rootViewController = [self mainTabBarController];
+        }
     } else {
         VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
         viewController.delegate = self;
@@ -172,6 +184,14 @@
 #pragma mark - VLDProfileViewControllerDelegate
 
 - (void)profileViewControllerDidFinishEditingProfile:(VLDProfileViewController *)controller {
+    [self.window.rootViewController presentViewController:[self mainTabBarController]
+                                                 animated:YES
+                                               completion:nil];
+}
+
+#pragma mark - VLDSecurityPasscodeViewControllerDelegate
+
+- (void)securityPasscodeViewControllerDidFinish:(VLDSecurityPasscodeViewController *)viewController {
     [self.window.rootViewController presentViewController:[self mainTabBarController]
                                                  animated:YES
                                                completion:nil];
