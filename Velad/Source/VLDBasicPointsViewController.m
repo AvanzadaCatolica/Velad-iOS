@@ -35,7 +35,7 @@
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     view.backgroundColor = [UIColor whiteColor];
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [view addSubview:tableView];
     self.tableView = tableView;
     self.view = view;

@@ -46,7 +46,7 @@ static CGFloat const kDatePickerHeight = 88;
 
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [view addSubview:tableView];
     self.tableView = tableView;
     VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithFrame:CGRectZero];

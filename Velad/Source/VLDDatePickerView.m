@@ -44,7 +44,7 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 #pragma mark - Setup methods
 
 - (void)setupView {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
 - (void)setupSelectedDate {
