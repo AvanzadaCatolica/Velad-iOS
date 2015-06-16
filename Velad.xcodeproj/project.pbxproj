@@ -27,6 +27,7 @@
 		3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */; };
 		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
+		3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
 		3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */; };
 		3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */; };
@@ -92,6 +93,7 @@
 		3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointCellTableViewCell.m; path = Source/VLDBasicPointCellTableViewCell.m; sourceTree = "<group>"; };
 		3F331AA81B2CEAB10055E742 /* VLDBasicPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointViewController.h; path = Source/VLDBasicPointViewController.h; sourceTree = "<group>"; };
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
+		3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Velad-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		3FCBDABA1B2DC20700AE04C0 /* VLDArrowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDArrowButton.h; path = Source/VLDArrowButton.h; sourceTree = "<group>"; };
 		3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDArrowButton.m; path = Source/VLDArrowButton.m; sourceTree = "<group>"; };
 		3FD02C0E1B2D719C00B82507 /* VLDErrorPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDErrorPresenter.h; path = Source/VLDErrorPresenter.h; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		3F331A551B2C67C80055E742 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */,
 				3F331A5D1B2C67E70055E742 /* main.m */,
 				3F331A5B1B2C67E70055E742 /* Info.plist */,
 			);
@@ -442,6 +445,7 @@
 			files = (
 				3F331A701B2C6AC60055E742 /* Localizable.strings in Resources */,
 				3F331A691B2C68410055E742 /* LaunchScreen.xib in Resources */,
+				3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */,
 				3F331A681B2C68410055E742 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,5 +6,6 @@ target 'Velad' do
   pod 'XLForm', git: 'git@github.com:xmartlabs/XLForm.git', branch: 'master'
   pod 'Reveal-iOS-SDK', configurations: ['Debug']
   pod 'SSKeychain'
+  pod 'VTAcknowledgementsViewController'
 end
 

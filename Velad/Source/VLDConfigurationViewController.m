@@ -11,6 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "VLDErrorPresenter.h"
 #import "VLDSecurityViewController.h"
+#import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 
 @interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
 
@@ -20,6 +21,7 @@
 - (void)onTapProfileButton:(id)button;
 - (void)onTapSecurityButton:(id)button;
 - (void)onTapOpinionButton:(id)button;
+- (void)onTapLicensesButton:(id)button;
 - (void)setupNavigationItem;
 
 @end
@@ -27,6 +29,8 @@
 static NSString * const kRowDescriptorProfile = @"VLDRowDescriptorProfile";
 static NSString * const kRowDescriptorSecurity = @"VLDRowDescriptorSecurity";
 static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
+static NSString * const kRowDescriptorLicenses = @"VLDRowDescriptorLicenses";
+static NSString * const kRowDescriptorVersion = @"VLDRowDescriptorVersion";
 
 @implementation VLDConfigurationViewController
 
@@ -71,12 +75,32 @@ static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
     [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
     [sectionDescriptor addFormRow:rowDescriptor];
     
+    sectionDescriptor = [XLFormSectionDescriptor formSection];
+    [formDescriptor addFormSection:sectionDescriptor];
+    
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorOpinion
                                                           rowType:XLFormRowDescriptorTypeButton
                                                             title:@"Danos tu opinión"];
     rowDescriptor.action.formSelector = @selector(onTapOpinionButton:);
     [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
     [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
+    sectionDescriptor = [XLFormSectionDescriptor formSection];
+    [formDescriptor addFormSection:sectionDescriptor];
+    
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorLicenses
+                                                          rowType:XLFormRowDescriptorTypeButton
+                                                            title:@"Licencias"];
+    rowDescriptor.action.formSelector = @selector(onTapLicensesButton:);
+    [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
+    [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorVersion
+                                                          rowType:XLFormRowDescriptorTypeInfo];
+    rowDescriptor.title = @"Versión";
+    rowDescriptor.value = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [sectionDescriptor addFormRow:rowDescriptor];
     
     self.form = formDescriptor;
@@ -123,6 +147,14 @@ static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
                                                               code:INT_MAX
                                                           userInfo:@{@"NSLocalizedDescription" : @"No se ha encontrado una cuenta de correo configurada"}]];
     }
+}
+
+- (void)onTapLicensesButton:(id)button {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Pods-Velad-acknowledgements" ofType:@"plist"];
+    VTAcknowledgementsViewController *viewController = [[VTAcknowledgementsViewController alloc] initWithAcknowledgementsPlistPath:path];
+    viewController.headerText = @"Velad está hecho con software open source.";
+    viewController.navigationItem.title = @"Licencias";
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
