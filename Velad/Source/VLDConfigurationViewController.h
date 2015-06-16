@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <XLForm/XLForm.h>
 
-@interface VLDConfigurationViewController : UIViewController
+@interface VLDConfigurationViewController : XLFormViewController
 
 @end
