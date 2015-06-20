@@ -173,8 +173,7 @@ static NSString * const kRowDescriptorSetActive = @"VLDRowDescriptorSetActive";
         [self toggleSecurity];
     }
     [self setupFormDescriptor];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 #pragma mark - XLFormDescriptorDelegate
