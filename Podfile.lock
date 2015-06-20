@@ -1,5 +1,6 @@
 PODS:
   - BEMSimpleLineGraph (4.0)
+  - HockeySDK (3.6.4)
   - Masonry (0.6.1)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
@@ -11,6 +12,7 @@ PODS:
 
 DEPENDENCIES:
   - BEMSimpleLineGraph
+  - HockeySDK
   - Masonry
   - Realm
   - Reveal-iOS-SDK
@@ -30,6 +32,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BEMSimpleLineGraph: e706c36c6e7944f6424285478a914d4adb178f92
+  HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9

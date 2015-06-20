@@ -18,6 +18,7 @@
 #import "VLDProfileViewController.h"
 #import "VLDSecurity.h"
 #import "VLDSecurityPasscodeViewController.h"
+#import <HockeySDK/HockeySDK.h>
 
 @interface VLDAppDelegate () <VLDProfileViewControllerDelegate, VLDSecurityPasscodeViewControllerDelegate>
 
@@ -26,9 +27,12 @@
 - (void)setupSecurity;
 - (void)setupAppearance;
 - (void)setupNavigation;
+- (void)setupHockey;
 - (UITabBarController *)mainTabBarController;
 
 @end
+
+static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
 
 @implementation VLDAppDelegate
 
@@ -38,6 +42,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor vld_mainColor];
+    [self setupHockey];
     [self setupSecurity];
     [self setupAppearance];
     [self setupNavigation];
@@ -117,6 +122,13 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
         self.window.rootViewController = navigationController;
     }
+}
+
+- (void)setupHockey {
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppID];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    [BITHockeyManager sharedHockeyManager].crashManager.crashManagerStatus = BITCrashManagerStatusAutoSend;
 }
 
 #pragma mark - Private methods

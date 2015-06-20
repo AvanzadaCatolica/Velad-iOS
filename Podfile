@@ -8,5 +8,6 @@ target 'Velad' do
   pod 'SSKeychain'
   pod 'VTAcknowledgementsViewController'
   pod 'BEMSimpleLineGraph'
+  pod 'HockeySDK'
 end
 
