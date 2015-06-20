@@ -45,7 +45,7 @@
     NSUInteger maximumPossibleScore = [self.dataSource maximumPossibleScoreForReportsResultView:self];
     NSUInteger score = [self.dataSource scoreForReportsResultView:self];
     self.explanationLable.text = [NSString stringWithFormat:@"Tu puntaje %@:", self.mode == VLDReportsResultViewModeWeekly? @"esta semana" : @"este mes"];
-    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d / %d", score, maximumPossibleScore]];
+    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu / %lu", (unsigned long)score, (unsigned long)maximumPossibleScore]];
     NSUInteger numberOfDigits = [@(score) stringValue].length;
     [mutableAttributedString addAttribute:NSFontAttributeName
                                     value:[UIFont systemFontOfSize:60.0]
