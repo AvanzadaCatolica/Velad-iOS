@@ -179,10 +179,10 @@
 
 #pragma mark - VLDDateIntervalPickerViewDelegate
 
-- (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
+- (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+                  withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate

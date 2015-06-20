@@ -284,7 +284,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 
 #pragma mark - VLDDateIntervalPickerViewDelegate
 
-- (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
+- (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
     [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];

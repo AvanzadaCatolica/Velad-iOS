@@ -8,7 +8,7 @@
 
 #import "VLDDateIntervalPickerView.h"
 #import <Masonry/Masonry.h>
-#import "VLDArrowButton.h"
+#import "UIColor+VLDAdditions.h"
 
 @interface VLDDateIntervalPickerView ()
 
@@ -23,6 +23,8 @@
 - (void)setupDateFormatter;
 - (void)setupSubviews;
 - (NSString *)labelTextForCurrentIntervalSelection;
+- (void)updateSelectedDateIntervalLabel;
+- (void)onTapSelectedDateIntervalLabel:(UITapGestureRecognizer *)tapGestureRecognizer;
 
 @end
 
@@ -74,7 +76,7 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     self.type = type;
     [self setupSelectedDate];
     [self setupDateFormatter];
-    self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
+    [self updateSelectedDateIntervalLabel];
 }
 
 #pragma mark - Setup methods
@@ -126,7 +128,12 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *label = [[UILabel alloc] init];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.numberOfLines = 2;
     label.text = [self labelTextForCurrentIntervalSelection];
+    label.userInteractionEnabled = YES;
+    [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                        action:@selector(onTapSelectedDateIntervalLabel:)]];
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(label.superview);
@@ -164,10 +171,10 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                                                                              toDate:self.selectedStartDate
                                                                             options:0];
     }
-    self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
+    [self updateSelectedDateIntervalLabel];
     [self setNeedsLayout];
-    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerViewDidChangeSelection:)]) {
-        [self.delegate dateIntervalPickerViewDidChangeSelection:self];
+    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionLeft];
     }
 }
 
@@ -185,10 +192,51 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                                                                              toDate:self.selectedStartDate
                                                                             options:0];
     }
-    self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
+    [self updateSelectedDateIntervalLabel];
     [self setNeedsLayout];
-    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerViewDidChangeSelection:)]) {
-        [self.delegate dateIntervalPickerViewDidChangeSelection:self];
+    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionRight];
+    }
+}
+
+- (BOOL)isTodayInCurrentIntervalSelection {
+    NSDate *today = [NSDate date];
+    return [self.selectedStartDate compare:today] == NSOrderedAscending && [self.selectedEndDate compare:today] == NSOrderedDescending;
+}
+
+- (void)updateSelectedDateIntervalLabel {
+    NSString *selectedDateString = [self labelTextForCurrentIntervalSelection];
+    NSString *todayString = @"";
+    if (![self isTodayInCurrentIntervalSelection]) {
+        if (self.type == VLDDateIntervalPickerViewTypeWeekly) {
+            todayString = @"\nIr a la semana actual";
+        } else if (self.type == VLDDateIntervalPickerViewTypeMonthly) {
+            todayString = @"\nIr al mes actual";
+        }
+    }
+    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", selectedDateString, todayString]];
+    [mutableAttributedString addAttribute:NSFontAttributeName
+                                    value:[UIFont systemFontOfSize:[UIFont labelFontSize]]
+                                    range:NSMakeRange(0, selectedDateString.length)];
+    [mutableAttributedString addAttribute:NSFontAttributeName
+                                    value:[UIFont systemFontOfSize:[UIFont labelFontSize] - 4]
+                                    range:NSMakeRange(selectedDateString.length, mutableAttributedString.length - selectedDateString.length)];
+    [mutableAttributedString addAttribute:NSForegroundColorAttributeName
+                                    value:[UIColor vld_mainColor]
+                                    range:NSMakeRange(selectedDateString.length, mutableAttributedString.length - selectedDateString.length)];
+    self.selectedDateIntervalLabel.attributedText = [mutableAttributedString copy];
+}
+
+- (void)onTapSelectedDateIntervalLabel:(UITapGestureRecognizer *)tapGestureRecognizer {
+    if ([self isTodayInCurrentIntervalSelection]) {
+        return;
+    }
+    VLDArrowButtonDirection direction = [self.selectedStartDate compare:[NSDate date]] == NSOrderedAscending ? VLDArrowButtonDirectionRight : VLDArrowButtonDirectionLeft;
+    [self setupSelectedDate];
+    [self updateSelectedDateIntervalLabel];
+    [self setNeedsLayout];
+    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:direction];
     }
 }
 

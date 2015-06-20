@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VLDArrowButton.h"
 
 typedef NS_ENUM(NSUInteger, VLDDateIntervalPickerViewType) {
     VLDDateIntervalPickerViewTypeWeekly,
@@ -33,6 +34,6 @@ extern NSString * const VLDDateIntervalPickerViewStepEndKey;
 
 @protocol VLDDateIntervalPickerViewDelegate <NSObject>
 
-- (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView;
+- (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction;
 
 @end
