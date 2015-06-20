@@ -13,6 +13,9 @@ typedef NS_ENUM(NSUInteger, VLDDateIntervalPickerViewType) {
     VLDDateIntervalPickerViewTypeMonthly
 };
 
+extern NSString * const VLDDateIntervalPickerViewStepStartKey;
+extern NSString * const VLDDateIntervalPickerViewStepEndKey;
+
 @protocol VLDDateIntervalPickerViewDelegate;
 
 @interface VLDDateIntervalPickerView : UIView
@@ -23,6 +26,8 @@ typedef NS_ENUM(NSUInteger, VLDDateIntervalPickerViewType) {
 @property (nonatomic, readonly) VLDDateIntervalPickerViewType type;
 
 - (instancetype)initWithType:(VLDDateIntervalPickerViewType)type;
+- (NSArray *)dayStepsForSelection;
+- (void)resetPicketWithType:(VLDDateIntervalPickerViewType)type;
 
 @end
 

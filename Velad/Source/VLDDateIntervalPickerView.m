@@ -16,6 +16,7 @@
 @property (nonatomic) NSDate *selectedEndDate;
 @property (nonatomic, weak) UILabel *selectedDateIntervalLabel;
 @property (nonatomic) NSDateFormatter *dateFormatter;
+@property (nonatomic) VLDDateIntervalPickerViewType type;
 
 - (void)setupView;
 - (void)setupSelectedDate;
@@ -25,6 +26,8 @@
 
 @end
 
+NSString * const VLDDateIntervalPickerViewStepStartKey = @"VLDDateIntervalPickerViewStepStartKey";
+NSString * const VLDDateIntervalPickerViewStepEndKey = @"VLDDateIntervalPickerViewStepEndKey";
 static CGFloat const kButtonsHorizontalPadding = 40;
 static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 
@@ -43,6 +46,35 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     }
     
     return self;
+}
+
+- (NSArray *)dayStepsForSelection {
+    NSMutableArray *daySteps = [NSMutableArray array];
+    NSRange range = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit
+                                                       inUnit:self.type == VLDDateIntervalPickerViewTypeWeekly ? NSWeekCalendarUnit : NSMonthCalendarUnit
+                                                      forDate:self.selectedStartDate];
+    NSUInteger steps = range.length;
+    NSDate *pivotDate = self.selectedStartDate;
+    for (NSUInteger index = 0; index < steps; index++) {
+        NSTimeInterval timeInterval;
+        NSDate *startDate;
+        [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit
+                                        startDate:&startDate
+                                         interval:&timeInterval
+                                          forDate:pivotDate];
+        NSDate *endDate = [startDate dateByAddingTimeInterval:timeInterval - 1];
+        [daySteps addObject:@{VLDDateIntervalPickerViewStepStartKey: startDate,
+                              VLDDateIntervalPickerViewStepEndKey: endDate}];
+        pivotDate = [startDate dateByAddingTimeInterval:timeInterval];
+    }
+    return [daySteps copy];
+}
+
+- (void)resetPicketWithType:(VLDDateIntervalPickerViewType)type {
+    self.type = type;
+    [self setupSelectedDate];
+    [self setupDateFormatter];
+    self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
 }
 
 #pragma mark - Setup methods
