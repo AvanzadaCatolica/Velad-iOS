@@ -192,6 +192,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     self.lineGraphLastClosestIndex = NSNotFound;
     [self.dateIntervalPickerView resetPicketWithType:mode == VLDReportsModeWeekly? VLDDateIntervalPickerViewTypeWeekly : VLDDateIntervalPickerViewTypeMonthly];
     [self setupDataSource];
+    self.lineGraphView.animationGraphEntranceTime = mode == VLDReportsModeWeekly ? 1 : 1.5;
     [self.lineGraphView reloadGraph];
     [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly];
 }
@@ -285,6 +286,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 #pragma mark - VLDDateIntervalPickerViewDelegate
 
 - (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
+    self.lineGraphLastClosestIndex = NSNotFound;
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
     [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];

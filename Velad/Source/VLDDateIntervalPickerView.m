@@ -52,10 +52,15 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 
 - (NSArray *)dayStepsForSelection {
     NSMutableArray *daySteps = [NSMutableArray array];
-    NSRange range = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit
-                                                       inUnit:self.type == VLDDateIntervalPickerViewTypeWeekly ? NSWeekCalendarUnit : NSMonthCalendarUnit
-                                                      forDate:self.selectedStartDate];
-    NSUInteger steps = range.length;
+    NSUInteger steps = 0;
+    if (self.type == VLDDateIntervalPickerViewTypeMonthly) {
+        NSRange range = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit
+                                                           inUnit:NSMonthCalendarUnit
+                                                          forDate:self.selectedStartDate];
+        steps = range.length;
+    } else if (self.type == VLDDateIntervalPickerViewTypeWeekly) {
+        steps = 7;
+    }
     NSDate *pivotDate = self.selectedStartDate;
     for (NSUInteger index = 0; index < steps; index++) {
         NSTimeInterval timeInterval;
