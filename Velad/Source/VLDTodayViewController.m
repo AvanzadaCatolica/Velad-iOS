@@ -236,9 +236,9 @@
 
 #pragma mark - VLDDatePickerViewDelegate
 
-- (void)datePickerViewDidChangeSelection:(VLDDatePickerView *)datePickerView {
+- (void)datePickerView:(VLDDatePickerView *)datePickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+                  withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
 }
 
 #pragma mark - VLDBasicPointsViewControllerDelegate

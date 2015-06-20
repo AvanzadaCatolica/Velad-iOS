@@ -8,7 +8,8 @@
 
 #import "VLDDatePickerView.h"
 #import <Masonry/Masonry.h>
-#import "VLDArrowButton.h"
+#import "UIColor+VLDAdditions.h"
+#import "NSDate+VLDAdditions.h"
 
 @interface VLDDatePickerView ()
 
@@ -19,6 +20,8 @@
 - (void)setupSelectedDate;
 - (void)setupDateFormatter;
 - (void)setupSubviews;
+- (void)updateSelectedDateLabel;
+- (void)onTapSelectedDateLabel:(UITapGestureRecognizer *)tapGestureRecognizer;
 
 @end
 
@@ -51,7 +54,7 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
     NSDateComponents *components = [[NSCalendar currentCalendar]
                                     components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                                     fromDate:[NSDate date]];
-    _selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
+    self.selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
 }
 
 - (void)setupDateFormatter {
@@ -82,31 +85,68 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
                forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = [_dateFormatter stringFromDate:_selectedDate];
+    label.userInteractionEnabled = YES;
+    [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                        action:@selector(onTapSelectedDateLabel:)]];
+    label.numberOfLines = 2;
+    label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(label.superview);
     }];
     _selectedDateLabel = label;
+    [self updateSelectedDateLabel];
 }
 
 #pragma mark - Private methods
 
 - (void)onTapLeftArrow:(id)sender {
     self.selectedDate = [self.selectedDate dateByAddingTimeInterval:-kDayTimeInterval];
-    self.selectedDateLabel.text = [self.dateFormatter stringFromDate:self.selectedDate];
+    [self updateSelectedDateLabel];
     [self setNeedsLayout];
-    if ([self.delegate respondsToSelector:@selector(datePickerViewDidChangeSelection:)]) {
-        [self.delegate datePickerViewDidChangeSelection:self];
+    if ([self.delegate respondsToSelector:@selector(datePickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate datePickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionLeft];
     }
 }
 
 - (void)onTapRightArrow:(id)sender {
     self.selectedDate = [self.selectedDate dateByAddingTimeInterval:kDayTimeInterval];
-    self.selectedDateLabel.text = [self.dateFormatter stringFromDate:self.selectedDate];
+    [self updateSelectedDateLabel];
     [self setNeedsLayout];
-    if ([self.delegate respondsToSelector:@selector(datePickerViewDidChangeSelection:)]) {
-        [self.delegate datePickerViewDidChangeSelection:self];
+    if ([self.delegate respondsToSelector:@selector(datePickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate datePickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionRight];
+    }
+}
+
+- (void)updateSelectedDateLabel {
+    NSString *selectedDateString = [self.dateFormatter stringFromDate:self.selectedDate];
+    NSString *todayString = @"";
+    if (![self.selectedDate isToday]) {
+        todayString = @"\nIr al día actual";
+    }
+    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", selectedDateString, todayString]];
+    [mutableAttributedString addAttribute:NSFontAttributeName
+                                    value:[UIFont systemFontOfSize:[UIFont labelFontSize]]
+                                    range:NSMakeRange(0, selectedDateString.length)];
+    [mutableAttributedString addAttribute:NSFontAttributeName
+                                    value:[UIFont systemFontOfSize:[UIFont labelFontSize] - 4]
+                                    range:NSMakeRange(selectedDateString.length, mutableAttributedString.length - selectedDateString.length)];
+    [mutableAttributedString addAttribute:NSForegroundColorAttributeName
+                                    value:[UIColor vld_mainColor]
+                                    range:NSMakeRange(selectedDateString.length, mutableAttributedString.length - selectedDateString.length)];
+    self.selectedDateLabel.attributedText = [mutableAttributedString copy];
+}
+
+- (void)onTapSelectedDateLabel:(UITapGestureRecognizer *)tapGestureRecognizer {
+    if ([self.selectedDate isToday]) {
+        return;
+    }
+    VLDArrowButtonDirection direction = [self.selectedDate compare:[NSDate date]] == NSOrderedAscending ? VLDArrowButtonDirectionRight : VLDArrowButtonDirectionLeft;
+    [self setupSelectedDate];
+    [self updateSelectedDateLabel];
+    [self setNeedsLayout];
+    if ([self.delegate respondsToSelector:@selector(datePickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate datePickerView:self didChangeSelectionWithDirection:direction];
     }
 }
 

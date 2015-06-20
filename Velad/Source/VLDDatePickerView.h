@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VLDArrowButton.h"
 
 @protocol VLDDatePickerViewDelegate;
 
@@ -19,6 +20,6 @@
 
 @protocol VLDDatePickerViewDelegate <NSObject>
 
-- (void)datePickerViewDidChangeSelection:(VLDDatePickerView *)datePickerView;
+- (void)datePickerView:(VLDDatePickerView *)datePickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction;
 
 @end

@@ -118,6 +118,7 @@ NSString * const VLDKeychainAccount = @"VLDKeychainAccount";
     self.passcodeLabel.text = @"- - - -";
     self.passcodeLabel.font = [UIFont systemFontOfSize:48];
     self.passcodeLabel.textAlignment = NSTextAlignmentCenter;
+    self.passcodeLabel.userInteractionEnabled = YES;
     [self.passcodeLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(onTapPasscodeLabel:)]];
 }
