@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     VLDReportsModeMontly,
 };
 
-@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource>
+@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 - (void)setupLayout;
 - (void)setupDataSource;
 - (void)setupChart;
+- (void)setupDateIntervalPickerView;
 - (void)onValueChangedSegmentedControl:(id)sender;
 - (void)onTapMailButton:(id)sender;
 
@@ -74,6 +75,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     [self setupNavigationItem];
     [self setupLayout];
     [self setupChart];
+    [self setupDateIntervalPickerView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
 
-#pragma mark - Private methods
+#pragma mark - Setup methods
 
 - (NSDateFormatter *)dateFormatter {
     if (_dateFormatter == nil) {
@@ -167,6 +169,12 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     self.lineGraphView.colorPoint = [UIColor vld_mainColor];
 }
 
+- (void)setupDateIntervalPickerView {
+    self.dateIntervalPickerView.delegate = self;
+}
+
+#pragma mark - Private methods
+
 - (void)onValueChangedSegmentedControl:(id)sender {
     VLDReportsMode mode = self.segmentedControl.selectedSegmentIndex;
     self.lineGraphLastClosestIndex = NSNotFound;
@@ -236,6 +244,14 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
         count += viewModel.count;
     }
     return count;
+}
+
+#pragma mark - VLDDateIntervalPickerViewDelegate
+
+- (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
+    [self setupDataSource];
+    [self.lineGraphView reloadGraph];
+    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];
 }
 
 @end
