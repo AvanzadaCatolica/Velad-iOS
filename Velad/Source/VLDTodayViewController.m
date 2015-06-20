@@ -33,8 +33,6 @@
 
 @end
 
-static CGFloat const kDatePickerHeight = 88;
-
 @implementation VLDTodayViewController
 
 #pragma mark - Life cycle
@@ -75,7 +73,7 @@ static CGFloat const kDatePickerHeight = 88;
         make.leading.equalTo(self.datePickerView.superview);
         make.trailing.equalTo(self.datePickerView.superview);
         make.bottom.equalTo(self.datePickerView.superview);
-        make.height.equalTo(@(kDatePickerHeight));
+        make.height.equalTo(self.datePickerView.superview).with.multipliedBy(0.2);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.tableView.superview);

@@ -38,8 +38,6 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 @end
 
-static CGFloat const kDatePickerHeight = 88;
-
 @implementation VLDDiaryViewController
 
 #pragma mark - Life cycle
@@ -103,7 +101,7 @@ static CGFloat const kDatePickerHeight = 88;
         make.leading.equalTo(self.dateIntervalPickerView.superview);
         make.trailing.equalTo(self.dateIntervalPickerView.superview);
         make.bottom.equalTo(self.dateIntervalPickerView.superview);
-        make.height.equalTo(@(kDatePickerHeight));
+        make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.tableView.superview);
