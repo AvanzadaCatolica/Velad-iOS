@@ -60,7 +60,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self setupDataSource];
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -180,7 +181,8 @@
 
 - (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
     [self setupDataSource];
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate

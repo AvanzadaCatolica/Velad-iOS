@@ -14,6 +14,7 @@
 #import "VLDNote.h"
 #import "VLDNoteViewController.h"
 #import "VLDUpdateNotesPresenter.h"
+#import "VLDEmptyView.h"
 
 typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     VLDDiaryModeAll,
@@ -27,14 +28,17 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 @property (nonatomic) RLMResults *notes;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
+@property (nonatomic) VLDEmptyView *emptyView;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
 - (void)setupTableView;
 - (void)setupDateIntervalPickerView;
+- (void)setupEmtpyView;
 - (void)onValueChangedSegmentedControl:(id)sender;
 - (void)onTapAddButton:(id)sender;
 - (void)onTapActionButton:(id)sender;
+- (void)updateEmptyStatus;
 
 @end
 
@@ -50,6 +54,9 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithType:VLDDateIntervalPickerViewTypeWeekly];
     [view addSubview:dateIntervalPickerView];
     self.dateIntervalPickerView = dateIntervalPickerView;
+    VLDEmptyView *emptyView = [[VLDEmptyView alloc] init];
+    [view addSubview:emptyView];
+    self.emptyView = emptyView;
     self.view = view;
 }
 
@@ -57,9 +64,11 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     [super viewDidLoad];
     [self setupNavigationItem];
     [self setupDataSource];
+    [self setupEmtpyView];
     [self setupLayout];
     [self setupTableView];
     [self setupDateIntervalPickerView];
+    [self updateEmptyStatus];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -109,6 +118,12 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
         make.top.equalTo(self.tableView.superview);
         make.bottom.equalTo(self.dateIntervalPickerView.mas_top);
     }];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.emptyView.superview);
+        make.trailing.equalTo(self.emptyView.superview);
+        make.top.equalTo(self.emptyView.superview);
+        make.bottom.equalTo(self.dateIntervalPickerView.mas_top);
+    }];
 }
 
 - (void)setupTableView {
@@ -123,6 +138,10 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     self.dateIntervalPickerView.delegate = self;
 }
 
+- (void)setupEmtpyView {
+    self.emptyView.alpha = 0;
+}
+
 #pragma mark - Private methods
 
 - (VLDUpdateNotesPresenter *)updateNotesPresenter {
@@ -135,8 +154,10 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 - (void)onValueChangedSegmentedControl:(id)sender {
     [self setupDataSource];
+    [self updateEmptyStatus];
     [self updateLeftBarButtonItem];
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)updateLeftBarButtonItem {
@@ -169,6 +190,14 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     [self.updateNotesPresenter present];
 }
 
+- (void)updateEmptyStatus {
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.emptyView.alpha = self.notes.count == 0 ? 1 : 0;
+                         self.tableView.alpha = self.notes.count == 0 ? 0 : 1;
+                     }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -194,6 +223,7 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
         
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [self updateLeftBarButtonItem];
+        [self updateEmptyStatus];
     }
 }
 
@@ -211,13 +241,17 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 - (void)dateIntervalPickerViewDidChangeSelection:(VLDDateIntervalPickerView *)dateIntervalPickerView {
     [self setupDataSource];
-    [self.tableView reloadData];
+    [self updateEmptyStatus];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - VLDNoteViewControllerDelegate
 
 - (void)noteViewControllerDidChangeProperties:(VLDNoteViewController *)viewController {
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
+    [self updateEmptyStatus];
 }
 
 - (void)noteViewControllerDidCancelEditing:(VLDNoteViewController *)viewController {
@@ -241,7 +275,8 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
     [self updateLeftBarButtonItem];
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

@@ -16,13 +16,17 @@
 #import "UIColor+VLDAdditions.h"
 #import "VLDBasicPoint.h"
 #import "VLDReportsResultView.h"
+#import <MessageUI/MessageUI.h>
+#import "VLDProfile.h"
+#import "UIView+VLDAdditions.h"
+#import "VLDErrorPresenter.h"
 
 typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     VLDReportsModeWeekly,
     VLDReportsModeMontly,
 };
 
-@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate>
+@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate, VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
@@ -31,6 +35,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 @property (nonatomic) NSArray *viewModels;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) NSUInteger lineGraphLastClosestIndex;
+@property (nonatomic) VLDErrorPresenter *errorPresenter;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
@@ -175,6 +180,13 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 
 #pragma mark - Private methods
 
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
+    }
+    return _errorPresenter;
+}
+
 - (void)onValueChangedSegmentedControl:(id)sender {
     VLDReportsMode mode = self.segmentedControl.selectedSegmentIndex;
     self.lineGraphLastClosestIndex = NSNotFound;
@@ -185,7 +197,31 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 }
 
 - (void)onTapMailButton:(id)sender {
-    
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
+        [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
+        composeViewController.mailComposeDelegate = self;
+        
+        VLDProfile *profile = [[VLDProfile allObjects] firstObject];
+        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@", profile.name, profile.circle, profile.group];
+        
+        VLDReportsMode mode = self.segmentedControl.selectedSegmentIndex;
+        
+        [composeViewController setSubject:[NSString stringWithFormat:@"Reporte %@", mode == VLDReportsModeWeekly ? @"semanal" : @"mensual"]];
+        [composeViewController setMessageBody:messageBody isHTML:NO];
+        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view snapshotImage])
+                                        mimeType:@"image/png"
+                                        fileName:@"Reporte.png"];
+        [self presentViewController:composeViewController
+                           animated:YES
+                         completion:^{
+                             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                         }];
+    } else {
+        [self.errorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
+                                                              code:INT_MAX
+                                                          userInfo:@{@"NSLocalizedDescription" : @"No se ha encontrado una cuenta de correo configurada"}]];
+    }
 }
 
 #pragma mark - BEMSimpleLineGraphDataSource
@@ -252,6 +288,18 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
     [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];
+}
+
+#pragma mark - VLDErrorPresenterDataSource
+
+- (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

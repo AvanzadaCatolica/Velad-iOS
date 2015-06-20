@@ -202,7 +202,8 @@
     if (indexPath) {
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else {
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                      withRowAnimation:UITableViewRowAnimationFade];
     }
     if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
         [self.delegate basicPointsViewControllerDidChangeProperties:self];

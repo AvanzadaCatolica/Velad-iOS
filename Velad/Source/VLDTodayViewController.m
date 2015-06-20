@@ -244,7 +244,8 @@
 #pragma mark - VLDBasicPointsViewControllerDelegate
 
 - (void)basicPointsViewControllerDidChangeProperties:(VLDBasicPointsViewController *)viewController {
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
