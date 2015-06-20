@@ -8,13 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, VLDDateIntervalPickerViewType) {
+    VLDDateIntervalPickerViewTypeWeekly,
+    VLDDateIntervalPickerViewTypeMonthly
+};
+
 @protocol VLDDateIntervalPickerViewDelegate;
 
 @interface VLDDateIntervalPickerView : UIView
 
-@property (nonatomic) NSDate *selectedStartDate;
-@property (nonatomic) NSDate *selectedEndDate;
+@property (nonatomic, readonly) NSDate *selectedStartDate;
+@property (nonatomic, readonly) NSDate *selectedEndDate;
 @property (nonatomic, weak) id<VLDDateIntervalPickerViewDelegate> delegate;
+@property (nonatomic, readonly) VLDDateIntervalPickerViewType type;
+
+- (instancetype)initWithType:(VLDDateIntervalPickerViewType)type;
 
 @end
 

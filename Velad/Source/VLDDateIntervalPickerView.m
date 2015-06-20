@@ -12,6 +12,8 @@
 
 @interface VLDDateIntervalPickerView ()
 
+@property (nonatomic) NSDate *selectedStartDate;
+@property (nonatomic) NSDate *selectedEndDate;
 @property (nonatomic, weak) UILabel *selectedDateIntervalLabel;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 
@@ -30,9 +32,10 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 
 #pragma mark - Public methods
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithType:(VLDDateIntervalPickerViewType)type {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
+        _type = type;
         [self setupView];
         [self setupSelectedDate];
         [self setupDateFormatter];
@@ -49,19 +52,23 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 }
 
 - (void)setupSelectedDate {
-    NSDate *weekStart;
+    NSDate *periodStart;
     NSTimeInterval timeInterval;
-    [[NSCalendar currentCalendar] rangeOfUnit:NSWeekCalendarUnit
-                                    startDate:&weekStart
+    [[NSCalendar currentCalendar] rangeOfUnit:_type == VLDDateIntervalPickerViewTypeWeekly ? NSWeekCalendarUnit : NSMonthCalendarUnit
+                                    startDate:&periodStart
                                      interval:&timeInterval
                                       forDate:[NSDate date]];
-    _selectedStartDate = weekStart;
-    _selectedEndDate = [weekStart dateByAddingTimeInterval:timeInterval - 1];
+    _selectedStartDate = periodStart;
+    _selectedEndDate = [periodStart dateByAddingTimeInterval:timeInterval - 1];
 }
 
 - (void)setupDateFormatter {
     _dateFormatter = [[NSDateFormatter alloc] init];
-    _dateFormatter.dateFormat = @"d' de 'MMMM";
+    if (_type == VLDDateIntervalPickerViewTypeWeekly) {
+        _dateFormatter.dateFormat = @"d' de 'MMMM";
+    } else {
+        _dateFormatter.dateFormat = @"MMMM yyyy";
+    }
     _dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
 }
 
@@ -98,16 +105,33 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 #pragma mark - Private methods
 
 - (NSString *)labelTextForCurrentIntervalSelection {
-    NSString *endDateText = [self.dateFormatter stringFromDate:self.selectedEndDate];
-    NSDateComponents *startDateComponents = [[NSCalendar currentCalendar]
-                                             components:NSDayCalendarUnit
-                                             fromDate:self.selectedStartDate];
-    return [NSString stringWithFormat:@"%ld al %@", (long)startDateComponents.day, endDateText];
+    if (self.type == VLDDateIntervalPickerViewTypeWeekly) {
+        NSString *endDateText = [self.dateFormatter stringFromDate:self.selectedEndDate];
+        NSDateComponents *startDateComponents = [[NSCalendar currentCalendar]
+                                                 components:NSDayCalendarUnit
+                                                 fromDate:self.selectedStartDate];
+        return [NSString stringWithFormat:@"%ld al %@", (long)startDateComponents.day, endDateText];
+    } else if (self.type == VLDDateIntervalPickerViewTypeMonthly) {
+        NSString *month = [self.dateFormatter stringFromDate:self.selectedStartDate];
+        return [month capitalizedString];
+    }
+    return nil;
 }
 
 - (void)onTapLeftArrow:(id)sender {
-    self.selectedStartDate = [self.selectedStartDate dateByAddingTimeInterval:-kWeekTimeInterval];
-    self.selectedEndDate = [self.selectedEndDate dateByAddingTimeInterval:-kWeekTimeInterval];
+    if (self.type == VLDDateIntervalPickerViewTypeWeekly) {
+        self.selectedStartDate = [self.selectedStartDate dateByAddingTimeInterval:-kWeekTimeInterval];
+        self.selectedEndDate = [self.selectedEndDate dateByAddingTimeInterval:-kWeekTimeInterval];
+    } else if (self.type == VLDDateIntervalPickerViewTypeMonthly) {
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        dateComponents.month = -1;
+        self.selectedStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
+                                                                               toDate:self.selectedStartDate
+                                                                              options:0];
+        self.selectedEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
+                                                                             toDate:self.selectedStartDate
+                                                                            options:0];
+    }
     self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
     [self setNeedsLayout];
     if ([self.delegate respondsToSelector:@selector(dateIntervalPickerViewDidChangeSelection:)]) {
@@ -116,8 +140,19 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
 }
 
 - (void)onTapRightArrow:(id)sender {
-    self.selectedStartDate = [self.selectedStartDate dateByAddingTimeInterval:kWeekTimeInterval];
-    self.selectedEndDate = [self.selectedEndDate dateByAddingTimeInterval:kWeekTimeInterval];
+    if (self.type == VLDDateIntervalPickerViewTypeWeekly) {
+        self.selectedStartDate = [self.selectedStartDate dateByAddingTimeInterval:kWeekTimeInterval];
+        self.selectedEndDate = [self.selectedEndDate dateByAddingTimeInterval:kWeekTimeInterval];
+    } else if (self.type == VLDDateIntervalPickerViewTypeMonthly) {
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        dateComponents.month = 1;
+        self.selectedStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
+                                                                               toDate:self.selectedStartDate
+                                                                              options:0];
+        self.selectedEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
+                                                                             toDate:self.selectedStartDate
+                                                                            options:0];
+    }
     self.selectedDateIntervalLabel.text = [self labelTextForCurrentIntervalSelection];
     [self setNeedsLayout];
     if ([self.delegate respondsToSelector:@selector(dateIntervalPickerViewDidChangeSelection:)]) {

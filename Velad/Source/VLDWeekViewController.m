@@ -46,7 +46,7 @@ static CGFloat const kDatePickerHeight = 88;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [view addSubview:tableView];
     self.tableView = tableView;
-    VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithFrame:CGRectZero];
+    VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithType:VLDDateIntervalPickerViewTypeWeekly];
     [view addSubview:dateIntervalPickerView];
     self.dateIntervalPickerView = dateIntervalPickerView;
     self.view = view;
@@ -65,10 +65,6 @@ static CGFloat const kDatePickerHeight = 88;
     [self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (UIRectEdge)edgesForExtendedLayout {
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
@@ -79,7 +75,7 @@ static CGFloat const kDatePickerHeight = 88;
     self.navigationItem.title = @"Semana";
     UIImage *mailImage = [[UIImage imageNamed:@"Mail"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:mailImage
-                                                                              style:UIBarButtonItemStyleBordered
+                                                                              style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onTapMailButton:)];
 }

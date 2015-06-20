@@ -50,10 +50,6 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     [self setupNavigationItem];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - Private methods
 
 - (VLDErrorPresenter *)errorPresenter {

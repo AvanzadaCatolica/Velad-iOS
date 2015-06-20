@@ -49,7 +49,7 @@ static CGFloat const kDatePickerHeight = 88;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [view addSubview:tableView];
     self.tableView = tableView;
-    VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithFrame:CGRectZero];
+    VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithType:VLDDateIntervalPickerViewTypeWeekly];
     [view addSubview:dateIntervalPickerView];
     self.dateIntervalPickerView = dateIntervalPickerView;
     self.view = view;
@@ -57,15 +57,11 @@ static CGFloat const kDatePickerHeight = 88;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupDataSource];
     [self setupNavigationItem];
+    [self setupDataSource];
     [self setupLayout];
     [self setupTableView];
     [self setupDateIntervalPickerView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {

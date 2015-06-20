@@ -60,10 +60,6 @@ static CGFloat const kDatePickerHeight = 88;
     [self setupNavigationItem];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (UIRectEdge)edgesForExtendedLayout {
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
@@ -109,7 +105,7 @@ static CGFloat const kDatePickerHeight = 88;
 - (void)setupNavigationItem {
     UIImage *listImage = [[UIImage imageNamed:@"List"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:listImage
-                                                                              style:UIBarButtonItemStyleBordered
+                                                                              style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onTapListButton:)];
     self.navigationItem.title = @"Hoy";
