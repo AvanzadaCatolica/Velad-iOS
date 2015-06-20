@@ -63,11 +63,6 @@ static CGFloat const kDatePickerHeight = 88;
                forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmentedControl;
     self.segmentedControl = segmentedControl;
-    UIImage *gearImage = [[UIImage imageNamed:@"Gear"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:gearImage
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(onTapSettingsButton:)];
     UIImage *mailImage = [[UIImage imageNamed:@"Mail"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:mailImage
                                                                               style:UIBarButtonItemStylePlain
@@ -88,8 +83,6 @@ static CGFloat const kDatePickerHeight = 88;
     
 }
 
-- (void)onTapSettingsButton:(id)sender {
-    
 }
 
 - (void)onTapMailButton:(id)sender {

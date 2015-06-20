@@ -1,19 +1,17 @@
 PODS:
+  - BEMSimpleLineGraph (4.0)
   - Masonry (0.6.1)
-  - PNChart (0.8.3):
-    - UICountingLabel (~> 1.2.0)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
   - Reveal-iOS-SDK (1.5.1)
   - SSKeychain (1.2.3)
-  - UICountingLabel (1.2.0)
   - VTAcknowledgementsViewController (0.14)
   - XLForm (3.0.0)
 
 DEPENDENCIES:
+  - BEMSimpleLineGraph
   - Masonry
-  - PNChart
   - Realm
   - Reveal-iOS-SDK
   - SSKeychain
@@ -31,12 +29,11 @@ CHECKOUT OPTIONS:
     :git: git@github.com:xmartlabs/XLForm.git
 
 SPEC CHECKSUMS:
+  BEMSimpleLineGraph: e706c36c6e7944f6424285478a914d4adb178f92
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
-  PNChart: 8d81e061ec4845915184755d8da84f385ca1cb28
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
-  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   VTAcknowledgementsViewController: 11a869dd69598a852f12699aeaf36e2589d3fc1b
   XLForm: 10fc7eb9e2d5df21a515fa3a794f4e26319abd0e
 

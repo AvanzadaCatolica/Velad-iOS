@@ -7,6 +7,6 @@ target 'Velad' do
   pod 'Reveal-iOS-SDK', configurations: ['Debug']
   pod 'SSKeychain'
   pod 'VTAcknowledgementsViewController'
-  pod 'PNChart'
+  pod 'BEMSimpleLineGraph'
 end
 
