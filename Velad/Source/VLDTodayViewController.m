@@ -62,7 +62,7 @@
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
 
-#pragma mark - Setup
+#pragma mark - Setup methods
 
 - (void)setupDataSource {
     self.basicPoints = [VLDBasicPoint basicPoints];

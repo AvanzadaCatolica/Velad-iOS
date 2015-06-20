@@ -15,17 +15,19 @@
 #import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
 #import "UIColor+VLDAdditions.h"
 #import "VLDBasicPoint.h"
+#import "VLDReportsResultView.h"
 
 typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     VLDReportsModeWeekly,
     VLDReportsModeMontly,
 };
 
-@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
+@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource>
 
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
 @property (nonatomic, weak) BEMSimpleLineGraphView *lineGraphView;
+@property (nonatomic, weak) VLDReportsResultView *reportsResultView;
 @property (nonatomic) NSArray *viewModels;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) NSUInteger lineGraphLastClosestIndex;
@@ -35,7 +37,6 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 - (void)setupDataSource;
 - (void)setupChart;
 - (void)onValueChangedSegmentedControl:(id)sender;
-- (void)onTapSettingsButton:(id)sender;
 - (void)onTapMailButton:(id)sender;
 
 @end
@@ -55,13 +56,16 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     BEMSimpleLineGraphView *lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectZero];
     [view addSubview:lineGraphView];
     self.lineGraphView = lineGraphView;
     VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithType:VLDDateIntervalPickerViewTypeWeekly];
     [view addSubview:dateIntervalPickerView];
     self.dateIntervalPickerView = dateIntervalPickerView;
+    VLDReportsResultView *reportsResultView = [[VLDReportsResultView alloc] initWithDataSource:self mode:VLDReportsResultViewModeWeekly];
+    [view addSubview:reportsResultView];
+    self.reportsResultView = reportsResultView;
     self.view = view;
 }
 
@@ -76,6 +80,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     [super viewWillAppear:animated];
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
+    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -121,6 +126,12 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
         make.bottom.equalTo(self.dateIntervalPickerView.superview);
         make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
     }];
+    [self.reportsResultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.dateIntervalPickerView.superview);
+        make.trailing.equalTo(self.dateIntervalPickerView.superview);
+        make.bottom.equalTo(self.dateIntervalPickerView.mas_top);
+        make.top.equalTo(self.lineGraphView.mas_bottom);
+    }];
 }
 
 - (void)setupDataSource {
@@ -162,6 +173,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     [self.dateIntervalPickerView resetPicketWithType:mode == VLDReportsModeWeekly? VLDDateIntervalPickerViewTypeWeekly : VLDDateIntervalPickerViewTypeMonthly];
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
+    [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly];
 }
 
 - (void)onTapMailButton:(id)sender {
@@ -208,6 +220,22 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
         return [NSString stringWithFormat:@" en %@", [self.dateFormatter stringFromDate:viewModel.date]];
     }
     return @" en 00/00";
+}
+
+#pragma mark - VLDReportsResultViewDataSource
+
+- (NSUInteger)maximumPossibleScoreForReportsResultView:(VLDReportsResultView *)reportsResultView {
+    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
+    NSArray *steps = [self.dateIntervalPickerView dayStepsForSelection];
+    return basicPoints.count * steps.count;
+}
+
+- (NSUInteger)scoreForReportsResultView:(VLDReportsResultView *)reportsResultView {
+    NSUInteger count = 0;
+    for (VLDReportsViewModel *viewModel in self.viewModels) {
+        count += viewModel.count;
+    }
+    return count;
 }
 
 @end
