@@ -117,6 +117,7 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
             self.window.rootViewController = [self mainTabBarController];
         }
     } else {
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
         VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
         viewController.delegate = self;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
