@@ -173,7 +173,7 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                                                                                toDate:self.selectedStartDate
                                                                               options:0];
         self.selectedEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
-                                                                             toDate:self.selectedStartDate
+                                                                             toDate:self.selectedEndDate
                                                                             options:0];
     }
     [self updateSelectedDateIntervalLabel];
@@ -194,7 +194,7 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
                                                                                toDate:self.selectedStartDate
                                                                               options:0];
         self.selectedEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
-                                                                             toDate:self.selectedStartDate
+                                                                             toDate:self.selectedEndDate
                                                                             options:0];
     }
     [self updateSelectedDateIntervalLabel];
