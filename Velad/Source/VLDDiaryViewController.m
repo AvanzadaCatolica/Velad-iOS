@@ -15,30 +15,31 @@
 #import "VLDNoteViewController.h"
 #import "VLDUpdateNotesPresenter.h"
 #import "VLDEmptyView.h"
+#import "VLDDiaryModePickerView.h"
 
-typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
-    VLDDiaryModeAll,
-    VLDDiaryModeConfessable,
-};
-
-@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate>
+@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate, VLDDiaryModePickerViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
+@property (nonatomic, weak) VLDDiaryModePickerView *diaryModePickerView;
 @property (nonatomic) RLMResults *notes;
-@property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
 @property (nonatomic) VLDEmptyView *emptyView;
+@property (nonatomic) VLDDiaryMode mode;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
 - (void)setupTableView;
 - (void)setupDateIntervalPickerView;
+- (void)setupDiaryModePickerView;
 - (void)setupEmtpyView;
-- (void)onValueChangedSegmentedControl:(id)sender;
-- (void)onTapAddButton:(id)sender;
-- (void)onTapActionButton:(id)sender;
 - (void)updateEmptyStatus;
+- (void)updateLeftBarButtonItem;
+- (void)updateRightBarButtonItem;
+- (void)onTapAddButton:(id)sender;
+- (void)onTapDoneButton:(id)sender;
+- (void)onTapDeleteButton:(id)sender;
+- (void)onTapActionButton:(id)sender;
 
 @end
 
@@ -57,6 +58,9 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     VLDEmptyView *emptyView = [[VLDEmptyView alloc] init];
     [view addSubview:emptyView];
     self.emptyView = emptyView;
+    VLDDiaryModePickerView *diaryModePickerView = [[VLDDiaryModePickerView alloc] initWithMode:VLDDiaryModeAll];
+    [view addSubview:diaryModePickerView];
+    self.diaryModePickerView = diaryModePickerView;
     self.view = view;
 }
 
@@ -68,6 +72,7 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     [self setupLayout];
     [self setupTableView];
     [self setupDateIntervalPickerView];
+    [self setupDiaryModePickerView];
     [self updateEmptyStatus];
 }
 
@@ -79,30 +84,29 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
     [self updateLeftBarButtonItem];
+    [self updateRightBarButtonItem];
 }
 
 #pragma mark - Setup methods
 
 - (void)setupDataSource {
-    VLDDiaryMode mode = self.segmentedControl.selectedSegmentIndex;
+    VLDDiaryMode mode = self.diaryModePickerView.mode;
     if (mode == VLDDiaryModeAll) {
         self.notes = [VLDNote notesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
                                             endDate:self.dateIntervalPickerView.selectedEndDate];
-    } else {
+    } else if (mode == VLDDiaryModeConfessable) {
         self.notes = [VLDNote confessableNotesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
                                                        endDate:self.dateIntervalPickerView.selectedEndDate];
+    } else if (mode == VLDDIaryModeGuidance) {
+        self.notes = [VLDNote guidanceNotesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
+                                                    endDate:self.dateIntervalPickerView.selectedEndDate];
     }
 }
 
 - (void)setupNavigationItem {
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Todos", @"Confesables"]];
-    segmentedControl.selectedSegmentIndex = 0;
-    [segmentedControl addTarget:self
-                         action:@selector(onValueChangedSegmentedControl:)
-               forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentedControl;
-    self.segmentedControl = segmentedControl;
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = @"Diario";
+    [self updateLeftBarButtonItem];
+    [self updateRightBarButtonItem];
 }
 
 - (void)setupLayout {
@@ -112,10 +116,15 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
         make.bottom.equalTo(self.dateIntervalPickerView.superview);
         make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
     }];
+    [self.diaryModePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.diaryModePickerView.superview);
+        make.trailing.equalTo(self.diaryModePickerView.superview);
+        make.top.equalTo(self.diaryModePickerView.superview);
+    }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.tableView.superview);
         make.trailing.equalTo(self.tableView.superview);
-        make.top.equalTo(self.tableView.superview);
+        make.top.equalTo(self.diaryModePickerView.mas_bottom);
         make.bottom.equalTo(self.dateIntervalPickerView.mas_top);
     }];
     [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,6 +147,10 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     self.dateIntervalPickerView.delegate = self;
 }
 
+- (void)setupDiaryModePickerView {
+    self.diaryModePickerView.delegate = self;
+}
+
 - (void)setupEmtpyView {
     self.emptyView.alpha = 0;
 }
@@ -152,31 +165,44 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     return _updateNotesPresenter;
 }
 
-- (void)onValueChangedSegmentedControl:(id)sender {
-    [self setupDataSource];
-    [self updateEmptyStatus];
-    [self updateLeftBarButtonItem];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+- (void)updateLeftBarButtonItem {
+    VLDDiaryMode mode = self.diaryModePickerView.mode;
+    if (mode == VLDDiaryModeConfessable && self.notes.count >= 1 && !self.isEditing) {
+        [self.navigationItem
+         setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                            target:self
+                                                                            action:@selector(onTapActionButton:)]
+         animated:YES];
+    } else {
+        [self.navigationItem setLeftBarButtonItems:nil animated:YES];
+    }
 }
 
-- (void)updateLeftBarButtonItem {
-    if (self.editing) {
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                                target:self
-                                                                                                action:@selector(onTapAddButton:)]];
+- (void)updateRightBarButtonItem {
+    if (self.isEditing) {
+        UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                        target:self
+                                                                                        action:@selector(onTapDoneButton:)];
+        [self.navigationItem setRightBarButtonItems:@[doneButtonItem] animated:YES];
     } else {
-        VLDDiaryMode mode = self.segmentedControl.selectedSegmentIndex;
-        if (mode == VLDDiaryModeConfessable && self.notes.count >= 1) {
-            [self.navigationItem
-             setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                target:self
-                                                                                action:@selector(onTapActionButton:)]
-             animated:YES];
-        } else {
-            [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-        }
+        UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Add"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapAddButton:)];
+        UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Delete"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapDeleteButton:)];
+        [self.navigationItem setRightBarButtonItems:@[addBarButtonItem, deleteButtonItem] animated:YES];
     }
+}
+
+- (void)updateEmptyStatus {
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.emptyView.alpha = self.notes.count == 0 ? 1 : 0;
+                         self.tableView.alpha = self.notes.count == 0 ? 0 : 1;
+                     }];
 }
 
 - (void)onTapAddButton:(id)sender {
@@ -186,16 +212,16 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
-- (void)onTapActionButton:(id)sender {
-    [self.updateNotesPresenter present];
+- (void)onTapDoneButton:(id)sender {
+    [self setEditing:NO animated:YES];
 }
 
-- (void)updateEmptyStatus {
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         self.emptyView.alpha = self.notes.count == 0 ? 1 : 0;
-                         self.tableView.alpha = self.notes.count == 0 ? 0 : 1;
-                     }];
+- (void)onTapDeleteButton:(id)sender {
+    [self setEditing:YES animated:YES];
+}
+
+- (void)onTapActionButton:(id)sender {
+    [self.updateNotesPresenter present];
 }
 
 #pragma mark - UITableViewDataSource
@@ -241,6 +267,7 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 - (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
+    [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
@@ -251,6 +278,7 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 - (void)noteViewControllerDidChangeProperties:(VLDNoteViewController *)viewController {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationFade];
+    [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
 }
 
@@ -275,6 +303,17 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
     [self updateLeftBarButtonItem];
+    [self updateEmptyStatus];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - VLDDiaryModePickerViewDelegate
+
+- (void)diaryModePickerViewDelegateDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView {
+    [self setupDataSource];
+    [self updateLeftBarButtonItem];
+    [self updateEmptyStatus];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationFade];
 }

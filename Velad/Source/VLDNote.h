@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, VLDNoteState) {
     VLDNoteStateRegular,
     VLDNoteStateConfessable,
-    VLDNoteStateConfessed
+    VLDNoteStateConfessed,
+    VLDNoteStateGuidance
 };
 
 @interface VLDNote : RLMObject
@@ -20,6 +21,8 @@ typedef NS_ENUM(NSInteger, VLDNoteState) {
 @property VLDNoteState state;
 @property NSDate *date;
 
++ (RLMResults *)guidanceNotesBetweenStartDate:(NSDate *)startDate
+                                      endDate:(NSDate *)endDate;
 + (RLMResults *)confessableNotesBetweenStartDate:(NSDate *)startDate
                                          endDate:(NSDate *)endDate;
 + (RLMResults *)notesBetweenStartDate:(NSDate *)startDate

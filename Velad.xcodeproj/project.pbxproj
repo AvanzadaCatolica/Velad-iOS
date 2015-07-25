@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F256C2F1B63AA7B00B63C07 /* VLDDiaryModePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F256C2E1B63AA7B00B63C07 /* VLDDiaryModePickerView.m */; };
 		3F331A591B2C67DC0055E742 /* VLDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */; };
 		3F331A621B2C67E70055E742 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A5D1B2C67E70055E742 /* main.m */; };
 		3F331A681B2C68410055E742 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A651B2C68410055E742 /* Images.xcassets */; };
@@ -59,6 +60,8 @@
 /* Begin PBXFileReference section */
 		242A4A03FF34540136584E3D /* Pods-Velad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Velad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad.debug.xcconfig"; sourceTree = "<group>"; };
 		327509EF0CA8E04A6C1F47D7 /* Pods-Velad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Velad.release.xcconfig"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad.release.xcconfig"; sourceTree = "<group>"; };
+		3F256C2D1B63AA7B00B63C07 /* VLDDiaryModePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDDiaryModePickerView.h; path = Source/VLDDiaryModePickerView.h; sourceTree = "<group>"; };
+		3F256C2E1B63AA7B00B63C07 /* VLDDiaryModePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDiaryModePickerView.m; path = Source/VLDDiaryModePickerView.m; sourceTree = "<group>"; };
 		3F331A2A1B2C67020055E742 /* Velad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F331A571B2C67DC0055E742 /* VLDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDAppDelegate.h; path = Source/VLDAppDelegate.h; sourceTree = "<group>"; };
 		3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDAppDelegate.m; path = Source/VLDAppDelegate.m; sourceTree = "<group>"; };
@@ -309,6 +312,8 @@
 				3FD02C1E1B2DAB6400B82507 /* VLDDateIntervalPickerView.m */,
 				3F8738431B35DA8D007501F1 /* VLDEmptyView.h */,
 				3F8738441B35DA8D007501F1 /* VLDEmptyView.m */,
+				3F256C2D1B63AA7B00B63C07 /* VLDDiaryModePickerView.h */,
+				3F256C2E1B63AA7B00B63C07 /* VLDDiaryModePickerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */,
 				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
+				3F256C2F1B63AA7B00B63C07 /* VLDDiaryModePickerView.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
 				3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */,
 				3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */,
