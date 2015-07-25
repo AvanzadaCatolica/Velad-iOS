@@ -63,6 +63,7 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorText
                                                           rowType:XLFormRowDescriptorTypeTextView
                                                             title:@"Nota"];
+    [rowDescriptor.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textView.textAlignment"];
     rowDescriptor.value = self.note ? self.note.text : @"";
     rowDescriptor.required = YES;
     [sectionDescriptor addFormRow:rowDescriptor];
