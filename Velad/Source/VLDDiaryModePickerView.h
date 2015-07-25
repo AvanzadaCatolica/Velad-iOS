@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 @interface VLDDiaryModePickerView : UIView
 
-@property (nonatomic) VLDDiaryMode mode;
+@property (nonatomic, readonly) VLDDiaryMode mode;
 @property (nonatomic, weak) id<VLDDiaryModePickerViewDelegate> delegate;
 
 - (instancetype)initWithMode:(VLDDiaryMode)mode;
@@ -27,6 +27,6 @@ typedef NS_ENUM(NSUInteger, VLDDiaryMode) {
 
 @protocol VLDDiaryModePickerViewDelegate <NSObject>
 
-- (void)diaryModePickerViewDelegateDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView;
+- (void)diaryModePickerViewDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView;
 
 @end

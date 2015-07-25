@@ -310,7 +310,7 @@
 
 #pragma mark - VLDDiaryModePickerViewDelegate
 
-- (void)diaryModePickerViewDelegateDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView {
+- (void)diaryModePickerViewDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView {
     [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];

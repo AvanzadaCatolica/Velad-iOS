@@ -20,18 +20,15 @@
 #import "VLDProfile.h"
 #import "UIView+VLDAdditions.h"
 #import "VLDErrorPresenter.h"
+#import "VLDReportsModePickerView.h"
 
-typedef NS_ENUM(NSUInteger, VLDReportsMode) {
-    VLDReportsModeWeekly,
-    VLDReportsModeMontly,
-};
+@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate, VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDReportsModePickerViewDelegate>
 
-@interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate, VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
-
-@property (nonatomic, weak) UISegmentedControl *segmentedControl;
+@property (nonatomic, weak) VLDReportsModePickerView *reportsModePickerView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
 @property (nonatomic, weak) BEMSimpleLineGraphView *lineGraphView;
 @property (nonatomic, weak) VLDReportsResultView *reportsResultView;
+@property (nonatomic, weak) UIView *contentView;
 @property (nonatomic) NSArray *viewModels;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) NSUInteger lineGraphLastClosestIndex;
@@ -40,9 +37,9 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 - (void)setupNavigationItem;
 - (void)setupLayout;
 - (void)setupDataSource;
+- (void)setupReportsModePickerView;
 - (void)setupChart;
 - (void)setupDateIntervalPickerView;
-- (void)onValueChangedSegmentedControl:(id)sender;
 - (void)onTapMailButton:(id)sender;
 
 @end
@@ -63,15 +60,25 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 - (void)loadView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    VLDReportsModePickerView *reportsPickerView = [[VLDReportsModePickerView alloc] initWithMode:VLDReportsModeWeekly];
+    [view addSubview:reportsPickerView];
+    self.reportsModePickerView = reportsPickerView;
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [view addSubview:contentView];
+    self.contentView = contentView;
+    
     BEMSimpleLineGraphView *lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectZero];
-    [view addSubview:lineGraphView];
+    [contentView addSubview:lineGraphView];
     self.lineGraphView = lineGraphView;
     VLDDateIntervalPickerView *dateIntervalPickerView = [[VLDDateIntervalPickerView alloc] initWithType:VLDDateIntervalPickerViewTypeWeekly];
-    [view addSubview:dateIntervalPickerView];
+    [contentView addSubview:dateIntervalPickerView];
     self.dateIntervalPickerView = dateIntervalPickerView;
     VLDReportsResultView *reportsResultView = [[VLDReportsResultView alloc] initWithDataSource:self mode:VLDReportsResultViewModeWeekly];
-    [view addSubview:reportsResultView];
+    [contentView addSubview:reportsResultView];
     self.reportsResultView = reportsResultView;
+    
     self.view = view;
 }
 
@@ -79,6 +86,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     [super viewDidLoad];
     [self setupNavigationItem];
     [self setupLayout];
+    [self setupReportsModePickerView];
     [self setupChart];
     [self setupDateIntervalPickerView];
 }
@@ -106,13 +114,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 }
 
 - (void)setupNavigationItem {
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Semanal", @"Mensual"]];
-    segmentedControl.selectedSegmentIndex = VLDReportsModeWeekly;
-    [segmentedControl addTarget:self
-                         action:@selector(onValueChangedSegmentedControl:)
-               forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentedControl;
-    self.segmentedControl = segmentedControl;
+    self.navigationItem.title = @"Informes";
     UIImage *mailImage = [[UIImage imageNamed:@"Mail"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:mailImage
                                                                               style:UIBarButtonItemStylePlain
@@ -121,17 +123,29 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 }
 
 - (void)setupLayout {
+    [self.reportsModePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.reportsModePickerView.superview);
+        make.trailing.equalTo(self.reportsModePickerView.superview);
+        make.top.equalTo(self.reportsModePickerView.superview);
+    }];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.contentView.superview);
+        make.trailing.equalTo(self.contentView.superview);
+        make.top.equalTo(self.reportsModePickerView.mas_bottom);
+        make.bottom.equalTo(self.contentView.superview);
+    }];
+    
     [self.lineGraphView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.dateIntervalPickerView.superview).with.offset(20);
         make.trailing.equalTo(self.dateIntervalPickerView.superview).with.offset(-20);
         make.top.equalTo(self.dateIntervalPickerView.superview).with.offset(20);
-        make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.3);
+        make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.4);
     }];
     [self.dateIntervalPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.dateIntervalPickerView.superview);
         make.trailing.equalTo(self.dateIntervalPickerView.superview);
         make.bottom.equalTo(self.dateIntervalPickerView.superview);
-        make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
+        make.height.equalTo(self.dateIntervalPickerView.superview.superview).with.multipliedBy(0.2);
     }];
     [self.reportsResultView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.dateIntervalPickerView.superview);
@@ -158,6 +172,10 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
         [viewModels addObject:viewModel];
     }
     self.viewModels = [viewModels copy];
+}
+
+- (void)setupReportsModePickerView {
+    self.reportsModePickerView.delegate = self;
 }
 
 - (void)setupChart {
@@ -187,16 +205,6 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     return _errorPresenter;
 }
 
-- (void)onValueChangedSegmentedControl:(id)sender {
-    VLDReportsMode mode = self.segmentedControl.selectedSegmentIndex;
-    self.lineGraphLastClosestIndex = NSNotFound;
-    [self.dateIntervalPickerView resetPicketWithType:mode == VLDReportsModeWeekly? VLDDateIntervalPickerViewTypeWeekly : VLDDateIntervalPickerViewTypeMonthly];
-    [self setupDataSource];
-    self.lineGraphView.animationGraphEntranceTime = mode == VLDReportsModeWeekly ? 1 : 1.5;
-    [self.lineGraphView reloadGraph];
-    [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly];
-}
-
 - (void)onTapMailButton:(id)sender {
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
@@ -206,7 +214,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
         NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@", profile.name, profile.circle, profile.group];
         
-        VLDReportsMode mode = self.segmentedControl.selectedSegmentIndex;
+        VLDReportsMode mode = self.reportsModePickerView.mode;
         
         [composeViewController setSubject:[NSString stringWithFormat:@"Reporte %@", mode == VLDReportsModeWeekly ? @"semanal" : @"mensual"]];
         [composeViewController setMessageBody:messageBody isHTML:NO];
@@ -302,6 +310,18 @@ typedef NS_ENUM(NSUInteger, VLDReportsMode) {
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - VLDReportsModePickerViewDelegate
+
+- (void)reportsModePickerViewDidChangeMode:(VLDReportsModePickerView *)reportsModePickerView {
+    VLDReportsMode mode = self.reportsModePickerView.mode;
+    self.lineGraphLastClosestIndex = NSNotFound;
+    [self.dateIntervalPickerView resetPicketWithType:mode == VLDReportsModeWeekly? VLDDateIntervalPickerViewTypeWeekly : VLDDateIntervalPickerViewTypeMonthly];
+    [self setupDataSource];
+    self.lineGraphView.animationGraphEntranceTime = mode == VLDReportsModeWeekly ? 1 : 1.5;
+    [self.lineGraphView reloadGraph];
+    [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly];
 }
 
 @end

@@ -1,18 +1,18 @@
 //
-//  VLDDiaryModePickerView.m
+//  VLDReportsModePickerView.m
 //  Velad
 //
 //  Created by Renzo Crisóstomo on 25/07/15.
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDDiaryModePickerView.h"
+#import "VLDReportsModePickerView.h"
 #import "UIColor+VLDAdditions.h"
 #import <Masonry/Masonry.h>
 
-@interface VLDDiaryModePickerView ()
+@interface VLDReportsModePickerView ()
 
-@property (nonatomic) VLDDiaryMode mode;
+@property (nonatomic) VLDReportsMode mode;
 @property (nonatomic, weak, readonly) UISegmentedControl *segmentedControl;
 
 - (void)setupView;
@@ -23,11 +23,11 @@
 
 static NSInteger const kSegmentedControlOffset = 10;
 
-@implementation VLDDiaryModePickerView
+@implementation VLDReportsModePickerView
 
 #pragma mark - Public methods
 
-- (instancetype)initWithMode:(VLDDiaryMode)mode {
+- (instancetype)initWithMode:(VLDReportsMode)mode {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _mode = mode;
@@ -59,7 +59,7 @@ static NSInteger const kSegmentedControlOffset = 10;
         make.trailing.equalTo(bottomView.superview);
         make.bottom.equalTo(bottomView.superview);
     }];
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Todos", @"Confesables", @"Guiamiento"]];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Semanal", @"Mensual"]];
     segmentedControl.selectedSegmentIndex = _mode;
     [segmentedControl addTarget:self
                          action:@selector(onValueChangedSegmentedControl:)
@@ -78,8 +78,8 @@ static NSInteger const kSegmentedControlOffset = 10;
 
 - (void)onValueChangedSegmentedControl:(id)sender {
     self.mode = self.segmentedControl.selectedSegmentIndex;
-    if ([self.delegate respondsToSelector:@selector(diaryModePickerViewDidChangeMode:)]) {
-        [self.delegate diaryModePickerViewDidChangeMode:self];
+    if ([self.delegate respondsToSelector:@selector(reportsModePickerViewDidChangeMode:)]) {
+        [self.delegate reportsModePickerViewDidChangeMode:self];
     }
 }
 
