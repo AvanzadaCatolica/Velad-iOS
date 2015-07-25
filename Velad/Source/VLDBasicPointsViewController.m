@@ -25,7 +25,7 @@
 - (void)setupDataSource;
 - (void)setupTableView;
 - (void)setupLayout;
-- (void)updateLeftBarButtonItem;
+- (void)updateRightBarButtonItems;
 - (void)onTapAddButton:(id)sender;
 
 @end
@@ -52,14 +52,14 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
-    [self updateLeftBarButtonItem];
+    [self updateRightBarButtonItems];
 }
 
 #pragma mark - Setup methods
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Puntos Básicos";
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self updateRightBarButtonItems];
 }
 
 - (void)setupDataSource {
@@ -90,17 +90,22 @@
     return _notificationScheduler;
 }
 
-- (void)updateLeftBarButtonItem {
-    if (self.editing) {
-        self.backButtonItem = self.navigationItem.leftBarButtonItem;
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                                target:self
-                                                                                                action:@selector(onTapAddButton:)]
-                                         animated:YES];
+- (void)updateRightBarButtonItems {
+    if (self.isEditing) {
+        UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                        target:self
+                                                                                        action:@selector(onTapDoneButton:)];
+        [self.navigationItem setRightBarButtonItems:@[doneButtonItem] animated:YES];
     } else {
-        [self.navigationItem setLeftBarButtonItem:self.backButtonItem
-                                         animated:YES];
-        self.backButtonItem = nil;
+        UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Add"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapAddButton:)];
+        UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Delete"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapDeleteButton:)];
+        [self.navigationItem setRightBarButtonItems:@[addBarButtonItem, deleteButtonItem] animated:YES];
     }
 }
 
@@ -111,6 +116,14 @@
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
+}
+
+- (void)onTapDoneButton:(id)sender {
+    [self setEditing:NO animated:YES];
+}
+
+- (void)onTapDeleteButton:(id)sender {
+    [self setEditing:YES animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

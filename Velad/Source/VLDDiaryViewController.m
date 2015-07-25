@@ -35,7 +35,7 @@
 - (void)setupEmtpyView;
 - (void)updateEmptyStatus;
 - (void)updateLeftBarButtonItem;
-- (void)updateRightBarButtonItem;
+- (void)updateRightBarButtonItems;
 - (void)onTapAddButton:(id)sender;
 - (void)onTapDoneButton:(id)sender;
 - (void)onTapDeleteButton:(id)sender;
@@ -84,7 +84,7 @@
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
     [self updateLeftBarButtonItem];
-    [self updateRightBarButtonItem];
+    [self updateRightBarButtonItems];
 }
 
 #pragma mark - Setup methods
@@ -106,7 +106,7 @@
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Diario";
     [self updateLeftBarButtonItem];
-    [self updateRightBarButtonItem];
+    [self updateRightBarButtonItems];
 }
 
 - (void)setupLayout {
@@ -178,7 +178,7 @@
     }
 }
 
-- (void)updateRightBarButtonItem {
+- (void)updateRightBarButtonItems {
     if (self.isEditing) {
         UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                         target:self
