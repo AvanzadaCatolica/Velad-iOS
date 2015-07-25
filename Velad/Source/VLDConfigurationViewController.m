@@ -12,6 +12,7 @@
 #import "VLDErrorPresenter.h"
 #import "VLDSecurityViewController.h"
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
+#import "NSCalendar+VLDAdditions.h"
 
 @interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
 
@@ -28,9 +29,12 @@
 
 static NSString * const kRowDescriptorProfile = @"VLDRowDescriptorProfile";
 static NSString * const kRowDescriptorSecurity = @"VLDRowDescriptorSecurity";
+static NSString * const kRowDescriptorCalendarPreference = @"VLDRowDescriptorCalendarPreference";
 static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
 static NSString * const kRowDescriptorLicenses = @"VLDRowDescriptorLicenses";
 static NSString * const kRowDescriptorVersion = @"VLDRowDescriptorVersion";
+
+NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification = @"VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification";
 
 @implementation VLDConfigurationViewController
 
@@ -74,6 +78,15 @@ static NSString * const kRowDescriptorVersion = @"VLDRowDescriptorVersion";
     [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
     [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
     [sectionDescriptor addFormRow:rowDescriptor];
+    
+    sectionDescriptor = [XLFormSectionDescriptor formSection];
+    [formDescriptor addFormSection:sectionDescriptor];
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorCalendarPreference
+                                                          rowType:XLFormRowDescriptorTypeBooleanSwitch
+                                                            title:@"Empezar el lunes"];
+    rowDescriptor.value = @([[NSUserDefaults standardUserDefaults] boolForKey:VLDCalendarShouldStartOnMondayKey]);
+    [sectionDescriptor addFormRow:rowDescriptor];
+    sectionDescriptor.footerTitle = @"Al estar seleccionado, todos los intervalos semanales empezarán el día lunes.\n\nCaso contrario, se usará la configuración de región del dispositivo.";
     
     sectionDescriptor = [XLFormSectionDescriptor formSection];
     [formDescriptor addFormSection:sectionDescriptor];
@@ -167,6 +180,17 @@ static NSString * const kRowDescriptorVersion = @"VLDRowDescriptorVersion";
 
 - (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
     return self;
+}
+
+#pragma mark - XLFormDescriptorDelegate
+
+-(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)formRow oldValue:(id)oldValue newValue:(id)newValue {
+    [super formRowDescriptorValueHasChanged:formRow oldValue:oldValue newValue:newValue];
+    if ([formRow.tag isEqualToString:kRowDescriptorCalendarPreference]) {
+        BOOL calendarShouldStartOnMonday = [newValue boolValue];
+        [[NSUserDefaults standardUserDefaults] setBool:calendarShouldStartOnMonday forKey:VLDCalendarShouldStartOnMondayKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification object:nil];
+    }
 }
 
 @end

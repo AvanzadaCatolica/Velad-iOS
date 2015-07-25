@@ -14,7 +14,7 @@ NSString *const VLDCalendarShouldStartOnMondayKey = @"VLDCalendarShouldStartOnMo
 
 + (NSCalendar *)vld_preferredCalendar {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL calendarShouldStartOnMonday = [[userDefaults objectForKey:VLDCalendarShouldStartOnMondayKey] boolValue];
+    BOOL calendarShouldStartOnMonday = [userDefaults boolForKey:VLDCalendarShouldStartOnMondayKey];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     if (calendarShouldStartOnMonday) {
         calendar.firstWeekday = 2;

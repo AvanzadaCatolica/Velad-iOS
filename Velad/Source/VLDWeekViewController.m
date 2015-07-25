@@ -181,8 +181,12 @@
 
 - (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    if (direction != VLDArrowButtonDirectionNone) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                      withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate

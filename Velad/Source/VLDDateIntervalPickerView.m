@@ -11,6 +11,7 @@
 #import "UIColor+VLDAdditions.h"
 #import "NSCalendar+VLDAdditions.h"
 #import "NSDate+VLDAdditions.h"
+#import "VLDConfigurationViewController.h"
 
 @interface VLDDateIntervalPickerView ()
 
@@ -47,9 +48,21 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
         [self setupSelectedDate];
         [self setupDateFormatter];
         [self setupSubviews];
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(onCalendarShouldStartOnMondayConfigurationDidChange:)
+         name:VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
+         object:nil];
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
+     object:nil];
 }
 
 - (NSArray *)dayStepsForSelection {
@@ -247,6 +260,18 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     [self setNeedsLayout];
     if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
         [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:direction];
+    }
+}
+
+
+
+#pragma mark - NSNotificationCenter
+
+- (void)onCalendarShouldStartOnMondayConfigurationDidChange:(NSNotification *)notification {
+    [self setupSelectedDate];
+    [self updateSelectedDateIntervalLabel];
+    if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
+        [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionNone];
     }
 }
 

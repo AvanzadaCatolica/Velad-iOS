@@ -26,6 +26,8 @@ static CGFloat const kArrowButtonPadding = 40;
             return [[UIImage imageNamed:@"LeftArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         case VLDArrowButtonDirectionRight:
             return [[UIImage imageNamed:@"RightArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        case VLDArrowButtonDirectionNone:
+            return nil;
     }
 }
 

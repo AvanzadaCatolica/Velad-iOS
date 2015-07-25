@@ -10,7 +10,8 @@
 
 typedef NS_ENUM(NSUInteger, VLDArrowButtonDirection) {
     VLDArrowButtonDirectionLeft,
-    VLDArrowButtonDirectionRight
+    VLDArrowButtonDirectionRight,
+    VLDArrowButtonDirectionNone
 };
 
 @interface VLDArrowButton : UIButton

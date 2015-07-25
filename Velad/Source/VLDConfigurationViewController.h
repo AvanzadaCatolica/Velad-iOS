@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <XLForm/XLForm.h>
 
+extern NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification;
+
 @interface VLDConfigurationViewController : XLFormViewController
 
 @end

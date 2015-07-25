@@ -284,8 +284,12 @@
     [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    if (direction != VLDArrowButtonDirectionNone) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                      withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - VLDNoteViewControllerDelegate
