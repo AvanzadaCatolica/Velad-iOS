@@ -55,7 +55,7 @@ static NSInteger const kSubviewSeparationSpace = 10;
     [self.contentView addSubview:noteLabel];
     self.noteLabel = noteLabel;
     [self.noteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.noteLabel.superview).with.offset(self.separatorDisplacement);
+        make.leading.equalTo(self.noteLabel.superview).with.offset(self.vld_separatorDisplacement);
         make.width.equalTo(self.noteLabel.superview).with.multipliedBy(0.7);
         make.top.equalTo(self.noteLabel.superview).with.offset(4);
     }];
@@ -76,7 +76,7 @@ static NSInteger const kSubviewSeparationSpace = 10;
     [self.contentView addSubview:dateLabel];
     self.dateLabel = dateLabel;
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.dateLabel.superview).with.offset(self.separatorDisplacement);
+        make.leading.equalTo(self.dateLabel.superview).with.offset(self.vld_separatorDisplacement);
         make.trailing.equalTo(self.stateLabel.mas_leading).with.offset(-kSubviewSeparationSpace);
         make.top.equalTo(self.noteLabel.mas_bottom);
         make.bottom.equalTo(self.dateLabel.superview).with.offset(-3);

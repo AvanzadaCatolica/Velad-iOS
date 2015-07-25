@@ -10,6 +10,6 @@
 
 @interface UITableViewCell (VLDAdditions)
 
-- (CGFloat)separatorDisplacement;
+- (CGFloat)vld_separatorDisplacement;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation UITableViewCell (VLDAdditions)
 
-- (CGFloat)separatorDisplacement {
+- (CGFloat)vld_separatorDisplacement {
     if ([UIScreen mainScreen].scale == 3.0) {
         return 20;
     } else {

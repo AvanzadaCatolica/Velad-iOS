@@ -10,6 +10,7 @@
 #import <Masonry/Masonry.h>
 #import "UIColor+VLDAdditions.h"
 #import "NSDate+VLDAdditions.h"
+#import "NSCalendar+VLDAdditions.h"
 
 @interface VLDDatePickerView ()
 
@@ -51,10 +52,10 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 }
 
 - (void)setupSelectedDate {
-    NSDateComponents *components = [[NSCalendar currentCalendar]
+    NSDateComponents *components = [[NSCalendar vld_preferredCalendar]
                                     components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                                     fromDate:[NSDate date]];
-    self.selectedDate = [[NSCalendar currentCalendar] dateFromComponents:components];
+    self.selectedDate = [[NSCalendar vld_preferredCalendar] dateFromComponents:components];
 }
 
 - (void)setupDateFormatter {
@@ -121,7 +122,7 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 - (void)updateSelectedDateLabel {
     NSString *selectedDateString = [self.dateFormatter stringFromDate:self.selectedDate];
     NSString *todayString = @"";
-    if (![self.selectedDate isToday]) {
+    if (![self.selectedDate vld_isToday]) {
         todayString = @"\nIr al día actual";
     }
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", selectedDateString, todayString]];
@@ -138,7 +139,7 @@ static NSTimeInterval const kDayTimeInterval = 24 * 60 * 60;
 }
 
 - (void)onTapSelectedDateLabel:(UITapGestureRecognizer *)tapGestureRecognizer {
-    if ([self.selectedDate isToday]) {
+    if ([self.selectedDate vld_isToday]) {
         return;
     }
     VLDArrowButtonDirection direction = [self.selectedDate compare:[NSDate date]] == NSOrderedAscending ? VLDArrowButtonDirectionRight : VLDArrowButtonDirectionLeft;

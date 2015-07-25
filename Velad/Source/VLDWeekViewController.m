@@ -140,7 +140,7 @@
         
         [composeViewController setSubject:@"Reporte semanal"];
         [composeViewController setMessageBody:messageBody isHTML:NO];
-        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view snapshotImage])
+        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view vld_snapshotImage])
                                         mimeType:@"image/png"
                                         fileName:@"Reporte.png"];
         [self presentViewController:composeViewController

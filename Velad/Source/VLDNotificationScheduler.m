@@ -11,6 +11,7 @@
 #import "VLDBasicPoint.h"
 #import <Realm/Realm.h>
 #import "VLDAlert.h"
+#import "NSCalendar+VLDAdditions.h"
 
 @interface VLDNotificationScheduler ()
 
@@ -92,7 +93,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
 
 - (BOOL)isToday:(NSString *)day {
     NSDate *today = [NSDate date];
-    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:today];
+    NSDateComponents *todayComponents = [[NSCalendar vld_preferredCalendar] components:NSWeekdayCalendarUnit fromDate:today];
     return todayComponents.weekday == [self weekdayForDay:day];
 }
 
@@ -110,13 +111,13 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
     } else {
         targetDate = [today dateByAddingTimeInterval:kWeekTimeInterval];
     }
-    NSDateComponents *timeComponents = [[NSCalendar currentCalendar] components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:time];
-    NSDateComponents *targetComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:targetDate];
+    NSDateComponents *timeComponents = [[NSCalendar vld_preferredCalendar] components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:time];
+    NSDateComponents *targetComponents = [[NSCalendar vld_preferredCalendar] components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:targetDate];
     [targetComponents setWeekday:[self weekdayForDay:day]];
     [targetComponents setHour:timeComponents.hour];
     [targetComponents setMinute:timeComponents.minute];
     [targetComponents setSecond:0];
-    NSDate *fireDate = [[NSCalendar currentCalendar] dateFromComponents:targetComponents];
+    NSDate *fireDate = [[NSCalendar vld_preferredCalendar] dateFromComponents:targetComponents];
     notification.fireDate = fireDate;
     notification.repeatInterval = NSWeekCalendarUnit;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];

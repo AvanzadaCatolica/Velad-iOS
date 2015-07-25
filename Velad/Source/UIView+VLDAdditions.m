@@ -10,7 +10,7 @@
 
 @implementation UIView (VLDAdditions)
 
-- (UIImage *)snapshotImage {
+- (UIImage *)vld_snapshotImage {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.0f);
     [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();

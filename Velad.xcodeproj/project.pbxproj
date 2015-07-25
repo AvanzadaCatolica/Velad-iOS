@@ -31,6 +31,7 @@
 		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
 		3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F42399E1B642C59009B40B5 /* VLDMigrationController.m */; };
+		3F4239A21B64350A009B40B5 /* NSCalendar+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */; };
 		3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */; };
 		3F517C7F1B357396000A6062 /* VLDReportsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */; };
 		3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */; };
@@ -109,6 +110,8 @@
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
 		3F42399D1B642C59009B40B5 /* VLDMigrationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDMigrationController.h; path = Source/VLDMigrationController.h; sourceTree = "<group>"; };
 		3F42399E1B642C59009B40B5 /* VLDMigrationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDMigrationController.m; path = Source/VLDMigrationController.m; sourceTree = "<group>"; };
+		3F4239A01B64350A009B40B5 /* NSCalendar+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCalendar+VLDAdditions.h"; path = "Source/NSCalendar+VLDAdditions.h"; sourceTree = "<group>"; };
+		3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCalendar+VLDAdditions.m"; path = "Source/NSCalendar+VLDAdditions.m"; sourceTree = "<group>"; };
 		3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Velad-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		3F517C7D1B357396000A6062 /* VLDReportsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsViewModel.h; path = Source/VLDReportsViewModel.h; sourceTree = "<group>"; };
 		3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsViewModel.m; path = Source/VLDReportsViewModel.m; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */,
 				3F256C331B64241200B63C07 /* UITableViewCell+VLDAdditions.h */,
 				3F256C341B64241200B63C07 /* UITableViewCell+VLDAdditions.m */,
+				3F4239A01B64350A009B40B5 /* NSCalendar+VLDAdditions.h */,
+				3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -558,6 +563,7 @@
 				3F331A841B2C84D00055E742 /* VLDDatePickerView.m in Sources */,
 				3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */,
 				3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */,
+				3F4239A21B64350A009B40B5 /* NSCalendar+VLDAdditions.m in Sources */,
 				3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */,
 				3FD02C281B2DB97800B82507 /* UIView+VLDAdditions.m in Sources */,
 				3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */,

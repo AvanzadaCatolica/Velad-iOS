@@ -10,6 +10,7 @@
 
 @interface NSDate (VLDAdditions)
 
-- (BOOL)isToday;
+- (BOOL)vld_isToday;
+- (NSDate *)vld_startOfTheWeek;
 
 @end

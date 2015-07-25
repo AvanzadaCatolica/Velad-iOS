@@ -10,6 +10,6 @@
 
 @interface UIView (VLDAdditions)
 
-- (UIImage *)snapshotImage;
+- (UIImage *)vld_snapshotImage;
 
 @end
