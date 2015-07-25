@@ -28,6 +28,7 @@
 
 static NSString * const kRowDescriptorName = @"VLDRowDescriptorName";
 static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescription";
+static NSString * const kRowDescriptorEnabled = @"VLDRowDescriptorEnabled";
 static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 @implementation VLDBasicPointViewController
@@ -83,6 +84,12 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     [rowDescriptor.cellConfigAtConfigure setObject:@(NSTextAlignmentRight)
                                             forKey:@"textField.textAlignment"];
     [sectionDescriptor addFormRow:rowDescriptor];
+    
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorEnabled
+                                                          rowType:XLFormRowDescriptorTypeBooleanSwitch
+                                                            title:@"Habilitado"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
     if (self.basicPoint) {
         rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorAlert
                                                               rowType:XLFormRowDescriptorTypeButton
@@ -103,6 +110,8 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
         XLFormRowDescriptor *descriptionFormRowDescriptor = [self.form formRowWithTag:kRowDescriptorDescription];
         descriptionFormRowDescriptor.value = basicPoint.descriptionText;
     }
+    XLFormRowDescriptor *enabledFormRowDescriptor = [self.form formRowWithTag:kRowDescriptorEnabled];
+    enabledFormRowDescriptor.value = @(basicPoint.enabled);
 }
 
 - (void)setupNavigationItem {
@@ -122,6 +131,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     } else {
         basicPoint.descriptionText = @"";
     }
+    basicPoint.enabled = [self.form.formValues[kRowDescriptorEnabled] boolValue];
 }
 
 - (void)onTapSaveButton:(id)sender {

@@ -104,6 +104,7 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     if ([[UINavigationBar appearance] respondsToSelector:@selector(setTranslucent:)]) {
         [[UINavigationBar appearance] setTranslucent:NO];
     }
+    [[UISwitch appearance] setOnTintColor:[UIColor vld_mainColor]];
 }
 
 - (void)setupNavigation {

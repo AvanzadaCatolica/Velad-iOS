@@ -184,27 +184,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
-    if (self.tableView.isEditing) {
-        VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:basicPoint];
-        viewController.delegate = self;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [self presentViewController:navigationController
-                           animated:YES
-                         completion:nil];
-        return;
-    }
-    
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm beginWriteTransaction];
-    
-    basicPoint.enabled = !basicPoint.enabled;
-    
-    [realm commitWriteTransaction];
-    
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
-        [self.delegate basicPointsViewControllerDidChangeProperties:self];
-    }
+    VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:basicPoint];
+    viewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
+    return;
 }
 
 #pragma mark - VLDBasicPointViewControllerDelegate
