@@ -26,6 +26,7 @@
 @property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
 @property (nonatomic) VLDEmptyView *emptyView;
 @property (nonatomic) VLDDiaryMode mode;
+@property (nonatomic) VLDNoteTableViewCell *referenceHeightCell;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
@@ -261,6 +262,20 @@
     viewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    VLDNote *note = self.notes[indexPath.row];
+    NSString *reuseIdentifer = NSStringFromClass([VLDNoteTableViewCell class]);
+    if (!self.referenceHeightCell) {
+        self.referenceHeightCell = [[VLDNoteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                               reuseIdentifier:reuseIdentifer];
+    }
+    self.referenceHeightCell.model = note;
+    [self.referenceHeightCell setNeedsLayout];
+    [self.referenceHeightCell layoutIfNeeded];
+    CGSize size = [self.referenceHeightCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height + 1.0f;
 }
 
 #pragma mark - VLDDateIntervalPickerViewDelegate

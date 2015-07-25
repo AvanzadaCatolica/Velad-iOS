@@ -30,5 +30,6 @@ typedef NS_ENUM(NSInteger, VLDNoteState) {
 + (NSArray *)stateSymbols;
 + (VLDNoteState)stateForSymbol:(NSString *)symbol;
 + (NSString *)symbolForState:(VLDNoteState)state;
++ (NSString *)formattedDateForNote:(VLDNote *)note;
 
 @end

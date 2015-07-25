@@ -46,4 +46,14 @@
     return [self stateSymbols][state];
 }
 
++ (NSString *)formattedDateForNote:(VLDNote *)note {
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *dateFormatter;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"dd/MM/yyyy";
+    });
+    return [dateFormatter stringFromDate:note.date];
+}
+
 @end

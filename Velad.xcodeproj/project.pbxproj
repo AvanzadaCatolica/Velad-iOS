@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F256C2F1B63AA7B00B63C07 /* VLDDiaryModePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F256C2E1B63AA7B00B63C07 /* VLDDiaryModePickerView.m */; };
 		3F256C321B63E20200B63C07 /* VLDReportsModePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F256C311B63E20200B63C07 /* VLDReportsModePickerView.m */; };
+		3F256C351B64241200B63C07 /* UITableViewCell+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F256C341B64241200B63C07 /* UITableViewCell+VLDAdditions.m */; };
 		3F331A591B2C67DC0055E742 /* VLDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */; };
 		3F331A621B2C67E70055E742 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A5D1B2C67E70055E742 /* main.m */; };
 		3F331A681B2C68410055E742 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F331A651B2C68410055E742 /* Images.xcassets */; };
@@ -65,6 +66,8 @@
 		3F256C2E1B63AA7B00B63C07 /* VLDDiaryModePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDDiaryModePickerView.m; path = Source/VLDDiaryModePickerView.m; sourceTree = "<group>"; };
 		3F256C301B63E20200B63C07 /* VLDReportsModePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsModePickerView.h; path = Source/VLDReportsModePickerView.h; sourceTree = "<group>"; };
 		3F256C311B63E20200B63C07 /* VLDReportsModePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsModePickerView.m; path = Source/VLDReportsModePickerView.m; sourceTree = "<group>"; };
+		3F256C331B64241200B63C07 /* UITableViewCell+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+VLDAdditions.h"; path = "Source/UITableViewCell+VLDAdditions.h"; sourceTree = "<group>"; };
+		3F256C341B64241200B63C07 /* UITableViewCell+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+VLDAdditions.m"; path = "Source/UITableViewCell+VLDAdditions.m"; sourceTree = "<group>"; };
 		3F331A2A1B2C67020055E742 /* Velad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F331A571B2C67DC0055E742 /* VLDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDAppDelegate.h; path = Source/VLDAppDelegate.h; sourceTree = "<group>"; };
 		3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDAppDelegate.m; path = Source/VLDAppDelegate.m; sourceTree = "<group>"; };
@@ -336,6 +339,8 @@
 				3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */,
 				3F52978A1B35E6F30006A455 /* NSDate+VLDAdditions.h */,
 				3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */,
+				3F256C331B64241200B63C07 /* UITableViewCell+VLDAdditions.h */,
+				3F256C341B64241200B63C07 /* UITableViewCell+VLDAdditions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */,
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 				3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */,
+				3F256C351B64241200B63C07 /* UITableViewCell+VLDAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
