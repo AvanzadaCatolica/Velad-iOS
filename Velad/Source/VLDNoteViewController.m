@@ -100,7 +100,8 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
 }
 
 - (void)bind:(VLDNote *)note {
-    note.text = self.form.formValues[kRowDescriptorText];
+    NSString *text = self.form.formValues[kRowDescriptorText];
+    note.text = [text stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     note.state = [VLDNote stateForSymbol:self.form.formValues[kRowDescriptorState]];
 }
 

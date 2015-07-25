@@ -30,6 +30,7 @@
 		3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */; };
 		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
+		3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F42399E1B642C59009B40B5 /* VLDMigrationController.m */; };
 		3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */; };
 		3F517C7F1B357396000A6062 /* VLDReportsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */; };
 		3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */; };
@@ -106,6 +107,8 @@
 		3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointCellTableViewCell.m; path = Source/VLDBasicPointCellTableViewCell.m; sourceTree = "<group>"; };
 		3F331AA81B2CEAB10055E742 /* VLDBasicPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointViewController.h; path = Source/VLDBasicPointViewController.h; sourceTree = "<group>"; };
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
+		3F42399D1B642C59009B40B5 /* VLDMigrationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDMigrationController.h; path = Source/VLDMigrationController.h; sourceTree = "<group>"; };
+		3F42399E1B642C59009B40B5 /* VLDMigrationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDMigrationController.m; path = Source/VLDMigrationController.m; sourceTree = "<group>"; };
 		3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Velad-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Velad/Pods-Velad-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		3F517C7D1B357396000A6062 /* VLDReportsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsViewModel.h; path = Source/VLDReportsViewModel.h; sourceTree = "<group>"; };
 		3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsViewModel.m; path = Source/VLDReportsViewModel.m; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 			children = (
 				3F331A571B2C67DC0055E742 /* VLDAppDelegate.h */,
 				3F331A581B2C67DC0055E742 /* VLDAppDelegate.m */,
+				3F42399D1B642C59009B40B5 /* VLDMigrationController.h */,
+				3F42399E1B642C59009B40B5 /* VLDMigrationController.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,
+				3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */,
 				3FE4C8121B305A3D0061420E /* VLDSecurityViewController.m in Sources */,
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,
 				3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */,

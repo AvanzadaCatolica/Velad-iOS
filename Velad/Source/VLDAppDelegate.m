@@ -19,15 +19,18 @@
 #import "VLDSecurity.h"
 #import "VLDSecurityPasscodeViewController.h"
 #import <HockeySDK/HockeySDK.h>
+#import "VLDMigrationController.h"
 
 @interface VLDAppDelegate () <VLDProfileViewControllerDelegate, VLDSecurityPasscodeViewControllerDelegate>
 
 @property (nonatomic) VLDSecurity *security;
+@property (nonatomic) VLDMigrationController *migrationController;
 
 - (void)setupSecurity;
 - (void)setupAppearance;
 - (void)setupNavigation;
 - (void)setupHockey;
+- (void)setupMigrationController;
 - (UITabBarController *)mainTabBarController;
 
 @end
@@ -42,10 +45,15 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor vld_mainColor];
+    
+    [self setupMigrationController];
+    [self.migrationController performMigration];
+    
     [self setupHockey];
     [self setupSecurity];
     [self setupAppearance];
     [self setupNavigation];
+    
     [self.window makeKeyAndVisible];
     if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]) {
         [self application:[UIApplication sharedApplication] didReceiveLocalNotification:launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]];
@@ -132,6 +140,10 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [BITHockeyManager sharedHockeyManager].crashManager.crashManagerStatus = BITCrashManagerStatusAutoSend;
+}
+
+- (void)setupMigrationController {
+    self.migrationController = [[VLDMigrationController alloc] init];
 }
 
 #pragma mark - Private methods
