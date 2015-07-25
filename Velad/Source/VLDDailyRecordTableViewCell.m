@@ -25,10 +25,20 @@
 
 #pragma mark - Life cycle
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
 - (void)prepareForReuse {
     self.model = nil;
     self.delegate = nil;
     self.textLabel.text = @"";
+    self.detailTextLabel.text = @"";
     self.accessoryType = UITableViewCellAccessoryNone;
     self.accessoryView = nil;
 }
@@ -38,6 +48,7 @@
 - (void)setModel:(VLDDailyRecord *)model {
     _model = model;
     self.textLabel.text = model.basicPoint.name;
+    self.detailTextLabel.text = model.basicPoint.descriptionText;
     if (model.record) {
         if ([model.record.notes vld_isEmpty]) {
             self.accessoryType = UITableViewCellAccessoryCheckmark;

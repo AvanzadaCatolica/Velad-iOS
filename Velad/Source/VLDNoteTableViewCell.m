@@ -57,7 +57,7 @@ static NSInteger const kSubviewSeparationSpace = 10;
     [self.noteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.noteLabel.superview).with.offset(self.separatorDisplacement);
         make.width.equalTo(self.noteLabel.superview).with.multipliedBy(0.7);
-        make.top.equalTo(self.noteLabel.superview).with.offset(kSubviewSeparationSpace);
+        make.top.equalTo(self.noteLabel.superview).with.offset(4);
     }];
     UILabel *stateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     stateLabel.textAlignment = NSTextAlignmentRight;
@@ -68,19 +68,18 @@ static NSInteger const kSubviewSeparationSpace = 10;
     [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.noteLabel.mas_trailing).with.offset(kSubviewSeparationSpace);
         make.trailing.equalTo(self.stateLabel.superview).with.offset(-kSubviewSeparationSpace);
-        make.top.equalTo(self.stateLabel.superview).with.offset(kSubviewSeparationSpace);
-        make.bottom.equalTo(self.stateLabel.superview).with.offset(-kSubviewSeparationSpace);
+        make.top.equalTo(self.stateLabel.superview);
+        make.bottom.equalTo(self.stateLabel.superview);
     }];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    dateLabel.font = [UIFont systemFontOfSize:14];
-    dateLabel.textColor = [UIColor darkGrayColor];
+    dateLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:dateLabel];
     self.dateLabel = dateLabel;
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.dateLabel.superview).with.offset(self.separatorDisplacement);
         make.trailing.equalTo(self.stateLabel.mas_leading).with.offset(-kSubviewSeparationSpace);
-        make.top.equalTo(self.noteLabel.mas_bottom).with.offset(kSubviewSeparationSpace);
-        make.bottom.equalTo(self.dateLabel.superview).with.offset(-kSubviewSeparationSpace);
+        make.top.equalTo(self.noteLabel.mas_bottom);
+        make.bottom.equalTo(self.dateLabel.superview).with.offset(-3);
     }];
 }
 
