@@ -111,7 +111,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
         descriptionFormRowDescriptor.value = basicPoint.descriptionText;
     }
     XLFormRowDescriptor *enabledFormRowDescriptor = [self.form formRowWithTag:kRowDescriptorEnabled];
-    enabledFormRowDescriptor.value = @(basicPoint.enabled);
+    enabledFormRowDescriptor.value = basicPoint ? @(basicPoint.enabled) : @(YES);
 }
 
 - (void)setupNavigationItem {
