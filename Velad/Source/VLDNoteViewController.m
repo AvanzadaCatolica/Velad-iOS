@@ -26,6 +26,7 @@
 @end
 
 static NSString * const kRowDescriptorText = @"VLDRowDescriptorText";
+static NSString * const kRowDescriptorDate = @"VLDRowDescriptorDate";
 static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
 
 @implementation VLDNoteViewController
@@ -68,6 +69,13 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
     rowDescriptor.required = YES;
     [sectionDescriptor addFormRow:rowDescriptor];
     
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorDate
+                                                          rowType:XLFormRowDescriptorTypeDate
+                                                            title:@"Fecha"];
+    rowDescriptor.value = self.note ? self.note.date : [NSDate date];
+    rowDescriptor.required = YES;
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorState
                                                           rowType:XLFormRowDescriptorTypeSelectorPush
                                                             title:@"Tipo"];
@@ -102,6 +110,7 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
 - (void)bind:(VLDNote *)note {
     NSString *text = self.form.formValues[kRowDescriptorText];
     note.text = [text stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    note.date = self.form.formValues[kRowDescriptorDate];
     note.state = [VLDNote stateForSymbol:self.form.formValues[kRowDescriptorState]];
 }
 
