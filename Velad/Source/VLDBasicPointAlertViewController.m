@@ -81,7 +81,7 @@ static NSString * const kRowDescriptorDelete = @"VLDRowDescriptorDelete";
     rowDescriptor.selectorOptions = [dateFormatter weekdaySymbols];
     rowDescriptor.valueTransformer = [VLDWeekdayArrayValueTrasformer class];
     rowDescriptor.selectorTitle = @"Días";
-    rowDescriptor.value = self.basicPoint.alert ? [self.basicPoint.alert weekDaySymbols] : @[];
+    rowDescriptor.value = self.basicPoint.alert ? [self.basicPoint.alert weekDaySymbols] : [self.basicPoint weekDaySymbols];
     [rowDescriptor addValidator:[[VLDWeekdayArrayValidator alloc] init]];
     [sectionDescriptor addFormRow:rowDescriptor];
     
