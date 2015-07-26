@@ -16,11 +16,12 @@
 #import "NSString+VLDAdditions.h"
 #import "VLDRecordNotesPresenter.h"
 #import "VLDBasicPointsViewController.h"
+#import "NSDate+VLDAdditions.h"
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDBasicPointsViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic) RLMResults *basicPoints;
+@property (nonatomic) NSArray *basicPoints;
 @property (nonatomic, weak) VLDDatePickerView *datePickerView;
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
@@ -65,7 +66,17 @@
 #pragma mark - Setup methods
 
 - (void)setupDataSource {
-    self.basicPoints = [VLDBasicPoint basicPoints];
+    RLMResults *results = [VLDBasicPoint basicPoints];
+    NSMutableArray *basicPoints = [NSMutableArray array];
+    
+    NSString *weekdaySymbol = [self.datePickerView.selectedDate vld_weekdaySymbol];
+    for (VLDBasicPoint *basicPoint in results) {
+        if ([basicPoint.weekDaySymbols indexOfObject:weekdaySymbol] != NSNotFound) {
+            [basicPoints addObject:basicPoint];
+        }
+    }
+    
+    self.basicPoints = [basicPoints copy];
 }
 
 - (void)setupLayout {
@@ -237,6 +248,7 @@
 #pragma mark - VLDDatePickerViewDelegate
 
 - (void)datePickerView:(VLDDatePickerView *)datePickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
+    [self setupDataSource];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
 }
@@ -244,6 +256,7 @@
 #pragma mark - VLDBasicPointsViewControllerDelegate
 
 - (void)basicPointsViewControllerDidChangeProperties:(VLDBasicPointsViewController *)viewController {
+    [self setupDataSource];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationFade];
 }

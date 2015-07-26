@@ -32,4 +32,11 @@
     return periodStart;
 }
 
+- (NSString *)vld_weekdaySymbol {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
+    [dateFormatter setDateFormat: @"EEEE"];
+    return [dateFormatter stringFromDate:self];
+}
+
 @end
