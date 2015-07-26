@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Realm/RLMObject.h>
+#import "VLDWeekday.h"
 
 @class RLMResults;
 @class VLDAlert;
@@ -20,7 +21,9 @@
 @property (getter=isEnabled) BOOL enabled;
 @property NSString *descriptionText;
 @property VLDAlert *alert;
+@property RLMArray<VLDWeekDay> *weekDays;
 
 + (RLMResults *)basicPoints;
+- (NSArray *)weekDaySymbols;
 
 @end

@@ -13,6 +13,8 @@
 #import "VLDErrorPresenter.h"
 #import "VLDBasicPointAlertViewController.h"
 #import "VLDAlert.h"
+#import "VLDWeekdayArrayValueTrasformer.h"
+#import "VLDWeekdayArrayValidator.h"
 
 @interface VLDBasicPointViewController () <VLDErrorPresenterDataSource>
 
@@ -29,6 +31,7 @@
 
 static NSString * const kRowDescriptorName = @"VLDRowDescriptorName";
 static NSString * const kRowDescriptorDescription = @"VLDRowDescriptorDescription";
+static NSString * const kRowDescriptorFrequency = @"VLDRowDescriptorFrequency";
 static NSString * const kRowDescriptorEnabled = @"VLDRowDescriptorEnabled";
 static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
@@ -86,6 +89,18 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
                                             forKey:@"textField.textAlignment"];
     [sectionDescriptor addFormRow:rowDescriptor];
     
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorFrequency
+                                                          rowType:XLFormRowDescriptorTypeMultipleSelector
+                                                            title:@"Frecuencia"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
+    rowDescriptor.selectorOptions = [dateFormatter weekdaySymbols];
+    rowDescriptor.valueTransformer = [VLDWeekdayArrayValueTrasformer class];
+    rowDescriptor.selectorTitle = @"Días";
+    rowDescriptor.value = self.basicPoint ? [self.basicPoint weekDaySymbols] : @[];
+    [rowDescriptor addValidator:[[VLDWeekdayArrayValidator alloc] init]];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorEnabled
                                                           rowType:XLFormRowDescriptorTypeBooleanSwitch
                                                             title:@"Habilitado"];
@@ -127,11 +142,21 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 - (void)bind:(VLDBasicPoint *)basicPoint {
     basicPoint.name = self.form.formValues[kRowDescriptorName];
+    
     if (self.form.formValues[@"VLDRowDescriptorDescription"] != [NSNull null]) {
         basicPoint.descriptionText = self.form.formValues[kRowDescriptorDescription];
     } else {
         basicPoint.descriptionText = @"";
     }
+    
+    [basicPoint.weekDays removeAllObjects];
+    NSArray *days = self.form.formValues[kRowDescriptorFrequency];
+    for (NSString *day in days) {
+        VLDWeekDay *weekDay = [[VLDWeekDay alloc] init];
+        weekDay.name = day;
+        [basicPoint.weekDays addObject:weekDay];
+    }
+    
     basicPoint.enabled = [self.form.formValues[kRowDescriptorEnabled] boolValue];
 }
 
@@ -150,7 +175,6 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     else {
         VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
         basicPoint.UUID = [[NSUUID UUID] UUIDString];
-        basicPoint.enabled = YES;
         basicPoint.order = [VLDBasicPoint allObjects].count;
         [self bind:basicPoint];
         [realm addObject:basicPoint];

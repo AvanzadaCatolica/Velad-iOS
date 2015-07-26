@@ -13,54 +13,8 @@
 #import "VLDAlert.h"
 #import "UIColor+VLDAdditions.h"
 #import "VLDDeleteAlertPresenter.h"
-
-@interface VLDWeekdayArrayValueTrasformer : NSValueTransformer
-@end
-
-@implementation VLDWeekdayArrayValueTrasformer
-
-+ (Class)transformedValueClass {
-    return [NSString class];
-}
-
-+ (BOOL)allowsReverseTransformation {
-    return NO;
-}
-
-- (id)transformedValue:(id)value {
-    if (!value) {
-        return nil;
-    }
-    if ([value isKindOfClass:[NSArray class]]) {
-        NSArray *array = (NSArray *)value;
-        if (array.count == 1) {
-            return [[array firstObject] capitalizedString];
-        } else {
-            return [NSString stringWithFormat:@"%ld días", (long)array.count];
-        }
-    }
-    if ([value isKindOfClass:[NSString class]]) {
-        return [value capitalizedString];
-    }
-    return nil;
-}
-
-@end
-
-@interface VLDWeekdayArrayValidator : NSObject <XLFormValidatorProtocol>
-
-@end
-
-@implementation VLDWeekdayArrayValidator
-
-- (XLFormValidationStatus *)isValid:(XLFormRowDescriptor *)row {
-    if ([row.value count] >= 1) {
-        return [XLFormValidationStatus formValidationStatusWithMsg:@"" status:YES rowDescriptor:row];
-    }
-    return [XLFormValidationStatus formValidationStatusWithMsg:@"Seleccione días de la semana" status:NO rowDescriptor:row];
-}
-
-@end
+#import "VLDWeekdayArrayValueTrasformer.h"
+#import "VLDWeekdayArrayValidator.h"
 
 @interface VLDBasicPointAlertViewController () <VLDErrorPresenterDataSource, VLDDeleteAlertPresenterDataSource, VLDDeleteAlertPresenterDelegate>
 

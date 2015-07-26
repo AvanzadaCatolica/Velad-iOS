@@ -54,6 +54,8 @@
 		3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8141B305B0E0061420E /* VLDSecurity.m */; };
 		3FE4C8181B3060B60061420E /* VLDSetActiveSecurityPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */; };
 		3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */; };
+		3FF1C3F01B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
+		3FF1C3F31B64FE010002A6E5 /* VLDWeekdayArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3F21B64FE010002A6E5 /* VLDWeekdayArrayValidator.m */; };
 		3FF4D7241B2DF1C3008538DA /* VLDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7231B2DF1C3008538DA /* VLDNote.m */; };
 		3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */; };
 		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
@@ -155,6 +157,10 @@
 		3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSetActiveSecurityPresenter.m; path = Source/VLDSetActiveSecurityPresenter.m; sourceTree = "<group>"; };
 		3FE4C8191B3064D10061420E /* VLDSecurityPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSecurityPasscodeViewController.h; path = Source/VLDSecurityPasscodeViewController.h; sourceTree = "<group>"; };
 		3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSecurityPasscodeViewController.m; path = Source/VLDSecurityPasscodeViewController.m; sourceTree = "<group>"; };
+		3FF1C3EE1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekdayArrayValueTrasformer.h; path = Source/VLDWeekdayArrayValueTrasformer.h; sourceTree = "<group>"; };
+		3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekdayArrayValueTrasformer.m; path = Source/VLDWeekdayArrayValueTrasformer.m; sourceTree = "<group>"; };
+		3FF1C3F11B64FE010002A6E5 /* VLDWeekdayArrayValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDWeekdayArrayValidator.h; path = Source/VLDWeekdayArrayValidator.h; sourceTree = "<group>"; };
+		3FF1C3F21B64FE010002A6E5 /* VLDWeekdayArrayValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDWeekdayArrayValidator.m; path = Source/VLDWeekdayArrayValidator.m; sourceTree = "<group>"; };
 		3FF4D7221B2DF1C3008538DA /* VLDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNote.h; path = Source/VLDNote.h; sourceTree = "<group>"; };
 		3FF4D7231B2DF1C3008538DA /* VLDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNote.m; path = Source/VLDNote.m; sourceTree = "<group>"; };
 		3FF4D7251B2DF3B2008538DA /* VLDNoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteTableViewCell.h; path = Source/VLDNoteTableViewCell.h; sourceTree = "<group>"; };
@@ -418,6 +424,10 @@
 			children = (
 				3FD02C0E1B2D719C00B82507 /* VLDErrorPresenter.h */,
 				3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */,
+				3FF1C3EE1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.h */,
+				3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */,
+				3FF1C3F11B64FE010002A6E5 /* VLDWeekdayArrayValidator.h */,
+				3FF1C3F21B64FE010002A6E5 /* VLDWeekdayArrayValidator.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -543,6 +553,7 @@
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
 				3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */,
 				3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */,
+				3FF1C3F01B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m in Sources */,
 				3F256C321B63E20200B63C07 /* VLDReportsModePickerView.m in Sources */,
 				3F331A951B2CBBB00055E742 /* VLDDiaryViewController.m in Sources */,
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
@@ -571,6 +582,7 @@
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,
+				3FF1C3F31B64FE010002A6E5 /* VLDWeekdayArrayValidator.m in Sources */,
 				3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */,
 				3FE4C8121B305A3D0061420E /* VLDSecurityViewController.m in Sources */,
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,

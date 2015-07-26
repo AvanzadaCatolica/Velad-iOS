@@ -31,6 +31,14 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     return results;
 }
 
+- (NSArray *)weekDaySymbols {
+    NSMutableArray *symbols = [NSMutableArray array];
+    for (VLDWeekDay *weekDay in self.weekDays) {
+        [symbols addObject:weekDay.name];
+    }
+    return [symbols copy];
+}
+
 #pragma mark - Private methods
 
 + (BOOL)isDatabaseSeedNeeded {

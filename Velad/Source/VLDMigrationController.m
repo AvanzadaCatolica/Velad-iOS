@@ -11,7 +11,7 @@
 #import "VLDNote.h"
 #import "VLDBasicPoint.h"
 
-static NSUInteger const kSchemaVersion = 1;
+static NSUInteger const kSchemaVersion = 2;
 
 @implementation VLDMigrationController
 
@@ -22,7 +22,19 @@ static NSUInteger const kSchemaVersion = 1;
                 if (oldSchemaVersion < 1) {
                     [migration enumerateObjects:VLDNote.className
                                           block:^(RLMObject *oldObject, RLMObject *newObject) {
-                                              newObject[@"text"] = [newObject[@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                                              newObject[@"text"] = [oldObject[@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                                          }];
+                }
+                if (oldSchemaVersion < 2) {
+                    [migration enumerateObjects:VLDBasicPoint.className
+                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
+                                              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                              dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
+                                              for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+                                                  VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+                                                  weekday.name = weekdaySymbol;
+                                                  [newObject[@"weekDays"] addObject:weekday];
+                                              }
                                           }];
                 }
             }];
