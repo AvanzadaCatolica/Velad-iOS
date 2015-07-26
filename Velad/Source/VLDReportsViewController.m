@@ -21,6 +21,7 @@
 #import "UIView+VLDAdditions.h"
 #import "VLDErrorPresenter.h"
 #import "VLDReportsModePickerView.h"
+#import "NSDate+VLDAdditions.h"
 
 @interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate, VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDReportsModePickerViewDelegate>
 
@@ -279,8 +280,25 @@
 
 - (NSUInteger)maximumPossibleScoreForReportsResultView:(VLDReportsResultView *)reportsResultView {
     RLMResults *basicPoints = [VLDBasicPoint basicPoints];
-    NSArray *steps = [self.dateIntervalPickerView dayStepsForSelection];
-    return basicPoints.count * steps.count;
+    if (reportsResultView.mode == VLDReportsModeWeekly) {
+        NSUInteger weeklyfrequencyCount = 0;
+        for (VLDBasicPoint *basicPoint in basicPoints) {
+            weeklyfrequencyCount += basicPoint.weekDays.count;
+        }
+        return weeklyfrequencyCount;
+    } else {
+        NSArray *steps = [self.dateIntervalPickerView dayStepsForSelection];
+        NSUInteger monthyfrequencyCount = 0;
+        for (NSDictionary *step in steps) {
+            NSDate *date = step[VLDDateIntervalPickerViewStepEndKey];
+            for (VLDBasicPoint *basicPoint in basicPoints) {
+                if ([basicPoint.weekDaySymbols indexOfObject:[date vld_weekdaySymbol]] != NSNotFound) {
+                    monthyfrequencyCount++;
+                }
+            }
+        }
+        return monthyfrequencyCount;
+    }
 }
 
 - (NSUInteger)scoreForReportsResultView:(VLDReportsResultView *)reportsResultView {
