@@ -20,13 +20,18 @@
 @property (nonatomic) RLMResults *basicPoints;
 @property (nonatomic) UIBarButtonItem *backButtonItem;
 @property (nonatomic) VLDNotificationScheduler *notificationScheduler;
+@property (nonatomic) NSMutableArray *orders;
 
 - (void)setupNavigationItem;
 - (void)setupDataSource;
 - (void)setupTableView;
+- (void)setupOrders;
 - (void)setupLayout;
+- (void)saveOrders;
 - (void)updateRightBarButtonItems;
 - (void)onTapAddButton:(id)sender;
+- (void)onTapDoneButton:(id)sender;
+- (void)onTapDeleteButton:(id)sender;
 
 @end
 
@@ -45,6 +50,7 @@
     [super viewDidLoad];
     [self setupNavigationItem];
     [self setupDataSource];
+    [self setupOrders];
     [self setupTableView];
     [self setupLayout];
 }
@@ -64,6 +70,13 @@
 
 - (void)setupDataSource {
     self.basicPoints = [[VLDBasicPoint allObjects] sortedResultsUsingProperty:@"order" ascending:YES];
+}
+
+- (void)setupOrders {
+    self.orders = [[NSMutableArray alloc] init];
+    for (VLDBasicPoint *basicPoint in self.basicPoints) {
+        [self.orders addObject:@(basicPoint.order)];
+    }
 }
 
 - (void)setupTableView {
@@ -109,6 +122,21 @@
     }
 }
 
+- (void)saveOrders {
+    NSMutableArray *previousOrder = [NSMutableArray array];
+    for (VLDBasicPoint *basicPoint in self.basicPoints) {
+        [previousOrder addObject:basicPoint];
+    }
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [self.orders enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+        VLDBasicPoint *basicPoint = [previousOrder objectAtIndex:index];
+        basicPoint.order = [self.orders indexOfObject:@(basicPoint.order)];
+    }];
+    [realm commitWriteTransaction];
+    [self setupOrders];
+}
+
 - (void)onTapAddButton:(id)sender {
     VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:nil];
     viewController.delegate = self;
@@ -120,6 +148,12 @@
 
 - (void)onTapDoneButton:(id)sender {
     [self setEditing:NO animated:YES];
+    
+    [self saveOrders];
+    
+    if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
+        [self.delegate basicPointsViewControllerDidChangeProperties:self];
+    }
 }
 
 - (void)onTapDeleteButton:(id)sender {
@@ -145,6 +179,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self saveOrders];
+        
         VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
         [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
         
@@ -156,6 +192,7 @@
         [realm commitWriteTransaction];
         
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.orders removeObjectAtIndex:indexPath.row];
         if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
             [self.delegate basicPointsViewControllerDidChangeProperties:self];
         }
@@ -163,21 +200,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    VLDBasicPoint *sourceBasicPoint = self.basicPoints[sourceIndexPath.row];
-    VLDBasicPoint *destinationBasicPoint = self.basicPoints[destinationIndexPath.row];
-    
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm beginWriteTransaction];
-    
-    NSInteger sourceOrder = sourceBasicPoint.order;
-    sourceBasicPoint.order = destinationBasicPoint.order;
-    destinationBasicPoint.order = sourceOrder;
-    
-    [realm commitWriteTransaction];
-    
-    if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
-        [self.delegate basicPointsViewControllerDidChangeProperties:self];
-    }
+    NSNumber *moved = [self.orders objectAtIndex:sourceIndexPath.row];
+    [self.orders removeObjectAtIndex:sourceIndexPath.row];
+    [self.orders insertObject:moved atIndex:destinationIndexPath.row];
 }
 
 #pragma mark - UITableViewDelegate
