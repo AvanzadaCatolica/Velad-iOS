@@ -11,5 +11,6 @@
 @interface VLDMigrationController : NSObject
 
 - (void)performMigration;
+- (void)orderingFix;
 
 @end

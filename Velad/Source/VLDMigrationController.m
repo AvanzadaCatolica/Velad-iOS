@@ -9,6 +9,7 @@
 #import "VLDMigrationController.h"
 #import <Realm/Realm.h>
 #import "VLDNote.h"
+#import "VLDBasicPoint.h"
 
 static NSUInteger const kSchemaVersion = 1;
 
@@ -25,6 +26,18 @@ static NSUInteger const kSchemaVersion = 1;
                                           }];
                 }
             }];
+}
+
+- (void)orderingFix {
+    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
+    int order = 0;
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (VLDBasicPoint *basicPoint in basicPoints) {
+        basicPoint.order = order;
+        order++;
+    }
+    [realm commitWriteTransaction];
 }
 
 @end
