@@ -32,7 +32,7 @@
 - (void)setViewModel:(VLDWeekViewModel *)viewModel {
     _viewModel = viewModel;
     self.textLabel.text = viewModel.basicPoint.name;
-    self.detailTextLabel.text = [NSString stringWithFormat:@"%ld/7", (long)viewModel.weekCount];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)viewModel.weekCount, (long)viewModel.basicPoint.weekDays.count];
 }
 
 @end
