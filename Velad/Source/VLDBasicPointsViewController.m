@@ -182,7 +182,9 @@
         [self saveOrders];
         
         VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
-        [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
+        if (basicPoint.isEnabled) {
+            [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
+        }
         
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
@@ -228,6 +230,9 @@
     } else {
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                       withRowAnimation:UITableViewRowAnimationFade];
+    }
+    if (!basicPoint.isEnabled) {
+        [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
     }
     if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
         [self.delegate basicPointsViewControllerDidChangeProperties:self];

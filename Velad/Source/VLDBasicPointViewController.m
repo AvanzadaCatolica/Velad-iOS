@@ -12,6 +12,7 @@
 #import <Realm/Realm.h>
 #import "VLDErrorPresenter.h"
 #import "VLDBasicPointAlertViewController.h"
+#import "VLDAlert.h"
 
 @interface VLDBasicPointViewController () <VLDErrorPresenterDataSource>
 
@@ -90,16 +91,6 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
                                                             title:@"Habilitado"];
     [sectionDescriptor addFormRow:rowDescriptor];
     
-    if (self.basicPoint) {
-        rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorAlert
-                                                              rowType:XLFormRowDescriptorTypeButton
-                                                                title:@"Alertas"];
-        rowDescriptor.action.formSelector = @selector(onTapAlertButton:);
-        [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
-        [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
-        [sectionDescriptor addFormRow:rowDescriptor];
-    }
-    
     self.form = formDescriptor;
 }
 
@@ -122,6 +113,16 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(onTapCancelButton:)];
+}
+
+- (XLFormRowDescriptor *)alertsRowDescriptor {
+    XLFormRowDescriptor *rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorAlert
+                                                          rowType:XLFormRowDescriptorTypeButton
+                                                            title:@"Alertas"];
+    rowDescriptor.action.formSelector = @selector(onTapAlertButton:);
+    [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
+    [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+    return rowDescriptor;
 }
 
 - (void)bind:(VLDBasicPoint *)basicPoint {
@@ -154,6 +155,9 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
         [self bind:basicPoint];
         [realm addObject:basicPoint];
     }
+    if (!self.basicPoint.isEnabled && self.basicPoint.alert) {
+        [realm deleteObject:self.basicPoint.alert];
+    }
     
     [realm commitWriteTransaction];
     
@@ -182,6 +186,20 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 
 - (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
     return self;
+}
+
+#pragma mark - XLFormDescriptorDelegate
+
+- (void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)formRow oldValue:(id)oldValue newValue:(id)newValue {
+    [super formRowDescriptorValueHasChanged:formRow oldValue:oldValue newValue:newValue];
+    if ([formRow.tag isEqualToString:kRowDescriptorEnabled]) {
+        BOOL enabled = [newValue boolValue];
+        if (enabled) {
+            [self.form addFormRow:[self alertsRowDescriptor] afterRowTag:kRowDescriptorEnabled];
+        } else {
+            [self.form removeFormRowWithTag:kRowDescriptorAlert];
+        }
+    }
 }
 
 @end

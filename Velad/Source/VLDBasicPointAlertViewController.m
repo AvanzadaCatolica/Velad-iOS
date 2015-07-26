@@ -203,9 +203,11 @@ static NSString * const kRowDescriptorDelete = @"VLDRowDescriptorDelete";
                                                               userInfo:@{@"NSLocalizedDescription" : @"Las notificaciones están deshabilitadas"}]];
         }
     }
-    [self.notificationScheduler scheduleNotificationForBasicPoint:self.basicPoint
-                                                             time:self.form.formValues[kRowDescriptorTime]
-                                                             days:self.form.formValues[kRowDescriptorInterval]];
+    if (self.basicPoint.isEnabled) {
+        [self.notificationScheduler scheduleNotificationForBasicPoint:self.basicPoint
+                                                                 time:self.form.formValues[kRowDescriptorTime]
+                                                                 days:self.form.formValues[kRowDescriptorInterval]];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
