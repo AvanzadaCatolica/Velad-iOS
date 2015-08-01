@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, VLDReportsResultViewMode) {
 @interface VLDReportsResultView : UIView
 
 @property (nonatomic, readonly) VLDReportsResultViewMode mode;
+@property (nonatomic, readonly) NSString *content;
 
 - (instancetype)initWithDataSource:(id<VLDReportsResultViewDataSource>)dataSource
                               mode:(VLDReportsResultViewMode)mode;

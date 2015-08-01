@@ -213,13 +213,17 @@
         composeViewController.mailComposeDelegate = self;
         
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
-        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@", profile.name, profile.circle, profile.group];
+        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
         
         VLDReportsMode mode = self.reportsModePickerView.mode;
         
+        messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"%@ %@\n\n", mode == VLDReportsModeWeekly ? @"Semana" : @"Mes", self.dateIntervalPickerView.title]];
+        
+        messageBody = [messageBody stringByAppendingFormat:@"Mi puntaje %@: %@", mode == VLDReportsModeWeekly ? @"esta semana" : @"este mes", self.reportsResultView.content];
+        
         [composeViewController setSubject:[NSString stringWithFormat:@"Reporte %@", mode == VLDReportsModeWeekly ? @"semanal" : @"mensual"]];
         [composeViewController setMessageBody:messageBody isHTML:NO];
-        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view vld_snapshotImage])
+        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.lineGraphView vld_snapshotImage])
                                         mimeType:@"image/png"
                                         fileName:@"Reporte.png"];
         [self presentViewController:composeViewController

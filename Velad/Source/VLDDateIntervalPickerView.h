@@ -23,6 +23,7 @@ extern NSString * const VLDDateIntervalPickerViewStepEndKey;
 
 @property (nonatomic, readonly) NSDate *selectedStartDate;
 @property (nonatomic, readonly) NSDate *selectedEndDate;
+@property (nonatomic, readonly) NSString *title;
 @property (nonatomic, weak) id<VLDDateIntervalPickerViewDelegate> delegate;
 @property (nonatomic, readonly) VLDDateIntervalPickerViewType type;
 

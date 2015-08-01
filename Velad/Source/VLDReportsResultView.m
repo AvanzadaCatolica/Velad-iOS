@@ -57,6 +57,10 @@
     self.emojiLabel.text = [self emojiForScore:score maximum:maximumPossibleScore];
 }
 
+- (NSString *)content {
+    return [NSString stringWithFormat:@"%@ %@", self.resultsLabel.text, self.emojiLabel.text];
+}
+
 #pragma mark - Setup methods
 
 - (void)setupView {

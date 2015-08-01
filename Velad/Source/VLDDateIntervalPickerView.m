@@ -99,6 +99,10 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     [self updateSelectedDateIntervalLabel];
 }
 
+- (NSString *)title {
+    return self.selectedDateIntervalLabel.text;
+}
+
 #pragma mark - Setup methods
 
 - (void)setupView {

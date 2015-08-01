@@ -154,13 +154,17 @@
         composeViewController.mailComposeDelegate = self;
         
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
-        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@", profile.name, profile.circle, profile.group];
+        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"Semana %@\n\n", self.dateIntervalPickerView.title]];
+        
+        for (NSArray *section in self.viewModel.sections) {
+            for (VLDWeekViewModel *viewModel in section) {
+                messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"%@: %ld/%ld\n", viewModel.basicPoint.name, (long)viewModel.weekCount, (long)viewModel.basicPoint.weekDays.count]];
+            }
+        }
         
         [composeViewController setSubject:@"Reporte semanal"];
         [composeViewController setMessageBody:messageBody isHTML:NO];
-        [composeViewController addAttachmentData:UIImagePNGRepresentation([self.view vld_snapshotImage])
-                                        mimeType:@"image/png"
-                                        fileName:@"Reporte.png"];
         [self presentViewController:composeViewController
                            animated:YES
                          completion:^{
