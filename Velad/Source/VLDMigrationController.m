@@ -44,6 +44,7 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
         NSLog(@"%@", [error localizedDescription]);
         return;
     }
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsDatabaseSeeded];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kHasPerformedCurrentHardMigration];
 }
 
