@@ -47,6 +47,7 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     self.window.tintColor = [UIColor vld_mainColor];
     
     [self setupMigrationController];
+    [self.migrationController performHardMigration];
     [self.migrationController performMigration];
     [self.migrationController seedDatabaseIfNeeded];
     
@@ -78,10 +79,6 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
             }
         }
     }
-}
-
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    //TODO: Make this work with the security model.
 }
 
 #pragma mark - Setup methods

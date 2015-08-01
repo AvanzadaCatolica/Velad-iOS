@@ -23,6 +23,7 @@
 
 static NSUInteger const kSchemaVersion = 1;
 static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
+static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v1";
 
 @implementation VLDMigrationController
 
@@ -31,6 +32,19 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
                 forRealmAtPath:[RLMRealm defaultRealmPath]
             withMigrationBlock:^(RLMMigration *migration, uint64_t oldSchemaVersion) {
             }];
+}
+
+- (void)performHardMigration {
+    if ([self hasPerformedCurrentHardMigration]) {
+        return;
+    }
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:[RLMRealm defaultRealmPath] error:&error];
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kHasPerformedCurrentHardMigration];
 }
 
 - (void)deleteAllData {
@@ -54,7 +68,6 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
 }
 
 - (void)seedDatabase {
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
     
@@ -143,6 +156,11 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
 - (BOOL)isDatabaseSeeded {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:kIsDatabaseSeeded];
+}
+
+- (BOOL)hasPerformedCurrentHardMigration {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:kHasPerformedCurrentHardMigration];
 }
 
 @end

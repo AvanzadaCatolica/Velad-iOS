@@ -11,6 +11,7 @@
 @interface VLDMigrationController : NSObject
 
 - (void)performMigration;
+- (void)performHardMigration;
 - (void)deleteAllData;
 - (void)seedDatabaseIfNeeded;
 - (void)seedDatabase;
