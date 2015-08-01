@@ -1,3 +1,19 @@
+__0.1.0__
+
+__Información importante:__
+
+Esta versión es incompatible con la versión anterior, pues presenta cambios en la base de datos y hemos decidido no hacer una migración para agilizar el desarrollo de la aplicación. Todos los datos serán borrados.
+
+Cambios:
+
+* Se cambió la forma de generar reportes por correo electrónico, ahora son textuales con excepción del gráfico generado en la vista de "Informes".
+* Se implementaron grupos para los puntos básicos.
+
+Problemas conocidos:
+
+* La aplicación aún no tiene ícono ni pantalla de lanzamiento.
+* Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
+
 __0.0.2__
 
 Cambios:  
@@ -33,4 +49,3 @@ Problemas conocidos:
 * La aplicación aún no tiene ícono ni pantalla de lanzamiento.
 * Al ordenar “puntos básicos” de forma muy rápida mientras se editan, a veces la información no es guardada correctamente.
 * Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
-
