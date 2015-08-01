@@ -13,10 +13,15 @@
 #import "VLDSecurityViewController.h"
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 #import "NSCalendar+VLDAdditions.h"
+#import "VLDRestoreDataPresenter.h"
+#include <Realm/Realm.h>
+#import "VLDMigrationController.h"
+#import "UIColor+VLDAdditions.h"
 
-@interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate>
+@interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDRestoreDataPresenterDataSource, VLDRestoreDataPresenterDelegate>
 
 @property (nonatomic) VLDErrorPresenter *errorPresenter;
+@property (nonatomic) VLDRestoreDataPresenter *restoreDataPresenter;
 
 - (void)setupFormDescriptor;
 - (void)onTapProfileButton:(id)button;
@@ -30,6 +35,7 @@
 static NSString * const kRowDescriptorProfile = @"VLDRowDescriptorProfile";
 static NSString * const kRowDescriptorSecurity = @"VLDRowDescriptorSecurity";
 static NSString * const kRowDescriptorCalendarPreference = @"VLDRowDescriptorCalendarPreference";
+static NSString * const kRowDescriptorRestoreData = @"VLDRowDescriptorRestoreData";
 static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
 static NSString * const kRowDescriptorLicenses = @"VLDRowDescriptorLicenses";
 static NSString * const kRowDescriptorVersion = @"VLDRowDescriptorVersion";
@@ -91,6 +97,16 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
     sectionDescriptor = [XLFormSectionDescriptor formSection];
     [formDescriptor addFormSection:sectionDescriptor];
     
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorRestoreData
+                                                          rowType:XLFormRowDescriptorTypeButton
+                                                            title:@"Restaurar información"];
+    rowDescriptor.action.formSelector = @selector(onTapRestoreData:);
+    [rowDescriptor.cellConfig setObject:[UIColor vld_mainColor] forKey:@"textLabel.textColor"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
+    sectionDescriptor = [XLFormSectionDescriptor formSection];
+    [formDescriptor addFormSection:sectionDescriptor];
+    
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorOpinion
                                                           rowType:XLFormRowDescriptorTypeButton
                                                             title:@"Danos tu opinión"];
@@ -132,6 +148,14 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
     return _errorPresenter;
 }
 
+- (VLDRestoreDataPresenter *)restoreDataPresenter {
+    if (_restoreDataPresenter == nil) {
+        _restoreDataPresenter = [[VLDRestoreDataPresenter alloc] initWithDataSource:self];
+        _restoreDataPresenter.delegate = self;
+    }
+    return _restoreDataPresenter;
+}
+
 - (void)onTapProfileButton:(id)button {
     VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -141,6 +165,10 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
 - (void)onTapSecurityButton:(id)button {
     VLDSecurityViewController *viewController = [[VLDSecurityViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)onTapRestoreData:(id)button {
+    [self.restoreDataPresenter present];
 }
 
 - (void)onTapOpinionButton:(id)button {
@@ -191,6 +219,26 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
         [[NSUserDefaults standardUserDefaults] setBool:calendarShouldStartOnMonday forKey:VLDCalendarShouldStartOnMondayKey];
         [[NSNotificationCenter defaultCenter] postNotificationName:VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification object:nil];
     }
+}
+
+#pragma mark - VLDRestoreDataPresenterDataSource
+
+- (UIViewController *)viewControllerForRestoreDataPresenter:(VLDRestoreDataPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - VLDRestoreDataPresenterDelegate
+
+- (void)restoreDataPresenterDidAccept:(VLDRestoreDataPresenter *)presenter {
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    
+    VLDMigrationController *migrationController = [[VLDMigrationController alloc] init];
+    [migrationController deleteAllData];
+    [migrationController seedDatabase];
+}
+
+- (void)restoreDataPresenterDidCancel:(VLDRestoreDataPresenter *)presenter {
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
 @end

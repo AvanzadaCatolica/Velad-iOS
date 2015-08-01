@@ -40,6 +40,7 @@
 		3F58FE1E1B6D54600031A1F9 /* VLDGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */; };
 		3F58FE211B6D60BB0031A1F9 /* VLDSectionsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */; };
 		3F58FE241B6D662D0031A1F9 /* VLDGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */; };
+		3F58FE271B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE261B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m */; };
 		3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738411B35B72E007501F1 /* VLDReportsResultView.m */; };
 		3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738441B35DA8D007501F1 /* VLDEmptyView.m */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
@@ -134,6 +135,8 @@
 		3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSectionsViewModel.m; path = Source/VLDSectionsViewModel.m; sourceTree = "<group>"; };
 		3F58FE221B6D662D0031A1F9 /* VLDGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroupViewController.h; path = Source/VLDGroupViewController.h; sourceTree = "<group>"; };
 		3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupViewController.m; path = Source/VLDGroupViewController.m; sourceTree = "<group>"; };
+		3F58FE251B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDRestoreDataPresenter.h; path = Source/VLDRestoreDataPresenter.h; sourceTree = "<group>"; };
+		3F58FE261B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDRestoreDataPresenter.m; path = Source/VLDRestoreDataPresenter.m; sourceTree = "<group>"; };
 		3F8738401B35B72E007501F1 /* VLDReportsResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsResultView.h; path = Source/VLDReportsResultView.h; sourceTree = "<group>"; };
 		3F8738411B35B72E007501F1 /* VLDReportsResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsResultView.m; path = Source/VLDReportsResultView.m; sourceTree = "<group>"; };
 		3F8738431B35DA8D007501F1 /* VLDEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEmptyView.h; path = Source/VLDEmptyView.h; sourceTree = "<group>"; };
@@ -438,6 +441,8 @@
 				3FE4C8171B3060B60061420E /* VLDSetActiveSecurityPresenter.m */,
 				3FE4C8191B3064D10061420E /* VLDSecurityPasscodeViewController.h */,
 				3FE4C81A1B3064D10061420E /* VLDSecurityPasscodeViewController.m */,
+				3F58FE251B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.h */,
+				3F58FE261B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				3FD02C281B2DB97800B82507 /* UIView+VLDAdditions.m in Sources */,
 				3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */,
 				3FD02C1C1B2D940400B82507 /* VLDWeekday.m in Sources */,
+				3F58FE271B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m in Sources */,
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,

@@ -11,6 +11,9 @@
 #import "VLDNote.h"
 #import "VLDBasicPoint.h"
 #import "VLDGroup.h"
+#import "VLDWeekday.h"
+#import "VLDAlert.h"
+#import "VLDRecord.h"
 
 @interface VLDMigrationController ()
 
@@ -30,10 +33,27 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
             }];
 }
 
-- (void)seedDatabase {
+- (void)deleteAllData {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    [realm deleteObjects:[VLDWeekDay allObjects]];
+    [realm deleteObjects:[VLDAlert allObjects]];
+    [realm deleteObjects:[VLDBasicPoint allObjects]];
+    [realm deleteObjects:[VLDGroup allObjects]];
+    [realm deleteObjects:[VLDRecord allObjects]];
+    
+    [realm commitWriteTransaction];
+}
+
+- (void)seedDatabaseIfNeeded {
     if ([self isDatabaseSeeded]) {
         return;
     }
+    [self seedDatabase];
+}
+
+- (void)seedDatabase {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
