@@ -14,12 +14,11 @@
 
 @interface VLDMigrationController ()
 
-+ (BOOL)isDatabaseSeedNeeded;
-+ (void)seedDatabase;
+- (BOOL)isDatabaseSeeded;
 
 @end
 
-static NSUInteger const kSchemaVersion = 4;
+static NSUInteger const kSchemaVersion = 1;
 static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
 
 @implementation VLDMigrationController
@@ -28,50 +27,14 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [RLMRealm setSchemaVersion:kSchemaVersion
                 forRealmAtPath:[RLMRealm defaultRealmPath]
             withMigrationBlock:^(RLMMigration *migration, uint64_t oldSchemaVersion) {
-                if (oldSchemaVersion < 1) {
-                    [migration enumerateObjects:VLDNote.className
-                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
-                                              newObject[@"text"] = [oldObject[@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-                                          }];
-                }
-                if (oldSchemaVersion < 2) {
-                    [migration enumerateObjects:VLDBasicPoint.className
-                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
-                                              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                                              dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
-                                              for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-                                                  VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-                                                  weekday.name = weekdaySymbol;
-                                                  [newObject[@"weekDays"] addObject:weekday];
-                                              }
-                                          }];
-                }
-                if (oldSchemaVersion < 3) {
-                    VLDGroup *group = [[VLDGroup alloc] init];
-                    group.name = @"General";
-                    group.order = 0;
-                    [migration enumerateObjects:VLDBasicPoint.className
-                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
-                                              [group.basicPoints addObject:newObject];
-                                          }];
-                }
-                if (oldSchemaVersion < 4) {
-                    [migration enumerateObjects:VLDBasicPoint.className
-                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
-                                              
-                                          }];
-                }
             }];
 }
 
-#pragma mark - Private methods
-
-+ (BOOL)isDatabaseSeedNeeded {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults boolForKey:kIsDatabaseSeeded];
-}
-
-+ (void)seedDatabase {
+- (void)seedDatabase {
+    if ([self isDatabaseSeeded]) {
+        return;
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
     
@@ -153,6 +116,13 @@ static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
     [realm commitWriteTransaction];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsDatabaseSeeded];
+}
+
+#pragma mark - Private methods
+
+- (BOOL)isDatabaseSeeded {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:kIsDatabaseSeeded];
 }
 
 @end

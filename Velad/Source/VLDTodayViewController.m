@@ -18,12 +18,12 @@
 #import "NSDate+VLDAdditions.h"
 #import "VLDGroupsViewController.h"
 #import "VLDGroup.h"
-#import "VLDTodayViewModel.h"
+#import "VLDSectionsViewModel.h"
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic) VLDTodayViewModel *viewModel;
+@property (nonatomic) VLDSectionsViewModel *viewModel;
 @property (nonatomic, weak) VLDDatePickerView *datePickerView;
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
@@ -62,8 +62,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self setupDataSource];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -77,7 +76,7 @@
     NSMutableArray *sections = [NSMutableArray array];
     NSString *weekdaySymbol = [self.datePickerView.selectedDate vld_weekdaySymbol];
     
-    RLMResults *groups = [VLDGroup allObjects];
+    RLMResults *groups = [VLDGroup sortedGroups];
     for (VLDGroup *group in groups) {
         for (VLDBasicPoint *basicPoint in group.basicPoints) {
             if ([basicPoint.weekDaySymbols indexOfObject:weekdaySymbol] != NSNotFound && basicPoint.enabled) {
@@ -90,13 +89,12 @@
                     [section addObject:basicPoint];
                     [sections addObject:section];
                 }
-                
             }
         }
     }
     
-    VLDTodayViewModel *viewModel = [[VLDTodayViewModel alloc] initWithSectionTitles:sectionTitles
-                                                                            sections:sections];
+    VLDSectionsViewModel *viewModel = [[VLDSectionsViewModel alloc] initWithSectionTitles:[sectionTitles copy]
+                                                                            sections:[sections copy]];
     self.viewModel = viewModel;
 }
 
@@ -274,8 +272,7 @@
 
 - (void)datePickerView:(VLDDatePickerView *)datePickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+    [self.tableView reloadData];
 }
 
 @end

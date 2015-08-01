@@ -10,4 +10,8 @@
 
 @implementation VLDGroup
 
++ (RLMResults *)sortedGroups {
+    return [[VLDGroup allObjects] sortedResultsUsingProperty:@"order" ascending:YES];
+}
+
 @end

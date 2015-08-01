@@ -142,9 +142,6 @@ static NSString * const kRowDescriptorState = @"VLDRowDescriptorState";
 }
 
 - (void)onTapCancelButton:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(noteViewControllerDidCancelEditing:)]) {
-        [self.delegate noteViewControllerDidCancelEditing:self];
-    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -77,6 +77,14 @@
     [self updateEmptyStatus];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
 - (UIRectEdge)edgesForExtendedLayout {
     return [super edgesForExtendedLayout] ^ UIRectEdgeBottom;
 }
@@ -284,28 +292,15 @@
     [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
-    if (direction != VLDArrowButtonDirectionNone) {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                      withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
-    } else {
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - VLDNoteViewControllerDelegate
 
 - (void)noteViewControllerDidChangeProperties:(VLDNoteViewController *)viewController {
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
-}
-
-- (void)noteViewControllerDidCancelEditing:(VLDNoteViewController *)viewController {
-    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-    if (indexPath) {
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
 }
 
 #pragma mark - VLDUpdateNotesPresenterDataSource
@@ -323,8 +318,7 @@
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 #pragma mark - VLDDiaryModePickerViewDelegate
@@ -333,8 +327,7 @@
     [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 @end

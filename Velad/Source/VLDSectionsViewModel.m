@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDTodayViewModel.h"
+#import "VLDSectionsViewModel.h"
 
-@implementation VLDTodayViewModel
+@implementation VLDSectionsViewModel
 
 - (instancetype)initWithSectionTitles:(NSArray *)sectionTitles
                              sections:(NSArray *)sections {

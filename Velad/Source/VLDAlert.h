@@ -16,5 +16,6 @@
 @property RLMArray<VLDWeekDay> *weekDays;
 
 - (NSArray *)weekDaySymbols;
+- (void)deleteAlertOnRealm:(RLMRealm *)realm;
 
 @end

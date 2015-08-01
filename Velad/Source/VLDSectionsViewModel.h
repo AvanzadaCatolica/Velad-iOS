@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VLDTodayViewModel : NSObject
+@interface VLDSectionsViewModel : NSObject
 
 @property (nonatomic, readonly) NSArray *sectionTitles;
 @property (nonatomic, readonly) NSArray *sections;
 
 - (instancetype)initWithSectionTitles:(NSArray *)sectionTitles
-                             sections:(NSArray *)sections;
+                             sections:(NSArray *)sections NS_DESIGNATED_INITIALIZER;
 
 @end

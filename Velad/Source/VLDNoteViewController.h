@@ -22,6 +22,5 @@
 @protocol VLDNoteViewControllerDelegate <NSObject>
 
 - (void)noteViewControllerDidChangeProperties:(VLDNoteViewController *)viewController;
-- (void)noteViewControllerDidCancelEditing:(VLDNoteViewController *)viewController;
 
 @end

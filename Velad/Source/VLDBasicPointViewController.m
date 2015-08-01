@@ -26,6 +26,8 @@
 - (void)setupNavigationItem;
 - (void)onTapSaveButton:(id)sender;
 - (void)onTapCancelButton:(id)sender;
+- (XLFormRowDescriptor *)alertsRowDescriptor;
+- (void)bind:(VLDBasicPoint *)basicPoint;
 
 @end
 
@@ -169,24 +171,27 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     
+    VLDBasicPoint *basicPoint;
+    
     if (self.basicPoint) {
         [self bind:self.basicPoint];
+        basicPoint = self.basicPoint;
     }
     else {
-        //TODO: Set group
-        VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
+        basicPoint = [[VLDBasicPoint alloc] init];
         basicPoint.UUID = [[NSUUID UUID] UUIDString];
         [self bind:basicPoint];
         [realm addObject:basicPoint];
     }
-    if (!self.basicPoint.isEnabled && self.basicPoint.alert) {
-        [realm deleteObject:self.basicPoint.alert];
+    if (!basicPoint.isEnabled && basicPoint.alert) {
+        [basicPoint.alert deleteAlertOnRealm:realm];
+        [realm deleteObject:basicPoint.alert];
     }
     
     [realm commitWriteTransaction];
     
     if ([self.delegate respondsToSelector:@selector(basicPointViewController:didFinishEditingBasicPoint:)]) {
-        [self.delegate basicPointViewController:self didFinishEditingBasicPoint:self.basicPoint];
+        [self.delegate basicPointViewController:self didFinishEditingBasicPoint:basicPoint];
     }
     [self dismissViewControllerAnimated:YES
                              completion:nil];
@@ -195,9 +200,6 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 - (void)onTapCancelButton:(id)sender {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
-    if ([self.delegate respondsToSelector:@selector(basicPointViewControllerDidCancelEditing:)]) {
-        [self.delegate basicPointViewControllerDidCancelEditing:self];
-    }
 }
 
 - (void)onTapAlertButton:(id)sender {

@@ -18,11 +18,13 @@
 #import <MessageUI/MessageUI.h>
 #import "VLDErrorPresenter.h"
 #import "VLDProfile.h"
+#import "VLDGroup.h"
+#import "VLDSectionsViewModel.h"
 
 @interface VLDWeekViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, MFMailComposeViewControllerDelegate, VLDErrorPresenterDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic) NSArray *viewModels;
+@property (nonatomic) VLDSectionsViewModel *viewModel;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
 @property (nonatomic) VLDErrorPresenter *errorPresenter;
 
@@ -60,8 +62,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self setupDataSource];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -80,17 +81,34 @@
 }
 
 - (void)setupDataSource {
-    NSMutableArray *viewModels = [NSMutableArray array];
-    RLMResults *basicPoints = [VLDBasicPoint objectsWhere:@"enabled == YES"];
-    for (VLDBasicPoint *basicPoint in basicPoints) {
-        RLMResults *countResults = [VLDRecord recordsForBasicPoint:basicPoint
-                                                  betweenStartDate:self.dateIntervalPickerView.selectedStartDate
-                                                           endDate:self.dateIntervalPickerView.selectedEndDate];
-        VLDWeekViewModel *viewModel = [[VLDWeekViewModel alloc] initWithBasicPoint:basicPoint
-                                                                         weekCount:countResults.count];
-        [viewModels addObject:viewModel];
+    NSMutableArray *sectionTitles = [NSMutableArray array];
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    RLMResults *groups = [VLDGroup sortedGroups];
+    for (VLDGroup *group in groups) {
+        for (VLDBasicPoint *basicPoint in group.basicPoints) {
+            if (basicPoint.isEnabled) {
+                RLMResults *countResults = [VLDRecord recordsForBasicPoint:basicPoint
+                                                          betweenStartDate:self.dateIntervalPickerView.selectedStartDate
+                                                                   endDate:self.dateIntervalPickerView.selectedEndDate];
+                VLDWeekViewModel *viewModel = [[VLDWeekViewModel alloc] initWithBasicPoint:basicPoint
+                                                                                 weekCount:countResults.count];
+                NSUInteger sectionIndex = [sectionTitles indexOfObject:group.name];
+                if (sectionIndex != NSNotFound) {
+                    [sections[sectionIndex] addObject:viewModel];
+                } else {
+                    [sectionTitles addObject:group.name];
+                    NSMutableArray *section = [NSMutableArray array];
+                    [section addObject:viewModel];
+                    [sections addObject:section];
+                }
+            }
+        }
     }
-    self.viewModels = [viewModels copy];
+    
+    VLDSectionsViewModel *viewModel = [[VLDSectionsViewModel alloc] initWithSectionTitles:[sectionTitles copy]
+                                                                                 sections:[sections copy]];
+    self.viewModel = viewModel;
 }
 
 - (void)setupLayout {
@@ -158,16 +176,21 @@
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Puntos Básicos";
+    return self.viewModel.sectionTitles[section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModels.count;
+    NSArray *viewModelSection = self.viewModel.sections[section];
+    return viewModelSection.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.viewModel.sections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VLDWeekTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDWeekTableViewCell class])];
-    cell.viewModel = self.viewModels[indexPath.row];
+    cell.viewModel = self.viewModel.sections[indexPath.section][indexPath.row];
     return cell;
 }
 
@@ -181,12 +204,7 @@
 
 - (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
-    if (direction != VLDArrowButtonDirectionNone) {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                      withRowAnimation:direction == VLDArrowButtonDirectionLeft ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
-    } else {
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate

@@ -38,7 +38,8 @@
 		3F58FE181B6D4FA70031A1F9 /* VLDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE171B6D4FA70031A1F9 /* VLDGroup.m */; };
 		3F58FE1B1B6D52E70031A1F9 /* VLDGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */; };
 		3F58FE1E1B6D54600031A1F9 /* VLDGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */; };
-		3F58FE211B6D60BB0031A1F9 /* VLDTodayViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */; };
+		3F58FE211B6D60BB0031A1F9 /* VLDSectionsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */; };
+		3F58FE241B6D662D0031A1F9 /* VLDGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */; };
 		3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738411B35B72E007501F1 /* VLDReportsResultView.m */; };
 		3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738441B35DA8D007501F1 /* VLDEmptyView.m */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
@@ -129,8 +130,10 @@
 		3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupsViewController.m; path = Source/VLDGroupsViewController.m; sourceTree = "<group>"; };
 		3F58FE1C1B6D54600031A1F9 /* VLDGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroupTableViewCell.h; path = Source/VLDGroupTableViewCell.h; sourceTree = "<group>"; };
 		3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupTableViewCell.m; path = Source/VLDGroupTableViewCell.m; sourceTree = "<group>"; };
-		3F58FE1F1B6D60BB0031A1F9 /* VLDTodayViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDTodayViewModel.h; path = Source/VLDTodayViewModel.h; sourceTree = "<group>"; };
-		3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDTodayViewModel.m; path = Source/VLDTodayViewModel.m; sourceTree = "<group>"; };
+		3F58FE1F1B6D60BB0031A1F9 /* VLDSectionsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDSectionsViewModel.h; path = Source/VLDSectionsViewModel.h; sourceTree = "<group>"; };
+		3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDSectionsViewModel.m; path = Source/VLDSectionsViewModel.m; sourceTree = "<group>"; };
+		3F58FE221B6D662D0031A1F9 /* VLDGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroupViewController.h; path = Source/VLDGroupViewController.h; sourceTree = "<group>"; };
+		3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupViewController.m; path = Source/VLDGroupViewController.m; sourceTree = "<group>"; };
 		3F8738401B35B72E007501F1 /* VLDReportsResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsResultView.h; path = Source/VLDReportsResultView.h; sourceTree = "<group>"; };
 		3F8738411B35B72E007501F1 /* VLDReportsResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsResultView.m; path = Source/VLDReportsResultView.m; sourceTree = "<group>"; };
 		3F8738431B35DA8D007501F1 /* VLDEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEmptyView.h; path = Source/VLDEmptyView.h; sourceTree = "<group>"; };
@@ -317,8 +320,6 @@
 			children = (
 				3F331A771B2C7C4C0055E742 /* VLDTodayViewController.h */,
 				3F331A781B2C7C4C0055E742 /* VLDTodayViewController.m */,
-				3F58FE1F1B6D60BB0031A1F9 /* VLDTodayViewModel.h */,
-				3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */,
 				3F331A7E1B2C81030055E742 /* VLDDailyRecordTableViewCell.h */,
 				3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */,
 				3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */,
@@ -327,6 +328,8 @@
 				3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */,
 				3F58FE1C1B6D54600031A1F9 /* VLDGroupTableViewCell.h */,
 				3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */,
+				3F58FE221B6D662D0031A1F9 /* VLDGroupViewController.h */,
+				3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */,
 				3F331A9F1B2CC8EB0055E742 /* VLDBasicPointsViewController.h */,
 				3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */,
 				3F331AA21B2CCCE70055E742 /* VLDBasicPointTableViewCell.h */,
@@ -448,6 +451,8 @@
 				3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */,
 				3FF1C3F11B64FE010002A6E5 /* VLDWeekdayArrayValidator.h */,
 				3FF1C3F21B64FE010002A6E5 /* VLDWeekdayArrayValidator.m */,
+				3F58FE1F1B6D60BB0031A1F9 /* VLDSectionsViewModel.h */,
+				3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -580,7 +585,7 @@
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F256C2F1B63AA7B00B63C07 /* VLDDiaryModePickerView.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
-				3F58FE211B6D60BB0031A1F9 /* VLDTodayViewModel.m in Sources */,
+				3F58FE211B6D60BB0031A1F9 /* VLDSectionsViewModel.m in Sources */,
 				3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */,
 				3F58FE1E1B6D54600031A1F9 /* VLDGroupTableViewCell.m in Sources */,
 				3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */,
@@ -598,6 +603,7 @@
 				3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */,
 				3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */,
 				3F4239A21B64350A009B40B5 /* NSCalendar+VLDAdditions.m in Sources */,
+				3F58FE241B6D662D0031A1F9 /* VLDGroupViewController.m in Sources */,
 				3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */,
 				3FD02C281B2DB97800B82507 /* UIView+VLDAdditions.m in Sources */,
 				3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */,

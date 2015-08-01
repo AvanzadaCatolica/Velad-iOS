@@ -9,6 +9,7 @@
 #import "VLDBasicPoint.h"
 #import <Realm/Realm.h>
 #import "VLDGroup.h"
+#import "VLDAlert.h"
 
 @interface VLDBasicPoint ()
 
@@ -24,6 +25,11 @@
         [symbols addObject:weekDay.name];
     }
     return [symbols copy];
+}
+
+- (void)deleteBasicPointInRealm:(RLMRealm *)realm {
+    [realm deleteObjects:self.weekDays];
+    [self.alert deleteAlertOnRealm:realm];
 }
 
 @end

@@ -12,6 +12,9 @@
 #import "VLDGroupTableViewCell.h"
 #import <Masonry/Masonry.h>
 #import "VLDBasicPointsViewController.h"
+#import "VLDGroupViewController.h"
+#import "VLDWeekday.h"
+#import "VLDAlert.h"
 
 @interface VLDGroupsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,6 +27,7 @@
 - (void)setupTableView;
 - (void)setupLayout;
 - (void)setupOrders;
+- (void)updateRightBarButtonItems;
 - (void)saveOrders;
 
 @end
@@ -48,14 +52,31 @@
     [self setupOrders];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    [self updateRightBarButtonItems];
+}
+
 #pragma mark - Setup methods
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Grupos";
+    [self updateRightBarButtonItems];
 }
 
 - (void)setupDataSource {
-    self.groups = [[VLDGroup allObjects] sortedResultsUsingProperty:@"order" ascending:YES];
+    self.groups = [VLDGroup sortedGroups];
 }
 
 - (void)setupTableView {
@@ -81,6 +102,26 @@
 
 #pragma mark - Private methods
 
+- (void)updateRightBarButtonItems {
+    if (self.isEditing) {
+        UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                        target:self
+                                                                                        action:@selector(onTapDoneButton:)];
+        [self.navigationItem setRightBarButtonItems:@[doneButtonItem] animated:YES];
+    } else {
+        UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Add"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapAddButton:)];
+        UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Delete"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onTapDeleteButton:)];
+        [self.navigationItem setRightBarButtonItems:@[addBarButtonItem, deleteButtonItem] animated:YES];
+    }
+}
+
+
 - (void)saveOrders {
     NSMutableArray *previousOrder = [NSMutableArray array];
     for (VLDGroup *group in self.groups) {
@@ -94,6 +135,24 @@
     }];
     [realm commitWriteTransaction];
     [self setupOrders];
+}
+
+- (void)onTapAddButton:(id)sender {
+    VLDGroupViewController *viewController = [[VLDGroupViewController alloc] initWithGroup:nil];
+    viewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)onTapDoneButton:(id)sender {
+    [self setEditing:NO animated:YES];
+    [self saveOrders];
+}
+
+- (void)onTapDeleteButton:(id)sender {
+    [self setEditing:YES animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -122,6 +181,10 @@
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
         
+        for (VLDBasicPoint *basicPoint in group.basicPoints) {
+            [basicPoint deleteBasicPointInRealm:realm];
+        }
+        [realm deleteObjects:group.basicPoints];
         [realm deleteObject:group];
         
         [realm commitWriteTransaction];
@@ -144,6 +207,13 @@
     VLDBasicPointsViewController *viewController = [[VLDBasicPointsViewController alloc] init];
     viewController.group = group;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - VLDGroupViewControllerDelegate
+
+- (void)groupViewController:(VLDGroupViewController *)viewController
+      didFinishEditingGroup:(VLDGroup *)basicPoint {
+    [self setupOrders];
 }
 
 @end

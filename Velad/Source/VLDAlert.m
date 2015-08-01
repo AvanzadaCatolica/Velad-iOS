@@ -18,4 +18,8 @@
     return [symbols copy];
 }
 
+- (void)deleteAlertOnRealm:(RLMRealm *)realm {
+    [realm deleteObjects:self.weekDays];
+}
+
 @end

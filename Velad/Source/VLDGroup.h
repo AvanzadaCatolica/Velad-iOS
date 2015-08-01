@@ -15,4 +15,6 @@
 @property RLMArray<VLDBasicPoint> *basicPoints;
 @property NSInteger order;
 
++ (RLMResults *)sortedGroups;
+
 @end

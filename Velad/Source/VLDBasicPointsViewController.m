@@ -14,6 +14,7 @@
 #import "VLDBasicPointViewController.h"
 #import "VLDNotificationScheduler.h"
 #import "VLDGroup.h"
+#import "VLDAlert.h"
 
 @interface VLDBasicPointsViewController () <UITableViewDataSource, UITableViewDelegate, VLDBasicPointViewControllerDelegate>
 
@@ -47,6 +48,16 @@
     [self setupNavigationItem];
     [self setupTableView];
     [self setupLayout];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -148,6 +159,7 @@
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
         
+        [basicPoint deleteBasicPointInRealm:realm];
         [realm deleteObject:basicPoint];
         
         [realm commitWriteTransaction];
@@ -177,30 +189,22 @@
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
-    return;
 }
 
 #pragma mark - VLDBasicPointViewControllerDelegate
 
 - (void)basicPointViewController:(VLDBasicPointViewController *)viewController
       didFinishEditingBasicPoint:(VLDBasicPoint *)basicPoint {
-    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-    if (indexPath) {
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                      withRowAnimation:UITableViewRowAnimationFade];
-    }
     if (!basicPoint.isEnabled) {
         [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
     }
-}
-
-- (void)basicPointViewControllerDidCancelEditing:(VLDBasicPointViewController *)viewController {
-    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-    if (indexPath) {
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    [self.group.basicPoints addObject:basicPoint];
+    
+    [realm commitWriteTransaction];
 }
 
 @end

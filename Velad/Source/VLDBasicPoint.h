@@ -23,6 +23,7 @@
 @property RLMArray<VLDWeekDay> *weekDays;
 
 - (NSArray *)weekDaySymbols;
+- (void)deleteBasicPointInRealm:(RLMRealm *)realm;
 
 @end
 
