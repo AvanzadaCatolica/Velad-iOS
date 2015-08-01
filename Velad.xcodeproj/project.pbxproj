@@ -28,13 +28,17 @@
 		3F331A9B1B2CBBD60055E742 /* VLDConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A9A1B2CBBD60055E742 /* VLDConfigurationViewController.m */; };
 		3F331A9E1B2CC3530055E742 /* UIColor+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */; };
 		3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */; };
-		3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */; };
+		3F331AA41B2CCCE70055E742 /* VLDBasicPointTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA31B2CCCE70055E742 /* VLDBasicPointTableViewCell.m */; };
 		3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */; };
 		3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F42399E1B642C59009B40B5 /* VLDMigrationController.m */; };
 		3F4239A21B64350A009B40B5 /* NSCalendar+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */; };
 		3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F4710181B30AB7500DE674F /* Pods-Velad-acknowledgements.plist */; };
 		3F517C7F1B357396000A6062 /* VLDReportsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */; };
 		3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */; };
+		3F58FE181B6D4FA70031A1F9 /* VLDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE171B6D4FA70031A1F9 /* VLDGroup.m */; };
+		3F58FE1B1B6D52E70031A1F9 /* VLDGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */; };
+		3F58FE1E1B6D54600031A1F9 /* VLDGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */; };
+		3F58FE211B6D60BB0031A1F9 /* VLDTodayViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */; };
 		3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738411B35B72E007501F1 /* VLDReportsResultView.m */; };
 		3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738441B35DA8D007501F1 /* VLDEmptyView.m */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
@@ -106,8 +110,8 @@
 		3F331A9D1B2CC3530055E742 /* UIColor+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+VLDAdditions.m"; path = "Source/UIColor+VLDAdditions.m"; sourceTree = "<group>"; };
 		3F331A9F1B2CC8EB0055E742 /* VLDBasicPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointsViewController.h; path = Source/VLDBasicPointsViewController.h; sourceTree = "<group>"; };
 		3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointsViewController.m; path = Source/VLDBasicPointsViewController.m; sourceTree = "<group>"; };
-		3F331AA21B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointCellTableViewCell.h; path = Source/VLDBasicPointCellTableViewCell.h; sourceTree = "<group>"; };
-		3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointCellTableViewCell.m; path = Source/VLDBasicPointCellTableViewCell.m; sourceTree = "<group>"; };
+		3F331AA21B2CCCE70055E742 /* VLDBasicPointTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointTableViewCell.h; path = Source/VLDBasicPointTableViewCell.h; sourceTree = "<group>"; };
+		3F331AA31B2CCCE70055E742 /* VLDBasicPointTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointTableViewCell.m; path = Source/VLDBasicPointTableViewCell.m; sourceTree = "<group>"; };
 		3F331AA81B2CEAB10055E742 /* VLDBasicPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDBasicPointViewController.h; path = Source/VLDBasicPointViewController.h; sourceTree = "<group>"; };
 		3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDBasicPointViewController.m; path = Source/VLDBasicPointViewController.m; sourceTree = "<group>"; };
 		3F42399D1B642C59009B40B5 /* VLDMigrationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDMigrationController.h; path = Source/VLDMigrationController.h; sourceTree = "<group>"; };
@@ -119,6 +123,14 @@
 		3F517C7E1B357396000A6062 /* VLDReportsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsViewModel.m; path = Source/VLDReportsViewModel.m; sourceTree = "<group>"; };
 		3F52978A1B35E6F30006A455 /* NSDate+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+VLDAdditions.h"; path = "Source/NSDate+VLDAdditions.h"; sourceTree = "<group>"; };
 		3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+VLDAdditions.m"; path = "Source/NSDate+VLDAdditions.m"; sourceTree = "<group>"; };
+		3F58FE161B6D4FA70031A1F9 /* VLDGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroup.h; path = Source/VLDGroup.h; sourceTree = "<group>"; };
+		3F58FE171B6D4FA70031A1F9 /* VLDGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroup.m; path = Source/VLDGroup.m; sourceTree = "<group>"; };
+		3F58FE191B6D52E70031A1F9 /* VLDGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroupsViewController.h; path = Source/VLDGroupsViewController.h; sourceTree = "<group>"; };
+		3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupsViewController.m; path = Source/VLDGroupsViewController.m; sourceTree = "<group>"; };
+		3F58FE1C1B6D54600031A1F9 /* VLDGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDGroupTableViewCell.h; path = Source/VLDGroupTableViewCell.h; sourceTree = "<group>"; };
+		3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDGroupTableViewCell.m; path = Source/VLDGroupTableViewCell.m; sourceTree = "<group>"; };
+		3F58FE1F1B6D60BB0031A1F9 /* VLDTodayViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDTodayViewModel.h; path = Source/VLDTodayViewModel.h; sourceTree = "<group>"; };
+		3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDTodayViewModel.m; path = Source/VLDTodayViewModel.m; sourceTree = "<group>"; };
 		3F8738401B35B72E007501F1 /* VLDReportsResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsResultView.h; path = Source/VLDReportsResultView.h; sourceTree = "<group>"; };
 		3F8738411B35B72E007501F1 /* VLDReportsResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsResultView.m; path = Source/VLDReportsResultView.m; sourceTree = "<group>"; };
 		3F8738431B35DA8D007501F1 /* VLDEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEmptyView.h; path = Source/VLDEmptyView.h; sourceTree = "<group>"; };
@@ -282,6 +294,8 @@
 			children = (
 				3F331A731B2C75FF0055E742 /* VLDBasicPoint.h */,
 				3F331A741B2C75FF0055E742 /* VLDBasicPoint.m */,
+				3F58FE161B6D4FA70031A1F9 /* VLDGroup.h */,
+				3F58FE171B6D4FA70031A1F9 /* VLDGroup.m */,
 				3F331A7B1B2C7EE10055E742 /* VLDRecord.h */,
 				3F331A7C1B2C7EE10055E742 /* VLDRecord.m */,
 				3FD02C171B2D8FE000B82507 /* VLDAlert.h */,
@@ -303,14 +317,20 @@
 			children = (
 				3F331A771B2C7C4C0055E742 /* VLDTodayViewController.h */,
 				3F331A781B2C7C4C0055E742 /* VLDTodayViewController.m */,
+				3F58FE1F1B6D60BB0031A1F9 /* VLDTodayViewModel.h */,
+				3F58FE201B6D60BB0031A1F9 /* VLDTodayViewModel.m */,
 				3F331A7E1B2C81030055E742 /* VLDDailyRecordTableViewCell.h */,
 				3F331A7F1B2C81030055E742 /* VLDDailyRecordTableViewCell.m */,
 				3F331A891B2C971C0055E742 /* VLDRecordNotesPresenter.h */,
 				3F331A8A1B2C971C0055E742 /* VLDRecordNotesPresenter.m */,
+				3F58FE191B6D52E70031A1F9 /* VLDGroupsViewController.h */,
+				3F58FE1A1B6D52E70031A1F9 /* VLDGroupsViewController.m */,
+				3F58FE1C1B6D54600031A1F9 /* VLDGroupTableViewCell.h */,
+				3F58FE1D1B6D54600031A1F9 /* VLDGroupTableViewCell.m */,
 				3F331A9F1B2CC8EB0055E742 /* VLDBasicPointsViewController.h */,
 				3F331AA01B2CC8EB0055E742 /* VLDBasicPointsViewController.m */,
-				3F331AA21B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.h */,
-				3F331AA31B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m */,
+				3F331AA21B2CCCE70055E742 /* VLDBasicPointTableViewCell.h */,
+				3F331AA31B2CCCE70055E742 /* VLDBasicPointTableViewCell.m */,
 				3F331AA81B2CEAB10055E742 /* VLDBasicPointViewController.h */,
 				3F331AA91B2CEAB10055E742 /* VLDBasicPointViewController.m */,
 				3FD02C111B2D7C0A00B82507 /* VLDBasicPointAlertViewController.h */,
@@ -546,10 +566,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FD02C191B2D8FE000B82507 /* VLDAlert.m in Sources */,
-				3F331AA41B2CCCE70055E742 /* VLDBasicPointCellTableViewCell.m in Sources */,
+				3F331AA41B2CCCE70055E742 /* VLDBasicPointTableViewCell.m in Sources */,
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */,
 				3FF4D72D1B2E096E008538DA /* VLDUpdateNotesPresenter.m in Sources */,
+				3F58FE1B1B6D52E70031A1F9 /* VLDGroupsViewController.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
 				3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */,
 				3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */,
@@ -559,7 +580,9 @@
 				3F331A881B2C925E0055E742 /* NSString+VLDAdditions.m in Sources */,
 				3F256C2F1B63AA7B00B63C07 /* VLDDiaryModePickerView.m in Sources */,
 				3F331A7D1B2C7EE10055E742 /* VLDRecord.m in Sources */,
+				3F58FE211B6D60BB0031A1F9 /* VLDTodayViewModel.m in Sources */,
 				3F52978C1B35E6F30006A455 /* NSDate+VLDAdditions.m in Sources */,
+				3F58FE1E1B6D54600031A1F9 /* VLDGroupTableViewCell.m in Sources */,
 				3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */,
 				3F331A981B2CBBC40055E742 /* VLDReportsViewController.m in Sources */,
 				3FE4C8091B301BDF0061420E /* VLDProfileViewController.m in Sources */,
@@ -583,6 +606,7 @@
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
 				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,
 				3FF1C3F31B64FE010002A6E5 /* VLDWeekdayArrayValidator.m in Sources */,
+				3F58FE181B6D4FA70031A1F9 /* VLDGroup.m in Sources */,
 				3F42399F1B642C59009B40B5 /* VLDMigrationController.m in Sources */,
 				3FE4C8121B305A3D0061420E /* VLDSecurityViewController.m in Sources */,
 				3F331AA11B2CC8EB0055E742 /* VLDBasicPointsViewController.m in Sources */,

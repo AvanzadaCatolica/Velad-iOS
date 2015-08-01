@@ -48,8 +48,6 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     
     [self setupMigrationController];
     [self.migrationController performMigration];
-    //TODO: Remove this before 1.0
-    [self.migrationController orderingFix];
     
     [self setupHockey];
     [self setupSecurity];

@@ -81,7 +81,7 @@
 
 - (void)setupDataSource {
     NSMutableArray *viewModels = [NSMutableArray array];
-    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
+    RLMResults *basicPoints = [VLDBasicPoint objectsWhere:@"enabled == YES"];
     for (VLDBasicPoint *basicPoint in basicPoints) {
         RLMResults *countResults = [VLDRecord recordsForBasicPoint:basicPoint
                                                   betweenStartDate:self.dateIntervalPickerView.selectedStartDate

@@ -159,7 +159,7 @@
 - (void)setupDataSource {
     NSArray *steps = [self.dateIntervalPickerView dayStepsForSelection];
     NSMutableArray *viewModels = [NSMutableArray array];
-    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
+    RLMResults *basicPoints = [VLDBasicPoint objectsWhere:@"enabled == YES"];
     for (NSDictionary *step in steps) {
         NSUInteger count = 0;
         for (VLDBasicPoint *basicPoint in basicPoints) {
@@ -279,7 +279,7 @@
 #pragma mark - VLDReportsResultViewDataSource
 
 - (NSUInteger)maximumPossibleScoreForReportsResultView:(VLDReportsResultView *)reportsResultView {
-    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
+    RLMResults *basicPoints = [VLDBasicPoint objectsWhere:@"enabled == YES"];
     if (reportsResultView.mode == VLDReportsModeWeekly) {
         NSUInteger weeklyfrequencyCount = 0;
         for (VLDBasicPoint *basicPoint in basicPoints) {

@@ -17,13 +17,13 @@
 
 @property NSString *UUID;
 @property NSString *name;
-@property NSInteger order;
 @property (getter=isEnabled) BOOL enabled;
 @property NSString *descriptionText;
 @property VLDAlert *alert;
 @property RLMArray<VLDWeekDay> *weekDays;
 
-+ (RLMResults *)basicPoints;
 - (NSArray *)weekDaySymbols;
 
 @end
+
+RLM_ARRAY_TYPE(VLDBasicPoint)

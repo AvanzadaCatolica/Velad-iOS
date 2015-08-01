@@ -9,25 +9,21 @@
 #import "VLDBasicPointsViewController.h"
 #import <Masonry/Masonry.h>
 #import <Realm/Realm.h>
-#import "VLDBasicPointCellTableViewCell.h"
+#import "VLDBasicPointTableViewCell.h"
 #import "VLDBasicPoint.h"
 #import "VLDBasicPointViewController.h"
 #import "VLDNotificationScheduler.h"
+#import "VLDGroup.h"
 
 @interface VLDBasicPointsViewController () <UITableViewDataSource, UITableViewDelegate, VLDBasicPointViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic) RLMResults *basicPoints;
 @property (nonatomic) UIBarButtonItem *backButtonItem;
 @property (nonatomic) VLDNotificationScheduler *notificationScheduler;
-@property (nonatomic) NSMutableArray *orders;
 
 - (void)setupNavigationItem;
-- (void)setupDataSource;
 - (void)setupTableView;
-- (void)setupOrders;
 - (void)setupLayout;
-- (void)saveOrders;
 - (void)updateRightBarButtonItems;
 - (void)onTapAddButton:(id)sender;
 - (void)onTapDoneButton:(id)sender;
@@ -49,8 +45,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationItem];
-    [self setupDataSource];
-    [self setupOrders];
     [self setupTableView];
     [self setupLayout];
 }
@@ -64,28 +58,16 @@
 #pragma mark - Setup methods
 
 - (void)setupNavigationItem {
-    self.navigationItem.title = @"Puntos Básicos";
+    self.navigationItem.title = self.group.name;
     [self updateRightBarButtonItems];
-}
-
-- (void)setupDataSource {
-    self.basicPoints = [[VLDBasicPoint allObjects] sortedResultsUsingProperty:@"order" ascending:YES];
-}
-
-- (void)setupOrders {
-    self.orders = [[NSMutableArray alloc] init];
-    for (VLDBasicPoint *basicPoint in self.basicPoints) {
-        [self.orders addObject:@(basicPoint.order)];
-    }
 }
 
 - (void)setupTableView {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.allowsSelectionDuringEditing = YES;
-    [self.tableView registerClass:[VLDBasicPointCellTableViewCell class]
-           forCellReuseIdentifier:NSStringFromClass([VLDBasicPointCellTableViewCell class])];
+    [self.tableView registerClass:[VLDBasicPointTableViewCell class]
+           forCellReuseIdentifier:NSStringFromClass([VLDBasicPointTableViewCell class])];
 }
 
 - (void)setupLayout {
@@ -122,21 +104,6 @@
     }
 }
 
-- (void)saveOrders {
-    NSMutableArray *previousOrder = [NSMutableArray array];
-    for (VLDBasicPoint *basicPoint in self.basicPoints) {
-        [previousOrder addObject:basicPoint];
-    }
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm beginWriteTransaction];
-    [self.orders enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-        VLDBasicPoint *basicPoint = [previousOrder objectAtIndex:index];
-        basicPoint.order = [self.orders indexOfObject:@(basicPoint.order)];
-    }];
-    [realm commitWriteTransaction];
-    [self setupOrders];
-}
-
 - (void)onTapAddButton:(id)sender {
     VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:nil];
     viewController.delegate = self;
@@ -148,12 +115,6 @@
 
 - (void)onTapDoneButton:(id)sender {
     [self setEditing:NO animated:YES];
-    
-    [self saveOrders];
-    
-    if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
-        [self.delegate basicPointsViewControllerDidChangeProperties:self];
-    }
 }
 
 - (void)onTapDeleteButton:(id)sender {
@@ -163,12 +124,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.basicPoints.count;
+    return self.group.basicPoints.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VLDBasicPointCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDBasicPointCellTableViewCell class])];
-    cell.model = self.basicPoints[indexPath.row];
+    VLDBasicPointTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDBasicPointTableViewCell class])];
+    cell.model = self.group.basicPoints[indexPath.row];
     
     return cell;
 }
@@ -179,9 +140,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self saveOrders];
-        
-        VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+        VLDBasicPoint *basicPoint = self.group.basicPoints[indexPath.row];
         if (basicPoint.isEnabled) {
             [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
         }
@@ -194,23 +153,24 @@
         [realm commitWriteTransaction];
         
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.orders removeObjectAtIndex:indexPath.row];
-        if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
-            [self.delegate basicPointsViewControllerDidChangeProperties:self];
-        }
     }
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSNumber *moved = [self.orders objectAtIndex:sourceIndexPath.row];
-    [self.orders removeObjectAtIndex:sourceIndexPath.row];
-    [self.orders insertObject:moved atIndex:destinationIndexPath.row];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    VLDBasicPoint *basicPoint = [self.group.basicPoints objectAtIndex:sourceIndexPath.row];
+    [self.group.basicPoints removeObjectAtIndex:sourceIndexPath.row];
+    [self.group.basicPoints insertObject:basicPoint atIndex:destinationIndexPath.row];
+    
+    [realm commitWriteTransaction];
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+    VLDBasicPoint *basicPoint = self.group.basicPoints[indexPath.row];
     VLDBasicPointViewController *viewController = [[VLDBasicPointViewController alloc] initWithBasicPoint:basicPoint];
     viewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -233,9 +193,6 @@
     }
     if (!basicPoint.isEnabled) {
         [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
-    }
-    if ([self.delegate respondsToSelector:@selector(basicPointsViewControllerDidChangeProperties:)]) {
-        [self.delegate basicPointsViewControllerDidChangeProperties:self];
     }
 }
 

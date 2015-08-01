@@ -173,9 +173,9 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
         [self bind:self.basicPoint];
     }
     else {
+        //TODO: Set group
         VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
         basicPoint.UUID = [[NSUUID UUID] UUIDString];
-        basicPoint.order = [VLDBasicPoint allObjects].count;
         [self bind:basicPoint];
         [realm addObject:basicPoint];
     }

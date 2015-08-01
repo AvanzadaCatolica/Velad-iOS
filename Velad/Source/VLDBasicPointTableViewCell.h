@@ -10,7 +10,7 @@
 
 @class VLDBasicPoint;
 
-@interface VLDBasicPointCellTableViewCell : UITableViewCell
+@interface VLDBasicPointTableViewCell : UITableViewCell
 
 @property (nonatomic) VLDBasicPoint *model;
 

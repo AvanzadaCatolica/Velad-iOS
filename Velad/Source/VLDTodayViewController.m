@@ -15,13 +15,15 @@
 #import <Masonry/Masonry.h>
 #import "NSString+VLDAdditions.h"
 #import "VLDRecordNotesPresenter.h"
-#import "VLDBasicPointsViewController.h"
 #import "NSDate+VLDAdditions.h"
+#import "VLDGroupsViewController.h"
+#import "VLDGroup.h"
+#import "VLDTodayViewModel.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDBasicPointsViewControllerDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic) NSArray *basicPoints;
+@property (nonatomic) VLDTodayViewModel *viewModel;
 @property (nonatomic, weak) VLDDatePickerView *datePickerView;
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
 
@@ -51,12 +53,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupDataSource];
     [self setupLayout];
     [self setupTableView];
     [self setupDatePickerView];
     [self setupGestureRecognizer];
     [self setupNavigationItem];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self setupDataSource];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -66,17 +73,31 @@
 #pragma mark - Setup methods
 
 - (void)setupDataSource {
-    RLMResults *results = [VLDBasicPoint basicPoints];
-    NSMutableArray *basicPoints = [NSMutableArray array];
-    
+    NSMutableArray *sectionTitles = [NSMutableArray array];
+    NSMutableArray *sections = [NSMutableArray array];
     NSString *weekdaySymbol = [self.datePickerView.selectedDate vld_weekdaySymbol];
-    for (VLDBasicPoint *basicPoint in results) {
-        if ([basicPoint.weekDaySymbols indexOfObject:weekdaySymbol] != NSNotFound) {
-            [basicPoints addObject:basicPoint];
+    
+    RLMResults *groups = [VLDGroup allObjects];
+    for (VLDGroup *group in groups) {
+        for (VLDBasicPoint *basicPoint in group.basicPoints) {
+            if ([basicPoint.weekDaySymbols indexOfObject:weekdaySymbol] != NSNotFound && basicPoint.enabled) {
+                NSUInteger sectionIndex = [sectionTitles indexOfObject:group.name];
+                if (sectionIndex != NSNotFound) {
+                    [sections[sectionIndex] addObject:basicPoint];
+                } else {
+                    [sectionTitles addObject:group.name];
+                    NSMutableArray *section = [NSMutableArray array];
+                    [section addObject:basicPoint];
+                    [sections addObject:section];
+                }
+                
+            }
         }
     }
     
-    self.basicPoints = [basicPoints copy];
+    VLDTodayViewModel *viewModel = [[VLDTodayViewModel alloc] initWithSectionTitles:sectionTitles
+                                                                            sections:sections];
+    self.viewModel = viewModel;
 }
 
 - (void)setupLayout {
@@ -133,7 +154,7 @@
 - (VLDDailyRecord *)dailyRecordAtIndexPath:(NSIndexPath *)indexPath {
     VLDDailyRecord *dailyRecord = [[VLDDailyRecord alloc] init];
     
-    VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+    VLDBasicPoint *basicPoint = self.viewModel.sections[indexPath.section][indexPath.row];
     dailyRecord.basicPoint = basicPoint;
     
     RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
@@ -146,7 +167,7 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint point = [gestureRecognizer locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
-        VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+        VLDBasicPoint *basicPoint = self.viewModel.sections[indexPath.section][indexPath.row];
         RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
         VLDRecord *record = [records firstObject];
         
@@ -159,19 +180,23 @@
 }
 
 - (void)onTapListButton:(id)sender {
-    VLDBasicPointsViewController *viewController = [[VLDBasicPointsViewController alloc] init];
-    viewController.delegate = self;
+    VLDGroupsViewController *viewController = [[VLDGroupsViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Puntos Básicos";
+    return self.viewModel.sectionTitles[section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.basicPoints.count;
+    NSArray *viewModelSection = self.viewModel.sections[section];
+    return viewModelSection.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.viewModel.sections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -185,7 +210,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    VLDBasicPoint *basicPoint = self.basicPoints[indexPath.row];
+    VLDBasicPoint *basicPoint = self.viewModel.sections[indexPath.section][indexPath.row];
     RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
     VLDRecord *record = [records firstObject];
     
@@ -210,7 +235,7 @@
 
 - (VLDBasicPoint *)basicPointForRecordNotesPresenter:(VLDRecordNotesPresenter *)presenter {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    return self.basicPoints[selectedIndexPath.row];
+    return self.viewModel.sections[selectedIndexPath.section][selectedIndexPath.row];
 }
 
 - (NSDate *)dateForRecordNotesPresenter:(VLDRecordNotesPresenter *)presenter {
@@ -251,14 +276,6 @@
     [self setupDataSource];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:direction == VLDArrowButtonDirectionLeft? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
-}
-
-#pragma mark - VLDBasicPointsViewControllerDelegate
-
-- (void)basicPointsViewControllerDidChangeProperties:(VLDBasicPointsViewController *)viewController {
-    [self setupDataSource];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

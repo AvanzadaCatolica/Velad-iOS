@@ -8,18 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class RLMResults;
-
-@protocol VLDBasicPointsViewControllerDelegate;
+@class VLDGroup;
 
 @interface VLDBasicPointsViewController : UIViewController
 
-@property (nonatomic, weak) id<VLDBasicPointsViewControllerDelegate> delegate;
-
-@end
-
-@protocol VLDBasicPointsViewControllerDelegate <NSObject>
-
-- (void)basicPointsViewControllerDidChangeProperties:(VLDBasicPointsViewController *)viewController;
+@property (nonatomic) VLDGroup *group;
 
 @end

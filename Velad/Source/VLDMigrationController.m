@@ -10,8 +10,17 @@
 #import <Realm/Realm.h>
 #import "VLDNote.h"
 #import "VLDBasicPoint.h"
+#import "VLDGroup.h"
 
-static NSUInteger const kSchemaVersion = 2;
+@interface VLDMigrationController ()
+
++ (BOOL)isDatabaseSeedNeeded;
++ (void)seedDatabase;
+
+@end
+
+static NSUInteger const kSchemaVersion = 4;
+static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
 
 @implementation VLDMigrationController
 
@@ -37,19 +46,113 @@ static NSUInteger const kSchemaVersion = 2;
                                               }
                                           }];
                 }
+                if (oldSchemaVersion < 3) {
+                    VLDGroup *group = [[VLDGroup alloc] init];
+                    group.name = @"General";
+                    group.order = 0;
+                    [migration enumerateObjects:VLDBasicPoint.className
+                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
+                                              [group.basicPoints addObject:newObject];
+                                          }];
+                }
+                if (oldSchemaVersion < 4) {
+                    [migration enumerateObjects:VLDBasicPoint.className
+                                          block:^(RLMObject *oldObject, RLMObject *newObject) {
+                                              
+                                          }];
+                }
             }];
 }
 
-- (void)orderingFix {
-    RLMResults *basicPoints = [VLDBasicPoint basicPoints];
-    int order = 0;
+#pragma mark - Private methods
+
++ (BOOL)isDatabaseSeedNeeded {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:kIsDatabaseSeeded];
+}
+
++ (void)seedDatabase {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
+    
     RLMRealm *realm = [RLMRealm defaultRealm];
+    
     [realm beginWriteTransaction];
-    for (VLDBasicPoint *basicPoint in basicPoints) {
-        basicPoint.order = order;
-        order++;
+    
+    VLDBasicPoint *basicPoint;
+    VLDGroup *group = [[VLDGroup alloc] init];
+    group.name = @"General";
+    group.order = 0;
+    [realm addObject:group];
+    
+    basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
+    basicPoint.name = @"Oración";
+    basicPoint.descriptionText = @"";
+    basicPoint.enabled = YES;
+    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+        weekday.name = weekdaySymbol;
+        [basicPoint.weekDays addObject:weekday];
     }
+    [realm addObject:basicPoint];
+    [group.basicPoints addObject:basicPoint];
+    
+    basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
+    basicPoint.name = @"Abnegación";
+    basicPoint.descriptionText = @"";
+    basicPoint.enabled = YES;
+    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+        weekday.name = weekdaySymbol;
+        [basicPoint.weekDays addObject:weekday];
+    }
+    [realm addObject:basicPoint];
+    [group.basicPoints addObject:basicPoint];
+    
+    basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
+    basicPoint.name = @"Eucaristía";
+    basicPoint.descriptionText = @"";
+    basicPoint.enabled = YES;
+    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+        weekday.name = weekdaySymbol;
+        [basicPoint.weekDays addObject:weekday];
+    }
+    [realm addObject:basicPoint];
+    [group.basicPoints addObject:basicPoint];
+    
+    basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
+    basicPoint.name = @"Rosario";
+    basicPoint.descriptionText = @"";
+    basicPoint.enabled = YES;
+    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+        weekday.name = weekdaySymbol;
+        [basicPoint.weekDays addObject:weekday];
+    }
+    [realm addObject:basicPoint];
+    [group.basicPoints addObject:basicPoint];
+    
+    basicPoint = [[VLDBasicPoint alloc] init];
+    basicPoint.UUID = [[NSUUID UUID] UUIDString];
+    basicPoint.name = @"Lectura";
+    basicPoint.descriptionText = @"";
+    basicPoint.enabled = YES;
+    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+        weekday.name = weekdaySymbol;
+        [basicPoint.weekDays addObject:weekday];
+    }
+    [realm addObject:basicPoint];
+    [group.basicPoints addObject:basicPoint];
+    
     [realm commitWriteTransaction];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsDatabaseSeeded];
 }
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDBasicPointCellTableViewCell.h"
+#import "VLDBasicPointTableViewCell.h"
 #import "VLDBasicPoint.h"
 #import "NSString+VLDAdditions.h"
 
-@implementation VLDBasicPointCellTableViewCell
+@implementation VLDBasicPointTableViewCell
 
 #pragma mark - Life cycle
 
@@ -25,6 +25,7 @@
 - (void)prepareForReuse {
     self.model = nil;
     self.textLabel.text = @"";
+    self.detailTextLabel.text = @"";
     self.accessoryType = UITableViewCellAccessoryNone;
 }
 
