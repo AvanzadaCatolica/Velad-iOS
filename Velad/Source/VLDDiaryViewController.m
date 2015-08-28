@@ -15,24 +15,20 @@
 #import "VLDNoteViewController.h"
 #import "VLDUpdateNotesPresenter.h"
 #import "VLDEmptyView.h"
-#import "VLDDiaryModePickerView.h"
 
-@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate, VLDDiaryModePickerViewDelegate>
+@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
-@property (nonatomic, weak) VLDDiaryModePickerView *diaryModePickerView;
 @property (nonatomic) RLMResults *notes;
 @property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
 @property (nonatomic) VLDEmptyView *emptyView;
-@property (nonatomic) VLDDiaryMode mode;
 @property (nonatomic) VLDNoteTableViewCell *referenceHeightCell;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
 - (void)setupTableView;
 - (void)setupDateIntervalPickerView;
-- (void)setupDiaryModePickerView;
 - (void)setupEmtpyView;
 - (void)updateEmptyStatus;
 - (void)updateLeftBarButtonItem;
@@ -59,9 +55,6 @@
     VLDEmptyView *emptyView = [[VLDEmptyView alloc] init];
     [view addSubview:emptyView];
     self.emptyView = emptyView;
-    VLDDiaryModePickerView *diaryModePickerView = [[VLDDiaryModePickerView alloc] initWithMode:VLDDiaryModeAll];
-    [view addSubview:diaryModePickerView];
-    self.diaryModePickerView = diaryModePickerView;
     self.view = view;
 }
 
@@ -73,7 +66,6 @@
     [self setupLayout];
     [self setupTableView];
     [self setupDateIntervalPickerView];
-    [self setupDiaryModePickerView];
     [self updateEmptyStatus];
 }
 
@@ -99,17 +91,7 @@
 #pragma mark - Setup methods
 
 - (void)setupDataSource {
-    VLDDiaryMode mode = self.diaryModePickerView.mode;
-    if (mode == VLDDiaryModeAll) {
-        self.notes = [VLDNote notesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
-                                            endDate:self.dateIntervalPickerView.selectedEndDate];
-    } else if (mode == VLDDiaryModeConfessable) {
-        self.notes = [VLDNote confessableNotesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
-                                                       endDate:self.dateIntervalPickerView.selectedEndDate];
-    } else if (mode == VLDDIaryModeGuidance) {
-        self.notes = [VLDNote guidanceNotesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
-                                                    endDate:self.dateIntervalPickerView.selectedEndDate];
-    }
+    
 }
 
 - (void)setupNavigationItem {
@@ -125,15 +107,10 @@
         make.bottom.equalTo(self.dateIntervalPickerView.superview);
         make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
     }];
-    [self.diaryModePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.diaryModePickerView.superview);
-        make.trailing.equalTo(self.diaryModePickerView.superview);
-        make.top.equalTo(self.diaryModePickerView.superview);
-    }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.tableView.superview);
         make.trailing.equalTo(self.tableView.superview);
-        make.top.equalTo(self.diaryModePickerView.mas_bottom);
+        make.top.equalTo(self.tableView.superview);
         make.bottom.equalTo(self.dateIntervalPickerView.mas_top);
     }];
     [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -156,10 +133,6 @@
     self.dateIntervalPickerView.delegate = self;
 }
 
-- (void)setupDiaryModePickerView {
-    self.diaryModePickerView.delegate = self;
-}
-
 - (void)setupEmtpyView {
     self.emptyView.alpha = 0;
 }
@@ -175,8 +148,8 @@
 }
 
 - (void)updateLeftBarButtonItem {
-    VLDDiaryMode mode = self.diaryModePickerView.mode;
-    if (mode == VLDDiaryModeConfessable && self.notes.count >= 1 && !self.isEditing) {
+    //TODO: Implement this
+    if (self.notes.count >= 1 && !self.isEditing) {
         [self.navigationItem
          setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                             target:self
@@ -315,15 +288,6 @@
 #pragma mark - VLDUpdateNotesPresenterDelegate
 
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
-    [self updateLeftBarButtonItem];
-    [self updateEmptyStatus];
-    [self.tableView reloadData];
-}
-
-#pragma mark - VLDDiaryModePickerViewDelegate
-
-- (void)diaryModePickerViewDidChangeMode:(VLDDiaryModePickerView *)diaryModePickerView {
-    [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
     [self.tableView reloadData];

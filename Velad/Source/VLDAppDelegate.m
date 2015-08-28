@@ -175,10 +175,6 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     navigationController = [[UINavigationController alloc] initWithRootViewController:diaryViewController];
     navigationController.tabBarItem.title = @"Diario";
     navigationController.navigationBar.translucent = NO;
-    [navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init]
-                                            forBarPosition:UIBarPositionAny
-                                                barMetrics:UIBarMetricsDefault];
-    [navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiaryNormal"]
                                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiarySelected"]
