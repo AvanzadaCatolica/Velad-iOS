@@ -16,7 +16,7 @@
 #import "VLDWeekday.h"
 #import "VLDAlert.h"
 
-@interface VLDGroupsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface VLDGroupsViewController () <UITableViewDataSource, UITableViewDelegate, VLDGroupViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) RLMResults *groups;
