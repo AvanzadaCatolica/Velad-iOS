@@ -76,76 +76,33 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
     
     [realm beginWriteTransaction];
     
-    VLDBasicPoint *basicPoint;
     VLDGroup *group = [[VLDGroup alloc] init];
     group.name = @"General";
     group.order = 0;
     [realm addObject:group];
     
-    basicPoint = [[VLDBasicPoint alloc] init];
-    basicPoint.UUID = [[NSUUID UUID] UUIDString];
-    basicPoint.name = @"Oración";
-    basicPoint.descriptionText = @"";
-    basicPoint.enabled = YES;
-    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-        weekday.name = weekdaySymbol;
-        [basicPoint.weekDays addObject:weekday];
-    }
-    [realm addObject:basicPoint];
-    [group.basicPoints addObject:basicPoint];
+    NSArray *names = @[@"Oración",
+                       @"Eucaristía",
+                       @"Abnegación",
+                       @"Vigilancia",
+                       @"Amor a la Virgen",
+                       @"Conocimiento serio de la fe",
+                       ];
     
-    basicPoint = [[VLDBasicPoint alloc] init];
-    basicPoint.UUID = [[NSUUID UUID] UUIDString];
-    basicPoint.name = @"Abnegación";
-    basicPoint.descriptionText = @"";
-    basicPoint.enabled = YES;
-    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-        weekday.name = weekdaySymbol;
-        [basicPoint.weekDays addObject:weekday];
+    for (NSString *name in names) {
+        VLDBasicPoint *basicPoint = [[VLDBasicPoint alloc] init];
+        basicPoint.UUID = [[NSUUID UUID] UUIDString];
+        basicPoint.name = name;
+        basicPoint.descriptionText = @"";
+        basicPoint.enabled = YES;
+        for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
+            VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
+            weekday.name = weekdaySymbol;
+            [basicPoint.weekDays addObject:weekday];
+        }
+        [realm addObject:basicPoint];
+        [group.basicPoints addObject:basicPoint];
     }
-    [realm addObject:basicPoint];
-    [group.basicPoints addObject:basicPoint];
-    
-    basicPoint = [[VLDBasicPoint alloc] init];
-    basicPoint.UUID = [[NSUUID UUID] UUIDString];
-    basicPoint.name = @"Eucaristía";
-    basicPoint.descriptionText = @"";
-    basicPoint.enabled = YES;
-    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-        weekday.name = weekdaySymbol;
-        [basicPoint.weekDays addObject:weekday];
-    }
-    [realm addObject:basicPoint];
-    [group.basicPoints addObject:basicPoint];
-    
-    basicPoint = [[VLDBasicPoint alloc] init];
-    basicPoint.UUID = [[NSUUID UUID] UUIDString];
-    basicPoint.name = @"Rosario";
-    basicPoint.descriptionText = @"";
-    basicPoint.enabled = YES;
-    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-        weekday.name = weekdaySymbol;
-        [basicPoint.weekDays addObject:weekday];
-    }
-    [realm addObject:basicPoint];
-    [group.basicPoints addObject:basicPoint];
-    
-    basicPoint = [[VLDBasicPoint alloc] init];
-    basicPoint.UUID = [[NSUUID UUID] UUIDString];
-    basicPoint.name = @"Lectura";
-    basicPoint.descriptionText = @"";
-    basicPoint.enabled = YES;
-    for (NSString *weekdaySymbol in [dateFormatter weekdaySymbols]) {
-        VLDWeekDay *weekday = [[VLDWeekDay alloc] init];
-        weekday.name = weekdaySymbol;
-        [basicPoint.weekDays addObject:weekday];
-    }
-    [realm addObject:basicPoint];
-    [group.basicPoints addObject:basicPoint];
     
     [realm commitWriteTransaction];
     
