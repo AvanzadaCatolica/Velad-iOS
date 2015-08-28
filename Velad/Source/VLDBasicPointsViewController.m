@@ -199,6 +199,15 @@
         [self.notificationScheduler unscheduleNotificationsForBasicPoint:basicPoint];
     }
     
+    NSUInteger index = [self.group.basicPoints indexOfObject:basicPoint];
+    if (index != NSNotFound) {
+        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:index
+                                                   inSection:0]];
+        [self.tableView reloadRowsAtIndexPaths:indexPaths
+                              withRowAnimation:UITableViewRowAnimationFade];
+        return;
+    }
+    
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     
