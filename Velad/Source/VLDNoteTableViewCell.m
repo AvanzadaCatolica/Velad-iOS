@@ -56,7 +56,7 @@ static NSInteger const kSubviewSeparationSpace = 10;
     self.noteLabel = noteLabel;
     [self.noteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.noteLabel.superview).with.offset(self.vld_separatorDisplacement);
-        make.width.equalTo(self.noteLabel.superview).with.multipliedBy(0.7);
+        make.width.equalTo(self.noteLabel.superview).with.multipliedBy(0.5);
         make.top.equalTo(self.noteLabel.superview).with.offset(4);
     }];
     UILabel *stateLabel = [[UILabel alloc] initWithFrame:CGRectZero];

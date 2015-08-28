@@ -15,8 +15,9 @@
 #import "VLDNoteViewController.h"
 #import "VLDUpdateNotesPresenter.h"
 #import "VLDEmptyView.h"
+#import "VLDNoteFilterViewController.h"
 
-@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate>
+@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate, VLDNoteFilterViewControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
@@ -24,12 +25,14 @@
 @property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
 @property (nonatomic) VLDEmptyView *emptyView;
 @property (nonatomic) VLDNoteTableViewCell *referenceHeightCell;
+@property (nonatomic) VLDNoteFilterType selectedNoteFilterType;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
 - (void)setupTableView;
 - (void)setupDateIntervalPickerView;
-- (void)setupEmtpyView;
+- (void)setupEmptyView;
+- (void)setupSelectedNoteFilterType;
 - (void)updateEmptyStatus;
 - (void)updateLeftBarButtonItem;
 - (void)updateRightBarButtonItems;
@@ -37,6 +40,7 @@
 - (void)onTapDoneButton:(id)sender;
 - (void)onTapDeleteButton:(id)sender;
 - (void)onTapActionButton:(id)sender;
+- (void)onTapFilterButton:(id)sender;
 
 @end
 
@@ -61,11 +65,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationItem];
-    [self setupDataSource];
-    [self setupEmtpyView];
+    [self setupEmptyView];
     [self setupLayout];
     [self setupTableView];
     [self setupDateIntervalPickerView];
+    [self setupSelectedNoteFilterType];
+    [self setupDataSource];
     [self updateEmptyStatus];
 }
 
@@ -90,8 +95,20 @@
 
 #pragma mark - Setup methods
 
+- (void)setupSelectedNoteFilterType {
+    self.selectedNoteFilterType = VLDNoteFilterTypeAll;
+}
+
 - (void)setupDataSource {
-    
+    if (self.selectedNoteFilterType == VLDNoteFilterTypeAll) {
+        self.notes = [VLDNote notesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
+                                            endDate:self.dateIntervalPickerView.selectedEndDate];
+    } else {
+        VLDNoteState state = self.selectedNoteFilterType - 1;
+        self.notes = [VLDNote notesWithState:state
+                            betweenStartDate:self.dateIntervalPickerView.selectedStartDate
+                                     endDate:self.dateIntervalPickerView.selectedEndDate];
+    }
 }
 
 - (void)setupNavigationItem {
@@ -124,7 +141,6 @@
 - (void)setupTableView {
     [self.tableView registerClass:[VLDNoteTableViewCell class]
            forCellReuseIdentifier:NSStringFromClass([VLDNoteTableViewCell class])];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 }
@@ -133,7 +149,7 @@
     self.dateIntervalPickerView.delegate = self;
 }
 
-- (void)setupEmtpyView {
+- (void)setupEmptyView {
     self.emptyView.alpha = 0;
 }
 
@@ -148,15 +164,16 @@
 }
 
 - (void)updateLeftBarButtonItem {
-    //TODO: Implement this
-    if (self.notes.count >= 1 && !self.isEditing) {
+    UIBarButtonItem *filterBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Filter"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapFilterButton:)];
+    if (self.selectedNoteFilterType == VLDNoteFilterTypeConfessable && self.notes.count >= 1 && !self.isEditing) {
+        UIBarButtonItem *actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                             target:self
+                                                                                             action:@selector(onTapActionButton:)];
         [self.navigationItem
-         setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                            target:self
-                                                                            action:@selector(onTapActionButton:)]
+         setLeftBarButtonItems:@[filterBarButtonItem, actionBarButtonItem]
          animated:YES];
     } else {
-        [self.navigationItem setLeftBarButtonItems:nil animated:YES];
+        [self.navigationItem setLeftBarButtonItems:@[filterBarButtonItem] animated:YES];
     }
 }
 
@@ -203,6 +220,13 @@
 
 - (void)onTapActionButton:(id)sender {
     [self.updateNotesPresenter present];
+}
+
+- (void)onTapFilterButton:(id)sender {
+    VLDNoteFilterViewController *viewController = [[VLDNoteFilterViewController alloc] initWithNoteFilerType:self.selectedNoteFilterType];
+    viewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -288,6 +312,16 @@
 #pragma mark - VLDUpdateNotesPresenterDelegate
 
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
+    [self updateLeftBarButtonItem];
+    [self updateEmptyStatus];
+    [self.tableView reloadData];
+}
+
+#pragma mark - VLDNoteFilterViewControllerDelegate
+
+- (void)noteFilterViewControlerDidFinishFilterSelection:(VLDNoteFilterViewController *)viewController {
+    self.selectedNoteFilterType = viewController.selectedNoteFilterType;
+    [self setupDataSource];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
     [self.tableView reloadData];

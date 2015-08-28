@@ -21,10 +21,9 @@ typedef NS_ENUM(NSInteger, VLDNoteState) {
 @property VLDNoteState state;
 @property NSDate *date;
 
-+ (RLMResults *)guidanceNotesBetweenStartDate:(NSDate *)startDate
-                                      endDate:(NSDate *)endDate;
-+ (RLMResults *)confessableNotesBetweenStartDate:(NSDate *)startDate
-                                         endDate:(NSDate *)endDate;
++ (RLMResults *)notesWithState:(VLDNoteState)state
+              betweenStartDate:(NSDate *)startDate
+                       endDate:(NSDate *)endDate;
 + (RLMResults *)notesBetweenStartDate:(NSDate *)startDate
                               endDate:(NSDate *)endDate;
 + (NSArray *)stateSymbols;

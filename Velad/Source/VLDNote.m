@@ -16,15 +16,10 @@
 
 #pragma mark - Public methods
 
-+ (RLMResults *)guidanceNotesBetweenStartDate:(NSDate *)startDate
-                                      endDate:(NSDate *)endDate {
-    RLMResults *results = [[VLDNote objectsWhere:@"state == %d AND date BETWEEN {%@, %@}", VLDNoteStateGuidance, startDate, endDate] sortedResultsUsingProperty:@"date" ascending:NO];
-    return results;
-}
-
-+ (RLMResults *)confessableNotesBetweenStartDate:(NSDate *)startDate
-                                         endDate:(NSDate *)endDate {
-    RLMResults *results = [[VLDNote objectsWhere:@"state == %d AND date BETWEEN {%@, %@}", VLDNoteStateConfessable, startDate, endDate] sortedResultsUsingProperty:@"date" ascending:NO];
++ (RLMResults *)notesWithState:(VLDNoteState)state
+              betweenStartDate:(NSDate *)startDate
+                       endDate:(NSDate *)endDate {
+    RLMResults *results = [[VLDNote objectsWhere:@"state == %d AND date BETWEEN {%@, %@}", state, startDate, endDate] sortedResultsUsingProperty:@"date" ascending:NO];
     return results;
 }
 
