@@ -15,4 +15,14 @@
     return [allConfessions firstObject];
 }
 
++ (NSString *)formattedDateForConfession:(VLDConfession *)confession {
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *dateFormatter;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"dd/MM/yyyy";
+    });
+    return [dateFormatter stringFromDate:confession.date];
+}
+
 @end

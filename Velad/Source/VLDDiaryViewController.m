@@ -13,23 +13,27 @@
 #import <Realm/Realm.h>
 #import "VLDNote.h"
 #import "VLDNoteViewController.h"
-#import "VLDUpdateNotesPresenter.h"
+#import "VLDNotesActionsPresenter.h"
 #import "VLDEmptyView.h"
 #import "VLDNoteFilterViewController.h"
 #import "VLDConfession.h"
 #import "NSDate+VLDAdditions.h"
 #import "UIColor+VLDAdditions.h"
+#import <MessageUI/MessageUI.h>
+#import "VLDErrorPresenter.h"
+#import "VLDProfile.h"
 
-@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate, VLDNoteFilterViewControllerDelegate>
+@interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDNotesActionsPresenterDataSource, VLDNotesActionsPresenterDelegate, VLDNoteFilterViewControllerDelegate, MFMailComposeViewControllerDelegate, VLDErrorPresenterDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) VLDDateIntervalPickerView *dateIntervalPickerView;
 @property (nonatomic) RLMResults *notes;
-@property (nonatomic) VLDUpdateNotesPresenter *updateNotesPresenter;
+@property (nonatomic) VLDNotesActionsPresenter *notesActionsPresenter;
 @property (nonatomic) VLDEmptyView *emptyView;
 @property (nonatomic) VLDNoteTableViewCell *referenceHeightCell;
 @property (nonatomic) VLDNoteFilterType selectedNoteFilterType;
 @property (nonatomic) VLDConfession *lastConfession;
+@property (nonatomic) VLDErrorPresenter *errorPresenter;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
@@ -39,7 +43,7 @@
 - (void)setupSelectedNoteFilterType;
 - (void)setupLastConfession;
 - (void)updateEmptyStatus;
-- (void)updateLeftBarButtonItem;
+- (void)updateLeftBarButtonItemAnimated:(BOOL)animated;
 - (void)updateRightBarButtonItems;
 - (void)onTapAddButton:(id)sender;
 - (void)onTapDoneButton:(id)sender;
@@ -95,7 +99,7 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:YES];
     [self updateRightBarButtonItems];
 }
 
@@ -137,7 +141,7 @@
 
 - (void)setupNavigationItem {
     self.navigationItem.title = @"Diario";
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:NO];
     [self updateRightBarButtonItems];
 }
 
@@ -183,25 +187,39 @@
 
 #pragma mark - Private methods
 
-- (VLDUpdateNotesPresenter *)updateNotesPresenter {
-    if (_updateNotesPresenter == nil) {
-        _updateNotesPresenter = [[VLDUpdateNotesPresenter alloc] initWithDataSource:self];
-        _updateNotesPresenter.delegate = self;
+- (VLDErrorPresenter *)errorPresenter {
+    if (_errorPresenter == nil) {
+        _errorPresenter = [[VLDErrorPresenter alloc] initWithDataSource:self];
     }
-    return _updateNotesPresenter;
+    return _errorPresenter;
 }
 
-- (void)updateLeftBarButtonItem {
-    UIBarButtonItem *filterBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Filter"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapFilterButton:)];
+- (VLDNotesActionsPresenter *)notesActionsPresenter {
+    if (_notesActionsPresenter == nil) {
+        _notesActionsPresenter = [[VLDNotesActionsPresenter alloc] initWithDataSource:self];
+        _notesActionsPresenter.delegate = self;
+    }
+    return _notesActionsPresenter;
+}
+
+- (void)updateLeftBarButtonItemAnimated:(BOOL)animated {
+    UIBarButtonItem *filterBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Filter"]
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:self
+                                                                           action:@selector(onTapFilterButton:)];
     if (self.selectedNoteFilterType == VLDNoteFilterTypeConfessable && self.notes.count >= 1 && !self.isEditing) {
         UIBarButtonItem *actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                              target:self
                                                                                              action:@selector(onTapActionButton:)];
         [self.navigationItem
          setLeftBarButtonItems:@[filterBarButtonItem, actionBarButtonItem]
-         animated:YES];
+         animated:animated];
     } else {
-        [self.navigationItem setLeftBarButtonItems:@[filterBarButtonItem] animated:YES];
+        UIBarButtonItem *mailBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Mail"]
+                                                                style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(onTapMailButton:)];
+        [self.navigationItem setLeftBarButtonItems:@[filterBarButtonItem, mailBarButtonItem] animated:animated];
     }
 }
 
@@ -247,7 +265,7 @@
 }
 
 - (void)onTapActionButton:(id)sender {
-    [self.updateNotesPresenter present];
+    [self.notesActionsPresenter present];
 }
 
 - (void)onTapFilterButton:(id)sender {
@@ -255,6 +273,55 @@
     viewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)onTapMailButton:(id)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] init];
+        [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
+        composeViewController.mailComposeDelegate = self;
+        
+        VLDProfile *profile = [[VLDProfile allObjects] firstObject];
+        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        
+        if (self.selectedNoteFilterType == VLDNoteFilterTypeDates) {
+            messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"Semana %@\n\n", self.dateIntervalPickerView.title]];
+        }
+        
+        if (self.lastConfession) {
+            messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"Última confesión: %@\n\n", [VLDConfession formattedDateForConfession:self.lastConfession]]];
+        }
+        
+        messageBody = [messageBody stringByAppendingString:@"Mis notas:\n\n"];
+        
+        for (VLDNote *note in self.notes) {
+            messageBody = [messageBody stringByAppendingFormat:@"%@ (%@ - %@)\n", note.text, [VLDNote symbolForState:note.state], [VLDNote formattedDateForNote:note]];
+        }
+        
+        [composeViewController setSubject:@"Diario"];
+        [composeViewController setMessageBody:messageBody isHTML:NO];
+        [self presentViewController:composeViewController
+                           animated:YES
+                         completion:^{
+                             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                         }];
+    } else {
+        [self.errorPresenter presentError:[NSError errorWithDomain:NSStringFromClass(self.class)
+                                                              code:INT_MAX
+                                                          userInfo:@{@"NSLocalizedDescription" : @"No se ha encontrado una cuenta de correo configurada"}]];
+    }
+}
+
+#pragma mark - VLDErrorPresenterDataSource
+
+- (UIViewController *)viewControllerForErrorPresenter:(VLDErrorPresenter *)presenter {
+    return self;
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -287,7 +354,7 @@
         [realm commitWriteTransaction];
         
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        [self updateLeftBarButtonItem];
+        [self updateLeftBarButtonItemAnimated:YES];
         [self updateEmptyStatus];
     }
 }
@@ -320,7 +387,7 @@
 
 - (void)dateIntervalPickerView:(VLDDateIntervalPickerView *)dateIntervalPickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:NO];
     [self updateEmptyStatus];
     [self.tableView reloadData];
 }
@@ -329,27 +396,31 @@
 
 - (void)noteViewControllerDidChangeProperties:(VLDNoteViewController *)viewController {
     [self.tableView reloadData];
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:YES];
     [self updateEmptyStatus];
 }
 
-#pragma mark - VLDUpdateNotesPresenterDataSource
+#pragma mark - VLDNotesActionPresenterDataSource
 
-- (RLMResults *)notesForUpdateNotesPresenter:(VLDUpdateNotesPresenter *)presenter {
+- (RLMResults *)notesForNotesActionsPresenter:(VLDNotesActionsPresenter *)presenter {
     return self.notes;
 }
 
-- (UIViewController *)viewControllerForUpdatesNotesPresenter:(VLDUpdateNotesPresenter *)presenter {
+- (UIViewController *)viewControllerForNotesActionsPresenter:(VLDNotesActionsPresenter *)presenter {
     return self;
 }
 
-#pragma mark - VLDUpdateNotesPresenterDelegate
+#pragma mark - VLDNotesActionsPresenterDelegate
 
-- (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
+- (void)notesActionsPresenterDidDidSelectRegister:(VLDNotesActionsPresenter *)presenter {
     [self setupLastConfession];
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:YES];
     [self updateEmptyStatus];
     [self.tableView reloadData];
+}
+
+- (void)notesActionsPresenterDidSelectMail:(VLDNotesActionsPresenter *)presenter {
+    [self onTapMailButton:nil];
 }
 
 #pragma mark - VLDNoteFilterViewControllerDelegate
@@ -358,7 +429,7 @@
     self.selectedNoteFilterType = viewController.selectedNoteFilterType;
     [self setupDataSource];
     [self.view setNeedsUpdateConstraints];
-    [self updateLeftBarButtonItem];
+    [self updateLeftBarButtonItemAnimated:YES];
     [self updateEmptyStatus];
     [self.tableView reloadData];
 }

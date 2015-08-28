@@ -13,5 +13,6 @@
 @property NSDate *date;
 
 + (VLDConfession *)lastConfession;
++ (NSString *)formattedDateForConfession:(VLDConfession *)confession;
 
 @end

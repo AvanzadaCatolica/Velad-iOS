@@ -1,28 +1,29 @@
 //
-//  VLDUpdateNotesPresenter.m
+//  VLDNotesActionsPresenter.m
 //  Velad
 //
 //  Created by Renzo Crisóstomo on 14/06/15.
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "VLDUpdateNotesPresenter.h"
+#import "VLDNotesActionsPresenter.h"
 #import "VLDNote.h"
 #import "VLDConfession.h"
 
-@interface VLDUpdateNotesPresenter () <UIActionSheetDelegate>
+@interface VLDNotesActionsPresenter () <UIActionSheetDelegate>
 
-@property (nonatomic, weak, readonly) id<VLDUpdateNotesPresenterDataSource> dataSource;
+@property (nonatomic, weak, readonly) id<VLDNotesActionsPresenterDataSource> dataSource;
 
-- (void)handleUpdate;
+- (void)handleRegister;
+- (void)handleMail;
 
 @end
 
-@implementation VLDUpdateNotesPresenter
+@implementation VLDNotesActionsPresenter
 
 #pragma mark - Life cycle
 
-- (instancetype)initWithDataSource:(id<VLDUpdateNotesPresenterDataSource>)dataSource {
+- (instancetype)initWithDataSource:(id<VLDNotesActionsPresenterDataSource>)dataSource {
     self = [super init];
     if (self) {
         _dataSource = dataSource;
@@ -32,8 +33,8 @@
 
 #pragma mark - Private methods
 
-- (void)handleUpdate {
-    RLMResults *notes = [self.dataSource notesForUpdateNotesPresenter:self];
+- (void)handleRegister {
+    RLMResults *notes = [self.dataSource notesForNotesActionsPresenter:self];
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     
@@ -48,8 +49,14 @@
     [realm addObject:confession];
     
     [realm commitWriteTransaction];
-    if ([self.delegate respondsToSelector:@selector(updateNotesPresenterDidFinishUpdate:)]) {
-        [self.delegate updateNotesPresenterDidFinishUpdate:self];
+    if ([self.delegate respondsToSelector:@selector(notesActionsPresenterDidDidSelectRegister:)]) {
+        [self.delegate notesActionsPresenterDidDidSelectRegister:self];
+    }
+}
+
+- (void)handleMail {
+    if ([self.delegate respondsToSelector:@selector(notesActionsPresenterDidSelectMail:)]) {
+        [self.delegate notesActionsPresenterDidSelectMail:self];
     }
 }
 
@@ -57,28 +64,34 @@
 
 - (void)present {
     if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Cambiar a confesadas todas las notas?"
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancelar"
                                                                style:UIAlertActionStyleCancel
                                                              handler:nil];
         [alertController addAction:cancelAction];
-        UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Cambiar"
+        UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Registrar confesión"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
-                                                              [self handleUpdate];
+                                                              [self handleRegister];
                                                           }];
         [alertController addAction:addAction];
-        [[self.dataSource viewControllerForUpdatesNotesPresenter:self]
+        UIAlertAction *mailAction = [UIAlertAction actionWithTitle:@"Enviar por correo"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action) {
+                                                               [self handleMail];
+                                                           }];
+        [alertController addAction:mailAction];
+        [[self.dataSource viewControllerForNotesActionsPresenter:self]
          presentViewController:alertController animated:YES completion:nil];
     } else {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Cambiar a confesadas todas las notas?"
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancelar"
                                                    destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Cambiar", nil];
-        [actionSheet showFromTabBar:[self.dataSource viewControllerForUpdatesNotesPresenter:self].tabBarController.tabBar];
+                                                        otherButtonTitles:@"Registrar confesión", @"Enviar por correo", nil];
+        [actionSheet showFromTabBar:[self.dataSource viewControllerForNotesActionsPresenter:self].tabBarController.tabBar];
     }
 }
 
@@ -87,8 +100,12 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+        [self handleRegister];
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
+        [self handleMail];
     }
-    [self handleUpdate];
+    
 }
 
 @end

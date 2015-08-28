@@ -66,7 +66,7 @@
 		3FF4D7241B2DF1C3008538DA /* VLDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7231B2DF1C3008538DA /* VLDNote.m */; };
 		3FF4D7271B2DF3B2008538DA /* VLDNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */; };
 		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
-		3FF4D72D1B2E096E008538DA /* VLDUpdateNotesPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDUpdateNotesPresenter.m */; };
+		3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 /* End PBXBuildFile section */
 
@@ -188,8 +188,8 @@
 		3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNoteTableViewCell.m; path = Source/VLDNoteTableViewCell.m; sourceTree = "<group>"; };
 		3FF4D7281B2DF599008538DA /* VLDNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteViewController.h; path = Source/VLDNoteViewController.h; sourceTree = "<group>"; };
 		3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNoteViewController.m; path = Source/VLDNoteViewController.m; sourceTree = "<group>"; };
-		3FF4D72B1B2E096E008538DA /* VLDUpdateNotesPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDUpdateNotesPresenter.h; path = Source/VLDUpdateNotesPresenter.h; sourceTree = "<group>"; };
-		3FF4D72C1B2E096E008538DA /* VLDUpdateNotesPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDUpdateNotesPresenter.m; path = Source/VLDUpdateNotesPresenter.m; sourceTree = "<group>"; };
+		3FF4D72B1B2E096E008538DA /* VLDNotesActionsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNotesActionsPresenter.h; path = Source/VLDNotesActionsPresenter.h; sourceTree = "<group>"; };
+		3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNotesActionsPresenter.m; path = Source/VLDNotesActionsPresenter.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -412,8 +412,8 @@
 				3FF4D7261B2DF3B2008538DA /* VLDNoteTableViewCell.m */,
 				3FF4D7281B2DF599008538DA /* VLDNoteViewController.h */,
 				3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */,
-				3FF4D72B1B2E096E008538DA /* VLDUpdateNotesPresenter.h */,
-				3FF4D72C1B2E096E008538DA /* VLDUpdateNotesPresenter.m */,
+				3FF4D72B1B2E096E008538DA /* VLDNotesActionsPresenter.h */,
+				3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */,
 				3F5D48CE1B90EFF50046364F /* VLDNoteFilterViewController.h */,
 				3F5D48CF1B90EFF50046364F /* VLDNoteFilterViewController.m */,
 			);
@@ -584,7 +584,7 @@
 				3F331AA41B2CCCE70055E742 /* VLDBasicPointTableViewCell.m in Sources */,
 				3F331A751B2C75FF0055E742 /* VLDBasicPoint.m in Sources */,
 				3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */,
-				3FF4D72D1B2E096E008538DA /* VLDUpdateNotesPresenter.m in Sources */,
+				3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */,
 				3F58FE1B1B6D52E70031A1F9 /* VLDGroupsViewController.m in Sources */,
 				3F331A791B2C7C4C0055E742 /* VLDTodayViewController.m in Sources */,
 				3FE4C81B1B3064D10061420E /* VLDSecurityPasscodeViewController.m in Sources */,
