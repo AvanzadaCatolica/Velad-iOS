@@ -13,7 +13,8 @@ typedef NS_ENUM(NSUInteger, VLDNoteFilterType) {
     VLDNoteFilterTypeRegular,
     VLDNoteFilterTypeConfessable,
     VLDNoteFilterTypeConfessed,
-    VLDNoteFilterTypeGuidance
+    VLDNoteFilterTypeGuidance,
+    VLDNoteFilterTypeDates
 };
 
 @protocol VLDNoteFilterViewControllerDelegate;

@@ -93,6 +93,25 @@
     [self updateRightBarButtonItems];
 }
 
+- (void)updateViewConstraints {
+    if (self.selectedNoteFilterType == VLDNoteFilterTypeDates) {
+        [self.dateIntervalPickerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.dateIntervalPickerView.superview);
+            make.trailing.equalTo(self.dateIntervalPickerView.superview);
+            make.bottom.equalTo(self.dateIntervalPickerView.superview);
+            make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
+        }];
+    } else {
+        [self.dateIntervalPickerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.dateIntervalPickerView.superview);
+            make.trailing.equalTo(self.dateIntervalPickerView.superview);
+            make.top.equalTo(self.dateIntervalPickerView.superview.mas_bottom);
+            make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
+        }];
+    }
+    [super updateViewConstraints];
+}
+
 #pragma mark - Setup methods
 
 - (void)setupSelectedNoteFilterType {
@@ -101,13 +120,12 @@
 
 - (void)setupDataSource {
     if (self.selectedNoteFilterType == VLDNoteFilterTypeAll) {
+        self.notes = [VLDNote allNotes];
+    } else if (self.selectedNoteFilterType == VLDNoteFilterTypeDates) {
         self.notes = [VLDNote notesBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
                                             endDate:self.dateIntervalPickerView.selectedEndDate];
     } else {
-        VLDNoteState state = self.selectedNoteFilterType - 1;
-        self.notes = [VLDNote notesWithState:state
-                            betweenStartDate:self.dateIntervalPickerView.selectedStartDate
-                                     endDate:self.dateIntervalPickerView.selectedEndDate];
+        self.notes = [VLDNote notesWithState:[VLDNote stateForFilterType:self.selectedNoteFilterType]];
     }
 }
 
@@ -121,7 +139,7 @@
     [self.dateIntervalPickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.dateIntervalPickerView.superview);
         make.trailing.equalTo(self.dateIntervalPickerView.superview);
-        make.bottom.equalTo(self.dateIntervalPickerView.superview);
+        make.top.equalTo(self.dateIntervalPickerView.superview.mas_bottom);
         make.height.equalTo(self.dateIntervalPickerView.superview).with.multipliedBy(0.2);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -322,6 +340,7 @@
 - (void)noteFilterViewControlerDidFinishFilterSelection:(VLDNoteFilterViewController *)viewController {
     self.selectedNoteFilterType = viewController.selectedNoteFilterType;
     [self setupDataSource];
+    [self.view setNeedsUpdateConstraints];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
     [self.tableView reloadData];

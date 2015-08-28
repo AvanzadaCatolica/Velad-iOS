@@ -16,10 +16,13 @@
 
 #pragma mark - Public methods
 
-+ (RLMResults *)notesWithState:(VLDNoteState)state
-              betweenStartDate:(NSDate *)startDate
-                       endDate:(NSDate *)endDate {
-    RLMResults *results = [[VLDNote objectsWhere:@"state == %d AND date BETWEEN {%@, %@}", state, startDate, endDate] sortedResultsUsingProperty:@"date" ascending:NO];
++ (RLMResults *)allNotes {
+    RLMResults *results = [[VLDNote allObjects] sortedResultsUsingProperty:@"date" ascending:NO];
+    return results;
+}
+
++ (RLMResults *)notesWithState:(VLDNoteState)state {
+    RLMResults *results = [[VLDNote objectsWhere:@"state == %d", state] sortedResultsUsingProperty:@"date" ascending:NO];
     return results;
 }
 
@@ -49,6 +52,21 @@
         dateFormatter.dateFormat = @"dd/MM/yyyy";
     });
     return [dateFormatter stringFromDate:note.date];
+}
+
++ (VLDNoteState)stateForFilterType:(VLDNoteFilterType)filterType {
+    switch (filterType) {
+        case VLDNoteFilterTypeRegular:
+            return VLDNoteStateRegular;
+        case VLDNoteFilterTypeConfessable:
+            return VLDNoteStateConfessable;
+        case VLDNoteFilterTypeConfessed:
+            return VLDNoteStateConfessed;
+        case VLDNoteFilterTypeGuidance:
+            return VLDNoteStateGuidance;
+        default:
+            return VLDNoteUndefined;
+    }
 }
 
 @end

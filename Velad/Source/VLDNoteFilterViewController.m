@@ -74,7 +74,7 @@
 }
 
 - (void)setupDataSource {
-    self.dataSource = @[@"Mostar todas", @"Regulares", @"Confesables", @"Confesadas", @"Guiamiento"];
+    self.dataSource = @[@"Mostar todas", @"Regulares", @"Confesables", @"Confesadas", @"Guiamiento", @"Por semanas"];
 }
 
 #pragma mark - Private methods

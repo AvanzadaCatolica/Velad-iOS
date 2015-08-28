@@ -7,12 +7,14 @@
 //
 
 #import <Realm/Realm.h>
+#import "VLDNoteFilterViewController.h"
 
 typedef NS_ENUM(NSInteger, VLDNoteState) {
     VLDNoteStateRegular,
     VLDNoteStateConfessable,
     VLDNoteStateConfessed,
-    VLDNoteStateGuidance
+    VLDNoteStateGuidance,
+    VLDNoteUndefined = NSIntegerMax
 };
 
 @interface VLDNote : RLMObject
@@ -21,14 +23,14 @@ typedef NS_ENUM(NSInteger, VLDNoteState) {
 @property VLDNoteState state;
 @property NSDate *date;
 
-+ (RLMResults *)notesWithState:(VLDNoteState)state
-              betweenStartDate:(NSDate *)startDate
-                       endDate:(NSDate *)endDate;
++ (RLMResults *)allNotes;
++ (RLMResults *)notesWithState:(VLDNoteState)state;
 + (RLMResults *)notesBetweenStartDate:(NSDate *)startDate
                               endDate:(NSDate *)endDate;
 + (NSArray *)stateSymbols;
 + (VLDNoteState)stateForSymbol:(NSString *)symbol;
 + (NSString *)symbolForState:(VLDNoteState)state;
 + (NSString *)formattedDateForNote:(VLDNote *)note;
++ (VLDNoteState)stateForFilterType:(VLDNoteFilterType)filterType;
 
 @end
