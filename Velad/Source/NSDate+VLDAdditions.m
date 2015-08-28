@@ -39,4 +39,15 @@
     return [dateFormatter stringFromDate:self];
 }
 
+- (BOOL)vld_isSameDay:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar vld_preferredCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+                                               fromDate:date];
+    NSDate *sanitazedDate = [calendar dateFromComponents:components];
+    components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+                             fromDate:self];
+    NSDate *selfDate = [calendar dateFromComponents:components];
+    return [selfDate isEqualToDate:sanitazedDate];
+}
+
 @end

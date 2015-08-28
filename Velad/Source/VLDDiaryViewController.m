@@ -16,6 +16,9 @@
 #import "VLDUpdateNotesPresenter.h"
 #import "VLDEmptyView.h"
 #import "VLDNoteFilterViewController.h"
+#import "VLDConfession.h"
+#import "NSDate+VLDAdditions.h"
+#import "UIColor+VLDAdditions.h"
 
 @interface VLDDiaryViewController () <UITableViewDataSource, UITableViewDelegate, VLDDateIntervalPickerViewDelegate, VLDNoteViewControllerDelegate, VLDUpdateNotesPresenterDataSource, VLDUpdateNotesPresenterDelegate, VLDNoteFilterViewControllerDelegate>
 
@@ -26,6 +29,7 @@
 @property (nonatomic) VLDEmptyView *emptyView;
 @property (nonatomic) VLDNoteTableViewCell *referenceHeightCell;
 @property (nonatomic) VLDNoteFilterType selectedNoteFilterType;
+@property (nonatomic) VLDConfession *lastConfession;
 
 - (void)setupNavigationItem;
 - (void)setupLayout;
@@ -33,6 +37,7 @@
 - (void)setupDateIntervalPickerView;
 - (void)setupEmptyView;
 - (void)setupSelectedNoteFilterType;
+- (void)setupLastConfession;
 - (void)updateEmptyStatus;
 - (void)updateLeftBarButtonItem;
 - (void)updateRightBarButtonItems;
@@ -64,6 +69,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupLastConfession];
     [self setupNavigationItem];
     [self setupEmptyView];
     [self setupLayout];
@@ -171,6 +177,10 @@
     self.emptyView.alpha = 0;
 }
 
+- (void)setupLastConfession {
+    self.lastConfession = [VLDConfession lastConfession];
+}
+
 #pragma mark - Private methods
 
 - (VLDUpdateNotesPresenter *)updateNotesPresenter {
@@ -255,7 +265,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VLDNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VLDNoteTableViewCell class])];
-    cell.model = self.notes[indexPath.row];
+    VLDNote *note = self.notes[indexPath.row];
+    cell.model = note;
+    if ((self.selectedNoteFilterType == VLDNoteFilterTypeAll || self.selectedNoteFilterType == VLDNoteFilterTypeConfessed) && (self.lastConfession && [note.date vld_isSameDay:self.lastConfession.date]) && note.state == VLDNoteStateConfessed) {
+        cell.dateLabel.textColor = [UIColor vld_mainColor];
+    } else {
+        cell.dateLabel.textColor = [UIColor blackColor];
+    }
     return cell;
 }
 
@@ -330,6 +346,7 @@
 #pragma mark - VLDUpdateNotesPresenterDelegate
 
 - (void)updateNotesPresenterDidFinishUpdate:(VLDUpdateNotesPresenter *)presenter {
+    [self setupLastConfession];
     [self updateLeftBarButtonItem];
     [self updateEmptyStatus];
     [self.tableView reloadData];

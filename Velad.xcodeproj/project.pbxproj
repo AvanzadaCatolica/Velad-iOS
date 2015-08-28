@@ -41,6 +41,7 @@
 		3F58FE241B6D662D0031A1F9 /* VLDGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE231B6D662D0031A1F9 /* VLDGroupViewController.m */; };
 		3F58FE271B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE261B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m */; };
 		3F5D48D01B90EFF50046364F /* VLDNoteFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D48CF1B90EFF50046364F /* VLDNoteFilterViewController.m */; };
+		3F5D48D31B91052C0046364F /* VLDConfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D48D21B91052C0046364F /* VLDConfession.m */; };
 		3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738411B35B72E007501F1 /* VLDReportsResultView.m */; };
 		3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738441B35DA8D007501F1 /* VLDEmptyView.m */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
@@ -137,6 +138,8 @@
 		3F58FE261B6D7C0A0031A1F9 /* VLDRestoreDataPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDRestoreDataPresenter.m; path = Source/VLDRestoreDataPresenter.m; sourceTree = "<group>"; };
 		3F5D48CE1B90EFF50046364F /* VLDNoteFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNoteFilterViewController.h; path = Source/VLDNoteFilterViewController.h; sourceTree = "<group>"; };
 		3F5D48CF1B90EFF50046364F /* VLDNoteFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNoteFilterViewController.m; path = Source/VLDNoteFilterViewController.m; sourceTree = "<group>"; };
+		3F5D48D11B91052C0046364F /* VLDConfession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDConfession.h; path = Source/VLDConfession.h; sourceTree = "<group>"; };
+		3F5D48D21B91052C0046364F /* VLDConfession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDConfession.m; path = Source/VLDConfession.m; sourceTree = "<group>"; };
 		3F8738401B35B72E007501F1 /* VLDReportsResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDReportsResultView.h; path = Source/VLDReportsResultView.h; sourceTree = "<group>"; };
 		3F8738411B35B72E007501F1 /* VLDReportsResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsResultView.m; path = Source/VLDReportsResultView.m; sourceTree = "<group>"; };
 		3F8738431B35DA8D007501F1 /* VLDEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEmptyView.h; path = Source/VLDEmptyView.h; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				3FE4C80B1B301DED0061420E /* VLDProfile.m */,
 				3FE4C8131B305B0E0061420E /* VLDSecurity.h */,
 				3FE4C8141B305B0E0061420E /* VLDSecurity.m */,
+				3F5D48D11B91052C0046364F /* VLDConfession.h */,
+				3F5D48D21B91052C0046364F /* VLDConfession.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -630,6 +635,7 @@
 				3F331A8B1B2C971C0055E742 /* VLDRecordNotesPresenter.m in Sources */,
 				3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */,
 				3F256C351B64241200B63C07 /* UITableViewCell+VLDAdditions.m in Sources */,
+				3F5D48D31B91052C0046364F /* VLDConfession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

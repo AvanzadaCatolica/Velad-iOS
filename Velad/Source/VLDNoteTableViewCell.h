@@ -13,5 +13,6 @@
 @interface VLDNoteTableViewCell : UITableViewCell
 
 @property (nonatomic) VLDNote *model;
+@property (nonatomic, weak, readonly) UILabel *dateLabel;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "VLDUpdateNotesPresenter.h"
 #import "VLDNote.h"
+#import "VLDConfession.h"
 
 @interface VLDUpdateNotesPresenter () <UIActionSheetDelegate>
 
@@ -36,10 +37,15 @@
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     
+    NSDate *date = [NSDate date];
     while (notes.count > 0) {
         VLDNote *note = notes.firstObject;
         note.state = VLDNoteStateConfessed;
+        note.date = date;
     }
+    VLDConfession *confession = [[VLDConfession alloc] init];
+    confession.date = date;
+    [realm addObject:confession];
     
     [realm commitWriteTransaction];
     if ([self.delegate respondsToSelector:@selector(updateNotesPresenterDidFinishUpdate:)]) {
