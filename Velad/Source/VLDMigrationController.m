@@ -42,7 +42,6 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
     [[NSFileManager defaultManager] removeItemAtPath:[RLMRealm defaultRealmPath] error:&error];
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
-        return;
     }
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsDatabaseSeeded];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kHasPerformedCurrentHardMigration];
