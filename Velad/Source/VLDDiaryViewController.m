@@ -212,14 +212,14 @@
                                                                                              target:self
                                                                                              action:@selector(onTapActionButton:)];
         [self.navigationItem
-         setLeftBarButtonItems:@[filterBarButtonItem, actionBarButtonItem]
+         setLeftBarButtonItems:@[actionBarButtonItem, filterBarButtonItem]
          animated:animated];
     } else {
         UIBarButtonItem *mailBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Mail"]
                                                                 style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onTapMailButton:)];
-        [self.navigationItem setLeftBarButtonItems:@[filterBarButtonItem, mailBarButtonItem] animated:animated];
+        [self.navigationItem setLeftBarButtonItems:@[mailBarButtonItem, filterBarButtonItem] animated:animated];
     }
 }
 
