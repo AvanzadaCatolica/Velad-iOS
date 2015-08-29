@@ -28,6 +28,7 @@
 - (void)onTapSecurityButton:(id)button;
 - (void)onTapOpinionButton:(id)button;
 - (void)onTapLicensesButton:(id)button;
+- (void)onTapOpenSourceButton:(id)button;
 - (void)setupNavigationItem;
 
 @end
@@ -126,6 +127,14 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
     [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
     [sectionDescriptor addFormRow:rowDescriptor];
     
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorLicenses
+                                                          rowType:XLFormRowDescriptorTypeButton
+                                                            title:@"Código abierto"];
+    rowDescriptor.action.formSelector = @selector(onTapOpenSourceButton:);
+    [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
+    [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
     rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorVersion
                                                           rowType:XLFormRowDescriptorTypeInfo];
     rowDescriptor.title = @"Versión";
@@ -196,6 +205,10 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
     viewController.headerText = @"Velad está hecho con software open source.";
     viewController.navigationItem.title = @"Licencias";
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)onTapOpenSourceButton:(id)button {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/AvanzadaCatolica/Velad-iOS"]];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
