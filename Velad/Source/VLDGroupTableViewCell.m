@@ -34,7 +34,7 @@
     _model = model;
     self.textLabel.text = model.name;
     self.detailTextLabel.text = [NSString stringWithFormat:@"%lu %@", (unsigned long)model.basicPoints.count, model
-                                 .basicPoints.count == 1? @"punto básico" : @"puntos básicos"];
+                                 .basicPoints.count == 1? @"punto" : @"puntos"];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 

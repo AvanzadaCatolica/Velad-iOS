@@ -123,7 +123,7 @@ static NSString * const kRowDescriptorAlert = @"VLDRowDescriptorAlert";
 }
 
 - (void)setupNavigationItem {
-    self.navigationItem.title = @"Punto Básico";
+    self.navigationItem.title = @"Punto";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                            target:self
                                                                                            action:@selector(onTapSaveButton:)];

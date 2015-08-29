@@ -41,7 +41,7 @@ NSString * const VLDBasicPointUUIDUserInfoKey = @"VLDBasicPointUUIDUserInfoKey";
         if ([localNotification respondsToSelector:@selector(alertTitle)]) {
             localNotification.alertTitle = @"Velad te recuerda";
         }
-        localNotification.alertBody = [NSString stringWithFormat:@"Alerta sobre el punto básico: %@", basicPoint.name];
+        localNotification.alertBody = [NSString stringWithFormat:@"Alerta sobre el punto: %@", basicPoint.name];
         localNotification.userInfo = @{VLDBasicPointUUIDUserInfoKey: basicPoint.UUID};
         localNotification.soundName = UILocalNotificationDefaultSoundName;
         [self scheduleNotification:localNotification

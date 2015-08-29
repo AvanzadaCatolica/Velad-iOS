@@ -76,7 +76,7 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
     [realm beginWriteTransaction];
     
     VLDGroup *group = [[VLDGroup alloc] init];
-    group.name = @"General";
+    group.name = @"Puntos Básicos";
     group.order = 0;
     [realm addObject:group];
     
