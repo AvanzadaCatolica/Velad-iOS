@@ -16,6 +16,7 @@
 @property VLDBasicPoint *basicPoint;
 @property NSString *notes;
 
++ (RLMResults *)recordsOnDate:(NSDate *)date;
 + (RLMResults *)recordForBasicPoint:(VLDBasicPoint *)basicPoint
                              onDate:(NSDate *)date;
 + (RLMResults *)recordsForBasicPoint:(VLDBasicPoint *)basicPoint

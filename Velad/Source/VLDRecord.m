@@ -13,6 +13,11 @@
 
 #pragma mark - Public methods
 
++ (RLMResults *)recordsOnDate:(NSDate *)date {
+    RLMResults *results = [VLDRecord objectsWhere:@"date == %@", date];
+    return results;
+}
+
 + (RLMResults *)recordForBasicPoint:(VLDBasicPoint *)basicPoint
                              onDate:(NSDate *)date {
     RLMResults *results = [VLDRecord objectsWhere:@"basicPoint == %@ AND date == %@", basicPoint, date];

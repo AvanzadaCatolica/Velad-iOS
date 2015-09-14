@@ -19,13 +19,15 @@
 #import "VLDGroupsViewController.h"
 #import "VLDGroup.h"
 #import "VLDSectionsViewModel.h"
+#import "VLDEncouragementAlertPresenter.h"
 
-@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate>
+@interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDEncouragementAlertPresenterDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) VLDSectionsViewModel *viewModel;
 @property (nonatomic, weak) VLDDatePickerView *datePickerView;
 @property (nonatomic) VLDRecordNotesPresenter *recordNotesPresenter;
+@property (nonatomic) VLDEncouragementAlertPresenter *encounragementAlertPresenter;
 
 - (void)setupDataSource;
 - (void)setupLayout;
@@ -33,6 +35,7 @@
 - (void)setupDatePickerView;
 - (void)setupGestureRecognizer;
 - (void)setupNavigationItem;
+- (void)showEncouragementAlert;
 
 @end
 
@@ -149,6 +152,14 @@
     return _recordNotesPresenter;
 }
 
+- (VLDEncouragementAlertPresenter *)encounragementAlertPresenter {
+    if (_encounragementAlertPresenter == nil) {
+        _encounragementAlertPresenter = [[VLDEncouragementAlertPresenter alloc] init];
+        _encounragementAlertPresenter.dataSource = self;
+    }
+    return _encounragementAlertPresenter;
+}
+
 - (VLDDailyRecord *)dailyRecordAtIndexPath:(NSIndexPath *)indexPath {
     VLDDailyRecord *dailyRecord = [[VLDDailyRecord alloc] init];
     
@@ -182,6 +193,10 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (void)showEncouragementAlert {
+    [self.encounragementAlertPresenter present];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -211,6 +226,8 @@
     VLDBasicPoint *basicPoint = self.viewModel.sections[indexPath.section][indexPath.row];
     RLMResults *records = [VLDRecord recordForBasicPoint:basicPoint onDate:self.datePickerView.selectedDate];
     VLDRecord *record = [records firstObject];
+
+    BOOL added = NO;
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
@@ -223,10 +240,18 @@
         record.basicPoint = basicPoint;
         record.notes = @"";
         [realm addObject:record];
+        added = YES;
     }
     
     [realm commitWriteTransaction];
+
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+    NSUInteger totalRecordsOnSelectedDay = [VLDRecord recordsOnDate:self.datePickerView.selectedDate].count;
+    NSArray *section = self.viewModel.sections[indexPath.section];
+    if ((float)totalRecordsOnSelectedDay / (float)section.count >= 0.5 && added) {
+        [self showEncouragementAlert];
+    }
 }
 
 #pragma mark - VLDRecordNotesPresenterDataSource
@@ -273,6 +298,12 @@
 - (void)datePickerView:(VLDDatePickerView *)datePickerView didChangeSelectionWithDirection:(VLDArrowButtonDirection)direction {
     [self setupDataSource];
     [self.tableView reloadData];
+}
+
+#pragma mark - VLDEncouragementAlertPresenterDataSource
+
+- (UIViewController *)viewControllerForEncouragementAlertPresenter:(VLDEncouragementAlertPresenter *)presenter {
+    return self;
 }
 
 @end

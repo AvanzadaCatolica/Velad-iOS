@@ -68,6 +68,7 @@
 		3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 		DA4D89D11BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,8 @@
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4D89CF1BADE61D008A4592 /* NSDateFormatter+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+VLDAdditions.h"; path = "Source/NSDateFormatter+VLDAdditions.h"; sourceTree = "<group>"; };
 		DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+VLDAdditions.m"; path = "Source/NSDateFormatter+VLDAdditions.m"; sourceTree = "<group>"; };
+		DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEncouragementAlertPresenter.h; path = Source/VLDEncouragementAlertPresenter.h; sourceTree = "<group>"; };
+		DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEncouragementAlertPresenter.m; path = Source/VLDEncouragementAlertPresenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +353,8 @@
 				3FD02C151B2D878F00B82507 /* VLDNotificationScheduler.m */,
 				3FE4C80D1B30534C0061420E /* VLDDeleteAlertPresenter.h */,
 				3FE4C80E1B30534C0061420E /* VLDDeleteAlertPresenter.m */,
+				DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */,
+				DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				3F331AAA1B2CEAB10055E742 /* VLDBasicPointViewController.m in Sources */,
 				3FD02C221B2DAE1E00B82507 /* VLDWeekTableViewCell.m in Sources */,
 				3F4239A21B64350A009B40B5 /* NSCalendar+VLDAdditions.m in Sources */,
+				DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */,
 				3F58FE241B6D662D0031A1F9 /* VLDGroupViewController.m in Sources */,
 				3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */,
 				3FD02C281B2DB97800B82507 /* UIView+VLDAdditions.m in Sources */,
