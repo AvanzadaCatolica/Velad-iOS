@@ -160,6 +160,16 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     navigationController.tabBarItem.image = [[UIImage imageNamed:@"TodaySelected"]
                                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [viewControllers addObject:navigationController];
+
+    VLDDiaryViewController *diaryViewController = [[VLDDiaryViewController alloc] init];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:diaryViewController];
+    navigationController.tabBarItem.title = @"Diario";
+    navigationController.navigationBar.translucent = NO;
+    navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiaryNormal"]
+                                             imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiarySelected"]
+                                             imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [viewControllers addObject:navigationController];
     
     VLDWeekViewController *weekViewController = [[VLDWeekViewController alloc] init];
     navigationController = [[UINavigationController alloc] initWithRootViewController:weekViewController];
@@ -168,16 +178,6 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     navigationController.tabBarItem.image = [[UIImage imageNamed:@"WeekNormal"]
                                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     navigationController.tabBarItem.image = [[UIImage imageNamed:@"WeekSelected"]
-                                             imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [viewControllers addObject:navigationController];
-    
-    VLDDiaryViewController *diaryViewController = [[VLDDiaryViewController alloc] init];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:diaryViewController];
-    navigationController.tabBarItem.title = @"Diario";
-    navigationController.navigationBar.translucent = NO;
-    navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiaryNormal"]
-                                             imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    navigationController.tabBarItem.image = [[UIImage imageNamed:@"DiarySelected"]
                                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [viewControllers addObject:navigationController];
     
