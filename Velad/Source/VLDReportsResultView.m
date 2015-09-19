@@ -71,7 +71,11 @@
 - (void)setupSubviews {
     UILabel *explanationLable = [[UILabel alloc] initWithFrame:CGRectZero];
     explanationLable.numberOfLines = 3;
-    explanationLable.font = [UIFont systemFontOfSize:18];
+    if ([[UIScreen mainScreen] scale] == 3.0f) {
+        explanationLable.font = [UIFont systemFontOfSize:18];
+    } else {
+        explanationLable.font = [UIFont systemFontOfSize:15];
+    }
     [self addSubview:explanationLable];
     [explanationLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(explanationLable.superview).with.offset(20);
