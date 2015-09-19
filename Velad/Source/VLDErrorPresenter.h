@@ -16,6 +16,7 @@
 @property (nonatomic, weak) id<VLDErrorPresenterDataSource> dataSource;
 
 - (instancetype)initWithDataSource:(id<VLDErrorPresenterDataSource>)dataSource NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 - (void)presentError:(NSError *)error;
 
 @end

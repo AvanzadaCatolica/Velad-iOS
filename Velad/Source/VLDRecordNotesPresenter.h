@@ -20,6 +20,7 @@
 @property (nonatomic, weak) id<VLDRecordNotesPresenterDelegate> delegate;
 
 - (instancetype)initWithDataSource:(id<VLDRecordNotesPresenterDataSource>)dataSource NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 - (void)present;
 
 @end

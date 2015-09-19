@@ -15,5 +15,6 @@
 
 - (instancetype)initWithSectionTitles:(NSArray *)sectionTitles
                              sections:(NSArray *)sections NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
