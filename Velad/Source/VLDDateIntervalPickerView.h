@@ -30,6 +30,7 @@ extern NSString * const VLDDateIntervalPickerViewStepEndKey;
 - (instancetype)initWithType:(VLDDateIntervalPickerViewType)type;
 - (NSArray *)dayStepsForSelection;
 - (void)resetPicketWithType:(VLDDateIntervalPickerViewType)type;
+- (BOOL)isTodayInCurrentIntervalSelection;
 
 @end
 

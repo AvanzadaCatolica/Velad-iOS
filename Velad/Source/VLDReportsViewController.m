@@ -96,7 +96,8 @@
     [super viewWillAppear:animated];
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
-    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];
+    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode
+                                        isUntilToday:[self.dateIntervalPickerView isTodayInCurrentIntervalSelection]];
 }
 
 - (UIRectEdge)edgesForExtendedLayout {
@@ -287,7 +288,11 @@
     if (reportsResultView.mode == VLDReportsModeWeekly) {
         NSUInteger weeklyfrequencyCount = 0;
         for (VLDBasicPoint *basicPoint in basicPoints) {
-            weeklyfrequencyCount += basicPoint.weekDays.count;
+            if ([self.dateIntervalPickerView isTodayInCurrentIntervalSelection]) {
+                weeklyfrequencyCount += [basicPoint possibleWeekDaysCountUntilCurrentWeekDay];
+            } else {
+                weeklyfrequencyCount += basicPoint.weekDays.count;
+            }
         }
         return weeklyfrequencyCount;
     } else {
@@ -299,6 +304,10 @@
                 if ([basicPoint.weekDaySymbols indexOfObject:[date vld_weekdaySymbol]] != NSNotFound) {
                     monthyfrequencyCount++;
                 }
+            }
+            if ([self.dateIntervalPickerView isTodayInCurrentIntervalSelection] &&
+                [date vld_isToday]) {
+                break;
             }
         }
         return monthyfrequencyCount;
@@ -319,7 +328,8 @@
     self.lineGraphLastClosestIndex = NSNotFound;
     [self setupDataSource];
     [self.lineGraphView reloadGraph];
-    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode];
+    [self.reportsResultView reloadResultViewWithMode:self.reportsResultView.mode
+                                        isUntilToday:[self.dateIntervalPickerView isTodayInCurrentIntervalSelection]];
 }
 
 #pragma mark - VLDErrorPresenterDataSource
@@ -343,7 +353,8 @@
     [self setupDataSource];
     self.lineGraphView.animationGraphEntranceTime = mode == VLDReportsModeWeekly ? 1 : 1.5;
     [self.lineGraphView reloadGraph];
-    [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly];
+    [self.reportsResultView reloadResultViewWithMode:mode == VLDReportsModeWeekly? VLDReportsResultViewModeWeekly : VLDReportsResultViewModeMonthly
+                                        isUntilToday:[self.dateIntervalPickerView isTodayInCurrentIntervalSelection]];
 }
 
 @end

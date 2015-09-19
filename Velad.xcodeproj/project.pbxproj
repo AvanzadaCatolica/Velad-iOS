@@ -67,6 +67,7 @@
 		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
 		3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
+		DA4D89D11BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +190,8 @@
 		3FF4D72B1B2E096E008538DA /* VLDNotesActionsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNotesActionsPresenter.h; path = Source/VLDNotesActionsPresenter.h; sourceTree = "<group>"; };
 		3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNotesActionsPresenter.m; path = Source/VLDNotesActionsPresenter.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4D89CF1BADE61D008A4592 /* NSDateFormatter+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+VLDAdditions.h"; path = "Source/NSDateFormatter+VLDAdditions.h"; sourceTree = "<group>"; };
+		DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+VLDAdditions.m"; path = "Source/NSDateFormatter+VLDAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +386,8 @@
 				3F256C341B64241200B63C07 /* UITableViewCell+VLDAdditions.m */,
 				3F4239A01B64350A009B40B5 /* NSCalendar+VLDAdditions.h */,
 				3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */,
+				DA4D89CF1BADE61D008A4592 /* NSDateFormatter+VLDAdditions.h */,
+				DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 				3F331A921B2CBB8F0055E742 /* VLDWeekViewController.m in Sources */,
 				3F5D48D01B90EFF50046364F /* VLDNoteFilterViewController.m in Sources */,
 				3F331A801B2C81030055E742 /* VLDDailyRecordTableViewCell.m in Sources */,
+				DA4D89D11BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m in Sources */,
 				3FE4C8151B305B0E0061420E /* VLDSecurity.m in Sources */,
 				3FF1C3F31B64FE010002A6E5 /* VLDWeekdayArrayValidator.m in Sources */,
 				3F58FE181B6D4FA70031A1F9 /* VLDGroup.m in Sources */,

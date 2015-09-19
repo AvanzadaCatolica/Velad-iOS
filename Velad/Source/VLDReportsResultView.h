@@ -22,7 +22,8 @@ typedef NS_ENUM(NSUInteger, VLDReportsResultViewMode) {
 
 - (instancetype)initWithDataSource:(id<VLDReportsResultViewDataSource>)dataSource
                               mode:(VLDReportsResultViewMode)mode;
-- (void)reloadResultViewWithMode:(VLDReportsResultViewMode)mode;
+- (void)reloadResultViewWithMode:(VLDReportsResultViewMode)mode
+                    isUntilToday:(BOOL)isUntilToday;
 
 @end
 

@@ -103,6 +103,11 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     return self.selectedDateIntervalLabel.text;
 }
 
+- (BOOL)isTodayInCurrentIntervalSelection {
+    NSDate *today = [NSDate date];
+    return [self.selectedStartDate compare:today] == NSOrderedAscending && [self.selectedEndDate compare:today] == NSOrderedDescending;
+}
+
 #pragma mark - Setup methods
 
 - (void)setupView {
@@ -224,11 +229,6 @@ static NSTimeInterval const kWeekTimeInterval = 7 * 24 * 60 * 60;
     if ([self.delegate respondsToSelector:@selector(dateIntervalPickerView:didChangeSelectionWithDirection:)]) {
         [self.delegate dateIntervalPickerView:self didChangeSelectionWithDirection:VLDArrowButtonDirectionRight];
     }
-}
-
-- (BOOL)isTodayInCurrentIntervalSelection {
-    NSDate *today = [NSDate date];
-    return [self.selectedStartDate compare:today] == NSOrderedAscending && [self.selectedEndDate compare:today] == NSOrderedDescending;
 }
 
 - (void)updateSelectedDateIntervalLabel {

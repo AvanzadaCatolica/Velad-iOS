@@ -40,11 +40,12 @@
     return self;
 }
 
-- (void)reloadResultViewWithMode:(VLDReportsResultViewMode)mode {
+- (void)reloadResultViewWithMode:(VLDReportsResultViewMode)mode
+                    isUntilToday:(BOOL)isUntilToday {
     self.mode = mode;
     NSUInteger maximumPossibleScore = [self.dataSource maximumPossibleScoreForReportsResultView:self];
     NSUInteger score = [self.dataSource scoreForReportsResultView:self];
-    self.explanationLable.text = [NSString stringWithFormat:@"Tu puntaje %@:", self.mode == VLDReportsResultViewModeWeekly? @"esta semana" : @"este mes"];
+    self.explanationLable.text = [NSString stringWithFormat:@"Tu puntaje %@%@:", isUntilToday? @"hasta hoy " : @"", self.mode == VLDReportsResultViewModeWeekly? @"esta semana" : @"este mes"];
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu / %lu", (unsigned long)score, (unsigned long)maximumPossibleScore]];
     NSUInteger numberOfDigits = [@(score) stringValue].length;
     [mutableAttributedString addAttribute:NSFontAttributeName
