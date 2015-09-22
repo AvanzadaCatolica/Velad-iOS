@@ -248,8 +248,7 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
     NSUInteger totalRecordsOnSelectedDay = [VLDRecord recordsOnDate:self.datePickerView.selectedDate].count;
-    NSArray *section = self.viewModel.sections[indexPath.section];
-    if ((float)totalRecordsOnSelectedDay / (float)section.count >= 0.5 && added) {
+    if ((float)totalRecordsOnSelectedDay / (float)self.viewModel.totalCount >= 0.5 && added) {
         [self showEncouragementAlert];
     }
 }

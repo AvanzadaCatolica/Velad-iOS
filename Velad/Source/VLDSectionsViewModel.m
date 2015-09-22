@@ -21,4 +21,12 @@
     return self;
 }
 
+- (NSUInteger)totalCount {
+    NSUInteger totalCount = 0;
+    for (NSArray *section in self.sections) {
+        totalCount += section.count;
+    }
+    return totalCount;
+}
+
 @end

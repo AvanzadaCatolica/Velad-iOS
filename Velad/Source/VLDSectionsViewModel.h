@@ -12,6 +12,7 @@
 
 @property (nonatomic, readonly) NSArray *sectionTitles;
 @property (nonatomic, readonly) NSArray *sections;
+@property (nonatomic, readonly) NSUInteger totalCount;
 
 - (instancetype)initWithSectionTitles:(NSArray *)sectionTitles
                              sections:(NSArray *)sections NS_DESIGNATED_INITIALIZER;
