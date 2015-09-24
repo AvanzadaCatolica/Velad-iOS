@@ -3,7 +3,7 @@ platform :ios, '7.0'
 target 'Velad' do
   pod 'Realm'
   pod 'Masonry'
-  pod 'XLForm', git: 'git@github.com:xmartlabs/XLForm.git', branch: 'master'
+  pod 'XLForm' 
   pod 'Reveal-iOS-SDK', configurations: ['Debug']
   pod 'SSKeychain'
   pod 'VTAcknowledgementsViewController'
