@@ -5,6 +5,9 @@ cache:
   - bundler
   - cocoapods
 
+before_install:
+  - brew install carthage
+
 install:
   - bundle exec rake bootstrap 
 
