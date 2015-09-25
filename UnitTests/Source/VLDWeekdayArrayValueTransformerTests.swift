@@ -6,7 +6,6 @@
 //  Copyright © 2015 MAC. All rights reserved.
 //
 
-import XCTest
 import Nimble
 import Quick
 
