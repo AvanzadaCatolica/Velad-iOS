@@ -14,7 +14,7 @@ class VLDSectionsViewModelTests: QuickSpec {
     override func spec() {
         describe("VLDSectionsViewModel") {
             it("should calculate `totalCount` correctly") {
-                let viewModel = VLDSectionsViewModel.init(sectionTitles: ["B", "C"], sections: [["ABA", "BAB"], ["CAC", "ACA"]])
+                let viewModel = VLDSectionsViewModel(sectionTitles: ["B", "C"], sections: [["ABA", "BAB"], ["CAC", "ACA"]])
                 expect(viewModel.totalCount).to(equal(4))
             }
         }

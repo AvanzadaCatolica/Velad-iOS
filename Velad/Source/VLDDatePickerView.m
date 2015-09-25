@@ -7,7 +7,7 @@
 //
 
 #import "VLDDatePickerView.h"
-#import <Masonry/Masonry.h>
+#import "Masonry/Masonry.h"
 #import "UIColor+VLDAdditions.h"
 #import "NSDate+VLDAdditions.h"
 #import "NSCalendar+VLDAdditions.h"

@@ -39,9 +39,9 @@ class VLDErrorPresenterTests: QuickSpec {
     override func spec() {
         describe("VLDErrorPresenterDataSource") {
             it("should call `viewControllerForErrorPresenter:` during `presentError:`") {
-                let dataSource = VLDErrorPresenterDataSource_Mock.init()
-                let error = NSError.init(domain: "", code: 0, userInfo: ["NSLocalizedDescription": ""])
-                let errorPresenter = VLDErrorPresenter.init(dataSource: dataSource)
+                let dataSource = VLDErrorPresenterDataSource_Mock()
+                let error = NSError(domain: "", code: 0, userInfo: ["NSLocalizedDescription": ""])
+                let errorPresenter = VLDErrorPresenter(dataSource: dataSource)
                 errorPresenter.presentError(nil)
                 expect(dataSource.callCountForSelector("viewControllerForErrorPresenter:")).to(equal(1))
             }
