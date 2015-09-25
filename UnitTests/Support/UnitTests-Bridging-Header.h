@@ -4,3 +4,5 @@
 
 #import "VLDWeekdayArrayValueTrasformer.h"
 #import "VLDErrorPresenter.h"
+#import "XLForm/XLForm.h"
+#import "VLDWeekdayArrayValidator.h"
