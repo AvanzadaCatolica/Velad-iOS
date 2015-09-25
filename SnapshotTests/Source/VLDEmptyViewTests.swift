@@ -15,7 +15,7 @@ class VLDEmptyViewTests: FBSnapshotTestCase {
         recordMode = false
     }
 
-    func testDateIntervalPickerViewWeekly() {
+    func testEmptyView() {
         let emptyView = VLDEmptyView()
         emptyView.frame = CGRectMake(0, 0, 320, 320)
         FBSnapshotVerifyView(emptyView)

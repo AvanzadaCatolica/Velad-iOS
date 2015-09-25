@@ -7,3 +7,4 @@
 #import "VLDDateIntervalPickerView.h"
 #import "VLDDateIntervalPickerView+Private.h"
 #import "VLDEmptyView.h"
+#import "VLDReportsModePickerView.h"
