@@ -13,7 +13,7 @@
 
 @interface VLDDatePickerView : UIView
 
-@property (nonatomic) NSDate *selectedDate;
+@property (nonatomic, readonly) NSDate *selectedDate;
 @property (nonatomic, weak) id<VLDDatePickerViewDelegate> delegate;
 
 @end

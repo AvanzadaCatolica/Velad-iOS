@@ -10,6 +10,7 @@
 
 @interface VLDDatePickerView (Private)
 
+- (void)setSelectedDate:(NSDate *)date;
 - (void)updateSelectedDateLabel;
 
 @end

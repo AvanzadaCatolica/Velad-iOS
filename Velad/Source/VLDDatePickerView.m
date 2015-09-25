@@ -16,6 +16,7 @@
 
 @property (nonatomic, weak) UILabel *selectedDateLabel;
 @property (nonatomic) NSDateFormatter *dateFormatter;
+@property (nonatomic) NSDate *selectedDate;
 
 - (void)setupView;
 - (void)setupSelectedDate;

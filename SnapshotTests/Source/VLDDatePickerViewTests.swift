@@ -19,7 +19,7 @@ class VLDDatePickerViewTests: FBSnapshotTestCase {
         let datePickerView = VLDDatePickerView(frame: CGRectMake(0, 0, 320, 60));
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        datePickerView.selectedDate = dateFormatter.dateFromString("20/09/1990")
+        datePickerView.setSelectedDate(dateFormatter.dateFromString("20/09/1990"))
         datePickerView.updateSelectedDateLabel()
         FBSnapshotVerifyView(datePickerView)
     }
