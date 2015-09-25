@@ -87,6 +87,7 @@
 		DA83C7A01BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C79F1BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DA83C7A11BB5F2DB00C1E05A /* NSString+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A871B2C925E0055E742 /* NSString+VLDAdditions.m */; };
 		DA83C7A31BB5F3D700C1E05A /* UIColorVLDAdditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C7A21BB5F3D700C1E05A /* UIColorVLDAdditionsTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C7BC1BB6021B00C1E05A /* ReferenceImages_64 in Resources */ = {isa = PBXBuildFile; fileRef = DA83C7BB1BB6021B00C1E05A /* ReferenceImages_64 */; settings = {ASSET_TAGS = (); }; };
 		DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
@@ -267,6 +268,7 @@
 		DA83C79D1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDReportsModePickerViewTests.swift; path = Source/VLDReportsModePickerViewTests.swift; sourceTree = "<group>"; };
 		DA83C79F1BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSStringVLDAdditionsTests.swift; path = Source/NSStringVLDAdditionsTests.swift; sourceTree = "<group>"; };
 		DA83C7A21BB5F3D700C1E05A /* UIColorVLDAdditionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorVLDAdditionsTests.swift; path = Source/UIColorVLDAdditionsTests.swift; sourceTree = "<group>"; };
+		DA83C7BB1BB6021B00C1E05A /* ReferenceImages_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ReferenceImages_64; sourceTree = "<group>"; };
 		DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEncouragementAlertPresenter.h; path = Source/VLDEncouragementAlertPresenter.h; sourceTree = "<group>"; };
 		DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEncouragementAlertPresenter.m; path = Source/VLDEncouragementAlertPresenter.m; sourceTree = "<group>"; };
 		DAA873051BB40A1500A443F2 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -593,6 +595,7 @@
 		DA83C76E1BB5BD7900C1E05A /* SnapshotTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA83C7BB1BB6021B00C1E05A /* ReferenceImages_64 */,
 				DA83C7771BB5BD8800C1E05A /* Source */,
 				DA83C7781BB5BD9300C1E05A /* Support */,
 			);
@@ -767,6 +770,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA83C7BC1BB6021B00C1E05A /* ReferenceImages_64 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1168,6 +1172,7 @@
 				DA83C7761BB5BD7900C1E05A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DAA8730E1BB40A1500A443F2 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
