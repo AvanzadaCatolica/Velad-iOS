@@ -14,7 +14,7 @@ class VLDWeekdayArrayValidatorTests: QuickSpec {
     override func spec() {
         describe("VLDWeekdayArrayValidator") {
             it("should validad a selected value") {
-                let validator = VLDWeekdayArrayValidator.init()
+                let validator = VLDWeekdayArrayValidator()
                 let formRowDescriptor = XLFormRowDescriptor(tag: "", rowType: "")
                 formRowDescriptor.value = ["Lunes"]
                 let status = validator.isValid(formRowDescriptor)

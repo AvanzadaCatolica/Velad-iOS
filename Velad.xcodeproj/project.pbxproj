@@ -73,24 +73,53 @@
 		DA7A09111BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7A09101BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DA7A09121BB59A6E0015C93A /* VLDWeekdayArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3F21B64FE010002A6E5 /* VLDWeekdayArrayValidator.m */; };
 		DA7A09141BB59A7F0015C93A /* libXLForm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7A09131BB59A7F0015C93A /* libXLForm.a */; };
+		DA83C7671BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C7661BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C7681BB5BBC100C1E05A /* VLDSectionsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F58FE201B6D60BB0031A1F9 /* VLDSectionsViewModel.m */; };
+		DA83C7791BB5BE2600C1E05A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAA8731C1BB411E400A443F2 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA83C77A1BB5BE2C00C1E05A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAA8731D1BB411E400A443F2 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA83C77C1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C77B1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C7861BB5C08800C1E05A /* FBSnapshotTestCase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA83C7871BB5C08E00C1E05A /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */; };
+		DA83C78F1BB5D34200C1E05A /* libMasonry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA83C78E1BB5D34200C1E05A /* libMasonry.a */; };
+		DA83C7971BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C79C1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C79E1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C79D1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
 		DAA8731E1BB411E400A443F2 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA8731C1BB411E400A443F2 /* Nimble.framework */; };
 		DAA8731F1BB411E400A443F2 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA8731D1BB411E400A443F2 /* Quick.framework */; };
-		DAA873231BB412E700A443F2 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAA873211BB412E700A443F2 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DAA873241BB412E700A443F2 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAA873221BB412E700A443F2 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DA83C7721BB5BD7900C1E05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F331A221B2C67020055E742 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F331A291B2C67020055E742;
+			remoteInfo = Velad;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		DA83C7821BB5BE9400C1E05A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA83C7861BB5C08800C1E05A /* FBSnapshotTestCase.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAA873201BB412CE00A443F2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DAA873231BB412E700A443F2 /* Nimble.framework in CopyFiles */,
-				DAA873241BB412E700A443F2 /* Quick.framework in CopyFiles */,
+				DA83C77A1BB5BE2C00C1E05A /* Quick.framework in CopyFiles */,
+				DA83C7791BB5BE2600C1E05A /* Nimble.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +250,18 @@
 		DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDErrorPresenterTests.swift; path = Source/VLDErrorPresenterTests.swift; sourceTree = "<group>"; };
 		DA7A09101BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDWeekdayArrayValidatorTests.swift; path = Source/VLDWeekdayArrayValidatorTests.swift; sourceTree = "<group>"; };
 		DA7A09131BB59A7F0015C93A /* libXLForm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libXLForm.a; path = "Pods/../build/Debug-iphoneos/libXLForm.a"; sourceTree = "<group>"; };
+		DA83C7661BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDSectionsViewModelTests.swift; path = Source/VLDSectionsViewModelTests.swift; sourceTree = "<group>"; };
+		DA83C76D1BB5BD7900C1E05A /* SnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA83C77B1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDDatePickerViewTests.swift; path = Source/VLDDatePickerViewTests.swift; sourceTree = "<group>"; };
+		DA83C77D1BB5BE6200C1E05A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Support/Info.plist; sourceTree = "<group>"; };
+		DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
+		DA83C78C1BB5D26700C1E05A /* SnapshotTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SnapshotTests-Bridging-Header.h"; path = "Support/SnapshotTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA83C78E1BB5D34200C1E05A /* libMasonry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMasonry.a; path = "Pods/../build/Debug-iphoneos/libMasonry.a"; sourceTree = "<group>"; };
+		DA83C7931BB5E6D000C1E05A /* VLDDatePickerView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VLDDatePickerView+Private.h"; path = "Source/VLDDatePickerView+Private.h"; sourceTree = "<group>"; };
+		DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDDateIntervalPickerViewTests.swift; path = Source/VLDDateIntervalPickerViewTests.swift; sourceTree = "<group>"; };
+		DA83C7981BB5E9EB00C1E05A /* VLDDateIntervalPickerView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VLDDateIntervalPickerView+Private.h"; path = "Source/VLDDateIntervalPickerView+Private.h"; sourceTree = "<group>"; };
+		DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDEmptyViewTests.swift; path = Source/VLDEmptyViewTests.swift; sourceTree = "<group>"; };
+		DA83C79D1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDReportsModePickerViewTests.swift; path = Source/VLDReportsModePickerViewTests.swift; sourceTree = "<group>"; };
 		DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEncouragementAlertPresenter.h; path = Source/VLDEncouragementAlertPresenter.h; sourceTree = "<group>"; };
 		DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEncouragementAlertPresenter.m; path = Source/VLDEncouragementAlertPresenter.m; sourceTree = "<group>"; };
 		DAA873051BB40A1500A443F2 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,8 +270,6 @@
 		DAA873181BB40D8300A443F2 /* UnitTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UnitTests-Bridging-Header.h"; path = "Support/UnitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAA8731C1BB411E400A443F2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		DAA8731D1BB411E400A443F2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		DAA873211BB412E700A443F2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		DAA873221BB412E700A443F2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +278,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA83C76A1BB5BD7900C1E05A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA83C78F1BB5D34200C1E05A /* libMasonry.a in Frameworks */,
+				DA83C7871BB5C08E00C1E05A /* FBSnapshotTestCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +317,7 @@
 			children = (
 				3F331A2C1B2C67020055E742 /* Velad */,
 				DAA873061BB40A1500A443F2 /* UnitTests */,
+				DA83C76E1BB5BD7900C1E05A /* SnapshotTests */,
 				3F331A2B1B2C67020055E742 /* Products */,
 				2582683999AF857AC08226F6 /* Pods */,
 				92E6478D0E4B852836397AB9 /* Frameworks */,
@@ -280,6 +329,7 @@
 			children = (
 				3F331A2A1B2C67020055E742 /* Velad.app */,
 				DAA873051BB40A1500A443F2 /* UnitTests.xctest */,
+				DA83C76D1BB5BD7900C1E05A /* SnapshotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -525,6 +575,8 @@
 		92E6478D0E4B852836397AB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA83C78E1BB5D34200C1E05A /* libMasonry.a */,
+				DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */,
 				DA7A09131BB59A7F0015C93A /* libXLForm.a */,
 				DAA8731C1BB411E400A443F2 /* Nimble.framework */,
 				DAA8731D1BB411E400A443F2 /* Quick.framework */,
@@ -533,11 +585,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DA83C76E1BB5BD7900C1E05A /* SnapshotTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA83C7771BB5BD8800C1E05A /* Source */,
+				DA83C7781BB5BD9300C1E05A /* Support */,
+			);
+			path = SnapshotTests;
+			sourceTree = "<group>";
+		};
+		DA83C7771BB5BD8800C1E05A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DA83C7931BB5E6D000C1E05A /* VLDDatePickerView+Private.h */,
+				DA83C77B1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift */,
+				DA83C7981BB5E9EB00C1E05A /* VLDDateIntervalPickerView+Private.h */,
+				DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */,
+				DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */,
+				DA83C79D1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		DA83C7781BB5BD9300C1E05A /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				DA83C78C1BB5D26700C1E05A /* SnapshotTests-Bridging-Header.h */,
+				DA83C77D1BB5BE6200C1E05A /* Info.plist */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		DAA873061BB40A1500A443F2 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
 				DAA8730F1BB40AB600A443F2 /* Source */,
-				DAA873251BB412F400A443F2 /* Frameworks */,
 				DAA873101BB40AC000A443F2 /* Support */,
 			);
 			path = UnitTests;
@@ -549,6 +631,7 @@
 				DA7A09101BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift */,
 				DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */,
 				DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */,
+				DA83C7661BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -560,15 +643,6 @@
 				DAA873131BB40B1900A443F2 /* Info.plist */,
 			);
 			name = Support;
-			sourceTree = "<group>";
-		};
-		DAA873251BB412F400A443F2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DAA873211BB412E700A443F2 /* Nimble.framework */,
-				DAA873221BB412E700A443F2 /* Quick.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -592,6 +666,25 @@
 			productName = Velad;
 			productReference = 3F331A2A1B2C67020055E742 /* Velad.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DA83C76C1BB5BD7900C1E05A /* SnapshotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA83C7741BB5BD7900C1E05A /* Build configuration list for PBXNativeTarget "SnapshotTests" */;
+			buildPhases = (
+				DA83C7691BB5BD7900C1E05A /* Sources */,
+				DA83C76A1BB5BD7900C1E05A /* Frameworks */,
+				DA83C76B1BB5BD7900C1E05A /* Resources */,
+				DA83C7821BB5BE9400C1E05A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA83C7731BB5BD7900C1E05A /* PBXTargetDependency */,
+			);
+			name = SnapshotTests;
+			productName = SnapshotTests;
+			productReference = DA83C76D1BB5BD7900C1E05A /* SnapshotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		DAA873041BB40A1500A443F2 /* UnitTests */ = {
 			isa = PBXNativeTarget;
@@ -624,6 +717,10 @@
 					3F331A291B2C67020055E742 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
+					DA83C76C1BB5BD7900C1E05A = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 3F331A291B2C67020055E742;
+					};
 					DAA873041BB40A1500A443F2 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -643,6 +740,7 @@
 			targets = (
 				3F331A291B2C67020055E742 /* Velad */,
 				DAA873041BB40A1500A443F2 /* UnitTests */,
+				DA83C76C1BB5BD7900C1E05A /* SnapshotTests */,
 			);
 		};
 /* End PBXProject section */
@@ -655,6 +753,13 @@
 				3F331A701B2C6AC60055E742 /* Localizable.strings in Resources */,
 				3F4710191B30AB7500DE674F /* Pods-Velad-acknowledgements.plist in Resources */,
 				3F331A681B2C68410055E742 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA83C76B1BB5BD7900C1E05A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,11 +871,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA83C7691BB5BD7900C1E05A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA83C79E1BB5EDFF00C1E05A /* VLDReportsModePickerViewTests.swift in Sources */,
+				DA83C79C1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift in Sources */,
+				DA83C7971BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift in Sources */,
+				DA83C77C1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAA873011BB40A1500A443F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA83C7681BB5BBC100C1E05A /* VLDSectionsViewModel.m in Sources */,
 				DA7A09121BB59A6E0015C93A /* VLDWeekdayArrayValidator.m in Sources */,
+				DA83C7671BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift in Sources */,
 				DA7A09111BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift in Sources */,
 				DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */,
 				DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */,
@@ -780,6 +898,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA83C7731BB5BD7900C1E05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F331A291B2C67020055E742 /* Velad */;
+			targetProxy = DA83C7721BB5BD7900C1E05A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F331A6D1B2C6A350055E742 /* Localizable.strings */ = {
@@ -906,6 +1032,59 @@
 			};
 			name = Release;
 		};
+		DA83C7751BB5BD7900C1E05A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SnapshotTests/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mac.velad.SnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnapshotTests/Support/SnapshotTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Velad.app/Velad";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Pods/**";
+			};
+			name = Debug;
+		};
+		DA83C7761BB5BD7900C1E05A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SnapshotTests/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mac.velad.SnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnapshotTests/Support/SnapshotTests-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Velad.app/Velad";
+			};
+			name = Release;
+		};
 		DAA8730C1BB40A1500A443F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -971,6 +1150,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DA83C7741BB5BD7900C1E05A /* Build configuration list for PBXNativeTarget "SnapshotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA83C7751BB5BD7900C1E05A /* Debug */,
+				DA83C7761BB5BD7900C1E05A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		DAA8730E1BB40A1500A443F2 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;

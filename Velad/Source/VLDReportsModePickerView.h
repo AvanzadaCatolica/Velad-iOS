@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, VLDReportsMode) {
     VLDReportsModeWeekly,
-    VLDReportsModeMontly,
+    VLDReportsModeMonthly,
 };
 
 @protocol VLDReportsModePickerViewDelegate;

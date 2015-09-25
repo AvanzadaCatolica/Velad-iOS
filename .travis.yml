@@ -12,4 +12,5 @@ install:
   - bundle exec rake bootstrap 
 
 script:
-  - bundle exec rake test
+  - bundle exec rake test:unit
+  - bundle exec rake test:snapshot
