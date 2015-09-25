@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <XLForm/XLForm.h>
+#import "XLForm/XLForm.h"
 
 @interface VLDWeekdayArrayValidator : NSObject <XLFormValidatorProtocol>
 
