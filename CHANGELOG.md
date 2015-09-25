@@ -1,3 +1,60 @@
+__0.1.5__
+
+Cambios:
+
+* Se corrigió un error en la frecuencia en la que aparece la alerta de estímulo en la pantalla de “Hoy”.
+
+Problemas ignorados:
+
+* Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
+
+__0.1.4__
+
+Cambios:
+
+* Se agregó una alerta para alentar el progreso diario de los puntos básicos.
+* Se cambió el orden del menú principal.
+* Los informes de la semana/mes actual se muestran hasta el día actual.
+* Se agregaron el ícono y la pantalla de lanzamiento de la aplicación.
+
+Problemas ignorados:
+
+* Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
+
+__0.1.3__
+
+__No hay ningún cambio en este versión.__
+
+__0.1.2__
+
+Cambios:
+
+* Se cambió el nombre del grupo por defecto de “General” a “Puntos Básicos”.
+* Se agregó un enlace en la pantalla de “Configuración” a el repositorio de código abierto.
+
+Problemas conocidos:
+
+* La aplicación aún no tiene ícono ni pantalla de lanzamiento.
+* Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
+
+__0.1.1__
+
+Cambios:
+
+* Se corrigió un error grave que borraba la base de datos al iniciar la aplicación por segunda vez después del update 0.1.0.
+* Se corrigió un error que duplicaba los puntos básicos luego de editarlos.
+* Se reemplazó el botón de edición de un tacho de basura a un botón textual.
+* Se han cambiado los puntos básicos por defecto.
+* Diario: se ha cambiado la forma de filtrar las notas.
+* Diario: al registrar una confesión, se guarda la fecha de esta y se resalta en la vista de notas.
+* Diario: se agregó la opción de enviar el diario por correo.
+* Semana e Informes: se cambió el botón de enviar por correo de derecha a izquierda para que esté alineado con el nuevo botón en la pantalla de diario.
+
+Problemas conocidos:
+
+* La aplicación aún no tiene ícono ni pantalla de lanzamiento.
+* Al presionar sobre el gráfico de informes por primera vez luego de que este se ha mostrado en la pantalla, no se muestra la fecha correcta.
+
 __0.1.0__
 
 __Información importante:__
