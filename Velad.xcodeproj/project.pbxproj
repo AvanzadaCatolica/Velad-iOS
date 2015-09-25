@@ -68,6 +68,8 @@
 		3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
 		DA4D89D11BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */; };
 		DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
@@ -213,6 +215,7 @@
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4D89CF1BADE61D008A4592 /* NSDateFormatter+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+VLDAdditions.h"; path = "Source/NSDateFormatter+VLDAdditions.h"; sourceTree = "<group>"; };
 		DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+VLDAdditions.m"; path = "Source/NSDateFormatter+VLDAdditions.m"; sourceTree = "<group>"; };
+		DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDErrorPresenterTests.swift; path = Source/VLDErrorPresenterTests.swift; sourceTree = "<group>"; };
 		DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEncouragementAlertPresenter.h; path = Source/VLDEncouragementAlertPresenter.h; sourceTree = "<group>"; };
 		DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEncouragementAlertPresenter.m; path = Source/VLDEncouragementAlertPresenter.m; sourceTree = "<group>"; };
 		DAA873051BB40A1500A443F2 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -537,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */,
+				DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -758,6 +762,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */,
+				DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */,
 				DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */,
 				DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */,
 			);
@@ -954,6 +960,7 @@
 				DAA8730D1BB40A1500A443F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,7 +10,7 @@ import XCTest
 import Nimble
 import Quick
 
-class UnitTests: QuickSpec {
+class VLDWeekdayArrayValueTransformerTests: QuickSpec {
 
     override func spec() {
         describe("VLDWeekdayArrayValueTrasformer") {
