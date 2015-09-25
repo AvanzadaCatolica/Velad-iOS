@@ -82,6 +82,7 @@
 		DA83C7871BB5C08E00C1E05A /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */; };
 		DA83C78F1BB5D34200C1E05A /* libMasonry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA83C78E1BB5D34200C1E05A /* libMasonry.a */; };
 		DA83C7971BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA83C79C1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA250681BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA873161BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
@@ -258,6 +259,7 @@
 		DA83C7931BB5E6D000C1E05A /* VLDDatePickerView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VLDDatePickerView+Private.h"; path = "Source/VLDDatePickerView+Private.h"; sourceTree = "<group>"; };
 		DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDDateIntervalPickerViewTests.swift; path = Source/VLDDateIntervalPickerViewTests.swift; sourceTree = "<group>"; };
 		DA83C7981BB5E9EB00C1E05A /* VLDDateIntervalPickerView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VLDDateIntervalPickerView+Private.h"; path = "Source/VLDDateIntervalPickerView+Private.h"; sourceTree = "<group>"; };
+		DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDEmptyViewTests.swift; path = Source/VLDEmptyViewTests.swift; sourceTree = "<group>"; };
 		DAA250661BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEncouragementAlertPresenter.h; path = Source/VLDEncouragementAlertPresenter.h; sourceTree = "<group>"; };
 		DAA250671BA76EBC00C81F12 /* VLDEncouragementAlertPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEncouragementAlertPresenter.m; path = Source/VLDEncouragementAlertPresenter.m; sourceTree = "<group>"; };
 		DAA873051BB40A1500A443F2 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -597,6 +599,7 @@
 				DA83C77B1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift */,
 				DA83C7981BB5E9EB00C1E05A /* VLDDateIntervalPickerView+Private.h */,
 				DA83C7961BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift */,
+				DA83C79B1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA83C79C1BB5EC7A00C1E05A /* VLDEmptyViewTests.swift in Sources */,
 				DA83C7971BB5E8D500C1E05A /* VLDDateIntervalPickerViewTests.swift in Sources */,
 				DA83C77C1BB5BE5B00C1E05A /* VLDDatePickerViewTests.swift in Sources */,
 			);
