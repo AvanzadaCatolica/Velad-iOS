@@ -42,7 +42,7 @@ class VLDErrorPresenterTests: QuickSpec {
                 let dataSource = VLDErrorPresenterDataSource_Mock()
                 let error = NSError(domain: "", code: 0, userInfo: ["NSLocalizedDescription": ""])
                 let errorPresenter = VLDErrorPresenter(dataSource: dataSource)
-                errorPresenter.presentError(nil)
+                errorPresenter.presentError(error)
                 expect(dataSource.callCountForSelector("viewControllerForErrorPresenter:")).to(equal(1))
             }
         }

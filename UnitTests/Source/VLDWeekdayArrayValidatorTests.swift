@@ -18,7 +18,7 @@ class VLDWeekdayArrayValidatorTests: QuickSpec {
                 let formRowDescriptor = XLFormRowDescriptor(tag: "", rowType: "")
                 formRowDescriptor.value = ["Lunes"]
                 let status = validator.isValid(formRowDescriptor)
-                expect(status.isValid).to(equal(true))
+                expect(status.isValid).to(beTrue())
             }
         }
     }

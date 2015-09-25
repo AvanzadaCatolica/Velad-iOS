@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DA83C76C1BB5BD7900C1E05A"
-               BuildableName = "SnapshotTests.xctest"
-               BlueprintName = "SnapshotTests"
+               BlueprintIdentifier = "DAA873041BB40A1500A443F2"
+               BuildableName = "UnitTests.xctest"
+               BlueprintName = "UnitTests"
                ReferencedContainer = "container:Velad.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -71,13 +71,6 @@
             ReferencedContainer = "container:Velad.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "FB_REFERENCE_IMAGE_DIR"
-            value = "$(SOURCE_ROOT)/SnapshotTests/ReferenceImages"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

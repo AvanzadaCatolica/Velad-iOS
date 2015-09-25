@@ -7,3 +7,4 @@
 #import "XLForm/XLForm.h"
 #import "VLDWeekdayArrayValidator.h"
 #import "VLDSectionsViewModel.h"
+#import "NSString+VLDAdditions.h"
