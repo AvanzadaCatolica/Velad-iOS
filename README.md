@@ -28,9 +28,10 @@ and open the `.xcworkspace` file with Xcode.
 
 __Tests:__
 
-Velad uses Carthage as dependency manager for the test target. In order to build the tests, run:
+Velad uses Carthage as dependency manager for the test targets. In order to build the tests, run:
 
 ```ruby
 bundle install
-bundle exec rake tests
+bundle exec rake tests:unit # unit tests
+bundle exec rake tests:snapshot # snapshot tests
 ```
