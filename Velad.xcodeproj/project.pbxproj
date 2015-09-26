@@ -67,6 +67,10 @@
 		3FF4D72A1B2DF599008538DA /* VLDNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D7291B2DF599008538DA /* VLDNoteViewController.m */; };
 		3FF4D72D1B2E096E008538DA /* VLDNotesActionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */; };
 		6B7629177A08ABC4011E92E8 /* libPods-Velad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AB8B98CC65AB363A395FCC /* libPods-Velad.a */; };
+		DA02FE471BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA02FE461BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift */; settings = {ASSET_TAGS = (); }; };
+		DA02FE481BB6B80F00EEA8A8 /* NSDate+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F52978B1B35E6F30006A455 /* NSDate+VLDAdditions.m */; };
+		DA02FE491BB6B99800EEA8A8 /* NSCalendar+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4239A11B64350A009B40B5 /* NSCalendar+VLDAdditions.m */; };
+		DA02FE4B1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA02FE4A1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DA4D89D11BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */; settings = {ASSET_TAGS = (); }; };
 		DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */; settings = {ASSET_TAGS = (); }; };
 		DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */; };
@@ -249,6 +253,8 @@
 		3FF4D72B1B2E096E008538DA /* VLDNotesActionsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDNotesActionsPresenter.h; path = Source/VLDNotesActionsPresenter.h; sourceTree = "<group>"; };
 		3FF4D72C1B2E096E008538DA /* VLDNotesActionsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDNotesActionsPresenter.m; path = Source/VLDNotesActionsPresenter.m; sourceTree = "<group>"; };
 		46AB8B98CC65AB363A395FCC /* libPods-Velad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Velad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA02FE461BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateVLDAdditionsTests.swift; path = Source/NSDateVLDAdditionsTests.swift; sourceTree = "<group>"; };
+		DA02FE4A1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSCalendarVLDAdditionsTests.swift; path = Source/NSCalendarVLDAdditionsTests.swift; sourceTree = "<group>"; };
 		DA4D89CF1BADE61D008A4592 /* NSDateFormatter+VLDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+VLDAdditions.h"; path = "Source/NSDateFormatter+VLDAdditions.h"; sourceTree = "<group>"; };
 		DA4D89D01BADE61D008A4592 /* NSDateFormatter+VLDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+VLDAdditions.m"; path = "Source/NSDateFormatter+VLDAdditions.m"; sourceTree = "<group>"; };
 		DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDErrorPresenterTests.swift; path = Source/VLDErrorPresenterTests.swift; sourceTree = "<group>"; };
@@ -642,6 +648,8 @@
 				DA7A08E11BB5855A0015C93A /* VLDErrorPresenterTests.swift */,
 				DA83C7661BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift */,
 				DA83C79F1BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift */,
+				DA02FE461BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift */,
+				DA02FE4A1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -898,10 +906,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA02FE491BB6B99800EEA8A8 /* NSCalendar+VLDAdditions.m in Sources */,
+				DA02FE481BB6B80F00EEA8A8 /* NSDate+VLDAdditions.m in Sources */,
 				DA83C7A11BB5F2DB00C1E05A /* NSString+VLDAdditions.m in Sources */,
 				DA83C7681BB5BBC100C1E05A /* VLDSectionsViewModel.m in Sources */,
 				DA83C7A01BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift in Sources */,
 				DA7A09121BB59A6E0015C93A /* VLDWeekdayArrayValidator.m in Sources */,
+				DA02FE471BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift in Sources */,
+				DA02FE4B1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift in Sources */,
 				DA83C7671BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift in Sources */,
 				DA7A09111BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift in Sources */,
 				DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */,

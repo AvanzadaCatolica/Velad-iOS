@@ -17,7 +17,7 @@ class NSStringVLDAdditionsTests: QuickSpec {
                 let string = ""
                 expect(string.vld_isEmpty()).to(beTrue())
             }
-            it("should return empty") {
+            it("should not return empty") {
                 let string = "ABA"
                 expect(string.vld_isEmpty()).to(beFalse())
             }
