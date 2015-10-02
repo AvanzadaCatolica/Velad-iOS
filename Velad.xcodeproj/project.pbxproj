@@ -1039,7 +1039,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mac.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "18072b47-bf17-45bd-9c9e-964b5a43013e";
+				PROVISIONING_PROFILE = "87e3f9e2-a07a-4e6e-af42-150164b5adb2";
 			};
 			name = Debug;
 		};
@@ -1054,7 +1054,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mac.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b078fe5f-e949-4251-b5b8-24666bebae64";
+				PROVISIONING_PROFILE = "c8d83368-fbc5-40b9-b466-0203e072ff4c";
 			};
 			name = Release;
 		};
