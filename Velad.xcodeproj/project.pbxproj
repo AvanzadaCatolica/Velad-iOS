@@ -1057,7 +1057,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kdx.velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87e3f9e2-a07a-4e6e-af42-150164b5adb2";
+				PROVISIONING_PROFILE = "4f58ba59-f636-4cd6-9eaf-d48890b174f9";
 			};
 			name = Debug;
 		};
@@ -1072,7 +1072,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kdx.velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8d83368-fbc5-40b9-b466-0203e072ff4c";
+				PROVISIONING_PROFILE = "d455cd70-0459-4b7a-b012-16ee44f4ead2";
 			};
 			name = Release;
 		};
