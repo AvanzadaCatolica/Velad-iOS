@@ -1,7 +1,13 @@
-desc "Bootstraps this project"
-task :bootstrap do
-  system "bundle exec pod install"
-  system "carthage update"
+namespace :bootstrap do
+  desc "Bootstraps application target"
+  task :application do
+    system "bundle exec pod install"
+  end
+
+  desc "Bootstraps tests target"
+  task :tests do
+    system "carthage update"
+  end
 end
 
 desc "Packs ipa"
