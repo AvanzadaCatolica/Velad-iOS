@@ -33,6 +33,20 @@ class VLDBasicPointTests: QuickSpec {
                 let symbols = basicPoint.weekDaySymbols()
                 expect(symbols).to(equal(["lunes"]))
             }
+            
+            it("should count possibilities correctly") {
+                let basicPoint = VLDBasicPoint()
+                ["lunes", "martes", "miércoles"].map({ name in
+                    let weekDay = VLDWeekDay()
+                    weekDay.name = name
+                    basicPoint.weekDays.addObject(weekDay)
+                })
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                let date = dateFormatter.dateFromString("19/09/2015")
+                let count = basicPoint.possibleWeekDaysCountUntilWeekDaySymbol(date?.vld_weekdaySymbol())
+                expect(count).to(equal(3))
+            }
         }
     }
 }

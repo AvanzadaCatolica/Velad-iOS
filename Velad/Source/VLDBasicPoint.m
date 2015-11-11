@@ -33,10 +33,8 @@
     [self.alert deleteAlertOnRealm:realm];
 }
 
-- (NSUInteger)possibleWeekDaysCountUntilCurrentWeekDay {
+- (NSUInteger)possibleWeekDaysCountUntilWeekDaySymbol:(NSString *)untilWeekDaySymbol {
     NSUInteger count = 0;
-    NSDate *today = [NSDate date];
-    NSString *symbol = [today vld_weekdaySymbol];
     NSArray *weekDaySymbols = [self weekDaySymbols];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"es"];
@@ -45,7 +43,7 @@
         if ([weekDaySymbols containsObject:weekDaySymbol]) {
             count++;
         }
-        if ([weekDaySymbol isEqualToString:symbol]) {
+        if ([weekDaySymbol isEqualToString:untilWeekDaySymbol]) {
             break;
         }
     }

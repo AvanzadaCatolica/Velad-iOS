@@ -24,7 +24,7 @@
 
 - (NSArray<NSString *> *)weekDaySymbols;
 - (void)deleteBasicPointInRealm:(RLMRealm *)realm;
-- (NSUInteger)possibleWeekDaysCountUntilCurrentWeekDay;
+- (NSUInteger)possibleWeekDaysCountUntilWeekDaySymbol:(NSString *)untilWeekDaySymbol;
 
 @end
 

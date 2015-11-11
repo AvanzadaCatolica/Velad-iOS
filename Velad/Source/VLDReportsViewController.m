@@ -293,7 +293,7 @@
         NSUInteger weeklyfrequencyCount = 0;
         for (VLDBasicPoint *basicPoint in basicPoints) {
             if ([self.dateIntervalPickerView isTodayInCurrentIntervalSelection]) {
-                weeklyfrequencyCount += [basicPoint possibleWeekDaysCountUntilCurrentWeekDay];
+                weeklyfrequencyCount += [basicPoint possibleWeekDaysCountUntilWeekDaySymbol:[[NSDate date] vld_weekdaySymbol]];
             } else {
                 weeklyfrequencyCount += basicPoint.weekDays.count;
             }
