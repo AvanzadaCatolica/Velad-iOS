@@ -15,6 +15,7 @@
 #import "VLDDeleteAlertPresenter.h"
 #import "VLDWeekdayArrayValueTrasformer.h"
 #import "VLDWeekdayArrayValidator.h"
+#import <Realm/Realm.h>
 
 @interface VLDBasicPointAlertViewController () <VLDErrorPresenterDataSource, VLDDeleteAlertPresenterDataSource, VLDDeleteAlertPresenterDelegate>
 

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm/Realm.h>
+#import "Realm/RLMObject.h"
+#import "Realm/RLMArray.h"
 #import "VLDWeekday.h"
 
 @interface VLDAlert : RLMObject

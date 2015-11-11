@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <Realm/RLMObject.h>
+#import "Realm/RLMObject.h"
+#import "Realm/RLMArray.h"
 #import "VLDWeekday.h"
 
 @class RLMResults;
@@ -22,7 +22,7 @@
 @property VLDAlert *alert;
 @property RLMArray<VLDWeekDay> *weekDays;
 
-- (NSArray *)weekDaySymbols;
+- (NSArray<NSString *> *)weekDaySymbols;
 - (void)deleteBasicPointInRealm:(RLMRealm *)realm;
 - (NSUInteger)possibleWeekDaysCountUntilCurrentWeekDay;
 

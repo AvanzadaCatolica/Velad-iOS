@@ -43,6 +43,10 @@
 		3F5D48D31B91052C0046364F /* VLDConfession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D48D21B91052C0046364F /* VLDConfession.m */; };
 		3F8738421B35B72E007501F1 /* VLDReportsResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738411B35B72E007501F1 /* VLDReportsResultView.m */; };
 		3F8738451B35DA8D007501F1 /* VLDEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8738441B35DA8D007501F1 /* VLDEmptyView.m */; };
+		3FC40D121BF3DB5B00754C19 /* VLDBasicPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC40D111BF3DB5B00754C19 /* VLDBasicPointTests.swift */; };
+		3FC40D131BF3DCC600754C19 /* VLDBasicPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F331A741B2C75FF0055E742 /* VLDBasicPoint.m */; };
+		3FC40D141BF3DF8500754C19 /* VLDAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C181B2D8FE000B82507 /* VLDAlert.m */; };
+		3FC40D151BF3DF9B00754C19 /* VLDWeekday.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C1B1B2D940400B82507 /* VLDWeekday.m */; };
 		3FCBDABC1B2DC20700AE04C0 /* VLDArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */; };
 		3FD02C101B2D719C00B82507 /* VLDErrorPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C0F1B2D719C00B82507 /* VLDErrorPresenter.m */; };
 		3FD02C131B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD02C121B2D7C0A00B82507 /* VLDBasicPointAlertViewController.m */; };
@@ -214,6 +218,7 @@
 		3F8738411B35B72E007501F1 /* VLDReportsResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDReportsResultView.m; path = Source/VLDReportsResultView.m; sourceTree = "<group>"; };
 		3F8738431B35DA8D007501F1 /* VLDEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDEmptyView.h; path = Source/VLDEmptyView.h; sourceTree = "<group>"; };
 		3F8738441B35DA8D007501F1 /* VLDEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDEmptyView.m; path = Source/VLDEmptyView.m; sourceTree = "<group>"; };
+		3FC40D111BF3DB5B00754C19 /* VLDBasicPointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLDBasicPointTests.swift; sourceTree = "<group>"; };
 		3FCBDABA1B2DC20700AE04C0 /* VLDArrowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDArrowButton.h; path = Source/VLDArrowButton.h; sourceTree = "<group>"; };
 		3FCBDABB1B2DC20700AE04C0 /* VLDArrowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLDArrowButton.m; path = Source/VLDArrowButton.m; sourceTree = "<group>"; };
 		3FD02C0E1B2D719C00B82507 /* VLDErrorPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLDErrorPresenter.h; path = Source/VLDErrorPresenter.h; sourceTree = "<group>"; };
@@ -666,6 +671,7 @@
 				DA02FE461BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift */,
 				DA02FE4A1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift */,
 				DAE295271BB6C3CF000254EC /* VLDProfileTests.swift */,
+				3FC40D111BF3DB5B00754C19 /* VLDBasicPointTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -922,6 +928,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC40D151BF3DF9B00754C19 /* VLDWeekday.m in Sources */,
+				3FC40D141BF3DF8500754C19 /* VLDAlert.m in Sources */,
+				3FC40D131BF3DCC600754C19 /* VLDBasicPoint.m in Sources */,
 				DAE295261BB6C3BF000254EC /* VLDProfile.m in Sources */,
 				DA02FE491BB6B99800EEA8A8 /* NSCalendar+VLDAdditions.m in Sources */,
 				DA02FE481BB6B80F00EEA8A8 /* NSDate+VLDAdditions.m in Sources */,
@@ -938,6 +947,7 @@
 				DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */,
 				DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */,
 				DAA873171BB40D4400A443F2 /* VLDWeekdayArrayValueTransformerTests.swift in Sources */,
+				3FC40D121BF3DB5B00754C19 /* VLDBasicPointTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

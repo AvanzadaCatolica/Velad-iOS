@@ -7,10 +7,10 @@
 //
 
 #import "VLDBasicPoint.h"
-#import <Realm/Realm.h>
 #import "VLDGroup.h"
 #import "VLDAlert.h"
 #import "NSDate+VLDAdditions.h"
+#import "Realm/RLMRealm.h"
 
 @interface VLDBasicPoint ()
 

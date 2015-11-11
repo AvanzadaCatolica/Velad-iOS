@@ -11,3 +11,4 @@
 #import "NSDate+VLDAdditions.h"
 #import "NSCalendar+VLDAdditions.h"
 #import "VLDProfile.h"
+#import "VLDBasicPoint.h"

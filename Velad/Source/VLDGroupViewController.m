@@ -9,6 +9,7 @@
 #import "VLDGroupViewController.h"
 #import "VLDErrorPresenter.h"
 #import "VLDGroup.h"
+#import <Realm/Realm.h>
 
 @interface VLDGroupViewController () <VLDErrorPresenterDataSource>
 

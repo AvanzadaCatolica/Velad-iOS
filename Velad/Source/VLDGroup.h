@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import <Realm/Realm.h>
+#import "Realm/RLMObject.h"
+#import "Realm/RLMArray.h"
+#import "Realm/RLMResults.h"
 #import "VLDBasicPoint.h"
 
 @interface VLDGroup : RLMObject

@@ -7,6 +7,7 @@
 //
 
 #import "VLDAlert.h"
+#import "Realm/RLMRealm.h"
 
 @implementation VLDAlert
 
