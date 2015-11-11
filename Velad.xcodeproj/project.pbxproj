@@ -97,6 +97,12 @@
 		DAA873191BB40F3200A443F2 /* VLDWeekdayArrayValueTrasformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1C3EF1B64FDB80002A6E5 /* VLDWeekdayArrayValueTrasformer.m */; };
 		DAA8731E1BB411E400A443F2 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA8731C1BB411E400A443F2 /* Nimble.framework */; };
 		DAA8731F1BB411E400A443F2 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA8731D1BB411E400A443F2 /* Quick.framework */; };
+		DAE295221BB6C35E000254EC /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE295201BB6C35E000254EC /* Realm.framework */; };
+		DAE295231BB6C35E000254EC /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE295211BB6C35E000254EC /* RealmSwift.framework */; };
+		DAE295241BB6C36E000254EC /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAE295201BB6C35E000254EC /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DAE295251BB6C36E000254EC /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAE295211BB6C35E000254EC /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DAE295261BB6C3BF000254EC /* VLDProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE4C80B1B301DED0061420E /* VLDProfile.m */; };
+		DAE295281BB6C3CF000254EC /* VLDProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE295271BB6C3CF000254EC /* VLDProfileTests.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +132,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				DAE295241BB6C36E000254EC /* Realm.framework in CopyFiles */,
+				DAE295251BB6C36E000254EC /* RealmSwift.framework in CopyFiles */,
 				DA83C77A1BB5BE2C00C1E05A /* Quick.framework in CopyFiles */,
 				DA83C7791BB5BE2600C1E05A /* Nimble.framework in CopyFiles */,
 			);
@@ -283,6 +291,9 @@
 		DAA873181BB40D8300A443F2 /* UnitTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UnitTests-Bridging-Header.h"; path = "Support/UnitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAA8731C1BB411E400A443F2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		DAA8731D1BB411E400A443F2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		DAE295201BB6C35E000254EC /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		DAE295211BB6C35E000254EC /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		DAE295271BB6C3CF000254EC /* VLDProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VLDProfileTests.swift; path = Source/VLDProfileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +318,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE295221BB6C35E000254EC /* Realm.framework in Frameworks */,
+				DAE295231BB6C35E000254EC /* RealmSwift.framework in Frameworks */,
 				DA7A09141BB59A7F0015C93A /* libXLForm.a in Frameworks */,
 				DAA8731E1BB411E400A443F2 /* Nimble.framework in Frameworks */,
 				DAA8731F1BB411E400A443F2 /* Quick.framework in Frameworks */,
@@ -588,6 +601,8 @@
 		92E6478D0E4B852836397AB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAE295201BB6C35E000254EC /* Realm.framework */,
+				DAE295211BB6C35E000254EC /* RealmSwift.framework */,
 				DA83C78E1BB5D34200C1E05A /* libMasonry.a */,
 				DA83C7851BB5C08800C1E05A /* FBSnapshotTestCase.framework */,
 				DA7A09131BB59A7F0015C93A /* libXLForm.a */,
@@ -650,6 +665,7 @@
 				DA83C79F1BB5F21D00C1E05A /* NSStringVLDAdditionsTests.swift */,
 				DA02FE461BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift */,
 				DA02FE4A1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift */,
+				DAE295271BB6C3CF000254EC /* VLDProfileTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -906,6 +922,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE295261BB6C3BF000254EC /* VLDProfile.m in Sources */,
 				DA02FE491BB6B99800EEA8A8 /* NSCalendar+VLDAdditions.m in Sources */,
 				DA02FE481BB6B80F00EEA8A8 /* NSDate+VLDAdditions.m in Sources */,
 				DA83C7A11BB5F2DB00C1E05A /* NSString+VLDAdditions.m in Sources */,
@@ -915,6 +932,7 @@
 				DA02FE471BB6B7F800EEA8A8 /* NSDateVLDAdditionsTests.swift in Sources */,
 				DA02FE4B1BB6BD8100EEA8A8 /* NSCalendarVLDAdditionsTests.swift in Sources */,
 				DA83C7671BB5B8F700C1E05A /* VLDSectionsViewModelTests.swift in Sources */,
+				DAE295281BB6C3CF000254EC /* VLDProfileTests.swift in Sources */,
 				DA7A09111BB59A660015C93A /* VLDWeekdayArrayValidatorTests.swift in Sources */,
 				DA7A08E31BB586760015C93A /* VLDErrorPresenter.m in Sources */,
 				DA7A08E21BB5855A0015C93A /* VLDErrorPresenterTests.swift in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 MAC. All rights reserved.
 //
 
-#import "RLMObject.h"
+#import "Realm/RLMObject.h"
 
 @interface VLDProfile : RLMObject
 

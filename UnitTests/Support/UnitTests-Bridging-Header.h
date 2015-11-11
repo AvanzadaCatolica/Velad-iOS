@@ -10,3 +10,4 @@
 #import "NSString+VLDAdditions.h"
 #import "NSDate+VLDAdditions.h"
 #import "NSCalendar+VLDAdditions.h"
+#import "VLDProfile.h"
