@@ -1,8 +1,6 @@
 Velad
 =====
 
-[![Build Status](https://travis-ci.org/AvanzadaCatolica/Velad-iOS.svg?branch=master)](https://travis-ci.org/AvanzadaCatolica/Velad-iOS)
-
 __Description:__
 
 Velad brings an agile tool to do daily autoevaluations, allowing you to register your activities and showing advancement and spiritual growth indicators. Please visit the [App Store](https://itunes.apple.com/us/app/velad/id1046170047) for more information about this app.
@@ -13,7 +11,8 @@ Velad is open source because we believe in the open source philosophy. If you wo
 
 __Requirements:__
 
-Xcode 7 and Ruby 2.0 or higher.
+* Xcode 7.1 (Swift 2.1)
+* Ruby 2.0 or higher.
 
 __Building:__
 
@@ -21,7 +20,7 @@ Velad uses CocoaPods as dependency manager for the application target. In order 
 
 ```ruby
 bundle install
-bundle exec rake bootstrap
+bundle exec rake bootstrap:application
 ```
 
 and open the `.xcworkspace` file with Xcode.
@@ -32,6 +31,17 @@ Velad uses Carthage as dependency manager for the test targets and runs two diff
 
 ```ruby
 bundle install
+bundle exec rake bootstrap:tests
 bundle exec rake tests:unit # unit tests
 bundle exec rake tests:snapshot # snapshot tests
+```
+
+__Packing:__
+
+In order to pack the project (generate the .ipa file) run:
+
+```ruby
+bundle install
+bundle exec rake bootstrap:application
+bundle exec rake pack
 ```
