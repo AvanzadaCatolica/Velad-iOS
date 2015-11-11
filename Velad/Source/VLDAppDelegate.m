@@ -81,6 +81,9 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
     }
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+}
+
 #pragma mark - Setup methods
 
 - (void)setupSecurity {
