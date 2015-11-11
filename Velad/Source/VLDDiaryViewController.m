@@ -281,8 +281,12 @@
         [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
         composeViewController.mailComposeDelegate = self;
         
+        NSString *messageBody = @"";
+        
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
-        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        if (profile) {
+            messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        }
         
         if (self.selectedNoteFilterType == VLDNoteFilterTypeDates) {
             messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"Semana %@\n\n", self.dateIntervalPickerView.title]];

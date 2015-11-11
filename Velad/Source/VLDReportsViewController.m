@@ -213,8 +213,12 @@
         [composeViewController.navigationBar setTintColor:[UIColor whiteColor]];
         composeViewController.mailComposeDelegate = self;
         
+        NSString *messageBody = @"";
+        
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
-        NSString *messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        if (profile) {
+            messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+        }
         
         VLDReportsMode mode = self.reportsModePickerView.mode;
         
