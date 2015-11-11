@@ -12,7 +12,8 @@ Velad is open source because we believe in the open source philosophy. If you wo
 __Requirements:__
 
 * Xcode 7.1 (Swift 2.1)
-* Ruby 2.0 or higher.
+* Ruby 2.0 or higher
+* Carthage 0.10.0
 
 __Building:__
 
