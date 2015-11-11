@@ -5,7 +5,7 @@ Velad
 
 __Description:__
 
-Please visit the [App Store]() for more information about this app.
+Velad brings an agile tool to do daily autoevaluations, allowing you to register your activities and showing advancement and spiritual growth indicators. Please visit the [App Store](https://itunes.apple.com/us/app/velad/id1046170047) for more information about this app.
 
 __Source code:__
 
