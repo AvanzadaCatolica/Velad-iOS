@@ -11,9 +11,13 @@
 
 @protocol VLDProfileViewControllerDelegate;
 
+extern NSString *const VLDProfileViewControllerConfigureLaterKey;
+
 @interface VLDProfileViewController : XLFormViewController
 
 @property (nonatomic, weak) id<VLDProfileViewControllerDelegate> delegate;
+
+- (instancetype)initWithConfigureLaterEnabled:(BOOL)configureLaterEnabled NS_DESIGNATED_INITIALIZER;
 
 @end
 

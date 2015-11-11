@@ -115,7 +115,8 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
 
 - (void)setupNavigation {
     VLDProfile *profile = [[VLDProfile allObjects] firstObject];
-    if (profile) {
+    BOOL profileConfigureLater = [[NSUserDefaults standardUserDefaults] boolForKey:VLDProfileViewControllerConfigureLaterKey];
+    if (profile || profileConfigureLater) {
         if (self.security.isEnabled) {
             VLDSecurityPasscodeViewController *viewController = [[VLDSecurityPasscodeViewController alloc] initWithMode:VLDSecurityPasscodeViewControllerModeRequest];
             viewController.delegate = self;
@@ -126,7 +127,7 @@ static NSString * const kHockeyAppID = @"8e0c429aa894fc4fe421cfe9500d33d5";
         }
     } else {
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
-        VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
+        VLDProfileViewController *viewController = [[VLDProfileViewController alloc] initWithConfigureLaterEnabled:YES];
         viewController.delegate = self;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
         self.window.rootViewController = navigationController;

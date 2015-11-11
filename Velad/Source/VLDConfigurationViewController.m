@@ -166,7 +166,7 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
 }
 
 - (void)onTapProfileButton:(id)button {
-    VLDProfileViewController *viewController = [[VLDProfileViewController alloc] init];
+    VLDProfileViewController *viewController = [[VLDProfileViewController alloc] initWithConfigureLaterEnabled:NO];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
