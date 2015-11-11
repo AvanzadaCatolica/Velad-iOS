@@ -11,5 +11,6 @@
 @interface VLDDateIntervalPickerView (Private)
 
 - (void)setSelectedStartDate:(NSDate *)date;
+- (void)updateSelectedDateIntervalLabel;
 
 @end

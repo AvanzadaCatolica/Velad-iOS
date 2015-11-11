@@ -21,6 +21,7 @@ class VLDDateIntervalPickerViewTests: FBSnapshotTestCase {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         dateIntervalPickerView.setSelectedStartDate(dateFormatter.dateFromString("20/09/1990"))
+        dateIntervalPickerView.updateSelectedDateIntervalLabel()
         FBSnapshotVerifyView(dateIntervalPickerView)
     }
 
@@ -29,7 +30,8 @@ class VLDDateIntervalPickerViewTests: FBSnapshotTestCase {
         dateIntervalPickerView.frame = CGRectMake(0, 0, 320, 60)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        dateIntervalPickerView.setSelectedStartDate(dateFormatter.dateFromString("01/09/1990"))
+        dateIntervalPickerView.setSelectedStartDate(dateFormatter.dateFromString("20/09/1990"))
+        dateIntervalPickerView.updateSelectedDateIntervalLabel()
         FBSnapshotVerifyView(dateIntervalPickerView)
     }
 

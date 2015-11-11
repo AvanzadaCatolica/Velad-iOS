@@ -1,4 +1,4 @@
-github "Quick/Nimble" "v2.0.0-rc.3"
+github "Quick/Nimble" "v2.0.0"
 github "Quick/Quick" "v0.6.0"
 github "nerdishbynature/ios-snapshot-test-case" "2.0.4.1"
-github "realm/realm-cocoa" "v0.95.2"
+github "realm/realm-cocoa" "v0.95.3"
