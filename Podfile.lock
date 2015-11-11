@@ -8,7 +8,7 @@ PODS:
   - Reveal-iOS-SDK (1.5.1)
   - SSKeychain (1.2.3)
   - VTAcknowledgementsViewController (0.14)
-  - XLForm (3.0.2)
+  - XLForm (3.0.0)
 
 DEPENDENCIES:
   - BEMSimpleLineGraph
@@ -18,7 +18,17 @@ DEPENDENCIES:
   - Reveal-iOS-SDK
   - SSKeychain
   - VTAcknowledgementsViewController
-  - XLForm
+  - XLForm (from `git@github.com:xmartlabs/XLForm.git`, commit `73a2d5275467c0aa04c4399896fc16a2c7189130`)
+
+EXTERNAL SOURCES:
+  XLForm:
+    :commit: 73a2d5275467c0aa04c4399896fc16a2c7189130
+    :git: git@github.com:xmartlabs/XLForm.git
+
+CHECKOUT OPTIONS:
+  XLForm:
+    :commit: 73a2d5275467c0aa04c4399896fc16a2c7189130
+    :git: git@github.com:xmartlabs/XLForm.git
 
 SPEC CHECKSUMS:
   BEMSimpleLineGraph: e706c36c6e7944f6424285478a914d4adb178f92
@@ -28,6 +38,6 @@ SPEC CHECKSUMS:
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   VTAcknowledgementsViewController: 11a869dd69598a852f12699aeaf36e2589d3fc1b
-  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
+  XLForm: 3e0521195126c4da4e90b104017e2758776393f1
 
 COCOAPODS: 0.38.2
