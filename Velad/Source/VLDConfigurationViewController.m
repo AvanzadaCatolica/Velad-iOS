@@ -18,7 +18,7 @@
 #import "VLDMigrationController.h"
 #import "UIColor+VLDAdditions.h"
 
-@interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDRestoreDataPresenterDataSource, VLDRestoreDataPresenterDelegate>
+@interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDRestoreDataPresenterDataSource, VLDRestoreDataPresenterDelegate, VLDProfileViewControllerDelegate>
 
 @property (nonatomic) VLDErrorPresenter *errorPresenter;
 @property (nonatomic) VLDRestoreDataPresenter *restoreDataPresenter;
@@ -167,6 +167,7 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
 
 - (void)onTapProfileButton:(id)button {
     VLDProfileViewController *viewController = [[VLDProfileViewController alloc] initWithConfigureLaterEnabled:NO];
+    viewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
@@ -252,6 +253,12 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
 
 - (void)restoreDataPresenterDidCancel:(VLDRestoreDataPresenter *)presenter {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
+#pragma mark - VLDProfileViewControllerDelegate
+
+- (void)profileViewControllerDidFinishEditingProfile:(VLDProfileViewController *)controller {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
