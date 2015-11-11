@@ -1055,7 +1055,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Velad/Support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdx.velad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mac.Velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4f58ba59-f636-4cd6-9eaf-d48890b174f9";
 			};
@@ -1070,7 +1070,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Velad/Support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdx.velad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mac.Velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d455cd70-0459-4b7a-b012-16ee44f4ead2";
 			};
