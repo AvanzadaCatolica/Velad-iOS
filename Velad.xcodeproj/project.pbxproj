@@ -697,6 +697,7 @@
 				3F331A271B2C67020055E742 /* Frameworks */,
 				3F331A281B2C67020055E742 /* Resources */,
 				83B15731141853CD7CB36066 /* Copy Pods Resources */,
+				BF850629EE55EA15AF699E24 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -827,6 +828,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Velad/Pods-Velad-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF850629EE55EA15AF699E24 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Velad/Pods-Velad-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C74643D23313835C586E9AF9 /* Check Pods Manifest.lock */ = {
