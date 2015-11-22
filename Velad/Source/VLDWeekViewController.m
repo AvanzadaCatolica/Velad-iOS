@@ -157,7 +157,7 @@
         
         VLDProfile *profile = [[VLDProfile allObjects] firstObject];
         if (profile) {
-            messageBody = [NSString stringWithFormat:@"Nombre: %@\nCírculo: %@\nGrupo: %@\n\n", profile.name, profile.circle, profile.group];
+            messageBody = [profile information];
         }
         
         messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"Semana %@\n\n", self.dateIntervalPickerView.title]];

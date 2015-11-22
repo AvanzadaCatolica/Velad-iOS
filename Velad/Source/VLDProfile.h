@@ -14,4 +14,6 @@
 @property NSString *circle;
 @property NSString *group;
 
+- (NSString *)information;
+
 @end

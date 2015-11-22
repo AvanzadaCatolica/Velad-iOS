@@ -77,7 +77,6 @@ NSString * const VLDProfileViewControllerConfigureLaterKey = @"VLDProfileViewCon
                                                           rowType:XLFormRowDescriptorTypeText
                                                             title:@"Círculo"];
     rowDescriptor.value = self.profile ? self.profile.circle : @"";
-    rowDescriptor.required = YES;
     [rowDescriptor.cellConfigAtConfigure setObject:@(NSTextAlignmentRight)
                                             forKey:@"textField.textAlignment"];
     [sectionDescriptor addFormRow:rowDescriptor];
@@ -86,7 +85,6 @@ NSString * const VLDProfileViewControllerConfigureLaterKey = @"VLDProfileViewCon
                                                           rowType:XLFormRowDescriptorTypeText
                                                             title:@"Grupo"];
     rowDescriptor.value = self.profile ? self.profile.group : @"";
-    rowDescriptor.required = YES;
     [rowDescriptor.cellConfigAtConfigure setObject:@(NSTextAlignmentRight)
                                             forKey:@"textField.textAlignment"];
     [sectionDescriptor addFormRow:rowDescriptor];
