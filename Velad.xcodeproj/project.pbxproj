@@ -1083,7 +1083,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mac.Velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d9830b7-7bcb-44a4-b8b8-7c3c889e5f63";
+				PROVISIONING_PROFILE = "92fee9b4-3954-4ec0-9b57-7a0e646aa7bd";
 			};
 			name = Debug;
 		};
@@ -1098,7 +1098,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mac.Velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97c7344b-c4b8-412f-a64d-c79c0569aba9";
+				PROVISIONING_PROFILE = "76c48ad4-d7ba-47b7-9b33-350ebadbe327";
 			};
 			name = Release;
 		};
