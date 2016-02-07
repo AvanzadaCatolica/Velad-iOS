@@ -14,5 +14,7 @@
 
 + (VLDConfession *)lastConfession;
 + (NSString *)formattedDateForConfession:(VLDConfession *)confession;
++ (RLMResults *)confessionsBetweenStartDate:(NSDate *)startDate
+                                    endDate:(NSDate *)endDate;
 
 @end

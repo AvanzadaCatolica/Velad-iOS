@@ -25,4 +25,10 @@
     return [dateFormatter stringFromDate:confession.date];
 }
 
++ (RLMResults *)confessionsBetweenStartDate:(NSDate *)startDate
+                                    endDate:(NSDate *)endDate {
+    RLMResults *results = [[VLDConfession objectsWhere:@"date BETWEEN {%@, %@}", startDate, endDate] sortedResultsUsingProperty:@"date" ascending:NO];
+    return results;
+}
+
 @end

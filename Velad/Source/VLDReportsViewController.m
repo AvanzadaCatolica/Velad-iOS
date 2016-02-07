@@ -22,6 +22,7 @@
 #import "VLDErrorPresenter.h"
 #import "VLDReportsModePickerView.h"
 #import "NSDate+VLDAdditions.h"
+#import "VLDConfession.h"
 
 @interface VLDReportsViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate, VLDReportsResultViewDataSource, VLDDateIntervalPickerViewDelegate, VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDReportsModePickerViewDelegate>
 
@@ -224,8 +225,12 @@
         
         messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"%@ %@\n\n", mode == VLDReportsModeWeekly ? @"Semana" : @"Mes", self.dateIntervalPickerView.title]];
         
-        messageBody = [messageBody stringByAppendingFormat:@"Mi puntaje %@: %@", mode == VLDReportsModeWeekly ? @"esta semana" : @"este mes", self.reportsResultView.content];
+        messageBody = [messageBody stringByAppendingFormat:@"Mi puntaje %@: %@\n\n", mode == VLDReportsModeWeekly ? @"esta semana" : @"este mes", self.reportsResultView.content];
         
+        RLMResults *confessions = [VLDConfession confessionsBetweenStartDate:self.dateIntervalPickerView.selectedStartDate
+                                                                     endDate:self.dateIntervalPickerView.selectedEndDate];
+        messageBody = [messageBody stringByAppendingFormat:@"Número de confesiones: %lu", (unsigned long)confessions.count];
+
         [composeViewController setSubject:[NSString stringWithFormat:@"Reporte %@", mode == VLDReportsModeWeekly ? @"semanal" : @"mensual"]];
         [composeViewController setMessageBody:messageBody isHTML:NO];
         [composeViewController addAttachmentData:UIImagePNGRepresentation([self.lineGraphView vld_snapshotImage])
