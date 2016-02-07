@@ -14,6 +14,7 @@
 #import "VLDWeekday.h"
 #import "VLDAlert.h"
 #import "VLDRecord.h"
+#import "VLDEncouragement.h"
 
 @interface VLDMigrationController ()
 
@@ -21,7 +22,7 @@
 
 @end
 
-static NSUInteger const kSchemaVersion = 1;
+static NSUInteger const kSchemaVersion = 2;
 static NSString * const kIsDatabaseSeeded = @"VLDIsDatabaseSeeded";
 static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v1";
 
@@ -31,6 +32,10 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
     [RLMRealm setSchemaVersion:kSchemaVersion
                 forRealmAtPath:[RLMRealm defaultRealmPath]
             withMigrationBlock:^(RLMMigration *migration, uint64_t oldSchemaVersion) {
+                if (oldSchemaVersion < 2) {
+                    [migration createObject:NSStringFromClass([VLDEncouragement class])
+                                  withValue:@{@"enabled": @(YES), @"percentage": @(50)}];
+                }
             }];
 }
 
@@ -102,6 +107,11 @@ static NSString * const kHasPerformedCurrentHardMigration = @"VLDHardMigration_v
         [realm addObject:basicPoint];
         [group.basicPoints addObject:basicPoint];
     }
+    
+    VLDEncouragement *encouragement = [[VLDEncouragement alloc] init];
+    encouragement.enabled = YES;
+    encouragement.percentage = 50;
+    [realm addObject:encouragement];
     
     [realm commitWriteTransaction];
     

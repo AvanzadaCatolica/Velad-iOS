@@ -20,6 +20,7 @@
 #import "VLDGroup.h"
 #import "VLDSectionsViewModel.h"
 #import "VLDEncouragementAlertPresenter.h"
+#import "VLDEncouragement.h"
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDEncouragementAlertPresenterDataSource>
 
@@ -247,8 +248,13 @@
 
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
+    VLDEncouragement *encouragement = [[VLDEncouragement allObjects] firstObject];
+    if (!encouragement.isEnabled) {
+        return;
+    }
+    
     NSUInteger totalRecordsOnSelectedDay = [VLDRecord recordsOnDate:self.datePickerView.selectedDate].count;
-    if ((float)totalRecordsOnSelectedDay / (float)self.viewModel.totalCount >= 0.5 && added) {
+    if ((float)totalRecordsOnSelectedDay / (float)self.viewModel.totalCount >= (float)encouragement.percentage / 100.0f && added) {
         [self showEncouragementAlert];
     }
 }
