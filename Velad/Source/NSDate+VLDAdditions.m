@@ -40,14 +40,17 @@
 }
 
 - (BOOL)vld_isSameDay:(NSDate *)date {
+    NSDate *strippedDate = [date vld_stripTime];
+    NSDate *selfStrippedDate = [self vld_stripTime];
+    return [strippedDate isEqualToDate:selfStrippedDate];
+}
+
+- (NSDate *)vld_stripTime {
     NSCalendar *calendar = [NSCalendar vld_preferredCalendar];
     NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
-                                               fromDate:date];
-    NSDate *sanitazedDate = [calendar dateFromComponents:components];
-    components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
-                             fromDate:self];
-    NSDate *selfDate = [calendar dateFromComponents:components];
-    return [selfDate isEqualToDate:sanitazedDate];
+                                               fromDate:self];
+    NSDate *strippedDate = [calendar dateFromComponents:components];
+    return strippedDate;
 }
 
 @end
