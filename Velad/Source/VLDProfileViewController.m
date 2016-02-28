@@ -18,9 +18,12 @@
 @property (nonatomic) VLDErrorPresenter *errorPresenter;
 @property (nonatomic) BOOL configureLaterEnabled;
 
+- (void)setupProfile;
 - (void)setupFormDescriptor;
 - (void)setupNavigationItem;
 - (void)bind:(VLDProfile *)profile;
+- (void)onTapSaveButton:(id)sender;
+- (void)onTapCancelButton:(id)sender;
 
 @end
 

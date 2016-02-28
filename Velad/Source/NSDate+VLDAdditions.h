@@ -14,5 +14,6 @@
 - (NSDate *)vld_startOfTheWeek;
 - (NSString *)vld_weekdaySymbol;
 - (BOOL)vld_isSameDay:(NSDate *)date;
+- (NSDate *)vld_stripTime;
 
 @end

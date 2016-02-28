@@ -20,6 +20,7 @@
 #import "VLDGroup.h"
 #import "VLDSectionsViewModel.h"
 #import "VLDEncouragementAlertPresenter.h"
+#import "VLDEncouragement.h"
 
 @interface VLDTodayViewController () <UITableViewDataSource, UITableViewDelegate, VLDRecordNotesPresenterDataSource, VLDRecordNotesPresenterDelegate, VLDDailyRecordTableViewCellDelegate, VLDDatePickerViewDelegate, VLDEncouragementAlertPresenterDataSource>
 
@@ -194,6 +195,33 @@
 }
 
 - (void)showEncouragementAlert {
+    VLDEncouragement *encouragement = [[VLDEncouragement allObjects] firstObject];
+    if (!encouragement.isEnabled) {
+        return;
+    }
+    
+    NSUInteger totalRecordsOnSelectedDay = [VLDRecord recordsOnDate:self.datePickerView.selectedDate].count;
+    if ((float)totalRecordsOnSelectedDay / (float)self.viewModel.totalCount < (float)encouragement.percentage / 100.0f) {
+        return;
+    }
+    
+    NSDate *now = [self.datePickerView.selectedDate vld_stripTime];
+    VLDDate *date = [VLDDate date:now];
+    if (!date) {
+        date = [[VLDDate alloc] init];
+        date.date = now;
+    }
+    if ([encouragement.shownDates indexOfObject:date] != NSNotFound) {
+        return;
+    }
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    
+    [encouragement.shownDates addObject:date];
+    
+    [realm commitWriteTransaction];
+    
     [self.encounragementAlertPresenter present];
 }
 
@@ -247,8 +275,7 @@
 
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-    NSUInteger totalRecordsOnSelectedDay = [VLDRecord recordsOnDate:self.datePickerView.selectedDate].count;
-    if ((float)totalRecordsOnSelectedDay / (float)self.viewModel.totalCount >= 0.5 && added) {
+    if (added) {
         [self showEncouragementAlert];
     }
 }

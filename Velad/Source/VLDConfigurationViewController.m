@@ -17,6 +17,7 @@
 #include <Realm/Realm.h>
 #import "VLDMigrationController.h"
 #import "UIColor+VLDAdditions.h"
+#import "VLDEncouragementViewController.h"
 
 @interface VLDConfigurationViewController () <VLDErrorPresenterDataSource, MFMailComposeViewControllerDelegate, VLDRestoreDataPresenterDataSource, VLDRestoreDataPresenterDelegate, VLDProfileViewControllerDelegate>
 
@@ -26,6 +27,7 @@
 - (void)setupFormDescriptor;
 - (void)onTapProfileButton:(id)button;
 - (void)onTapSecurityButton:(id)button;
+- (void)onTapEncouragementButton:(id)button;
 - (void)onTapOpinionButton:(id)button;
 - (void)onTapLicensesButton:(id)button;
 - (void)onTapOpenSourceButton:(id)button;
@@ -35,6 +37,7 @@
 
 static NSString * const kRowDescriptorProfile = @"VLDRowDescriptorProfile";
 static NSString * const kRowDescriptorSecurity = @"VLDRowDescriptorSecurity";
+static NSString * const kRowDescriptorEncouragement = @"VLDRowDescriptorEncouragement";
 static NSString * const kRowDescriptorCalendarPreference = @"VLDRowDescriptorCalendarPreference";
 static NSString * const kRowDescriptorRestoreData = @"VLDRowDescriptorRestoreData";
 static NSString * const kRowDescriptorOpinion = @"VLDRowDescriptorOpinion";
@@ -82,6 +85,14 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
                                                           rowType:XLFormRowDescriptorTypeButton
                                                             title:@"Seguridad"];
     rowDescriptor.action.formSelector = @selector(onTapSecurityButton:);
+    [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
+    [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
+    [sectionDescriptor addFormRow:rowDescriptor];
+    
+    rowDescriptor = [XLFormRowDescriptor formRowDescriptorWithTag:kRowDescriptorSecurity
+                                                          rowType:XLFormRowDescriptorTypeButton
+                                                            title:@"Mensajes de ánimo"];
+    rowDescriptor.action.formSelector = @selector(onTapEncouragementButton:);
     [rowDescriptor.cellConfig setObject:@(NSTextAlignmentLeft) forKey:@"textLabel.textAlignment"];
     [rowDescriptor.cellConfig setObject:@(UITableViewCellAccessoryDisclosureIndicator) forKey:@"accessoryType"];
     [sectionDescriptor addFormRow:rowDescriptor];
@@ -175,6 +186,12 @@ NSString *const VLDCalendarShouldStartOnMondayConfigurationDidChangeNotification
 - (void)onTapSecurityButton:(id)button {
     VLDSecurityViewController *viewController = [[VLDSecurityViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)onTapEncouragementButton:(id)button {
+    VLDEncouragementViewController *viewController = [[VLDEncouragementViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)onTapRestoreData:(id)button {
