@@ -8,6 +8,15 @@
 
 #import "VLDEncouragement.h"
 
+@implementation VLDDate
+
++ (VLDDate *)date:(NSDate *)date {
+    RLMResults *results = [VLDDate objectsWhere:@"date == %@", date];
+    return [results firstObject];
+}
+
+@end
+
 @implementation VLDEncouragement
 
 @end
