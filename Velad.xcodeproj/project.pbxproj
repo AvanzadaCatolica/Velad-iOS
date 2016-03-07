@@ -1110,7 +1110,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kdx.velad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "76c48ad4-d7ba-47b7-9b33-350ebadbe327";
+				PROVISIONING_PROFILE = "17444298-ca3f-480e-ab0c-9f067a73f0a2";
 			};
 			name = Release;
 		};
